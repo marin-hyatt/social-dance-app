@@ -219,14 +219,14 @@ commentsCount | Number | number of comments on post
     ```
 ## Complex/Ambiguous Features
 1. Caching videos on device
-    Pros: will probably have to implement this anyway if I want a good user experience, I have a vague idea of how to do it
-    Cons: maybe a little too easy, I could do this in addition to multithreading to increase the difficulty of the task
+- Pros: will probably have to implement this anyway if I want a good user experience, I have a vague idea of how to do it
+- Cons: maybe a little too easy, I could do this in addition to multithreading to increase the difficulty of the task
 3. Multithreading when fetching videos from Parse backend
-    Pros: same as caching videos
-    Cons: I'm not incredibly confident in my understanding of threads
+- Pros: same as caching videos
+- Cons: I'm not incredibly confident in my understanding of threads
 5. Mirroring dance video
-    Pros: something I'm very interested in implementing, makes my app more unique
-    Cons: no idea how to do it, requires expanding the scope of my app a little (implementing tutorials screen)
+- Pros: something I'm very interested in implementing, makes my app more unique
+- Cons: no idea how to do it, requires expanding the scope of my app a little (implementing tutorials screen)
 6. Sorting algorithm for explore page
-    Pros: I know a bunch of sorting algorithms already
-    Cons: doesn't seem very ambiguous, also I don't see a reason to use one
+- Pros: I know a bunch of sorting algorithms already
+- Cons: doesn't seem very ambiguous, also I don't see a reason to use one
