@@ -3,9 +3,9 @@
 ## Table of Contents
 1. [Overview](#Overview)
 2. [Product Spec](#Product-Spec)
-3.  [Wireframes](#Wireframes)
+3. [Wireframes](#Wireframes)
 4. [Schema](#Schema)
-5. [Complex/Ambiguous Features](#Complex/Ambiguous Features)
+5. [Complex/Ambiguous Features](#Complex/Ambiguous-Features)
 
 ## Overview
 ### Description
