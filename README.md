@@ -84,7 +84,7 @@ This app allows dancers and non-dancers alike to post dance videos of themselves
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="thumbnail_CamScanner 07-07-2021 11.44.jpg" width=600>
+<img src="wireframe.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
