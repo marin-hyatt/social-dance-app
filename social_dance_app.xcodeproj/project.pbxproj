@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE15A269CA8B700391917 /* AppDelegate.m */; };
 		9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE15D269CA8B700391917 /* SceneDelegate.m */; };
-		9B2EE161269CA8B700391917 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE160269CA8B700391917 /* ViewController.m */; };
 		9B2EE164269CA8B700391917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2EE162269CA8B700391917 /* Main.storyboard */; };
 		9B2EE166269CA8B900391917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B2EE165269CA8B900391917 /* Assets.xcassets */; };
 		9B2EE169269CA8B900391917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2EE167269CA8B900391917 /* LaunchScreen.storyboard */; };
 		9B2EE16C269CA8B900391917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE16B269CA8B900391917 /* main.m */; };
 		9B2EE176269CA8B900391917 /* social_dance_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE175269CA8B900391917 /* social_dance_appTests.m */; };
 		9B2EE181269CA8B900391917 /* social_dance_appUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE180269CA8B900391917 /* social_dance_appUITests.m */; };
+		9B2EE193269CA91900391917 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE192269CA91900391917 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +41,6 @@
 		9B2EE15A269CA8B700391917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9B2EE15C269CA8B700391917 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		9B2EE15D269CA8B700391917 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		9B2EE15F269CA8B700391917 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9B2EE160269CA8B700391917 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9B2EE163269CA8B700391917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9B2EE165269CA8B900391917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B2EE168269CA8B900391917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +52,8 @@
 		9B2EE17C269CA8B900391917 /* social_dance_appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = social_dance_appUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2EE180269CA8B900391917 /* social_dance_appUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = social_dance_appUITests.m; sourceTree = "<group>"; };
 		9B2EE182269CA8B900391917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B2EE191269CA91900391917 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9B2EE192269CA91900391917 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,12 +104,13 @@
 		9B2EE158269CA8B700391917 /* social_dance_app */ = {
 			isa = PBXGroup;
 			children = (
+				9B2EE190269CA8EE00391917 /* Views */,
+				9B2EE18F269CA8E700391917 /* Models */,
+				9B2EE18E269CA8D500391917 /* View Controllers */,
 				9B2EE159269CA8B700391917 /* AppDelegate.h */,
 				9B2EE15A269CA8B700391917 /* AppDelegate.m */,
 				9B2EE15C269CA8B700391917 /* SceneDelegate.h */,
 				9B2EE15D269CA8B700391917 /* SceneDelegate.m */,
-				9B2EE15F269CA8B700391917 /* ViewController.h */,
-				9B2EE160269CA8B700391917 /* ViewController.m */,
 				9B2EE162269CA8B700391917 /* Main.storyboard */,
 				9B2EE165269CA8B900391917 /* Assets.xcassets */,
 				9B2EE167269CA8B900391917 /* LaunchScreen.storyboard */,
@@ -135,6 +136,29 @@
 				9B2EE182269CA8B900391917 /* Info.plist */,
 			);
 			path = social_dance_appUITests;
+			sourceTree = "<group>";
+		};
+		9B2EE18E269CA8D500391917 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9B2EE191269CA91900391917 /* LoginViewController.h */,
+				9B2EE192269CA91900391917 /* LoginViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9B2EE18F269CA8E700391917 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9B2EE190269CA8EE00391917 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,7 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B2EE161269CA8B700391917 /* ViewController.m in Sources */,
+				9B2EE193269CA91900391917 /* LoginViewController.m in Sources */,
 				9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */,
 				9B2EE16C269CA8B900391917 /* main.m in Sources */,
 				9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */,
