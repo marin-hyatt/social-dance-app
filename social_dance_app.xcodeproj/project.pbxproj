@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13A1DE9E051C6C4F2B9E6601 /* Pods_social_dance_appTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0926C3FB3C6C47D42F1602 /* Pods_social_dance_appTests.framework */; };
-		724DF44CC6B040DDBDFBF2CB /* Pods_social_dance_app_social_dance_appUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEE9D7C6903F086C50BEAE94 /* Pods_social_dance_app_social_dance_appUITests.framework */; };
+		644269BC7A82C93C2107D723 /* libPods-social_dance_app-social_dance_appUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D4DEDC54C58F0411A7D468 /* libPods-social_dance_app-social_dance_appUITests.a */; };
+		78F9DE7680D07EE1184D6C52 /* libPods-social_dance_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67F66A67426023213E5D719C /* libPods-social_dance_app.a */; };
 		9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE15A269CA8B700391917 /* AppDelegate.m */; };
 		9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE15D269CA8B700391917 /* SceneDelegate.m */; };
 		9B2EE164269CA8B700391917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2EE162269CA8B700391917 /* Main.storyboard */; };
@@ -23,14 +23,13 @@
 		9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE19E269CAF2500391917 /* DetailViewController.m */; };
 		9B2EE1A2269CD8E300391917 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE1A1269CD8E300391917 /* LoginView.m */; };
 		9B2EE1A5269CDE9F00391917 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE1A4269CDE9F00391917 /* LoginViewController.m */; };
-		9B3C09B3269CE15200B244DE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09B2269CE15200B244DE /* Post.m */; };
-		9B3C09B6269CE15C00B244DE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09B5269CE15C00B244DE /* User.m */; };
 		9B3C09B9269CE16900B244DE /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09B8269CE16900B244DE /* Song.m */; };
 		9B3C09BC269CE2D500B244DE /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09BB269CE2D500B244DE /* HomeTableViewCell.m */; };
 		9B3C09BF269CE30600B244DE /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09BE269CE30600B244DE /* DetailView.m */; };
 		9B3C09C2269CE3AC00B244DE /* SearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C1269CE3AC00B244DE /* SearchCollectionViewCell.m */; };
 		9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C4269CE41C00B244DE /* CreateView.m */; };
-		B7DAADDE8A1BF6F4A31149CF /* Pods_social_dance_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8C571FC2728F79195FF882 /* Pods_social_dance_app.framework */; };
+		9B3C09C8269CF41D00B244DE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C7269CF41D00B244DE /* Post.m */; };
+		CABFDEA0EF1DC19ADCC5202A /* libPods-social_dance_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3B8C571FC2728F79195FF882 /* Pods_social_dance_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_social_dance_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D4DEDC54C58F0411A7D468 /* libPods-social_dance_app-social_dance_appUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_app-social_dance_appUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5DCFE0532BEF04914AE73A /* Pods-social_dance_app-social_dance_appUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app-social_dance_appUITests.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests.release.xcconfig"; sourceTree = "<group>"; };
+		67F66A67426023213E5D719C /* libPods-social_dance_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D9A099D56EC4B08A86C6C20 /* Pods-social_dance_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.debug.xcconfig"; sourceTree = "<group>"; };
 		7DEDF84A2EE0DA8859D07251 /* Pods-social_dance_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.release.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.release.xcconfig"; sourceTree = "<group>"; };
 		9B2EE156269CA8B700391917 /* social_dance_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = social_dance_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,10 +83,6 @@
 		9B2EE1A1269CD8E300391917 /* LoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		9B2EE1A3269CDE9F00391917 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9B2EE1A4269CDE9F00391917 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		9B3C09B1269CE15200B244DE /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		9B3C09B2269CE15200B244DE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
-		9B3C09B4269CE15C00B244DE /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		9B3C09B5269CE15C00B244DE /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		9B3C09B7269CE16900B244DE /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		9B3C09B8269CE16900B244DE /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		9B3C09BA269CE2D500B244DE /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
@@ -97,11 +93,12 @@
 		9B3C09C1269CE3AC00B244DE /* SearchCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCollectionViewCell.m; sourceTree = "<group>"; };
 		9B3C09C3269CE41C00B244DE /* CreateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateView.h; sourceTree = "<group>"; };
 		9B3C09C4269CE41C00B244DE /* CreateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateView.m; sourceTree = "<group>"; };
+		9B3C09C6269CF41D00B244DE /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		9B3C09C7269CF41D00B244DE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		9DDD14C4A779EF5D93F4F777 /* Pods-social_dance_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB179721461108F7E7DF4AED /* Pods-social_dance_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.release.xcconfig"; sourceTree = "<group>"; };
+		D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F7D4FC576299881AD2703C /* Pods-social_dance_app-social_dance_appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app-social_dance_appUITests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		FE0926C3FB3C6C47D42F1602 /* Pods_social_dance_appTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_social_dance_appTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FEE9D7C6903F086C50BEAE94 /* Pods_social_dance_app_social_dance_appUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_social_dance_app_social_dance_appUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7DAADDE8A1BF6F4A31149CF /* Pods_social_dance_app.framework in Frameworks */,
+				78F9DE7680D07EE1184D6C52 /* libPods-social_dance_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13A1DE9E051C6C4F2B9E6601 /* Pods_social_dance_appTests.framework in Frameworks */,
+				CABFDEA0EF1DC19ADCC5202A /* libPods-social_dance_appTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				724DF44CC6B040DDBDFBF2CB /* Pods_social_dance_app_social_dance_appUITests.framework in Frameworks */,
+				644269BC7A82C93C2107D723 /* libPods-social_dance_app-social_dance_appUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,9 +145,9 @@
 		5B3BB6F59E0FDF94A3D26CBF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3B8C571FC2728F79195FF882 /* Pods_social_dance_app.framework */,
-				FEE9D7C6903F086C50BEAE94 /* Pods_social_dance_app_social_dance_appUITests.framework */,
-				FE0926C3FB3C6C47D42F1602 /* Pods_social_dance_appTests.framework */,
+				67F66A67426023213E5D719C /* libPods-social_dance_app.a */,
+				24D4DEDC54C58F0411A7D468 /* libPods-social_dance_app-social_dance_appUITests.a */,
+				D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,12 +231,10 @@
 		9B2EE18F269CA8E700391917 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9B3C09B1269CE15200B244DE /* Post.h */,
-				9B3C09B2269CE15200B244DE /* Post.m */,
-				9B3C09B4269CE15C00B244DE /* User.h */,
-				9B3C09B5269CE15C00B244DE /* User.m */,
 				9B3C09B7269CE16900B244DE /* Song.h */,
 				9B3C09B8269CE16900B244DE /* Song.m */,
+				9B3C09C6269CF41D00B244DE /* Post.h */,
+				9B3C09C7269CF41D00B244DE /* Post.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,7 +267,7 @@
 				9B2EE152269CA8B700391917 /* Sources */,
 				9B2EE153269CA8B700391917 /* Frameworks */,
 				9B2EE154269CA8B700391917 /* Resources */,
-				01BA61082DFD4294219E0DD8 /* [CP] Embed Pods Frameworks */,
+				04401443990A25906653514E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -310,7 +305,7 @@
 				9B2EE178269CA8B900391917 /* Sources */,
 				9B2EE179269CA8B900391917 /* Frameworks */,
 				9B2EE17A269CA8B900391917 /* Resources */,
-				2C3E54C5745514B71CBBF5DF /* [CP] Embed Pods Frameworks */,
+				DA7DAF693FC80DD2DF7386EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -391,38 +386,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01BA61082DFD4294219E0DD8 /* [CP] Embed Pods Frameworks */ = {
+		04401443990A25906653514E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2C3E54C5745514B71CBBF5DF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		636169E21DDFE2E37F61E60B /* [CP] Check Pods Manifest.lock */ = {
@@ -469,6 +447,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DA7DAF693FC80DD2DF7386EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F603AB30624C4698BCCDF812 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -505,9 +500,8 @@
 				9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */,
 				9B3C09BF269CE30600B244DE /* DetailView.m in Sources */,
 				9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */,
+				9B3C09C8269CF41D00B244DE /* Post.m in Sources */,
 				9B2EE19C269CACAE00391917 /* CreateViewController.m in Sources */,
-				9B3C09B3269CE15200B244DE /* Post.m in Sources */,
-				9B3C09B6269CE15C00B244DE /* User.m in Sources */,
 				9B2EE1A5269CDE9F00391917 /* LoginViewController.m in Sources */,
 				9B3C09BC269CE2D500B244DE /* HomeTableViewCell.m in Sources */,
 				9B2EE196269CAC9600391917 /* HomeViewController.m in Sources */,

@@ -99,12 +99,20 @@ This app allows dancers and non-dancers alike to post dance videos of themselves
 | objectID  | String  |unique id for the user post (default field)|
 | author  | Pointer to User  |user who posted the post|
 | video | File | the dance video to be posted |
-| spotifyURI | String | unique string that corresponds to music in video |
+| song | Pointer to Song | object representing song in video |
 | createdAt | DateTime | date when post is created (default field) |
 | updatedAt | DateTime | date when post is last updated (default field) |
 | caption | String | image caption by author |
 | likesCount | Number | number of likes on post |
 commentsCount | Number | number of comments on post
+
+**Model: Song**
+| Property  | Type | Description |
+| ------------- | ------------- | --------|
+| objectID  | String  |unique id for the user post (default field)|
+| createdAt | DateTime | date when post is created (default field) |
+| updatedAt | DateTime | date when post is last updated (default field) |
+
 
 **Model: User**
 

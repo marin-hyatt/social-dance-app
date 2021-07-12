@@ -94,24 +94,37 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="371"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtx-9z-dFC">
-                                                    <rect key="frame" x="0.0" y="59" width="414" height="312"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtx-9z-dFC">
+                                                    <rect key="frame" x="0.0" y="53" width="414" height="318"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-t8-vu0">
-                                                    <rect key="frame" x="20" y="11" width="40" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-t8-vu0">
+                                                    <rect key="frame" x="8" y="5" width="40" height="40"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="6Hn-dV-LaJ"/>
+                                                        <constraint firstAttribute="width" constant="40" id="oKk-BF-Wsv"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duE-Fe-jOg">
-                                                    <rect key="frame" x="68" y="20" width="76" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duE-Fe-jOg">
+                                                    <rect key="frame" x="56" y="15" width="76" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="aDg-t8-vu0" secondAttribute="bottom" constant="8" id="1IC-aL-RaD"/>
+                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" id="ELt-LD-Hab"/>
+                                                <constraint firstAttribute="bottom" secondItem="rtx-9z-dFC" secondAttribute="bottom" id="L6T-mL-mOP"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="trailing" constant="8" id="Mdu-JJ-JIW"/>
+                                                <constraint firstItem="aDg-t8-vu0" firstAttribute="top" secondItem="Ud9-6D-Mck" secondAttribute="top" constant="5" id="PWQ-kr-3LT"/>
+                                                <constraint firstItem="duE-Fe-jOg" firstAttribute="centerY" secondItem="aDg-t8-vu0" secondAttribute="centerY" id="VIA-Ju-bAV"/>
+                                                <constraint firstAttribute="trailing" secondItem="rtx-9z-dFC" secondAttribute="trailing" id="XP8-Ig-XaJ"/>
+                                                <constraint firstItem="aDg-t8-vu0" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" constant="8" id="oZx-Q4-T2J"/>
+                                                <constraint firstItem="duE-Fe-jOg" firstAttribute="leading" secondItem="aDg-t8-vu0" secondAttribute="trailing" constant="8" id="s7L-yn-aDE"/>
+                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="duE-Fe-jOg" secondAttribute="bottom" constant="18" id="wkF-12-1K1"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="profilePictureView" destination="aDg-t8-vu0" id="Ahq-Rw-drp"/>

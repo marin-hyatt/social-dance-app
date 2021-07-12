@@ -9,4 +9,12 @@
 
 @implementation Song
 
+@dynamic  title;
+@dynamic  artist;
+@dynamic  uri;
+
++ (nonnull NSString *)parseClassName {
+    return @"Song";
+}
+
 @end

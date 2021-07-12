@@ -1,0 +1,1 @@
+../../../Parse/ParseUI/Classes/QueryCollectionViewController/PFQueryCollectionViewController.h
