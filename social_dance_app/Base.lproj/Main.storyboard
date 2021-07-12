@@ -337,6 +337,9 @@
                                 <state key="normal" title="Record Video">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onRecordVideoPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="cgX-rU-OPJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
                                 <rect key="frame" x="253" y="238" width="131" height="36"/>
@@ -345,6 +348,9 @@
                                 <state key="normal" title="Choose Video">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onChooseVideoPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="IBH-C9-pVg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZN-vV-83Q">
                                 <rect key="frame" x="144.5" y="727" width="125" height="36"/>
@@ -353,6 +359,9 @@
                                 <state key="normal" title="Choose Song">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onChooseSongPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="IvP-ke-n02"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7yB-3f-mzb"/>
@@ -372,6 +381,9 @@
                     <navigationItem key="navigationItem" id="ibi-0F-3c1">
                         <barButtonItem key="rightBarButtonItem" title="Post" image="pencil" catalog="system" id="hKh-D6-NAK"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="createView" destination="iCW-Yy-Z8S" id="Vf7-aH-9zt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY6-JN-Fg0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

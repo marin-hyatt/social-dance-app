@@ -6,8 +6,11 @@
 //
 
 #import "CreateViewController.h"
+#import "CreateView.h"
 
-@interface CreateViewController ()
+@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (strong, nonatomic) IBOutlet CreateView *createView;
+
 
 @end
 
@@ -17,6 +20,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+- (IBAction)onRecordVideoPressed:(UIButton *)sender {
+    [self showImagePicker:YES];
+}
+
+- (IBAction)onChooseVideoPressed:(UIButton *)sender {
+    [self showImagePicker:NO];
+}
+
+- (IBAction)onChooseSongPressed:(id)sender {
+}
+
+-(void) showImagePicker:(BOOL) userIsRecording {
+    // Sets up image picker
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+
+    // Checks to see if phone or simulator is able to take pictures
+    if (userIsRecording && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerVC.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+    } else {
+        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+
 
 /*
 #pragma mark - Navigation
