@@ -7,9 +7,13 @@
 
 #import "CreateViewController.h"
 #import "CreateView.h"
+#import "Song.h"
+#import "Parse/Parse.h"
+#import "Post.h"
 
 @interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
+@property (strong, nonatomic) PFFileObject *videoFile;
 
 
 @end
@@ -30,6 +34,37 @@
 }
 
 - (IBAction)onChooseSongPressed:(id)sender {
+}
+
+- (IBAction)onPostPressed:(UIBarButtonItem *)sender {
+    NSString *caption = self.createView.captionField.text;
+    
+    // TODO: add spotify functionality, for now Song object is nil
+    Song *song = nil;
+
+    
+    // Post video to backend
+    [Post postUserVideo:self.videoFile withCaption:caption withSong:song withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error! %@", error.localizedDescription);
+        } else {
+            NSLog(@"Video posted!");
+        }
+    }];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    // grab our movie URL
+    NSURL *chosenMovie = [info objectForKey:UIImagePickerControllerMediaURL];
+    NSLog(@"%@", chosenMovie);
+    
+    // save it to the documents directory (option 1)
+    NSData *videoData = [NSData dataWithContentsOfURL:chosenMovie];
+    self.videoFile = [PFFileObject fileObjectWithName:@"video.mp4" data:videoData];
+
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+        
 }
 
 -(void) showImagePicker:(BOOL) userIsRecording {

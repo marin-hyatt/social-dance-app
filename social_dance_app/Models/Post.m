@@ -17,11 +17,28 @@
 @dynamic likeCount;
 @dynamic commentCount;
 @dynamic createdAt;
-@dynamic video;
+@dynamic videoFile;
 @dynamic song;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
+}
+
++ (void)postUserVideo:(PFFileObject *)videoFile withCaption:(NSString *)caption withSong:(Song *)song withCompletion:(PFBooleanResultBlock)completion {
+    Post *newPost = [Post new];
+
+    newPost.author = [PFUser currentUser];
+    newPost.caption = caption;
+    newPost.videoFile = videoFile;
+    newPost.song = song;
+    newPost.likeCount = @(0);
+    newPost.commentCount = @(0);
+    
+    [newPost saveInBackgroundWithBlock: completion];
+}
+
+- (void)setVideoURL:(NSURL *)videoURL {
+    
 }
 
 @end

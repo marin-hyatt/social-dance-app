@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CreateView : UIView
+@property (weak, nonatomic) IBOutlet UITextField *captionField;
 
 @end
 
