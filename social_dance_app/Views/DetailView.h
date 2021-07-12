@@ -10,6 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailView : UIView
+@property (weak, nonatomic) IBOutlet UIView *videoPlayerView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *songNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 
 @end
 

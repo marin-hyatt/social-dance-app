@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 
 @end
 

@@ -6,8 +6,10 @@
 //
 
 #import "DetailViewController.h"
+#import "DetailView.h"
 
 @interface DetailViewController ()
+@property (strong, nonatomic) IBOutlet DetailView *detailView;
 
 @end
 
