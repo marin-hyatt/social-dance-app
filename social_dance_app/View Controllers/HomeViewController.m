@@ -6,8 +6,13 @@
 //
 
 #import "HomeViewController.h"
+#import "Parse/Parse.h"
+#import "LoginViewController.h"
+#import "SceneDelegate.h"
 
 @interface HomeViewController ()
+- (IBAction)onLogoutButtonPressed:(id)sender;
+
 
 @end
 
@@ -27,5 +32,19 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onLogoutButtonPressed:(id)sender {
+    //Creates app delegate, Main storyboard, and Login view controller. Then sets the root view controller (the one the user sees) to the Login view controller
+    SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    myDelegate.window.rootViewController = loginViewController;
+    
+    // Logs out user
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+    }];
+}
 
 @end

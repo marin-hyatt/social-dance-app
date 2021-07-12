@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="LoginView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +122,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" selectedImage="house" catalog="system" id="3sF-aj-THh"/>
                     <navigationItem key="navigationItem" id="bAb-Pz-uNl">
-                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="Ww2-jL-9kh"/>
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="Ww2-jL-9kh">
+                            <connections>
+                                <action selector="onLogoutButtonPressed:" destination="99N-S4-3fk" id="x7F-4P-S2M"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="LTi-52-sZA" kind="presentation" id="Dxy-pc-bSQ"/>
@@ -281,26 +285,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adv-3V-Z6z">
-                                <rect key="frame" x="28" y="238" width="160" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adv-3V-Z6z">
+                                <rect key="frame" x="30" y="238" width="126" height="36"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Record Video">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
-                                <rect key="frame" x="220" y="238" width="160" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
+                                <rect key="frame" x="253" y="238" width="131" height="36"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Choose Video">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZN-vV-83Q">
-                                <rect key="frame" x="116" y="527" width="182" height="91"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZN-vV-83Q">
+                                <rect key="frame" x="144.5" y="727" width="125" height="36"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Choose Song">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -308,16 +312,20 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7yB-3f-mzb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wZN-vV-83Q" firstAttribute="centerX" secondItem="iCW-Yy-Z8S" secondAttribute="centerX" id="8Jx-dL-ul2"/>
+                            <constraint firstItem="wZN-vV-83Q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Adv-3V-Z6z" secondAttribute="bottom" constant="50" id="ION-Ho-bLG"/>
+                            <constraint firstItem="7yB-3f-mzb" firstAttribute="bottom" secondItem="wZN-vV-83Q" secondAttribute="bottom" constant="50" id="K4S-r9-JaL"/>
+                            <constraint firstItem="Adv-3V-Z6z" firstAttribute="leading" secondItem="7yB-3f-mzb" secondAttribute="leading" constant="30" id="M4k-Ka-TaM"/>
+                            <constraint firstItem="B19-XJ-PSl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Adv-3V-Z6z" secondAttribute="trailing" constant="30" id="PPH-Rx-4Q2"/>
+                            <constraint firstItem="Adv-3V-Z6z" firstAttribute="top" secondItem="7yB-3f-mzb" secondAttribute="top" constant="150" id="eM8-6Z-DT3"/>
+                            <constraint firstItem="B19-XJ-PSl" firstAttribute="centerY" secondItem="Adv-3V-Z6z" secondAttribute="centerY" id="fHY-ko-cis"/>
+                            <constraint firstItem="7yB-3f-mzb" firstAttribute="trailing" secondItem="B19-XJ-PSl" secondAttribute="trailing" constant="30" id="r64-GD-ELW"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Create" image="video" catalog="system" id="btq-6r-Lyb"/>
                     <navigationItem key="navigationItem" id="ibi-0F-3c1">
-                        <barButtonItem key="rightBarButtonItem" title="Post" style="plain" id="tKP-d6-Ewk">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="MA8-EW-UNq">
-                                <rect key="frame" x="302" y="7" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" image="pencil" catalog="system" id="hKh-D6-NAK"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY6-JN-Fg0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -365,6 +373,7 @@
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="music.note" catalog="system" width="97" height="128"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="video" catalog="system" width="128" height="83"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
