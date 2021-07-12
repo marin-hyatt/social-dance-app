@@ -23,6 +23,13 @@
 		9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE19E269CAF2500391917 /* DetailViewController.m */; };
 		9B2EE1A2269CD8E300391917 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE1A1269CD8E300391917 /* LoginView.m */; };
 		9B2EE1A5269CDE9F00391917 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE1A4269CDE9F00391917 /* LoginViewController.m */; };
+		9B3C09B3269CE15200B244DE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09B2269CE15200B244DE /* Post.m */; };
+		9B3C09B6269CE15C00B244DE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09B5269CE15C00B244DE /* User.m */; };
+		9B3C09B9269CE16900B244DE /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09B8269CE16900B244DE /* Song.m */; };
+		9B3C09BC269CE2D500B244DE /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09BB269CE2D500B244DE /* HomeTableViewCell.m */; };
+		9B3C09BF269CE30600B244DE /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09BE269CE30600B244DE /* DetailView.m */; };
+		9B3C09C2269CE3AC00B244DE /* SearchCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C1269CE3AC00B244DE /* SearchCollectionViewCell.m */; };
+		9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C4269CE41C00B244DE /* CreateView.m */; };
 		B7DAADDE8A1BF6F4A31149CF /* Pods_social_dance_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8C571FC2728F79195FF882 /* Pods_social_dance_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +83,20 @@
 		9B2EE1A1269CD8E300391917 /* LoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		9B2EE1A3269CDE9F00391917 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		9B2EE1A4269CDE9F00391917 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9B3C09B1269CE15200B244DE /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		9B3C09B2269CE15200B244DE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		9B3C09B4269CE15C00B244DE /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		9B3C09B5269CE15C00B244DE /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		9B3C09B7269CE16900B244DE /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		9B3C09B8269CE16900B244DE /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		9B3C09BA269CE2D500B244DE /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		9B3C09BB269CE2D500B244DE /* HomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		9B3C09BD269CE30600B244DE /* DetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailView.h; sourceTree = "<group>"; };
+		9B3C09BE269CE30600B244DE /* DetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailView.m; sourceTree = "<group>"; };
+		9B3C09C0269CE3AC00B244DE /* SearchCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchCollectionViewCell.h; sourceTree = "<group>"; };
+		9B3C09C1269CE3AC00B244DE /* SearchCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchCollectionViewCell.m; sourceTree = "<group>"; };
+		9B3C09C3269CE41C00B244DE /* CreateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateView.h; sourceTree = "<group>"; };
+		9B3C09C4269CE41C00B244DE /* CreateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateView.m; sourceTree = "<group>"; };
 		9DDD14C4A779EF5D93F4F777 /* Pods-social_dance_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB179721461108F7E7DF4AED /* Pods-social_dance_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.release.xcconfig"; sourceTree = "<group>"; };
 		E0F7D4FC576299881AD2703C /* Pods-social_dance_app-social_dance_appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app-social_dance_appUITests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +234,12 @@
 		9B2EE18F269CA8E700391917 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9B3C09B1269CE15200B244DE /* Post.h */,
+				9B3C09B2269CE15200B244DE /* Post.m */,
+				9B3C09B4269CE15C00B244DE /* User.h */,
+				9B3C09B5269CE15C00B244DE /* User.m */,
+				9B3C09B7269CE16900B244DE /* Song.h */,
+				9B3C09B8269CE16900B244DE /* Song.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,6 +249,14 @@
 			children = (
 				9B2EE1A0269CD8E300391917 /* LoginView.h */,
 				9B2EE1A1269CD8E300391917 /* LoginView.m */,
+				9B3C09BA269CE2D500B244DE /* HomeTableViewCell.h */,
+				9B3C09BB269CE2D500B244DE /* HomeTableViewCell.m */,
+				9B3C09BD269CE30600B244DE /* DetailView.h */,
+				9B3C09BE269CE30600B244DE /* DetailView.m */,
+				9B3C09C0269CE3AC00B244DE /* SearchCollectionViewCell.h */,
+				9B3C09C1269CE3AC00B244DE /* SearchCollectionViewCell.m */,
+				9B3C09C3269CE41C00B244DE /* CreateView.h */,
+				9B3C09C4269CE41C00B244DE /* CreateView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -463,13 +498,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B3C09B9269CE16900B244DE /* Song.m in Sources */,
 				9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */,
 				9B2EE16C269CA8B900391917 /* main.m in Sources */,
 				9B2EE1A2269CD8E300391917 /* LoginView.m in Sources */,
 				9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */,
+				9B3C09BF269CE30600B244DE /* DetailView.m in Sources */,
+				9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */,
 				9B2EE19C269CACAE00391917 /* CreateViewController.m in Sources */,
+				9B3C09B3269CE15200B244DE /* Post.m in Sources */,
+				9B3C09B6269CE15C00B244DE /* User.m in Sources */,
 				9B2EE1A5269CDE9F00391917 /* LoginViewController.m in Sources */,
+				9B3C09BC269CE2D500B244DE /* HomeTableViewCell.m in Sources */,
 				9B2EE196269CAC9600391917 /* HomeViewController.m in Sources */,
+				9B3C09C2269CE3AC00B244DE /* SearchCollectionViewCell.m in Sources */,
 				9B2EE199269CACA200391917 /* SearchViewController.m in Sources */,
 				9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */,
 			);
