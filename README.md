@@ -230,4 +230,3 @@ commentsCount | Number | number of comments on post
 6. Sorting algorithm for explore page
 - Pros: I know a bunch of sorting algorithms already
 - Cons: doesn't seem very ambiguous, also I don't see a reason to use one
-
