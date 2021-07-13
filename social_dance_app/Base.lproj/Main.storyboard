@@ -340,7 +340,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adv-3V-Z6z">
-                                <rect key="frame" x="30" y="238" width="126" height="36"/>
+                                <rect key="frame" x="30" y="345" width="126" height="36"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Record Video">
@@ -351,7 +351,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
-                                <rect key="frame" x="253" y="238" width="131" height="36"/>
+                                <rect key="frame" x="253" y="345" width="131" height="36"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Choose Video">
@@ -362,7 +362,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZN-vV-83Q">
-                                <rect key="frame" x="144.5" y="727" width="125" height="36"/>
+                                <rect key="frame" x="144.5" y="515" width="125" height="36"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Choose Song">
@@ -372,9 +372,8 @@
                                     <action selector="onChooseSongPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="IvP-ke-n02"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3yQ-Vq-Gbc">
-                                <rect key="frame" x="30" y="569" width="354" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caption" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3yQ-Vq-Gbc">
+                                <rect key="frame" x="30" y="431" width="354" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -383,13 +382,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="wZN-vV-83Q" firstAttribute="centerX" secondItem="iCW-Yy-Z8S" secondAttribute="centerX" id="8Jx-dL-ul2"/>
-                            <constraint firstItem="wZN-vV-83Q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Adv-3V-Z6z" secondAttribute="bottom" constant="50" id="ION-Ho-bLG"/>
-                            <constraint firstItem="7yB-3f-mzb" firstAttribute="bottom" secondItem="wZN-vV-83Q" secondAttribute="bottom" constant="50" id="K4S-r9-JaL"/>
+                            <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="centerY" secondItem="iCW-Yy-Z8S" secondAttribute="centerY" id="9LA-8R-xvN"/>
+                            <constraint firstItem="7yB-3f-mzb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wZN-vV-83Q" secondAttribute="bottom" constant="50" id="K4S-r9-JaL"/>
                             <constraint firstItem="Adv-3V-Z6z" firstAttribute="leading" secondItem="7yB-3f-mzb" secondAttribute="leading" constant="30" id="M4k-Ka-TaM"/>
                             <constraint firstItem="B19-XJ-PSl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Adv-3V-Z6z" secondAttribute="trailing" constant="30" id="PPH-Rx-4Q2"/>
-                            <constraint firstItem="Adv-3V-Z6z" firstAttribute="top" secondItem="7yB-3f-mzb" secondAttribute="top" constant="150" id="eM8-6Z-DT3"/>
+                            <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="leading" secondItem="7yB-3f-mzb" secondAttribute="leading" constant="30" id="db7-Hl-98V"/>
+                            <constraint firstItem="Adv-3V-Z6z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7yB-3f-mzb" secondAttribute="top" constant="50" id="eM8-6Z-DT3"/>
                             <constraint firstItem="B19-XJ-PSl" firstAttribute="centerY" secondItem="Adv-3V-Z6z" secondAttribute="centerY" id="fHY-ko-cis"/>
+                            <constraint firstItem="7yB-3f-mzb" firstAttribute="trailing" secondItem="3yQ-Vq-Gbc" secondAttribute="trailing" constant="30" id="ihd-uY-HM8"/>
+                            <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="top" secondItem="Adv-3V-Z6z" secondAttribute="bottom" constant="50" id="pC7-cU-DTQ"/>
                             <constraint firstItem="7yB-3f-mzb" firstAttribute="trailing" secondItem="B19-XJ-PSl" secondAttribute="trailing" constant="30" id="r64-GD-ELW"/>
+                            <constraint firstItem="wZN-vV-83Q" firstAttribute="top" secondItem="3yQ-Vq-Gbc" secondAttribute="bottom" constant="50" id="z1I-wV-jjq"/>
                         </constraints>
                         <connections>
                             <outlet property="captionField" destination="3yQ-Vq-Gbc" id="aRv-kb-Q6E"/>

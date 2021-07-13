@@ -15,6 +15,7 @@
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *feed;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property int numDataToLoad;
 - (IBAction)onLogoutButtonPressed:(id)sender;
@@ -33,6 +34,11 @@
     // Gets posts from Parse
     self.numDataToLoad = 20;
     [self loadPosts:self.numDataToLoad];
+    
+    // Initializes refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadPosts:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -45,6 +51,14 @@
     return cell;
     
 }
+
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if(indexPath.row + 1 == [self.feed count] && !self.isMoreDataLoading){
+//        self.isMoreDataLoading = true;
+//        self.numDataToLoad++;
+//        [self loadPosts:self.numDataToLoad];
+//    }
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.feed.count;
@@ -68,6 +82,7 @@
             NSLog(@"Feed successfully loaded");
             self.feed = posts;
             [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
         }
         else {
             // handle error

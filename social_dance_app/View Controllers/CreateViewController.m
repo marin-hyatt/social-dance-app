@@ -51,6 +51,9 @@
             NSLog(@"Video posted!");
         }
     }];
+    
+    // Switches to root view controller
+    self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {

@@ -16,6 +16,7 @@
     [super awakeFromNib];
     // Initialization code
 //    self.videoView = [PlayerView new];
+    // TODO: refactor video player code to go in PlayerView?
     [self initializeVideoPlayer];
     
     // Add play/pause tap gesture recognizer
@@ -36,11 +37,12 @@
     self.player = [AVPlayer playerWithPlayerItem:nil];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     
-    // Autolayout stuff
+    // TODO: Autolayout stuff
     [self.player setExternalPlaybackVideoGravity:AVLayerVideoGravityResizeAspectFill];
     self.playerLayer.frame = self.videoView.frame;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    self.playerLayer.needsDisplayOnBoundsChange = YES;
+    self.player.volume = 3;
+//    self.playerLayer.needsDisplayOnBoundsChange = YES;
     
     // code for looping video
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
@@ -66,6 +68,7 @@
 //    self.videoView.frame = CGRectMake(0, 0, self.playerLayer.frame.size.width, self.playerLayer.frame.size.height);
 //    NSLog(@"Old width: %f", self.videoView.frame.size.width);
 }
+
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
