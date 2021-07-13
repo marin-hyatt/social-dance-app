@@ -6,10 +6,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayerView : UIView
+
+/*
+@property AVPlayer *player;
+@property AVPlayerLayer *playerLayer;
+-(void)setUpVideoPlayerWithUrl:(NSURL *)url;
+ */
 
 @end
 

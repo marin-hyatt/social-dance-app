@@ -9,6 +9,7 @@
 #import "Post.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "PlayerView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property AVPlayerLayer *playerLayer;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
-@property (weak, nonatomic) IBOutlet UIView *videoView;
+@property (strong, nonatomic) IBOutlet PlayerView *videoView;
 -(void)updateAppearance;
 
 @end
