@@ -10,9 +10,13 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "HomeTableViewCell.h"
+#import "Post.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *feed;
+@property (assign, nonatomic) BOOL isMoreDataLoading;
+@property int numDataToLoad;
 - (IBAction)onLogoutButtonPressed:(id)sender;
 
 
@@ -25,16 +29,51 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    // Gets posts from Parse
+    self.numDataToLoad = 20;
+    [self loadPosts:self.numDataToLoad];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell"];
+    
+    // Set up cell
+    cell.post = self.feed[indexPath.row];
+    [cell updateAppearance];
+    
     return cell;
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.feed.count;
+}
+
+-(void)loadPosts:(int)limit {
+    NSLog(@"Load posts");
+    
+    //Querys Parse for posts
+    
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = limit;
+
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            self.isMoreDataLoading = false;
+            NSLog(@"Feed successfully loaded");
+            self.feed = posts;
+            [self.tableView reloadData];
+        }
+        else {
+            // handle error
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+    }];
 }
 /*
 #pragma mark - Navigation
