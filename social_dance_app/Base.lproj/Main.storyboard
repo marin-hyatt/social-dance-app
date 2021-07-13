@@ -255,7 +255,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e8B-zQ-491">
                                 <rect key="frame" x="0.0" y="139" width="414" height="757"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jHy-ja-JzT">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jHy-ja-JzT">
                                     <size key="itemSize" width="209" height="197"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -270,28 +270,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dha-BC-1h4">
-                                                    <rect key="frame" x="79.5" y="75" width="50" height="47.5"/>
+                                                    <rect key="frame" x="89.5" y="85" width="30" height="27.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="L9o-Mn-gzl"/>
-                                                        <constraint firstAttribute="height" constant="50" id="u1V-af-lUH"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Arh-2O-c7S"/>
+                                                        <constraint firstAttribute="width" constant="30" id="zNh-DI-fgT"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clH-iN-JS4">
-                                                    <rect key="frame" x="66.5" y="131" width="76" height="21"/>
+                                                    <rect key="frame" x="66.5" y="123.5" width="76" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dha-BC-1h4" firstAttribute="centerY" secondItem="kms-vi-quT" secondAttribute="centerY" id="KMo-c5-Tae"/>
-                                                <constraint firstItem="clH-iN-JS4" firstAttribute="top" secondItem="dha-BC-1h4" secondAttribute="bottom" constant="7.5" id="PaN-oJ-ilK"/>
-                                                <constraint firstItem="clH-iN-JS4" firstAttribute="centerX" secondItem="kms-vi-quT" secondAttribute="centerX" id="ZDx-Qz-afM"/>
-                                                <constraint firstAttribute="bottom" secondItem="clH-iN-JS4" secondAttribute="bottom" constant="45" id="dVQ-g8-ROo"/>
-                                                <constraint firstItem="dha-BC-1h4" firstAttribute="centerX" secondItem="kms-vi-quT" secondAttribute="centerX" id="zAs-LN-iB9"/>
+                                                <constraint firstItem="dha-BC-1h4" firstAttribute="centerX" secondItem="kms-vi-quT" secondAttribute="centerX" id="LhJ-rc-wGZ"/>
+                                                <constraint firstItem="clH-iN-JS4" firstAttribute="top" secondItem="dha-BC-1h4" secondAttribute="bottom" constant="10" id="Pt6-W8-Kbs"/>
+                                                <constraint firstItem="dha-BC-1h4" firstAttribute="centerY" secondItem="kms-vi-quT" secondAttribute="centerY" id="UyB-mA-dur"/>
+                                                <constraint firstItem="clH-iN-JS4" firstAttribute="centerX" secondItem="kms-vi-quT" secondAttribute="centerX" id="qDY-op-xDi"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="209" height="197"/>
                                         <connections>
                                             <outlet property="usernameLabel" destination="clH-iN-JS4" id="1H5-uz-2fV"/>
@@ -299,7 +297,7 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="kix-Pp-9eg">
+                            <searchBar contentMode="redraw" placeholder="Search for username" translatesAutoresizingMaskIntoConstraints="NO" id="kix-Pp-9eg">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -320,6 +318,7 @@
                     <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="fSU-q8-Vz3"/>
                     <navigationItem key="navigationItem" id="Nb4-xO-e9F"/>
                     <connections>
+                        <outlet property="flowLayout" destination="jHy-ja-JzT" id="eCb-zp-VYn"/>
                         <outlet property="searchBar" destination="kix-Pp-9eg" id="MtZ-Ey-5MK"/>
                         <outlet property="searchCollectionView" destination="e8B-zQ-491" id="bhU-ih-y0T"/>
                     </connections>

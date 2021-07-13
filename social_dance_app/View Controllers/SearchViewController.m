@@ -9,9 +9,10 @@
 #import "Parse/Parse.h"
 #import "SearchCollectionViewCell.h"
 
-@interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
+@interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *searchCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) NSMutableArray *filteredUsers;
 
@@ -29,6 +30,29 @@
     [self loadUsers:20];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    NSLog(@"Layout calculated");
+    //Resizes layout
+
+    self.flowLayout.minimumInteritemSpacing = 0;
+    self.flowLayout.minimumLineSpacing = 0;
+    self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+//    CGFloat cellsPerLine = 2;
+//    //Accounting for the spaces in between the cells
+//    CGFloat itemWidth = ((self.searchCollectionView.frame.size.width - (self.flowLayout.minimumInteritemSpacing)) / cellsPerLine);
+//    CGFloat itemHeight = itemWidth * 1.5;
+//    self.flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    int totalwidth = self.searchCollectionView.bounds.size.width;
+    int numberOfCellsPerRow = 3;
+    int dimensions = (CGFloat)(totalwidth / numberOfCellsPerRow);
+    return CGSizeMake(dimensions, dimensions);
+}
+
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     SearchCollectionViewCell *cell = [self.searchCollectionView dequeueReusableCellWithReuseIdentifier:@"SearchCollectionViewCell" forIndexPath:indexPath];
     
@@ -41,11 +65,24 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return 5;
     return self.filteredUsers.count;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length != 0) {
+            // Creates a predicate used for filtering, in this case we use the title
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PFUser *user, NSDictionary *bindings) {
+                return [user[@"username"] containsString:searchText];
+            }];
+            // Filters the array of movies using the predicate
+            self.filteredUsers = [self.users filteredArrayUsingPredicate:predicate];
+        }
+        else {
+            //If no search, don't filter anything
+            self.filteredUsers = self.users;
+        }
+        //Refresh the data to reflect filtering
+        [self.searchCollectionView reloadData];
     
 }
 
