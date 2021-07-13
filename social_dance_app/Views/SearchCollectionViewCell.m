@@ -9,4 +9,8 @@
 
 @implementation SearchCollectionViewCell
 
+- (void)updateAppearance {
+    self.usernameLabel.text = self.user[@"username"];
+}
+
 @end

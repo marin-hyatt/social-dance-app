@@ -30,6 +30,7 @@
 		9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C4269CE41C00B244DE /* CreateView.m */; };
 		9B3C09C8269CF41D00B244DE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C7269CF41D00B244DE /* Post.m */; };
 		9B3C09CE269DD81400B244DE /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09CD269DD81400B244DE /* PlayerView.m */; };
+		9BE67B46269E1A3C0047611E /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B45269E1A3C0047611E /* SearchView.m */; };
 		CABFDEA0EF1DC19ADCC5202A /* libPods-social_dance_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,8 @@
 		9B3C09C7269CF41D00B244DE /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		9B3C09CC269DD81400B244DE /* PlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
 		9B3C09CD269DD81400B244DE /* PlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
+		9BE67B44269E1A3C0047611E /* SearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		9BE67B45269E1A3C0047611E /* SearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		9DDD14C4A779EF5D93F4F777 /* Pods-social_dance_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB179721461108F7E7DF4AED /* Pods-social_dance_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.release.xcconfig"; sourceTree = "<group>"; };
 		D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +260,8 @@
 				9B3C09C4269CE41C00B244DE /* CreateView.m */,
 				9B3C09CC269DD81400B244DE /* PlayerView.h */,
 				9B3C09CD269DD81400B244DE /* PlayerView.m */,
+				9BE67B44269E1A3C0047611E /* SearchView.h */,
+				9BE67B45269E1A3C0047611E /* SearchView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */,
 				9B2EE16C269CA8B900391917 /* main.m in Sources */,
 				9B2EE1A2269CD8E300391917 /* LoginView.m in Sources */,
+				9BE67B46269E1A3C0047611E /* SearchView.m in Sources */,
 				9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */,
 				9B3C09BF269CE30600B244DE /* DetailView.m in Sources */,
 				9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */,
