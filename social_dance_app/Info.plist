@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>spotify</string> <!-- added this for Spotify API -->
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>com.marinhyatt.social-dance-app</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>social-dance-app</string>
+        </array>
+      </dict>
+    </array>
     <key>NSPhotoLibraryUsageDescription</key>               <!-- added this for photo library permission -->
     <string>Need library access to upload images</string> <!-- added this for photo library permission -->
     <key>NSCameraUsageDescription</key> <!-- added this for camera permission -->

@@ -31,6 +31,9 @@
 		9B3C09C8269CF41D00B244DE /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09C7269CF41D00B244DE /* Post.m */; };
 		9B3C09CE269DD81400B244DE /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3C09CD269DD81400B244DE /* PlayerView.m */; };
 		9BE67B46269E1A3C0047611E /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B45269E1A3C0047611E /* SearchView.m */; };
+		9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */; };
+		9BE67B4C269E3D360047611E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE67B4B269E3D360047611E /* Keys.plist */; };
+		9BE67B4F269E3DCC0047611E /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B4E269E3DCC0047611E /* APIManager.m */; };
 		CABFDEA0EF1DC19ADCC5202A /* libPods-social_dance_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +104,10 @@
 		9B3C09CD269DD81400B244DE /* PlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		9BE67B44269E1A3C0047611E /* SearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		9BE67B45269E1A3C0047611E /* SearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
+		9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		9BE67B4B269E3D360047611E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		9BE67B4D269E3DCC0047611E /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		9BE67B4E269E3DCC0047611E /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		9DDD14C4A779EF5D93F4F777 /* Pods-social_dance_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB179721461108F7E7DF4AED /* Pods-social_dance_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.release.xcconfig"; sourceTree = "<group>"; };
 		D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F9DE7680D07EE1184D6C52 /* libPods-social_dance_app.a in Frameworks */,
+				9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +169,7 @@
 		9B2EE14D269CA8B700391917 = {
 			isa = PBXGroup;
 			children = (
+				9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */,
 				9B2EE158269CA8B700391917 /* social_dance_app */,
 				9B2EE174269CA8B900391917 /* social_dance_appTests */,
 				9B2EE17F269CA8B900391917 /* social_dance_appUITests */,
@@ -183,6 +192,7 @@
 		9B2EE158269CA8B700391917 /* social_dance_app */ = {
 			isa = PBXGroup;
 			children = (
+				9BE67B48269E39250047611E /* Manager */,
 				9B2EE190269CA8EE00391917 /* Views */,
 				9B2EE18F269CA8E700391917 /* Models */,
 				9B2EE18E269CA8D500391917 /* View Controllers */,
@@ -195,6 +205,7 @@
 				9B2EE167269CA8B900391917 /* LaunchScreen.storyboard */,
 				9B2EE16A269CA8B900391917 /* Info.plist */,
 				9B2EE16B269CA8B900391917 /* main.m */,
+				9BE67B4B269E3D360047611E /* Keys.plist */,
 			);
 			path = social_dance_app;
 			sourceTree = "<group>";
@@ -264,6 +275,15 @@
 				9BE67B45269E1A3C0047611E /* SearchView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9BE67B48269E39250047611E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				9BE67B4D269E3DCC0047611E /* APIManager.h */,
+				9BE67B4E269E3DCC0047611E /* APIManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE67B4C269E3D360047611E /* Keys.plist in Resources */,
 				9B2EE169269CA8B900391917 /* LaunchScreen.storyboard in Resources */,
 				9B2EE166269CA8B900391917 /* Assets.xcassets in Resources */,
 				9B2EE164269CA8B700391917 /* Main.storyboard in Resources */,
@@ -505,6 +526,7 @@
 			files = (
 				9B3C09B9269CE16900B244DE /* Song.m in Sources */,
 				9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */,
+				9BE67B4F269E3DCC0047611E /* APIManager.m in Sources */,
 				9B2EE16C269CA8B900391917 /* main.m in Sources */,
 				9B2EE1A2269CD8E300391917 /* LoginView.m in Sources */,
 				9BE67B46269E1A3C0047611E /* SearchView.m in Sources */,
@@ -694,6 +716,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M6WW8H36AB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = social_dance_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -713,6 +739,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M6WW8H36AB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = social_dance_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

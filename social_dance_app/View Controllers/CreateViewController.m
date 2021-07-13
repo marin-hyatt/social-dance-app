@@ -10,6 +10,7 @@
 #import "Song.h"
 #import "Parse/Parse.h"
 #import "Post.h"
+#import "APIManager.h"
 
 @interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
@@ -34,6 +35,7 @@
 }
 
 - (IBAction)onChooseSongPressed:(id)sender {
+    [[APIManager shared] openSpotify];
 }
 
 - (IBAction)onPostPressed:(UIBarButtonItem *)sender {
