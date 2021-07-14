@@ -34,6 +34,9 @@
 		9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */; };
 		9BE67B4C269E3D360047611E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE67B4B269E3D360047611E /* Keys.plist */; };
 		9BE67B4F269E3DCC0047611E /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B4E269E3DCC0047611E /* APIManager.m */; };
+		9BE67B54269F557A0047611E /* SpotifyAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B53269F557A0047611E /* SpotifyAuthViewController.m */; };
+		9BE67B56269F56320047611E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B55269F56320047611E /* WebKit.framework */; };
+		9BE67B59269F568B0047611E /* SpotifyAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B58269F568B0047611E /* SpotifyAuthView.m */; };
 		CABFDEA0EF1DC19ADCC5202A /* libPods-social_dance_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +111,11 @@
 		9BE67B4B269E3D360047611E /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		9BE67B4D269E3DCC0047611E /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		9BE67B4E269E3DCC0047611E /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		9BE67B52269F557A0047611E /* SpotifyAuthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifyAuthViewController.h; sourceTree = "<group>"; };
+		9BE67B53269F557A0047611E /* SpotifyAuthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifyAuthViewController.m; sourceTree = "<group>"; };
+		9BE67B55269F56320047611E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9BE67B57269F568B0047611E /* SpotifyAuthView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifyAuthView.h; sourceTree = "<group>"; };
+		9BE67B58269F568B0047611E /* SpotifyAuthView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifyAuthView.m; sourceTree = "<group>"; };
 		9DDD14C4A779EF5D93F4F777 /* Pods-social_dance_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB179721461108F7E7DF4AED /* Pods-social_dance_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.release.xcconfig"; sourceTree = "<group>"; };
 		D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +129,7 @@
 			files = (
 				78F9DE7680D07EE1184D6C52 /* libPods-social_dance_app.a in Frameworks */,
 				9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */,
+				9BE67B56269F56320047611E /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +168,7 @@
 		5B3BB6F59E0FDF94A3D26CBF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9BE67B55269F56320047611E /* WebKit.framework */,
 				67F66A67426023213E5D719C /* libPods-social_dance_app.a */,
 				24D4DEDC54C58F0411A7D468 /* libPods-social_dance_app-social_dance_appUITests.a */,
 				D5F05279685B8A2B6750EBF2 /* libPods-social_dance_appTests.a */,
@@ -241,6 +251,8 @@
 				9B2EE19E269CAF2500391917 /* DetailViewController.m */,
 				9B2EE1A3269CDE9F00391917 /* LoginViewController.h */,
 				9B2EE1A4269CDE9F00391917 /* LoginViewController.m */,
+				9BE67B52269F557A0047611E /* SpotifyAuthViewController.h */,
+				9BE67B53269F557A0047611E /* SpotifyAuthViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -273,6 +285,8 @@
 				9B3C09CD269DD81400B244DE /* PlayerView.m */,
 				9BE67B44269E1A3C0047611E /* SearchView.h */,
 				9BE67B45269E1A3C0047611E /* SearchView.m */,
+				9BE67B57269F568B0047611E /* SpotifyAuthView.h */,
+				9BE67B58269F568B0047611E /* SpotifyAuthView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -537,7 +551,9 @@
 				9B2EE19C269CACAE00391917 /* CreateViewController.m in Sources */,
 				9B2EE1A5269CDE9F00391917 /* LoginViewController.m in Sources */,
 				9B3C09BC269CE2D500B244DE /* HomeTableViewCell.m in Sources */,
+				9BE67B54269F557A0047611E /* SpotifyAuthViewController.m in Sources */,
 				9B2EE196269CAC9600391917 /* HomeViewController.m in Sources */,
+				9BE67B59269F568B0047611E /* SpotifyAuthView.m in Sources */,
 				9B3C09C2269CE3AC00B244DE /* SearchCollectionViewCell.m in Sources */,
 				9B2EE199269CACA200391917 /* SearchViewController.m in Sources */,
 				9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */,

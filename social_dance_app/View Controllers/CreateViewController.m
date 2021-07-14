@@ -35,7 +35,9 @@
 }
 
 - (IBAction)onChooseSongPressed:(id)sender {
-    [[APIManager shared] openSpotify];
+//    [[APIManager shared] openSpotify];
+//    [[APIManager shared] getAccessToken];
+    [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
 }
 
 - (IBAction)onPostPressed:(UIBarButtonItem *)sender {
@@ -63,7 +65,6 @@
     NSURL *chosenMovie = [info objectForKey:UIImagePickerControllerMediaURL];
     NSLog(@"%@", chosenMovie);
     
-    // save it to the documents directory (option 1)
     NSData *videoData = [NSData dataWithContentsOfURL:chosenMovie];
     self.videoFile = [PFFileObject fileObjectWithName:@"video.mp4" data:videoData];
 

@@ -37,12 +37,27 @@
     self.player = [AVPlayer playerWithPlayerItem:nil];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     
-    // TODO: Autolayout stuff
-    [self.player setExternalPlaybackVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    self.playerLayer.frame = self.videoView.frame;
+     // TODO: Autolayout stuff
+//    [self.videoView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    // TODO: put in completion block in main queue
+//    [self.videoView addConstraint:[NSLayoutConstraint
+//                                      constraintWithItem:self.videoView
+//                                      attribute:NSLayoutAttributeHeight
+//                                      relatedBy:NSLayoutRelationEqual
+//                                      toItem:self.videoView
+//                                      attribute:NSLayoutAttributeWidth
+//                                      multiplier:(self.playerLayer.frame.size.height / self.playerLayer.frame.size.width)
+//                                      constant:0]];
+    
+//    [self.player setExternalPlaybackVideoGravity:AVLayerVideoGravityResizeAspect];
+//    self.playerLayer.frame = self.videoView.frame;
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.player.volume = 3;
+    
+    
 //    self.playerLayer.needsDisplayOnBoundsChange = YES;
+    
+    NSLog(@"Player layer height: %f width: %f", self.playerLayer.frame.size.height, self.playerLayer.frame.size.width);
     
     // code for looping video
     self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
@@ -76,6 +91,7 @@
 }
 
 - (void)updateAppearance {
+    NSLog(@"update appearance");
     PFUser *user = self.post[@"author"];
     
     self.usernameLabel.text = user[@"username"];
@@ -91,6 +107,29 @@
     [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
 //    NSLog(@"New width: %f", self.videoView.frame.size.width);
 //    [self startPlayback];
+    
+    
+    // Get dimensions of media within URL
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    AVAssetTrack *track = [tracks objectAtIndex:0];
+    
+    NSLog(@"Height: %f, Width: %f", track.naturalSize.height, track.naturalSize.width);
+    
+    // Re-configure view dimensions to dimensions of video
+    [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.height].active = YES;
+    [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
+
+    [self.playerLayer setFrame:self.videoView.frame];
+
+    
+    NSLog(@"Rect height: %f Rect width: %f", self.playerLayer.videoRect.size.height, self.playerLayer.videoRect.size.width);
+    
+    NSLog(@"Player layer height: %f width: %f", self.playerLayer.frame.size.height, self.playerLayer.frame.size.width);
+    
+    NSLog(@"View layer height: %f width: %f", self.videoView.frame.size.height, self.videoView.frame.size.width);
+    
+//    [self.videoView setFrame:self.playerLayer.frame];
 }
 
 -(void)startPlayback {

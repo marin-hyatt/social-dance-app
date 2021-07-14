@@ -96,10 +96,6 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtx-9z-dFC" customClass="PlayerView">
                                                     <rect key="frame" x="0.0" y="53" width="414" height="318"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="318" id="RRv-ax-aew"/>
-                                                        <constraint firstAttribute="width" constant="414" id="gGB-DQ-xOg"/>
-                                                    </constraints>
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-t8-vu0">
                                                     <rect key="frame" x="8" y="5" width="40" height="40"/>
@@ -118,15 +114,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="aDg-t8-vu0" secondAttribute="bottom" constant="8" id="1IC-aL-RaD"/>
-                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" id="ELt-LD-Hab"/>
-                                                <constraint firstAttribute="bottom" secondItem="rtx-9z-dFC" secondAttribute="bottom" id="L6T-mL-mOP"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="trailing" constant="8" id="Mdu-JJ-JIW"/>
+                                                <constraint firstAttribute="bottom" secondItem="rtx-9z-dFC" secondAttribute="bottom" id="N08-cL-b12"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="top" secondItem="Ud9-6D-Mck" secondAttribute="top" constant="5" id="PWQ-kr-3LT"/>
                                                 <constraint firstItem="duE-Fe-jOg" firstAttribute="centerY" secondItem="aDg-t8-vu0" secondAttribute="centerY" id="VIA-Ju-bAV"/>
-                                                <constraint firstAttribute="trailing" secondItem="rtx-9z-dFC" secondAttribute="trailing" id="XP8-Ig-XaJ"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" constant="8" id="oZx-Q4-T2J"/>
                                                 <constraint firstItem="duE-Fe-jOg" firstAttribute="leading" secondItem="aDg-t8-vu0" secondAttribute="trailing" constant="8" id="s7L-yn-aDE"/>
-                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="duE-Fe-jOg" secondAttribute="bottom" constant="18" id="wkF-12-1K1"/>
+                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" id="uOf-D4-frR"/>
+                                                <constraint firstAttribute="trailing" secondItem="rtx-9z-dFC" secondAttribute="trailing" id="vH1-IZ-8Pw"/>
+                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="bottom" constant="18" id="wkF-12-1K1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -421,11 +417,49 @@
                     </navigationItem>
                     <connections>
                         <outlet property="createView" destination="iCW-Yy-Z8S" id="Vf7-aH-9zt"/>
+                        <segue destination="pSb-hY-RcG" kind="presentation" identifier="SpotifyAuthViewController" id="SWU-k4-vuU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY6-JN-Fg0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2328.985507246377" y="1770.5357142857142"/>
+        </scene>
+        <!--Spotify Auth View Controller-->
+        <scene sceneID="xph-Eh-nYU">
+            <objects>
+                <viewController id="pSb-hY-RcG" customClass="SpotifyAuthViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xLt-4r-cCB" customClass="SpotifyAuthView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YTL-Qv-vvu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OhT-5J-uE5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YTL-Qv-vvu" firstAttribute="leading" secondItem="OhT-5J-uE5" secondAttribute="leading" id="Hy8-nI-Kku"/>
+                            <constraint firstItem="YTL-Qv-vvu" firstAttribute="trailing" secondItem="OhT-5J-uE5" secondAttribute="trailing" id="Pve-4Q-dc6"/>
+                            <constraint firstItem="YTL-Qv-vvu" firstAttribute="top" secondItem="OhT-5J-uE5" secondAttribute="top" id="hc9-4N-Pc5"/>
+                            <constraint firstAttribute="bottom" secondItem="YTL-Qv-vvu" secondAttribute="bottom" id="mUB-YM-Fk4"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="webView" destination="YTL-Qv-vvu" id="fOY-cb-eK3"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="authView" destination="xLt-4r-cCB" id="IVU-Ze-KEg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRl-oC-ZcB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2328.985507246377" y="2509.8214285714284"/>
         </scene>
         <!--Create-->
         <scene sceneID="pEg-c8-HEa">

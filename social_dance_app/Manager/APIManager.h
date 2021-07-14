@@ -10,11 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface APIManager : NSObject <SPTSessionManagerDelegate>
+@interface APIManager : NSObject <SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate>
 + (instancetype)shared;
 @property (nonatomic, strong) SPTSessionManager *sessionManager;
 @property (nonatomic, strong) SPTConfiguration *configuration;
-- (void)openSpotify;
+@property (nonatomic, strong) SPTAppRemote *appRemote;
+@property NSURL *tokenSwapURL;
+@property NSURL *tokenRefreshURL;
+@property NSString *clientID;
+@property NSString *clientSecret;
+-(void)openSpotify;
+-(void)getAccessToken;
+-(void)exchangeCodeForAccessTokenWithCode:(NSString *)code withCompletion:(void (^)(NSDictionary *, NSError *))completion;
+-(void)cacheToken;
+-(void)refreshToken;
 
 
 @end
