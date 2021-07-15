@@ -26,7 +26,7 @@
         NSLog(@"Welcome back %@ 😀", user.username);
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *homeController = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavigationController"];
+        UIViewController *homeController = [storyboard instantiateViewControllerWithIdentifier:@"SpotifyAuthViewController"];
         self.window.rootViewController = homeController;
     }
 }

@@ -75,7 +75,7 @@
         // cancel the redirect and dismiss this view controller
         decisionHandler(WKNavigationActionPolicyCancel);
         // segue to login
-        [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
+        [self performSegueWithIdentifier:@"HomeSegue" sender:nil];
 //        [self dismissViewControllerAnimated:true completion:nil];
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);

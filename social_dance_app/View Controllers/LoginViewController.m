@@ -53,7 +53,7 @@
         } else {
             NSLog(@"User registered successfully");
             // manually segue to logged in view
-            [self performSegueWithIdentifier:@"HomeSegue" sender:nil];
+            [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
         }
     }];
 }
@@ -80,7 +80,7 @@
         } else {
             NSLog(@"User logged in successfully");
             // display view controller that needs to shown after successful login
-            [self performSegueWithIdentifier:@"HomeSegue" sender:nil];
+            [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
         }
     }];
 }

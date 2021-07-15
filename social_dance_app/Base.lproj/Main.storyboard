@@ -67,12 +67,12 @@
                     <navigationItem key="navigationItem" id="mjU-iy-AGf"/>
                     <connections>
                         <outlet property="loginView" destination="8bC-Xf-vdC" id="nLn-yE-Pyl"/>
-                        <segue destination="yOv-FT-bnj" kind="presentation" identifier="HomeSegue" id="hj6-dR-SBw"/>
+                        <segue destination="pSb-hY-RcG" kind="presentation" identifier="SpotifyAuthViewController" id="tir-9b-gva"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-648" y="100"/>
+            <point key="canvasLocation" x="-648" y="113"/>
         </scene>
         <!--Home-->
         <scene sceneID="Uxi-8W-JUb">
@@ -417,7 +417,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="createView" destination="iCW-Yy-Z8S" id="Vf7-aH-9zt"/>
-                        <segue destination="pSb-hY-RcG" kind="presentation" identifier="SpotifyAuthViewController" id="66s-XK-kzF"/>
                         <segue destination="pmE-j5-fhZ" kind="presentation" identifier="SpotifySearchViewController" id="TWO-RL-1T6"/>
                     </connections>
                 </viewController>
@@ -428,7 +427,7 @@
         <!--Spotify Auth View Controller-->
         <scene sceneID="xph-Eh-nYU">
             <objects>
-                <viewController id="pSb-hY-RcG" customClass="SpotifyAuthViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpotifyAuthViewController" id="pSb-hY-RcG" customClass="SpotifyAuthViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xLt-4r-cCB" customClass="SpotifyAuthView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -456,12 +455,12 @@
                     </view>
                     <connections>
                         <outlet property="authView" destination="xLt-4r-cCB" id="IVU-Ze-KEg"/>
-                        <segue destination="pmE-j5-fhZ" kind="presentation" identifier="SpotifySearchViewController" id="kHe-NI-7Q5"/>
+                        <segue destination="yOv-FT-bnj" kind="presentation" identifier="HomeSegue" id="cnf-zk-Fo9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uRl-oC-ZcB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2058" y="2515"/>
+            <point key="canvasLocation" x="290" y="113"/>
         </scene>
         <!--Spotify Search View Controller-->
         <scene sceneID="fGt-B4-kTx">
@@ -579,9 +578,6 @@
             <point key="canvasLocation" x="1200" y="113"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="TWO-RL-1T6"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
