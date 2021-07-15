@@ -11,6 +11,7 @@
 
 @implementation APIManager
 
+
 + (instancetype)shared {
     static APIManager *sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -124,19 +125,34 @@
             completion(nil, error);
         } else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            // Once access token and other info is received, cache it
+            [self cacheTokenWithDictionary:dataDictionary];
             completion(dataDictionary, nil);
         }
     }];
     [task resume];
 }
 
-- (void)cacheToken {
+- (void)cacheTokenWithDictionary:(NSDictionary *)dataDictionary {
+    [NSUserDefaults.standardUserDefaults setValue:dataDictionary[@"access_token"] forKey:@"access_token"];
+    [NSUserDefaults.standardUserDefaults setValue:dataDictionary[@"refresh_token"] forKey:@"refresh_token"];
+    
+    NSLog(@"Expiration interval when caching: %@", dataDictionary[@"expires_in"]);
+    NSLog(@"Expiration date when caching: %@", [NSDate.now dateByAddingTimeInterval:[dataDictionary[@"expires_in"] doubleValue]]);
+    
+    [NSUserDefaults.standardUserDefaults setValue:[NSDate.now dateByAddingTimeInterval:[dataDictionary[@"expires_in"] doubleValue]] forKey:@"expiration_date"];
+    
+    NSLog(@"Cached expiration date: %@", [NSUserDefaults.standardUserDefaults objectForKey:@"expiration_date"]);
+    
+    /*
+    [self.cache setValue:dataDictionary[@"access_token"] forKey:@"access_token"];
+    [self.cache setValue:dataDictionary[@"refresh_token"] forKey:@"refresh_token"];
+    [self.cache setValue:[NSDate.now dateByAddingTimeInterval:[dataDictionary[@"expires_in"] doubleValue]] forKey:@"expiration_date"];
+     */
     
 }
 
-- (void)refreshToken {
-    
-}
+
 -(void)openSpotify {
     self.sessionManager = [[SPTSessionManager alloc] initWithConfiguration:self.configuration delegate:self];
 
@@ -168,8 +184,9 @@
     
 }
 
--(void)getAccessToken {
+-(NSString *)accessToken {
     
+    /*
     
 //    // Swapping code for access_token
 //    NSURL *swapServiceURL = [NSURL URLWithString:<#(nonnull NSString *)#>:@"https://social-dance-app.herokuapp.com/api/token"];
@@ -190,7 +207,7 @@
     [urlRequest setValue:spotifyAuthKey forHTTPHeaderField:@"Authorization"];
     [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    /*
+
     // Make request
     NSURLComponents *requestBodyComponents = [NSURLComponents new];
     [[requestBodyComponents setQueryItems:[NSURLQueryItem queryItemWithName:@"client_id" value:self.clientID], [NSURLQueryItem queryItemWithName:@"grant_type" value:@"authorization_code"], [NSURLQueryItem queryItemWithName:@"code" value:]] ]
@@ -204,8 +221,41 @@
     }];
     NSLog(@"%@", spotifyAuthKey);
      
-    */
+     */
     
+    
+    return [NSUserDefaults.standardUserDefaults stringForKey:@"access_token"];
+//    return [self.cache objectForKey:@"access_token"];
+    
+}
+
+- (NSString *)refreshToken {
+    return [NSUserDefaults.standardUserDefaults stringForKey:@"refresh_token"];
+//    return [self.cache objectForKey:@"refresh_token"];
+}
+
+- (NSDate *)expirationDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    NSLog(@"Expiration date: %@", [NSUserDefaults.standardUserDefaults stringForKey:@"expiration_date"]);
+//    NSLog(@"Formatted expiration date: %@", [dateFormatter dateFromString:[NSUserDefaults.standardUserDefaults stringForKey:@"expiration_date"]]);
+    return [NSUserDefaults.standardUserDefaults objectForKey:@"expiration_date"];
+//    return [dateFormatter dateFromString:[self.cache objectForKey:@"expiration_date"]];
+}
+
+- (BOOL)shouldRefreshToken {
+    // Should refresh token when it is 5 min away from expiring
+    [self printUserDefaults];
+//    NSLog(@"Access token: %@", [self.cache objectForKey:@"access_token"]);
+    NSDate *currentDate = [NSDate now];
+    double fiveMinutes = 300;
+    return [currentDate dateByAddingTimeInterval:fiveMinutes] >= self.expirationDate;
+}
+
+// Debugging method
+-(void)printUserDefaults {
+    NSLog(@"Expiration date: %@", self.expirationDate);
+    NSLog(@"Access token: %@", self.accessToken);
+    NSLog(@"Refresh token: %@", self.refreshToken);
 }
 
 // When user returns to app, notify session manager

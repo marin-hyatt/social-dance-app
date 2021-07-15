@@ -37,7 +37,14 @@
 - (IBAction)onChooseSongPressed:(id)sender {
 //    [[APIManager shared] openSpotify];
 //    [[APIManager shared] getAccessToken];
-    [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
+//    NSLog(@"Access token: %@", [[APIManager shared] accessToken]);
+    NSLog(@"Checking to see if data is cached");
+    NSLog(@"Expiration date: %@", [[APIManager shared] expirationDate]);
+    NSLog(@"Should refresh token: %s", [[APIManager shared] shouldRefreshToken] ? "YES" : "NO");
+    if ([[APIManager shared] shouldRefreshToken]) {
+        [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
+    }
+    
 }
 
 - (IBAction)onPostPressed:(UIBarButtonItem *)sender {

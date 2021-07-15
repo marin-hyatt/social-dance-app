@@ -36,7 +36,7 @@
     NSString *signInString = [NSString stringWithFormat:@"%@?response_type=code&client_id=%@&scope=%@&redirect_uri=%@", base, clientID, scope, redirectURI];
     
     NSURL *url = [NSURL URLWithString:signInString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.authView.webView loadRequest:request];
     
 }

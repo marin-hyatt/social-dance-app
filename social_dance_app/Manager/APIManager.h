@@ -20,10 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *clientID;
 @property NSString *clientSecret;
 -(void)openSpotify;
--(void)getAccessToken;
+@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSString *refreshToken;
+@property (nonatomic, strong) NSDate *expirationDate;
+@property NSCache *cache;
+-(BOOL)shouldRefreshToken;
 -(void)exchangeCodeForAccessTokenWithCode:(NSString *)code withCompletion:(void (^)(NSDictionary *, NSError *))completion;
--(void)cacheToken;
--(void)refreshToken;
+-(void)cacheTokenWithDictionary:(NSDictionary *)dataDictionary;
 
 
 @end
