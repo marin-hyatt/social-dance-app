@@ -12,6 +12,7 @@
 @dynamic  title;
 @dynamic  artist;
 @dynamic  uri;
+@dynamic albumImageURLString;
 
 + (nonnull NSString *)parseClassName {
     return @"Song";
@@ -23,11 +24,11 @@
     self.uri = dictionary[@"uri"];
     self.title = dictionary[@"name"];
     self.artist = dictionary[@"artists"][0][@"name"];
-    self.albumImageURL = dictionary[@"album"][@"images"][0][@"url"];
+    self.albumImageURLString = dictionary[@"album"][@"images"][0][@"url"];
     
     NSLog(@"Song name: %@", self.title);
     NSLog(@"Song artist: %@", self.artist);
-    NSLog(@"Album image url: %@", self.albumImageURL);
+    NSLog(@"Album image url: %@", self.albumImageURLString);
     
     return self;
 }

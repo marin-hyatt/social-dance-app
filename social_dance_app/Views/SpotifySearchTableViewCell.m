@@ -6,6 +6,7 @@
 //
 
 #import "SpotifySearchTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation SpotifySearchTableViewCell
 
@@ -18,6 +19,19 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    
+}
+
+- (void)updateAppearance {
+    
+    self.trackNameLabel.text = self.song.title;
+    self.artistNameLabel.text = self.song.artist;
+    
+    self.albumImageView.image = nil;
+    
+    if (self.song.albumImageURLString != nil) {
+        [self.albumImageView setImageWithURL: [NSURL URLWithString:self.song.albumImageURLString]];
+    }
 }
 
 @end

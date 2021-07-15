@@ -480,32 +480,45 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="7p1-Ov-YtI" customClass="SpotifySearchTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotifySearchTableViewCell" rowHeight="90" id="7p1-Ov-YtI" customClass="SpotifySearchTableViewCell">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7p1-Ov-YtI" id="lmz-Wq-sD7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GFH-He-Fx9">
-                                                    <rect key="frame" x="20" y="7" width="68" height="75"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GFH-He-Fx9">
+                                                    <rect key="frame" x="8" y="8" width="75" height="74"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="75" id="7e6-fy-D2T"/>
+                                                        <constraint firstAttribute="height" constant="75" id="L7D-Fp-EJK"/>
+                                                        <constraint firstAttribute="width" secondItem="GFH-He-Fx9" secondAttribute="height" multiplier="1:1" id="vnD-gQ-D0W"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="track name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV5-x4-OEz">
-                                                    <rect key="frame" x="96" y="11" width="86" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="track name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV5-x4-OEz">
+                                                    <rect key="frame" x="99" y="16" width="85.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSC-7X-Jca">
-                                                    <rect key="frame" x="96" y="50" width="86" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSC-7X-Jca">
+                                                    <rect key="frame" x="99" y="53" width="86" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fSC-7X-Jca" firstAttribute="leading" secondItem="zV5-x4-OEz" secondAttribute="leading" id="7xY-So-SA9"/>
+                                                <constraint firstAttribute="bottom" secondItem="fSC-7X-Jca" secondAttribute="bottom" constant="16" id="Acz-Aj-Lro"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fSC-7X-Jca" secondAttribute="trailing" constant="8" id="Gcr-bJ-hqI"/>
+                                                <constraint firstAttribute="bottom" secondItem="GFH-He-Fx9" secondAttribute="bottom" constant="8" id="Gle-JM-XjO"/>
+                                                <constraint firstItem="GFH-He-Fx9" firstAttribute="leading" secondItem="lmz-Wq-sD7" secondAttribute="leading" constant="8" id="Mf3-vW-VVv"/>
+                                                <constraint firstItem="zV5-x4-OEz" firstAttribute="leading" secondItem="GFH-He-Fx9" secondAttribute="trailing" constant="16" id="PCg-ox-zVv"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zV5-x4-OEz" secondAttribute="trailing" constant="8" id="VuP-ix-Yfj"/>
+                                                <constraint firstItem="GFH-He-Fx9" firstAttribute="top" secondItem="lmz-Wq-sD7" secondAttribute="top" constant="8" id="onC-Ad-jpV"/>
+                                                <constraint firstItem="zV5-x4-OEz" firstAttribute="top" secondItem="lmz-Wq-sD7" secondAttribute="top" constant="16" id="qAZ-s6-VmX"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="albumImageView" destination="GFH-He-Fx9" id="8nM-Os-HJt"/>
@@ -519,6 +532,10 @@
                         <viewLayoutGuide key="safeArea" id="Zgu-9R-5zd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="xl1-7u-WHf" id="yb2-9A-bWX"/>
+                        <outlet property="tableView" destination="MQV-zU-RCx" id="G5g-qA-0cD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0y1-P4-kdX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
