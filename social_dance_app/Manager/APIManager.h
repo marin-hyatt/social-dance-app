@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSCache *cache;
 -(BOOL)shouldRefreshToken;
 -(void)exchangeCodeForAccessTokenWithCode:(NSString *)code withCompletion:(void (^)(NSDictionary *, NSError *))completion;
+-(void)refreshTokenIfNeededWithCompletion:(void (^)(BOOL, NSError *))completion;
 -(void)cacheTokenWithDictionary:(NSDictionary *)dataDictionary;
+-(void)searchForTrackWithQuery:(NSString *)trackName withCompletion:(void (^)(NSDictionary *, NSError *))completion;
 
 
 @end

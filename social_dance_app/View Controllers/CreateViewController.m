@@ -38,12 +38,22 @@
 //    [[APIManager shared] openSpotify];
 //    [[APIManager shared] getAccessToken];
 //    NSLog(@"Access token: %@", [[APIManager shared] accessToken]);
-    NSLog(@"Checking to see if data is cached");
-    NSLog(@"Expiration date: %@", [[APIManager shared] expirationDate]);
-    NSLog(@"Should refresh token: %s", [[APIManager shared] shouldRefreshToken] ? "YES" : "NO");
     if ([[APIManager shared] shouldRefreshToken]) {
         [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
     }
+
+    
+    // Test search
+    [[APIManager shared]searchForTrackWithQuery:@"vanilla%20twilight" withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
+            if (error != nil) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successful search!");
+//                NSLog(@"%@", dataDictionary);
+                [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
+            }
+            
+    }];
     
 }
 

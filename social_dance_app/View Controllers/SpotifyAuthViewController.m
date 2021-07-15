@@ -28,10 +28,9 @@
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
     
     NSString *clientID = [dict objectForKey: @"client_ID"];
-    NSString *clientSecret = [dict objectForKey: @"client_Secret"];
     
     NSString *base = @"https://accounts.spotify.com/authorize";
-    NSString *scope = @"user-read-recently-played";
+    NSString *scope = @"user-read-recently-played%20user-read-playback-state%20app-remote-control%20user-read-private";
     NSString *redirectURI = @"social-dance-app://social-dance-app-callback";
     NSString *signInString = [NSString stringWithFormat:@"%@?response_type=code&client_id=%@&scope=%@&redirect_uri=%@", base, clientID, scope, redirectURI];
     

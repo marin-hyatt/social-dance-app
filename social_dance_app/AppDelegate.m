@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
 #import <SpotifyiOS/SpotifyiOS.h>
+#import "APIManager.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +28,12 @@
     }];
     
     [Parse initializeWithConfiguration:config];
+    
+    [[APIManager shared] refreshTokenIfNeededWithCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            NSLog(@"Success!");
+        }
+    }];
     
     // Override point for customization after application launch.
     return YES;
