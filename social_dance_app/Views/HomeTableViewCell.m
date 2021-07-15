@@ -15,13 +15,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-//    self.videoView = [PlayerView new];
     // TODO: refactor video player code to go in PlayerView?
     [self initializeVideoPlayer];
     
-    // Add play/pause tap gesture recognizer
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
-    // Attach gesture recognizer to image view and enables user interaction
     [self.videoView addGestureRecognizer:tapGestureRecognizer];
     [self.videoView setUserInteractionEnabled:YES];
 }
@@ -37,7 +34,6 @@
     self.player = [AVPlayer playerWithPlayerItem:nil];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     
-     // TODO: Autolayout stuff
 //    [self.videoView setTranslatesAutoresizingMaskIntoConstraints:NO];
     // TODO: put in completion block in main queue
 //    [self.videoView addConstraint:[NSLayoutConstraint

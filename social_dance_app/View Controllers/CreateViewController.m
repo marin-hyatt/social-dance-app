@@ -38,12 +38,15 @@
 //    [[APIManager shared] openSpotify];
 //    [[APIManager shared] getAccessToken];
 //    NSLog(@"Access token: %@", [[APIManager shared] accessToken]);
-    if ([[APIManager shared] shouldRefreshToken]) {
-        [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
-    }
+    [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
+    
+//    if ([[APIManager shared] shouldRefreshToken]) {
+//        [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
+//    } else {
+//        [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
+//    }
 
-    // Segue to search view controller
-    [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
+    
     
 }
 

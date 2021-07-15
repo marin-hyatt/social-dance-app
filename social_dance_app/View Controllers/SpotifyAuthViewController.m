@@ -20,9 +20,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSLog(@"Access token: %@", [[APIManager shared] accessToken]);
+//    if (![[APIManager shared] shouldRefreshToken]) {
+//        [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
+//    }
+    
     self.authView.webView.navigationDelegate = self;
     
     // Log in to Spotify
+    
     // TODO: refactor this code into APIManager
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
@@ -56,22 +63,25 @@
         NSString *code = [urlString stringByReplacingOccurrencesOfString:@"social-dance-app://social-dance-app-callback/?code=" withString:@""];
         NSLog(@"Code: %@", code);
         
-        // exchange for access code
+        // exchange for access token
         [[APIManager shared]exchangeCodeForAccessTokenWithCode:code withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
-                    if (error != nil) {
-                        NSLog(@"Error! %@", error.localizedDescription);
-                    } else {
-                        NSLog(@"%@", dataDictionary);
-                    }
+            if (error != nil) {
+                NSLog(@"Error! %@", error.localizedDescription);
+            } else {
+                NSLog(@"%@", dataDictionary);
+            }
         }];
         
         // cancel the redirect and dismiss this view controller
         decisionHandler(WKNavigationActionPolicyCancel);
-        [self dismissViewControllerAnimated:true completion:nil];
+        // segue to login
+        [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
+//        [self dismissViewControllerAnimated:true completion:nil];
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
 }
+
 /*
 #pragma mark - Navigation
 

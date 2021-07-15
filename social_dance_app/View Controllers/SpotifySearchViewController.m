@@ -10,7 +10,7 @@
 #import "Song.h"
 #import "SpotifySearchTableViewCell.h"
 
-@interface SpotifySearchViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface SpotifySearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSMutableArray *songArray;
@@ -24,28 +24,30 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    [self searchForSongs];
-    
+    self.searchBar.delegate = self;
 }
 
--(void)searchForSongs {
+-(void)searchForSongsWithQuery:(NSString *)query {
     // Test search
-    [[APIManager shared]searchForTrackWithQuery:@"vanilla%20twilight" withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
+    [[APIManager shared]searchForTrackWithQuery:query withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
             if (error != nil) {
                 NSLog(@"Error: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successful search!");
-//                NSLog(@"%@", dataDictionary);
+                NSLog(@"%@", dataDictionary[@"tracks"][@"items"]);
                 self.songArray = [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
-                
-                // Reloads data on main thread. Not quite sure why I got an error in the first place
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                    
-                });
+                NSLog(@"%@", self.songArray);
             }
     }];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSString *query = self.searchBar.text;
+    NSString *formattedQuery = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSLog(@"%@", formattedQuery);
+    
+    [self searchForSongsWithQuery:formattedQuery];
+    [self.tableView reloadData];
     
     
 }
@@ -57,6 +59,13 @@
     [cell updateAppearance];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@", self.songArray[indexPath.row]);
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

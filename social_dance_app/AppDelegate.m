@@ -29,11 +29,12 @@
     
     [Parse initializeWithConfiguration:config];
     
-    [[APIManager shared] refreshTokenIfNeededWithCompletion:^(BOOL success, NSError *error) {
-        if (success) {
-            NSLog(@"Success!");
-        }
-    }];
+    // TODO: add ability to refresh access token instead of exchanging for a new token every time
+//    [[APIManager shared] refreshTokenIfNeededWithCompletion:^(BOOL success, NSError *error) {
+//        if (success) {
+//            NSLog(@"Success!");
+//        }
+//    }];
     
     // Override point for customization after application launch.
     return YES;
