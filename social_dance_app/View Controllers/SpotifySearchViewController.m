@@ -6,6 +6,8 @@
 //
 
 #import "SpotifySearchViewController.h"
+#import "APIManager.h"
+#import "Song.h"
 
 @interface SpotifySearchViewController ()
 
@@ -16,6 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Test search
+    [[APIManager shared]searchForTrackWithQuery:@"vanilla%20twilight" withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
+            if (error != nil) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            } else {
+                NSLog(@"Successful search!");
+//                NSLog(@"%@", dataDictionary);
+                [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
+            }
+            
+    }];
 }
 
 /*

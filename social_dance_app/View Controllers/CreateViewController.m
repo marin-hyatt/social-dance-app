@@ -42,18 +42,8 @@
         [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
     }
 
-    
-    // Test search
-    [[APIManager shared]searchForTrackWithQuery:@"vanilla%20twilight" withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
-            if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
-            } else {
-                NSLog(@"Successful search!");
-//                NSLog(@"%@", dataDictionary);
-                [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
-            }
-            
-    }];
+    // Segue to search view controller
+    [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
     
 }
 

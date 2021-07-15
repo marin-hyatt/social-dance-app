@@ -418,7 +418,7 @@
                     <connections>
                         <outlet property="createView" destination="iCW-Yy-Z8S" id="Vf7-aH-9zt"/>
                         <segue destination="pSb-hY-RcG" kind="presentation" identifier="SpotifyAuthViewController" id="SWU-k4-vuU"/>
-                        <segue destination="pmE-j5-fhZ" kind="presentation" id="IrP-fp-czW"/>
+                        <segue destination="pmE-j5-fhZ" kind="presentation" identifier="SpotifySearchViewController" id="IrP-fp-czW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY6-JN-Fg0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -480,7 +480,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="7p1-Ov-YtI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="7p1-Ov-YtI" customClass="SpotifySearchTableViewCell">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7p1-Ov-YtI" id="lmz-Wq-sD7">
@@ -488,11 +488,30 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GFH-He-Fx9">
-                                                    <rect key="frame" x="28" y="3" width="79" height="83"/>
+                                                    <rect key="frame" x="20" y="7" width="68" height="75"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="track name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zV5-x4-OEz">
+                                                    <rect key="frame" x="96" y="11" width="86" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSC-7X-Jca">
+                                                    <rect key="frame" x="96" y="50" width="86" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="albumImageView" destination="GFH-He-Fx9" id="8nM-Os-HJt"/>
+                                            <outlet property="artistNameLabel" destination="fSC-7X-Jca" id="FUa-MW-s24"/>
+                                            <outlet property="trackNameLabel" destination="zV5-x4-OEz" id="y7C-ef-8EB"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
