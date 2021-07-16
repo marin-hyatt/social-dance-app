@@ -269,19 +269,19 @@
                     <navigationItem key="navigationItem" id="U7E-vT-SA0"/>
                     <connections>
                         <outlet property="detailView" destination="09u-gM-xUE" id="kk6-S8-b2J"/>
-                        <segue destination="tYV-Oo-UUA" kind="presentation" id="XXe-TN-jrX"/>
+                        <segue destination="tYV-Oo-UUA" kind="show" identifier="SpotifyWebViewController" id="XXe-TN-jrX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36d-uI-Dhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-39.130434782608695" y="2542.6339285714284"/>
         </scene>
-        <!--View Controller-->
+        <!--Spotify Web View Controller-->
         <scene sceneID="nFH-bp-UqC">
             <objects>
-                <viewController id="tYV-Oo-UUA" sceneMemberID="viewController">
+                <viewController id="tYV-Oo-UUA" customClass="SpotifyWebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iWQ-sG-MVH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXW-yI-kMr">
@@ -297,6 +297,10 @@
                         <viewLayoutGuide key="safeArea" id="eLW-2B-mhr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lA7-GH-3u9"/>
+                    <connections>
+                        <outlet property="webView" destination="YXW-yI-kMr" id="0Jg-JI-Giw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9u-Yr-tbS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
