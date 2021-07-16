@@ -35,9 +35,10 @@
                 NSLog(@"Error: %@", error.localizedDescription);
             } else {
                 NSLog(@"Successful search!");
-                NSLog(@"%@", dataDictionary[@"tracks"][@"items"]);
                 self.songArray = [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
-                NSLog(@"%@", self.songArray);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
             }
     }];
 }
@@ -48,7 +49,6 @@
     NSLog(@"%@", formattedQuery);
     
     [self searchForSongsWithQuery:formattedQuery];
-    [self.tableView reloadData];
     
     
 }
