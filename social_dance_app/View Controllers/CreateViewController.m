@@ -56,7 +56,7 @@
     NSString *caption = self.createView.captionField.text;
     
     // TODO: add spotify functionality, for now Song object is nil
-    Song *song = nil;
+    Song *song = self.chosenSong;
 
     
     // Post video to backend
@@ -105,6 +105,7 @@
 
 - (void)didPickSong:(Song *)song {
     NSLog(@"Song: %@", song);
+    self.chosenSong = song;
     [self.createView updateAppearanceWithSong:song];
 }
 

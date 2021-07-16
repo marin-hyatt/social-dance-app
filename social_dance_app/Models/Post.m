@@ -34,11 +34,9 @@
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     
-    [newPost saveInBackgroundWithBlock: completion];
-}
-
-- (void)setVideoURL:(NSURL *)videoURL {
+    NSLog(@"Post song: %@", newPost.song);
     
+    [newPost saveInBackgroundWithBlock: completion];
 }
 
 @end
