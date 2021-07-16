@@ -11,6 +11,7 @@
 #import "SceneDelegate.h"
 #import "HomeTableViewCell.h"
 #import "Post.h"
+#import "DetailViewController.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -73,6 +74,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"song"];
     postQuery.limit = limit;
 
     // fetch data asynchronously
@@ -86,19 +88,26 @@
         }
         else {
             // handle error
-            NSLog(@"Error: %@", error.localizedDescription);
+            NSLog(@"Parse error: %@", error.localizedDescription);
         }
     }];
 }
-/*
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier]  isEqual: @"DetailViewController"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Post *post = self.feed[indexPath.row];
+  
+        DetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.post = post;
+    }
 }
-*/
+
 
 - (IBAction)onLogoutButtonPressed:(id)sender {
     //Creates app delegate, Main storyboard, and Login view controller. Then sets the root view controller (the one the user sees) to the Login view controller

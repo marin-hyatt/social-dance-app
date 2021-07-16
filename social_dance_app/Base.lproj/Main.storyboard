@@ -129,6 +129,7 @@
                                             <outlet property="profilePictureView" destination="aDg-t8-vu0" id="Ahq-Rw-drp"/>
                                             <outlet property="usernameLabel" destination="duE-Fe-jOg" id="EM2-gF-Qtw"/>
                                             <outlet property="videoView" destination="rtx-9z-dFC" id="Piy-N6-bLE"/>
+                                            <segue destination="LTi-52-sZA" kind="presentation" identifier="DetailViewController" id="hg0-wf-NGo"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -153,7 +154,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="SU0-i9-O1G" id="gLB-Wk-pxg"/>
-                        <segue destination="LTi-52-sZA" kind="presentation" id="Dxy-pc-bSQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nv9-L2-oTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
