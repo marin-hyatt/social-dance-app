@@ -221,6 +221,9 @@
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Listen with Spotify"/>
+                                        <connections>
+                                            <action selector="onListenButtonPressed:" destination="LTi-52-sZA" eventType="touchUpInside" id="NiC-FT-3zn"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -266,11 +269,38 @@
                     <navigationItem key="navigationItem" id="U7E-vT-SA0"/>
                     <connections>
                         <outlet property="detailView" destination="09u-gM-xUE" id="kk6-S8-b2J"/>
+                        <segue destination="tYV-Oo-UUA" kind="presentation" id="XXe-TN-jrX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36d-uI-Dhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-39.130434782608695" y="2542.6339285714284"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="nFH-bp-UqC">
+            <objects>
+                <viewController id="tYV-Oo-UUA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iWQ-sG-MVH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YXW-yI-kMr">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eLW-2B-mhr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9u-Yr-tbS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-39.130434782608695" y="3326.7857142857142"/>
         </scene>
         <!--Home-->
         <scene sceneID="wGf-rh-wFx">

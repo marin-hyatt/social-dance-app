@@ -7,6 +7,8 @@
 
 #import "DetailViewController.h"
 #import "DetailView.h"
+#import "APIManager.h"
+
 
 @interface DetailViewController ()
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
@@ -19,6 +21,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.detailView updateAppearanceWithPost:self.post];
+}
+
+- (IBAction)onListenButtonPressed:(UIButton *)sender {
+    // TODO: make Spotify API call
+    // Check to see if Spotify app is installed
+    NSURL *webUrl = [NSURL URLWithString:self.post.song.webURL];
+    NSURL *uri = [NSURL URLWithString:self.post.song.uri];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:uri]) {
+        [[UIApplication sharedApplication] openURL:webUrl options:@{} completionHandler:^(BOOL success) {
+            if (success) {
+                NSLog(@"Success");
+            } else {
+                NSLog(@"Error");
+            }
+        }];
+    }
+    
 }
 
 /*
