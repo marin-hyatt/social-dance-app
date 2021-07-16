@@ -23,8 +23,17 @@
 - (void)updateAppearanceWithPost:(Post *)post {
     self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
-    NSLog(@"%@", post.author.username);
     self.songNameLabel.text = post[@"song"][@"title"];
+    
+    self.albumImageView.image = nil;
+    
+    if (post.song.albumImageURLString != nil) {
+        [self.albumImageView setImageWithURL: [NSURL URLWithString:post.song.albumImageURLString]];
+    }
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
+    [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
+    [self.videoPlayerView setUserInteractionEnabled:YES];
     
     [self initializeVideoPlayer];
     
@@ -80,6 +89,19 @@
     [self.videoPlayerView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
 
     [self.playerLayer setFrame:self.videoPlayerView.frame];
+}
+
+-(void)startPlayback {
+    NSLog(@"Playback time");
+    if (self.player.rate != 0) {
+        [self.player pause];
+    } else {
+        [self.player play];
+    }
+}
+
+-(void)stopPlayback {
+    [self.player pause];
 }
 
 @end
