@@ -34,4 +34,9 @@
     }
 }
 
+- (IBAction)onListenButtonPressed:(UIButton *)sender {
+    NSLog(@"Button pressed");
+    [self.delegate openSpotifyWithSong:self.song];
+}
+
 @end

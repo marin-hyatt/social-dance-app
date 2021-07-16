@@ -9,8 +9,9 @@
 #import "APIManager.h"
 #import "Song.h"
 #import "SpotifySearchTableViewCell.h"
+#import "SpotifyWebViewController.h"
 
-@interface SpotifySearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface SpotifySearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SpotifySearchCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSMutableArray *songArray;
@@ -58,6 +59,7 @@
     
     cell.song = self.songArray[indexPath.row];
     [cell updateAppearance];
+    cell.delegate = self;
     
     return cell;
 }
@@ -72,18 +74,37 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //    return 20;
-    
     return self.songArray.count;
 }
 
-/*
+- (void)openSpotifyWithSong:(Song *)song {
+    // Check to see if Spotify app is installed
+    NSURL *webUrl = [NSURL URLWithString:song.webURL];
+    NSURL *uri = [NSURL URLWithString:song.uri];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:uri]) {
+        [[UIApplication sharedApplication] openURL:webUrl options:@{} completionHandler:^(BOOL success) {
+            if (success) {
+                NSLog(@"Success");
+            } else {
+                NSLog(@"Error");
+            }
+        }];
+    } else {
+        // Segue to web view since app can't be opened
+        [self performSegueWithIdentifier:@"SpotifyWebViewController" sender:song];
+    }
+}
+
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+     if ([segue.identifier isEqualToString:@"SpotifyWebViewController"]) {
+         Song *song = sender;
+         SpotifyWebViewController *vc = [segue destinationViewController];
+         vc.url = [NSURL URLWithString:song.webURL];
+     }
+ }
 
 @end

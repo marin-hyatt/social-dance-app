@@ -10,11 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol SpotifySearchCellDelegate <NSObject>
+
+-(void)openSpotifyWithSong:(Song *)song;
+
+@end
+
 @interface SpotifySearchTableViewCell : UITableViewCell
 @property (nonatomic, strong) Song *song;
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
 @property (weak, nonatomic) IBOutlet UILabel *trackNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+@property (nonatomic, weak) id<SpotifySearchCellDelegate> delegate;
+
 -(void)updateAppearance;
 
 @end

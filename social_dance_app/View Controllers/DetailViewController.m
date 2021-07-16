@@ -25,7 +25,6 @@
 }
 
 - (IBAction)onListenButtonPressed:(UIButton *)sender {
-    // TODO: make Spotify API call
     // Check to see if Spotify app is installed
     NSURL *webUrl = [NSURL URLWithString:self.post.song.webURL];
     NSURL *uri = [NSURL URLWithString:self.post.song.uri];
@@ -42,7 +41,6 @@
         // Segue to web view since app can't be opened
         [self performSegueWithIdentifier:@"SpotifyWebViewController" sender:nil];
     }
-    
 }
 
 
