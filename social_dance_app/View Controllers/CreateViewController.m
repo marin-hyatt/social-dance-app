@@ -11,10 +11,13 @@
 #import "Parse/Parse.h"
 #import "Post.h"
 #import "APIManager.h"
+#import "SpotifySearchViewController.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
 @property (strong, nonatomic) PFFileObject *videoFile;
+@property (strong, nonatomic) Song *chosenSong;
 
 
 @end
@@ -101,16 +104,20 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+- (void)didPickSong:(Song *)song {
+    NSLog(@"Song: %@", song);
+}
 
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"SpotifySearchViewController"]) {
+        SpotifySearchViewController *vc = [segue destinationViewController];
+        vc.delegate = self;
+    }
+    
 }
-*/
+
 
 @end

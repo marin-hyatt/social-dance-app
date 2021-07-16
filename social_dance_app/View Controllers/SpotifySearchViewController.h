@@ -6,11 +6,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Song.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SpotifySearchViewController : UIViewController
+@protocol SpotifySearchDelegate <NSObject>
+
+-(void)didPickSong:(Song *)song;
 
 @end
+
+
+@interface SpotifySearchViewController : UIViewController
+@property (nonatomic, weak) id<SpotifySearchDelegate> delegate;
+
+@end
+
+
+
+
 
 NS_ASSUME_NONNULL_END

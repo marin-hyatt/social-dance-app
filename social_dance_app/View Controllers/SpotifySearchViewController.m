@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSMutableArray *songArray;
 
+
 @end
 
 @implementation SpotifySearchViewController
@@ -62,7 +63,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@", self.songArray[indexPath.row]);
+    Song *song = self.songArray[indexPath.row];
+    [self.delegate didPickSong:song];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
