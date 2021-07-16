@@ -6,6 +6,7 @@
 3. [Wireframes](#Wireframes)
 4. [Schema](#Schema)
 5. [Complex/Ambiguous Features](#Complex/Ambiguous-Features)
+6. [Progress Gifs](#Progress-Gifs)
 
 ## Overview
 ### Description
@@ -230,4 +231,11 @@ commentsCount | Number | number of comments on post
 ## Complex/Ambiguous Features
 1. Caching videos on device: storing videos that are already fetched from Parse on the device so user does not have to load previously fetched videos
 2. Multithreading when fetching videos from Parse backend
+
+## Progress Gifs
+
+**Sprint 1**
+![](sprint_1_gif_1.gif)
+![](sprint_1_gif_2.gif)
+![](sprint_1_gif_3.gif)
 

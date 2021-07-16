@@ -74,9 +74,27 @@
 
 -(void)setUpVideoPlayerWithUrl:(NSURL *)url {
 //    NSLog(@"Set up video player");
-    [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
+    
+    // TODO: use multithreading to get the video from url
+//    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        if (error != nil || data == nil) {
+//            NSLog(@"Error: %@",  error.localizedDescription);
+//        } else {
+//            NSLog(@"Success");
+//            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
+//            }];
+//        }
+//    }];
+//    [task resume];
+    
 //    NSLog(@"New width: %f", self.videoView.frame.size.width);
 //    [self startPlayback];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
+    });
+    
     
     
     // Get dimensions of media within URL

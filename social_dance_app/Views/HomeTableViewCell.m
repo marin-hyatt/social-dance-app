@@ -100,24 +100,24 @@
 
 -(void)setUpVideoPlayerWithUrl:(NSURL *)url {
 //    NSLog(@"Set up video player");
-    [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
+//    [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
 //    NSLog(@"New width: %f", self.videoView.frame.size.width);
 //    [self startPlayback];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
+        
+        // TODO: figure out how to fit view to video if UI stuff needs to be done on main queue. Maybe set initial configuration and then set it again somewhere? 
+//        // Get dimensions of media within URL
+//        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
+//        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+//        AVAssetTrack *track = [tracks objectAtIndex:0];
+//        // Re-configure view dimensions to dimensions of video
+//        [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.height].active = YES;
+//        [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
+    });
     
-    // Get dimensions of media within URL
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-    AVAssetTrack *track = [tracks objectAtIndex:0];
-    
-    NSLog(@"Height: %f, Width: %f", track.naturalSize.height, track.naturalSize.width);
-    
-    // Re-configure view dimensions to dimensions of video
-    [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.height].active = YES;
-    [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
-
     [self.playerLayer setFrame:self.videoView.frame];
-
     
     NSLog(@"Rect height: %f Rect width: %f", self.playerLayer.videoRect.size.height, self.playerLayer.videoRect.size.width);
     
