@@ -235,7 +235,9 @@ commentsCount | Number | number of comments on post
 ## Progress Gifs
 
 **Sprint 1**
+
 ![](sprint_1_gif_1.gif)
 ![](sprint_1_gif_2.gif)
 ![](sprint_1_gif_3.gif)
+![](sprint_1_gif_4.gif)
 
