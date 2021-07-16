@@ -6,6 +6,7 @@
 //
 
 #import "CreateView.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation CreateView
 
@@ -16,5 +17,16 @@
     // Drawing code
 }
 */
+
+- (void)updateAppearanceWithSong:(Song *)song {
+    self.trackNameLabel.text = song.title;
+    self.artistNameLabel.text = song.artist;
+    
+    self.albumImageView.image = nil;
+    
+    if (song.albumImageURLString != nil) {
+        [self.albumImageView setImageWithURL: [NSURL URLWithString:song.albumImageURLString]];
+    }
+}
 
 @end

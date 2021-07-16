@@ -12,7 +12,6 @@
 #import "Post.h"
 #import "APIManager.h"
 #import "SpotifySearchViewController.h"
-#import "UIImageView+AFNetworking.h"
 
 @interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
@@ -106,6 +105,7 @@
 
 - (void)didPickSong:(Song *)song {
     NSLog(@"Song: %@", song);
+    [self.createView updateAppearanceWithSong:song];
 }
 
 

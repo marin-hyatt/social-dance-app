@@ -349,7 +349,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adv-3V-Z6z">
-                                <rect key="frame" x="30" y="345" width="126" height="36"/>
+                                <rect key="frame" x="30" y="387" width="126" height="36"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Record Video">
@@ -360,7 +360,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
-                                <rect key="frame" x="253" y="345" width="131" height="36"/>
+                                <rect key="frame" x="253" y="387" width="131" height="36"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Choose Video">
@@ -371,7 +371,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZN-vV-83Q">
-                                <rect key="frame" x="144.5" y="515" width="125" height="36"/>
+                                <rect key="frame" x="144.5" y="481" width="125" height="36"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Choose Song">
@@ -386,25 +386,65 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NMA-Cw-8zO">
+                                <rect key="frame" x="50" y="537" width="314" height="268"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EcN-rg-MHg">
+                                        <rect key="frame" x="8" y="8" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="K44-WS-ujd"/>
+                                            <constraint firstAttribute="height" constant="75" id="QUG-pu-oaY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bo-VH-8lG">
+                                        <rect key="frame" x="99" y="53" width="86" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="track name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPZ-Q2-VU3">
+                                        <rect key="frame" x="99" y="16" width="86" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="1Bo-VH-8lG" firstAttribute="top" secondItem="EPZ-Q2-VU3" secondAttribute="bottom" constant="16" id="Pen-3z-Zk9"/>
+                                    <constraint firstItem="EPZ-Q2-VU3" firstAttribute="leading" secondItem="EcN-rg-MHg" secondAttribute="trailing" constant="16" id="Ykx-OA-Udu"/>
+                                    <constraint firstItem="EcN-rg-MHg" firstAttribute="leading" secondItem="NMA-Cw-8zO" secondAttribute="leading" constant="8" id="iix-T6-diu"/>
+                                    <constraint firstItem="1Bo-VH-8lG" firstAttribute="leading" secondItem="EcN-rg-MHg" secondAttribute="trailing" constant="16" id="tTv-ub-fm9"/>
+                                    <constraint firstItem="EcN-rg-MHg" firstAttribute="top" secondItem="NMA-Cw-8zO" secondAttribute="top" constant="8" id="vTJ-8H-F4T"/>
+                                    <constraint firstItem="EPZ-Q2-VU3" firstAttribute="top" secondItem="NMA-Cw-8zO" secondAttribute="top" constant="16" id="vxX-ad-wmR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7yB-3f-mzb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="7yB-3f-mzb" firstAttribute="trailing" secondItem="NMA-Cw-8zO" secondAttribute="trailing" constant="50" id="3sQ-9w-39H"/>
                             <constraint firstItem="wZN-vV-83Q" firstAttribute="centerX" secondItem="iCW-Yy-Z8S" secondAttribute="centerX" id="8Jx-dL-ul2"/>
                             <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="centerY" secondItem="iCW-Yy-Z8S" secondAttribute="centerY" id="9LA-8R-xvN"/>
-                            <constraint firstItem="7yB-3f-mzb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wZN-vV-83Q" secondAttribute="bottom" constant="50" id="K4S-r9-JaL"/>
+                            <constraint firstItem="NMA-Cw-8zO" firstAttribute="leading" secondItem="7yB-3f-mzb" secondAttribute="leading" constant="50" id="CPA-ba-X0p"/>
                             <constraint firstItem="Adv-3V-Z6z" firstAttribute="leading" secondItem="7yB-3f-mzb" secondAttribute="leading" constant="30" id="M4k-Ka-TaM"/>
                             <constraint firstItem="B19-XJ-PSl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Adv-3V-Z6z" secondAttribute="trailing" constant="30" id="PPH-Rx-4Q2"/>
+                            <constraint firstItem="NMA-Cw-8zO" firstAttribute="top" secondItem="wZN-vV-83Q" secondAttribute="bottom" constant="20" id="Tj6-QA-LzC"/>
+                            <constraint firstItem="7yB-3f-mzb" firstAttribute="bottom" secondItem="NMA-Cw-8zO" secondAttribute="bottom" constant="8" id="XTf-bO-3YI"/>
                             <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="leading" secondItem="7yB-3f-mzb" secondAttribute="leading" constant="30" id="db7-Hl-98V"/>
                             <constraint firstItem="Adv-3V-Z6z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7yB-3f-mzb" secondAttribute="top" constant="50" id="eM8-6Z-DT3"/>
+                            <constraint firstItem="NMA-Cw-8zO" firstAttribute="centerX" secondItem="iCW-Yy-Z8S" secondAttribute="centerX" id="fFj-zz-8dT"/>
                             <constraint firstItem="B19-XJ-PSl" firstAttribute="centerY" secondItem="Adv-3V-Z6z" secondAttribute="centerY" id="fHY-ko-cis"/>
                             <constraint firstItem="7yB-3f-mzb" firstAttribute="trailing" secondItem="3yQ-Vq-Gbc" secondAttribute="trailing" constant="30" id="ihd-uY-HM8"/>
-                            <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="top" secondItem="Adv-3V-Z6z" secondAttribute="bottom" constant="50" id="pC7-cU-DTQ"/>
+                            <constraint firstItem="3yQ-Vq-Gbc" firstAttribute="top" secondItem="Adv-3V-Z6z" secondAttribute="bottom" constant="8" id="pC7-cU-DTQ"/>
                             <constraint firstItem="7yB-3f-mzb" firstAttribute="trailing" secondItem="B19-XJ-PSl" secondAttribute="trailing" constant="30" id="r64-GD-ELW"/>
-                            <constraint firstItem="wZN-vV-83Q" firstAttribute="top" secondItem="3yQ-Vq-Gbc" secondAttribute="bottom" constant="50" id="z1I-wV-jjq"/>
+                            <constraint firstItem="wZN-vV-83Q" firstAttribute="top" secondItem="3yQ-Vq-Gbc" secondAttribute="bottom" constant="16" id="z1I-wV-jjq"/>
                         </constraints>
                         <connections>
+                            <outlet property="albumImageView" destination="EcN-rg-MHg" id="5Ue-MR-SW5"/>
+                            <outlet property="artistNameLabel" destination="1Bo-VH-8lG" id="5AM-mf-LdL"/>
                             <outlet property="captionField" destination="3yQ-Vq-Gbc" id="aRv-kb-Q6E"/>
+                            <outlet property="trackNameLabel" destination="EPZ-Q2-VU3" id="Pzf-km-NVC"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Create" image="video" catalog="system" id="btq-6r-Lyb"/>

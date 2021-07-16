@@ -6,11 +6,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Song.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CreateView : UIView
 @property (weak, nonatomic) IBOutlet UITextField *captionField;
+@property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
+@property (weak, nonatomic) IBOutlet UILabel *trackNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+-(void)updateAppearanceWithSong:(Song *)song;
 
 @end
 
