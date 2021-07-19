@@ -93,9 +93,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="371"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtx-9z-dFC" customClass="PlayerView">
+                                                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtx-9z-dFC" customClass="PlayerView">
                                                     <rect key="frame" x="0.0" y="53" width="414" height="318"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="318" id="Jhn-Vg-pki"/>
                                                         <constraint firstAttribute="width" constant="414" id="hnw-sv-VpD"/>
@@ -117,7 +117,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="aDg-t8-vu0" secondAttribute="bottom" constant="8" id="1IC-aL-RaD"/>
+                                                <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="aDg-t8-vu0" secondAttribute="bottom" priority="999" constant="8" id="1IC-aL-RaD"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="trailing" constant="8" id="Mdu-JJ-JIW"/>
                                                 <constraint firstAttribute="bottom" secondItem="rtx-9z-dFC" secondAttribute="bottom" id="N08-cL-b12"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="top" secondItem="Ud9-6D-Mck" secondAttribute="top" constant="5" id="PWQ-kr-3LT"/>
@@ -176,7 +176,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="500"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="u1U-PY-RoC"/>
+                                    <constraint firstAttribute="height" constant="500" id="abo-d4-356"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="of5-h0-hhd">
@@ -743,6 +743,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

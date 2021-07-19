@@ -26,22 +26,72 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
     [self.videoPlayerView setUserInteractionEnabled:YES];
-//
-    [self initializeVideoPlayer];
     
-//    CGRect frame = CGRectMake(0, 0, 400, 400);
-//    self.videoPlayerView = [[PlayerView alloc] initWithFrame:frame];
+    [self.videoPlayerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
     
     
     PFFileObject *videoFile = post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
 //    [self.videoPlayerView setUpVideoPlayerWithUrl:videoFileUrl];
-    [self setUpVideoPlayerWithUrl:videoFileUrl];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:videoFileUrl];
+    
+    // As I understand it, the task runs on a background thread
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // generate a temporary file URL
+        NSString *filename = [[NSUUID UUID] UUIDString];
+        
+        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        NSURL *fileURL = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
+        
+        // save the NSData to that URL
+        NSError *fileError;
+        [data writeToURL:fileURL options:0 error:&fileError];
+        
+        // give player the video with that file URL
+        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.player = [AVPlayer playerWithPlayerItem:playerItem];
+            // code for looping video
+            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(playerItemDidReachEnd:)
+                                                         name:AVPlayerItemDidPlayToEndTimeNotification
+                                                       object:[self.player currentItem]];
+            [self.videoPlayerView setPlayer:self.player];
+        });
+    }];
+    [task resume];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        self.player = [AVPlayer playerWithPlayerItem:[AVPlayerItem playerItemWithURL:videoFileUrl]];
+//        [self.videoPlayerView setPlayer:self.player];
+////        [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:videoFile.url]];
+//    });
+//    [self setUpVideoPlayerWithUrl:videoFileUrl];
 
 }
 
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero completionHandler:nil];
+}
 
+-(void)startPlayback {
+    if (self.player.rate != 0) {
+        [self.player pause];
+    } else {
+        [self.player play];
+    }
+}
+
+/*
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.playerLayer.frame = self.videoPlayerView.bounds;
@@ -50,6 +100,7 @@
 -(void)initializeVideoPlayer {
     self.player = [AVPlayer playerWithPlayerItem:nil];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    
 
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.player.volume = 3;
@@ -120,6 +171,6 @@
 -(void)stopPlayback {
     [self.player pause];
 }
-
+*/
 
 @end

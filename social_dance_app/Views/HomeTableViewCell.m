@@ -173,8 +173,6 @@
         // give player the video with that file URL
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-        AVAssetTrack *track = [tracks objectAtIndex:0];
         [self.player replaceCurrentItemWithPlayerItem:playerItem];
         
         // TODO: update UI in main thread
@@ -182,15 +180,6 @@
 //            // Re-configure view dimensions to dimensions of video
 //            [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.height].active = YES;
 //            [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
-            
-            NSLog(@"Track height: %f Track width: %f", track.naturalSize.height, track.naturalSize.height);
-            
-            NSLog(@"Rect height: %f Rect width: %f", self.playerLayer.videoRect.size.height, self.playerLayer.videoRect.size.width);
-            
-            NSLog(@"Player layer height: %f width: %f", self.playerLayer.frame.size.height, self.playerLayer.frame.size.width);
-            
-            NSLog(@"View layer height: %f width: %f", self.videoView.frame.size.height, self.videoView.frame.size.width);
-            
             [self.videoView addConstraint:[NSLayoutConstraint
                                            constraintWithItem:self.videoView
                                            attribute:NSLayoutAttributeHeight
@@ -199,13 +188,6 @@
                                            attribute:NSLayoutAttributeWidth
                                            multiplier:(self.playerLayer.frame.size.height / self.playerLayer.frame.size.width)
                                            constant:0]];
-            NSLog(@"Track height: %f Track width: %f", track.naturalSize.height, track.naturalSize.height);
-            
-            NSLog(@"Rect height: %f Rect width: %f", self.playerLayer.videoRect.size.height, self.playerLayer.videoRect.size.width);
-            
-            NSLog(@"Player layer height: %f width: %f", self.playerLayer.frame.size.height, self.playerLayer.frame.size.width);
-            
-            NSLog(@"View layer height: %f width: %f", self.videoView.frame.size.height, self.videoView.frame.size.width);
         });
     }];
     [task resume];
