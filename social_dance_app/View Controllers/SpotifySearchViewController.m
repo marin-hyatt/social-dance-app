@@ -57,10 +57,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SpotifySearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"SpotifySearchTableViewCell"];
     
-    cell.song = self.songArray[indexPath.row];
-    [cell updateAppearance];
-    cell.delegate = self;
-    
+    if ([self.songArray count] > 0) {
+        cell.song = self.songArray[indexPath.row];
+        [cell updateAppearance];
+        cell.delegate = self;
+    }
     return cell;
 }
 

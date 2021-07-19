@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property AVPlayer *player;
-@property AVPlayerLayer *playerLayer;
--(void)setUpVideoPlayerWithUrl:(NSURL *)url;
  
 
 @end
