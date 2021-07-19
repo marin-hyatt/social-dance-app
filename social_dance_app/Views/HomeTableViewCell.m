@@ -44,10 +44,10 @@
 //                                      attribute:NSLayoutAttributeWidth
 //                                      multiplier:(self.playerLayer.frame.size.height / self.playerLayer.frame.size.width)
 //                                      constant:0]];
-    
+//
 //    [self.player setExternalPlaybackVideoGravity:AVLayerVideoGravityResizeAspect];
 //    self.playerLayer.frame = self.videoView.frame;
-    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     self.player.volume = 3;
     
     
@@ -156,8 +156,10 @@
     config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:url];
-    [[session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    // As I understand it, the task runs on a background thread
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // generate a temporary file URL
         NSString *filename = [[NSUUID UUID] UUIDString];
         
@@ -169,18 +171,50 @@
         [data writeToURL:fileURL options:0 error:&fileError];
         
         // give player the video with that file URL
-        NSLog(@"%@", fileURL);
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:fileURL];
+        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+        AVAssetTrack *track = [tracks objectAtIndex:0];
         [self.player replaceCurrentItemWithPlayerItem:playerItem];
-    }] resume];
+        
+        // TODO: update UI in main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            // Re-configure view dimensions to dimensions of video
+//            [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.height].active = YES;
+//            [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
+            
+            NSLog(@"Track height: %f Track width: %f", track.naturalSize.height, track.naturalSize.height);
+            
+            NSLog(@"Rect height: %f Rect width: %f", self.playerLayer.videoRect.size.height, self.playerLayer.videoRect.size.width);
+            
+            NSLog(@"Player layer height: %f width: %f", self.playerLayer.frame.size.height, self.playerLayer.frame.size.width);
+            
+            NSLog(@"View layer height: %f width: %f", self.videoView.frame.size.height, self.videoView.frame.size.width);
+            
+            [self.videoView addConstraint:[NSLayoutConstraint
+                                           constraintWithItem:self.videoView
+                                           attribute:NSLayoutAttributeHeight
+                                           relatedBy:NSLayoutRelationEqual
+                                           toItem:self.videoView
+                                           attribute:NSLayoutAttributeWidth
+                                           multiplier:(self.playerLayer.frame.size.height / self.playerLayer.frame.size.width)
+                                           constant:0]];
+            NSLog(@"Track height: %f Track width: %f", track.naturalSize.height, track.naturalSize.height);
+            
+            NSLog(@"Rect height: %f Rect width: %f", self.playerLayer.videoRect.size.height, self.playerLayer.videoRect.size.width);
+            
+            NSLog(@"Player layer height: %f width: %f", self.playerLayer.frame.size.height, self.playerLayer.frame.size.width);
+            
+            NSLog(@"View layer height: %f width: %f", self.videoView.frame.size.height, self.videoView.frame.size.width);
+        });
+    }];
+    [task resume];
     
     
 
     /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
-
-        // TODO: figure out how to fit view to video if UI stuff needs to be done on main queue. Maybe set initial configuration and then set it again somewhere?
 //        // Get dimensions of media within URL
 //        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
 //        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
