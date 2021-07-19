@@ -12,6 +12,7 @@
 #import "Post.h"
 #import "APIManager.h"
 #import "SpotifySearchViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
@@ -90,13 +91,15 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-
-    // Checks to see if phone or simulator is able to take pictures
-    if (userIsRecording && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    NSArray *availableMediaTypes = [UIImagePickerController
+                                    availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+    
+    if (userIsRecording
+        && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]
+        && [availableMediaTypes containsObject:(NSString *)kUTTypeMovie]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerVC.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+        imagePickerVC.mediaTypes = @[(NSString *)kUTTypeMovie];
     } else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
 
@@ -104,7 +107,6 @@
 }
 
 - (void)didPickSong:(Song *)song {
-    NSLog(@"Song: %@", song);
     self.chosenSong = song;
     [self.createView updateAppearanceWithSong:song];
 }
@@ -117,7 +119,6 @@
         SpotifySearchViewController *vc = [segue destinationViewController];
         vc.delegate = self;
     }
-    
 }
 
 
