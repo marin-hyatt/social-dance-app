@@ -12,14 +12,6 @@
 
 @implementation DetailView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void)updateAppearanceWithPost:(Post *)post {
     self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
@@ -34,14 +26,21 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
     [self.videoPlayerView setUserInteractionEnabled:YES];
-    
+//
     [self initializeVideoPlayer];
+    
+//    CGRect frame = CGRectMake(0, 0, 400, 400);
+//    self.videoPlayerView = [[PlayerView alloc] initWithFrame:frame];
+    
     
     PFFileObject *videoFile = post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
+//    [self.videoPlayerView setUpVideoPlayerWithUrl:videoFileUrl];
     [self setUpVideoPlayerWithUrl:videoFileUrl];
+
 }
+
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -121,5 +120,6 @@
 -(void)stopPlayback {
     [self.player pause];
 }
+
 
 @end

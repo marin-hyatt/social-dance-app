@@ -35,7 +35,7 @@
 //            NSLog(@"Success!");
 //        }
 //    }];
-    
+    [NSURLCache sharedURLCache].diskCapacity = 1000 * 1024 * 1024; // 1000 MB
     // Override point for customization after application launch.
     return YES;
 }

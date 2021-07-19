@@ -9,11 +9,12 @@
 #import "Post.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "PlayerView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailView : UIView
-@property (weak, nonatomic) IBOutlet UIView *videoPlayerView;
+@property (strong, nonatomic) IBOutlet PlayerView *videoPlayerView;
 @property AVPlayer *player;
 @property AVPlayerLayer *playerLayer;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;

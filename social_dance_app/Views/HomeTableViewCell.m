@@ -103,11 +103,84 @@
 //    [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
 //    NSLog(@"New width: %f", self.videoView.frame.size.width);
 //    [self startPlayback];
+    // TODO: either load video from URL and cache it, or load video from cache
     
+    /*
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
+    
+    //Creates the path to export to  - Saving to temporary directory
+    NSString* filename = [NSString stringWithFormat:@"TrimmedCapture%d.mp4", 0];
+    NSString* path = [NSTemporaryDirectory() stringByAppendingPathComponent:filename];
+    
+    //Checks if there is already a file at the output URL.  session will not overwrite previous data
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+    {
+        NSLog(@"Removing item at path: %@", path);
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    }
+    
+    exporter.outputURL = [NSURL fileURLWithPath:path];
+    exporter.metadata = nil;
+    exporter.outputFileType = AVFileTypeMPEG4;
+    
+    NSLog(@"%@", exporter);
+    
+//
+//    exporter.outputURL = [NSURL URLWithString:@"tempURL"]; // consider you have a export url
+//    exporter.outputFileType = AVFileTypeMPEG4;
+    [exporter exportAsynchronouslyWithCompletionHandler:^{
+            switch (exporter.status) {
+                case AVAssetExportSessionStatusCompleted:{
+                    NSLog(@"Export Complete");
+                    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:exporter.outputURL, @"outputURL", nil];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"videoFinishedTrimming" object:self userInfo:options];
+                    break;
+                }
+                case AVAssetExportSessionStatusFailed:
+                    NSLog(@"Export Error: %@", [exporter.error description]);
+                    NSLog(@"%@", exporter);
+                    break;
+                case AVAssetExportSessionStatusCancelled:
+                    NSLog(@"Export Cancelled");
+                    break;
+                default:
+                    break;
+            }
+        }];
+    exporter = nil;
+    
+    */
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:url];
+    [[session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // generate a temporary file URL
+        NSString *filename = [[NSUUID UUID] UUIDString];
+        
+        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        NSURL *fileURL = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
+        
+        // save the NSData to that URL
+        NSError *fileError;
+        [data writeToURL:fileURL options:0 error:&fileError];
+        
+        // give player the video with that file URL
+        NSLog(@"%@", fileURL);
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:fileURL];
+        [self.player replaceCurrentItemWithPlayerItem:playerItem];
+    }] resume];
+    
+    
+
+    /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
-        
-        // TODO: figure out how to fit view to video if UI stuff needs to be done on main queue. Maybe set initial configuration and then set it again somewhere? 
+
+        // TODO: figure out how to fit view to video if UI stuff needs to be done on main queue. Maybe set initial configuration and then set it again somewhere?
 //        // Get dimensions of media within URL
 //        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
 //        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
@@ -116,6 +189,7 @@
 //        [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.height].active = YES;
 //        [self.videoView.heightAnchor constraintEqualToConstant:track.naturalSize.width].active = YES;
     });
+     */
     
     [self.playerLayer setFrame:self.videoView.frame];
     

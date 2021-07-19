@@ -9,21 +9,34 @@
 
 @implementation PlayerView
 
-/*
+
 - (instancetype)initWithFrame:(CGRect)frame {
     NSLog(@"Init with frame called");
     self = [super initWithFrame:frame];
+    
     if (self) {
-        self.player= [AVPlayer new];
+        self.player = [AVPlayer playerWithPlayerItem:nil];
         self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        
+        // code for looping video
+        self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playerItemDidReachEnd:)
+                                                       name:AVPlayerItemDidPlayToEndTimeNotification
+                                                     object:[self.player currentItem]];
+//        self.playerLayer.frame = self.bounds;
+//        NSLog(@"%f",self.playerLayer.frame.size.width);
+//        NSLog(@"%f",self.playerLayer.frame.size.height);
         [self.layer addSublayer:self.playerLayer];
     }
     return self;
 }
 
 - (void)layoutSubviews {
-    self.playerLayer.frame = self.layer.bounds;
+    self.playerLayer.frame = self.bounds;
+    NSLog(@"%f",self.playerLayer.frame.size.width);
+    NSLog(@"%f",self.playerLayer.frame.size.height);
 }
 
 -(void)setUpVideoPlayerWithUrl:(NSURL *)url {
@@ -31,7 +44,7 @@
     NSLog(@"%@", self.player.currentItem);
     [self.player replaceCurrentItemWithPlayerItem:[AVPlayerItem playerItemWithURL:url]];
     NSLog(@"%@", self.player.currentItem);
-//    NSLog(@"New width: %f", self.videoView.frame.size.width);
+    
     [self startPlayback];
 }
 
@@ -42,15 +55,10 @@
 -(void)stopPlayback {
     [self.player pause];
 }
-*/
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero completionHandler:nil];
 }
-*/
-
 
 @end

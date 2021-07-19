@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayerView : UIView
 
-/*
+
 @property AVPlayer *player;
 @property AVPlayerLayer *playerLayer;
 -(void)setUpVideoPlayerWithUrl:(NSURL *)url;
- */
+ 
 
 @end
 
