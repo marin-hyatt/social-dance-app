@@ -599,6 +599,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="thumbnailView" destination="SAw-yY-usN" id="nza-8s-nVS"/>
+                                            <segue destination="LTi-52-sZA" kind="show" identifier="DetailViewController" id="QUm-Pj-Hsc"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -838,6 +839,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="qR1-Ct-2ka"/>
         <segue reference="XXe-TN-jrX"/>
+        <segue reference="QUm-Pj-Hsc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house" catalog="system" width="128" height="106"/>

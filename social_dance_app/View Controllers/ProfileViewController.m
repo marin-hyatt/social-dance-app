@@ -10,6 +10,8 @@
 #import "Parse/Parse.h"
 #import "ProfileCollectionViewCell.h"
 #import <AVFoundation/AVFoundation.h>
+#import "DetailViewController.h"
+#import "Post.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
@@ -93,6 +95,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"song"];
     [postQuery whereKey:@"author" equalTo:self.user];
     postQuery.limit = 20;
 
@@ -108,14 +111,21 @@
     }];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier]  isEqual: @"DetailViewController"]) {
+        UICollectionViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.profileCollectionView indexPathForCell:tappedCell];
+        Post *post = self.feed[indexPath.item];
+        NSLog(@"%@", post);
+        
+        DetailViewController *vc = [segue destinationViewController];
+        vc.post = post;
+    }
 }
-*/
+
 
 @end
