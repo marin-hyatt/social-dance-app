@@ -157,6 +157,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="SU0-i9-O1G" id="gLB-Wk-pxg"/>
+                        <segue destination="0hQ-4P-Izj" kind="show" identifier="ProfileViewController" id="kQC-ax-5Di"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nv9-L2-oTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -834,6 +835,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
     </inferredMetricsTieBreakers>
     <resources>

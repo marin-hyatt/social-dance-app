@@ -22,6 +22,13 @@
     [self.videoView addGestureRecognizer:tapGestureRecognizer];
     [self.videoView setUserInteractionEnabled:YES];
     
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
+    UITapGestureRecognizer *usernameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
+    [self.profilePictureView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profilePictureView setUserInteractionEnabled:YES];
+    [self.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
+    [self.usernameLabel setUserInteractionEnabled:YES];
+    
 }
 
 - (void)updateAppearance {
@@ -113,5 +120,10 @@
     }
 }
 
+-(void)onProfileTapped:(UITapGestureRecognizer *)sender {
+    NSLog(@"Profile picture tapped");
+    [self.delegate feedCell:self didTap:self.post[@"author"]];
+    
+}
 
 @end

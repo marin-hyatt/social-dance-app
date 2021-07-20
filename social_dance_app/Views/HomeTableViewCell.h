@@ -12,6 +12,7 @@
 #import "PlayerView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol HomeTableViewCellDelegate;
 
 @interface HomeTableViewCell : UITableViewCell
 @property Post *post;
@@ -21,7 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
 @property (strong, nonatomic) IBOutlet PlayerView *videoView;
+@property (weak, nonatomic) id<HomeTableViewCellDelegate> delegate;
 -(void)updateAppearance;
+
+@end
+
+@protocol HomeTableViewCellDelegate <NSObject>
+- (void)feedCell:(HomeTableViewCell *) feedCell didTap: (PFUser *)user;
 
 @end
 

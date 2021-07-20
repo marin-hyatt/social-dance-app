@@ -12,8 +12,9 @@
 #import "HomeTableViewCell.h"
 #import "Post.h"
 #import "DetailViewController.h"
+#import "ProfileViewController.h"
 
-@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, HomeTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *feed;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -47,6 +48,7 @@
     
     // Set up cell
     cell.post = self.feed[indexPath.row];
+    cell.delegate = self;
     [cell updateAppearance];
     
     return cell;
@@ -106,6 +108,9 @@
   
         DetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.post = post;
+    } else if ([[segue identifier]  isEqual: @"ProfileViewController"]) {
+        ProfileViewController *vc = [segue destinationViewController];
+        vc.user = sender;
     }
 }
 
@@ -123,5 +128,10 @@
         // PFUser.current() will now be nil
     }];
 }
+
+- (void)feedCell:(nonnull HomeTableViewCell *)feedCell didTap:(nonnull PFUser *)user {
+    [self performSegueWithIdentifier:@"ProfileViewController" sender:user];
+}
+
 
 @end
