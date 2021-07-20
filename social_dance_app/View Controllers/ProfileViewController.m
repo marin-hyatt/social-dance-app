@@ -34,6 +34,10 @@
     [self loadPosts];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.flowLayout invalidateLayout];
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     NSLog(@"Layout calculated");
@@ -44,7 +48,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSLog(@"Size for item at index path called");
     int totalwidth = self.profileCollectionView.bounds.size.width;
     int numberOfCellsPerRow = 3;
     int dimensions = (CGFloat)(totalwidth / numberOfCellsPerRow);
