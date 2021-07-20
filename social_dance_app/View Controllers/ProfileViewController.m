@@ -42,7 +42,6 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    NSLog(@"Layout calculated");
     
     self.flowLayout.minimumInteritemSpacing = 0;
     self.flowLayout.minimumLineSpacing = 0;
@@ -50,7 +49,6 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Size for item at index path called");
     int totalwidth = self.profileCollectionView.bounds.size.width;
     int numberOfCellsPerRow = 3;
     int dimensions = (CGFloat)(totalwidth / numberOfCellsPerRow);

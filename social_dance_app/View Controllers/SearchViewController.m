@@ -31,20 +31,16 @@
     [self loadUsers:20];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.flowLayout invalidateLayout];
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    NSLog(@"Layout calculated");
-    //Resizes layout
 
     self.flowLayout.minimumInteritemSpacing = 0;
     self.flowLayout.minimumLineSpacing = 0;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-
-//    CGFloat cellsPerLine = 2;
-//    //Accounting for the spaces in between the cells
-//    CGFloat itemWidth = ((self.searchCollectionView.frame.size.width - (self.flowLayout.minimumInteritemSpacing)) / cellsPerLine);
-//    CGFloat itemHeight = itemWidth * 1.5;
-//    self.flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
