@@ -377,6 +377,7 @@
                                         <size key="customSize" width="209" height="197"/>
                                         <connections>
                                             <outlet property="usernameLabel" destination="clH-iN-JS4" id="1H5-uz-2fV"/>
+                                            <segue destination="0hQ-4P-Izj" kind="show" identifier="ProfileViewController" id="qR1-Ct-2ka"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -835,7 +836,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kQC-ax-5Di"/>
+        <segue reference="qR1-Ct-2ka"/>
         <segue reference="XXe-TN-jrX"/>
     </inferredMetricsTieBreakers>
     <resources>

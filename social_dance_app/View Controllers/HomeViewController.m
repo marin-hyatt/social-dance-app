@@ -29,15 +29,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    // Gets posts from Parse
     self.numDataToLoad = 20;
     [self loadPosts:self.numDataToLoad];
     
-    // Initializes refresh control
+
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadPosts:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
@@ -46,7 +44,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeTableViewCell"];
     
-    // Set up cell
     cell.post = self.feed[indexPath.row];
     cell.delegate = self;
     [cell updateAppearance];

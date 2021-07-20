@@ -75,6 +75,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell updateAppearanceWithImage:thumbnailImage];
+            cell.thumbnailView.transform = CGAffineTransformMakeRotation(M_PI_2);
             [self updateViewConstraints];
         });
     });

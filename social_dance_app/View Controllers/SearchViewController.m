@@ -8,6 +8,7 @@
 #import "SearchViewController.h"
 #import "Parse/Parse.h"
 #import "SearchCollectionViewCell.h"
+#import "ProfileViewController.h"
 
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -127,14 +128,20 @@
     }];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier]  isEqual: @"ProfileViewController"]) {
+        UICollectionViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.searchCollectionView indexPathForCell:tappedCell];
+        PFUser *user = self.filteredUsers[indexPath.item];
+        
+        ProfileViewController *vc = [segue destinationViewController];
+        vc.user = user;
+    }
 }
-*/
+
 
 @end
