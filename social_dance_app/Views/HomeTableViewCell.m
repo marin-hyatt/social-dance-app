@@ -12,6 +12,8 @@
 
 @implementation HomeTableViewCell
 
+static void * cellContext = &cellContext;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -59,48 +61,59 @@
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
         
         self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-//        [self.playerItem addObserver:self forKeyPath:@"status" options:
-//         NSKeyValueObservingOptionNew
-//                        context:nil];
+        
+        
 
         // Code needs to be here, not in main queue
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
-                                                   object:[self.player currentItem]];
+                                                   object:self.playerItem];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-            [self.videoView setPlayer:self.player];
-            // TODO: UI stuff
-            NSLog(@"I'm in the main queue");
+            if (self.player == nil) {
+                self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+                
+//                // Add observer for KVO
+//                [self.playerItem addObserver:self forKeyPath:@"status" options:
+//                 NSKeyValueObservingOptionNew
+//                                context:&cellContext];
+                
+                self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+                [self.videoView setPlayer:self.player];
+                // TODO: UI stuff
+                NSLog(@"I'm in the main queue");
+            }
+            
         });
         
     }];
     [task resume];
 }
 
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"status"]) {
-        AVPlayerItem *playerItem = (AVPlayerItem *)object;
-        NSLog(@"%ld", playerItem.status);
-        
-        AVAsset *asset = playerItem.asset;
-        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-        AVAssetTrack *track = [tracks objectAtIndex:0];
-        CGFloat trackHeight = track.naturalSize.height;
-        CGFloat trackWidth = track.naturalSize.width;
-        
-        // Update UI
-        [self.videoView printDimensions];
-        [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
-        
-        @try {
-            [object removeObserver:self forKeyPath:keyPath];
+    if (context == cellContext) {
+        if ([keyPath isEqualToString:@"status"]) {
+            AVPlayerItem *playerItem = (AVPlayerItem *)object;
+            NSLog(@"%ld", playerItem.status);
+            
+            AVAsset *asset = playerItem.asset;
+            NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+            AVAssetTrack *track = [tracks objectAtIndex:0];
+            CGFloat trackHeight = track.naturalSize.height;
+            CGFloat trackWidth = track.naturalSize.width;
+            
+            // Update UI
+            [self.videoView printDimensions];
+            [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
+            
+            @try {
+                [object removeObserver:self forKeyPath:keyPath];
+            }
+            @catch (NSException * __unused exception) {}
         }
-        @catch (NSException * __unused exception) {}    
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
@@ -124,6 +137,11 @@
     NSLog(@"Profile picture tapped");
     [self.delegate feedCell:self didTap:self.post[@"author"]];
     
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.player = nil;
 }
 
 @end
