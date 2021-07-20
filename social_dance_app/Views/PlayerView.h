@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property AVPlayer *player;
 -(void)printDimensions;
+-(void)updateAutolayoutWithHeight:(CGFloat) height withWidth:(CGFloat) width;
  
 
 @end

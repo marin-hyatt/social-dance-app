@@ -15,13 +15,19 @@
 - (void)updateAppearanceWithPost:(Post *)post {
     self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
-    self.songNameLabel.text = post[@"song"][@"title"];
     
-    self.albumImageView.image = nil;
-    
-    if (post.song.albumImageURLString != nil) {
-        [self.albumImageView setImageWithURL: [NSURL URLWithString:post.song.albumImageURLString]];
+    if (post.song == nil) {
+        [self.songView setHidden:YES];
+    } else {
+        self.songNameLabel.text = post[@"song"][@"title"];
+        
+        self.albumImageView.image = nil;
+        
+        if (post.song.albumImageURLString != nil) {
+            [self.albumImageView setImageWithURL: [NSURL URLWithString:post.song.albumImageURLString]];
+        }
     }
+    
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];

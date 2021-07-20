@@ -52,6 +52,7 @@
     return cell;
     
 }
+  
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 //    if(indexPath.row + 1 == [self.feed count] && !self.isMoreDataLoading){

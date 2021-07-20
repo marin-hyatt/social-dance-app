@@ -22,13 +22,9 @@
     [self.videoView addGestureRecognizer:tapGestureRecognizer];
     [self.videoView setUserInteractionEnabled:YES];
     
-    [self.playerItem addObserver:self forKeyPath:@"status" options:
-     NSKeyValueObservingOptionNew
-                    context:nil];
 }
 
 - (void)updateAppearance {
-    NSLog(@"update appearance");
     PFUser *user = self.post[@"author"];
     
     self.usernameLabel.text = user[@"username"];
@@ -53,29 +49,27 @@
 
         NSError *fileError;
         [data writeToURL:fileURL options:0 error:&fileError];
-
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
+        
         self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        
-        if (self.player == nil) {
-            self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-        }
-        
+//        [self.playerItem addObserver:self forKeyPath:@"status" options:
+//         NSKeyValueObservingOptionNew
+//                        context:nil];
+
+        // Code needs to be here, not in main queue
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
                                                    object:[self.player currentItem]];
         
-//        NSArray *requiredAssetKeys = @[@"playable", @"hasProtectedContent"];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+            self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
             [self.videoView setPlayer:self.player];
-            
             // TODO: UI stuff
             NSLog(@"I'm in the main queue");
         });
+        
     }];
     [task resume];
 }
@@ -85,7 +79,16 @@
     if ([keyPath isEqualToString:@"status"]) {
         AVPlayerItem *playerItem = (AVPlayerItem *)object;
         NSLog(@"%ld", playerItem.status);
+        
+        AVAsset *asset = playerItem.asset;
+        NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+        AVAssetTrack *track = [tracks objectAtIndex:0];
+        CGFloat trackHeight = track.naturalSize.height;
+        CGFloat trackWidth = track.naturalSize.width;
+        
+        // Update UI
         [self.videoView printDimensions];
+        [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
         
         @try {
             [object removeObserver:self forKeyPath:keyPath];

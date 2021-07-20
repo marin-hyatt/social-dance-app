@@ -25,7 +25,15 @@
     
     [(AVPlayerLayer *)[self layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     
-    if ([(AVPlayerLayer *)[self layer] videoRect].size.width != 0 && [(AVPlayerLayer *)[self layer] videoRect].size.height != 0) {
+    [self updateAutolayoutWithHeight:[(AVPlayerLayer *)[self layer] videoRect].size.height withWidth:[(AVPlayerLayer *)[self layer] videoRect].size.width];
+
+    [self printDimensions];
+}
+
+- (void)updateAutolayoutWithHeight:(CGFloat)height withWidth:(CGFloat)width {
+    // TODO: right now this sets dimensions to correct ratio but multiplied by a very small number, need to fix that
+    NSLog(@"Track width: %f, Track height: %f", width, height);
+    if (width != 0 && height != 0) {
         NSLog(@"Adding constraints");
         [self addConstraint:[NSLayoutConstraint
                              constraintWithItem:self
@@ -33,10 +41,9 @@
                              relatedBy:NSLayoutRelationEqual
                              toItem:self
                              attribute:NSLayoutAttributeWidth
-                             multiplier:([(AVPlayerLayer *)[self layer] videoRect].size.height / [(AVPlayerLayer *)[self layer] videoRect].size.width)
+                             multiplier:(height / width)
                              constant:0]];
     }
-    [self printDimensions];
 }
 
 -(void)printDimensions {
