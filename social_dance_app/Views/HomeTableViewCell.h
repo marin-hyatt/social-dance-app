@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeTableViewCell : UITableViewCell
 @property Post *post;
 @property AVPlayer *player;
+@property AVPlayerItem *playerItem;
 @property AVPlayerLayer *playerLayer;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;

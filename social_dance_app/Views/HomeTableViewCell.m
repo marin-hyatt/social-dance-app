@@ -16,11 +16,15 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.videoView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
+//    [self.videoView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoView addGestureRecognizer:tapGestureRecognizer];
     [self.videoView setUserInteractionEnabled:YES];
+    
+    [self.playerItem addObserver:self forKeyPath:@"status" options:
+     NSKeyValueObservingOptionNew
+                    context:nil];
 }
 
 - (void)updateAppearance {
@@ -51,20 +55,45 @@
         [data writeToURL:fileURL options:0 error:&fileError];
 
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+        self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
         
+        if (self.player == nil) {
+            self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+        }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playerItemDidReachEnd:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:[self.player currentItem]];
+        
+//        NSArray *requiredAssetKeys = @[@"playable", @"hasProtectedContent"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.player = [AVPlayer playerWithPlayerItem:playerItem];
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(playerItemDidReachEnd:)
-                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                       object:[self.player currentItem]];
+            
             [self.videoView setPlayer:self.player];
+            
+            // TODO: UI stuff
+            NSLog(@"I'm in the main queue");
         });
     }];
     [task resume];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerItem *playerItem = (AVPlayerItem *)object;
+        NSLog(@"%ld", playerItem.status);
+        [self.videoView printDimensions];
+        
+        @try {
+            [object removeObserver:self forKeyPath:keyPath];
+        }
+        @catch (NSException * __unused exception) {}    
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -80,5 +109,6 @@
         [self.player play];
     }
 }
+
 
 @end

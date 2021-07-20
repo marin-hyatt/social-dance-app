@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property AVPlayer *player;
+-(void)printDimensions;
  
 
 @end
