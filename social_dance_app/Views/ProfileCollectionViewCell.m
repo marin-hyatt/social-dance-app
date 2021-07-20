@@ -9,4 +9,8 @@
 
 @implementation ProfileCollectionViewCell
 
+- (void)updateAppearanceWithImage:(UIImage *)image {
+    self.thumbnailView.image = image;
+}
+
 @end

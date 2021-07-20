@@ -36,6 +36,7 @@
 		9B4841BC26A73B1600BB8988 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841BB26A73B1600BB8988 /* ProfileViewController.m */; };
 		9B4841BF26A73B9100BB8988 /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841BE26A73B9100BB8988 /* ProfileView.m */; };
 		9B4841C226A73BA400BB8988 /* ProfileCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841C126A73BA400BB8988 /* ProfileCollectionViewCell.m */; };
+		9B4841C526A74F4000BB8988 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841C426A74F4000BB8988 /* TabBarController.m */; };
 		9BE67B46269E1A3C0047611E /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B45269E1A3C0047611E /* SearchView.m */; };
 		9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */; };
 		9BE67B4C269E3D360047611E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE67B4B269E3D360047611E /* Keys.plist */; };
@@ -123,6 +124,8 @@
 		9B4841BE26A73B9100BB8988 /* ProfileView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileView.m; sourceTree = "<group>"; };
 		9B4841C026A73BA400BB8988 /* ProfileCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileCollectionViewCell.h; sourceTree = "<group>"; };
 		9B4841C126A73BA400BB8988 /* ProfileCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileCollectionViewCell.m; sourceTree = "<group>"; };
+		9B4841C326A74F4000BB8988 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		9B4841C426A74F4000BB8988 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		9BE67B44269E1A3C0047611E /* SearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		9BE67B45269E1A3C0047611E /* SearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				9B4841B826A20D4300BB8988 /* SpotifyWebViewController.m */,
 				9B4841BA26A73B1600BB8988 /* ProfileViewController.h */,
 				9B4841BB26A73B1600BB8988 /* ProfileViewController.m */,
+				9B4841C326A74F4000BB8988 /* TabBarController.h */,
+				9B4841C426A74F4000BB8988 /* TabBarController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				9B4841C226A73BA400BB8988 /* ProfileCollectionViewCell.m in Sources */,
 				9B3C09B9269CE16900B244DE /* Song.m in Sources */,
 				9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */,
+				9B4841C526A74F4000BB8988 /* TabBarController.m in Sources */,
 				9BE67B4F269E3DCC0047611E /* APIManager.m in Sources */,
 				9B2EE16C269CA8B900391917 /* main.m in Sources */,
 				9B2EE1A2269CD8E300391917 /* LoginView.m in Sources */,
