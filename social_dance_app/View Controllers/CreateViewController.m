@@ -132,6 +132,7 @@
         imagePickerVC.mediaTypes = @[(NSString *)kUTTypeMovie];
     } else {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePickerVC.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     }
 
     [self presentViewController:imagePickerVC animated:YES completion:nil];
