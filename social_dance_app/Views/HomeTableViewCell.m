@@ -44,6 +44,12 @@ static void * cellContext = &cellContext;
     PFFileObject *videoFile = self.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
+    // Update autolayout corresponding to video aspect ratio
+    CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
+    CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
+    
+    [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+    
 //    [self setUpVideoPlayerWithUrl:videoFileUrl];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
@@ -84,7 +90,9 @@ static void * cellContext = &cellContext;
                 
                 self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
                 [self.videoView setPlayer:self.player];
+                
                 // TODO: UI stuff
+                
                 NSLog(@"I'm in the main queue");
             }
             
