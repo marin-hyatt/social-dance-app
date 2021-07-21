@@ -55,14 +55,17 @@ static void * cellContext = &cellContext;
     
     // TODO: potentially find out a better way to do this
     for (PFUser *user in likedByUsers) {
-        if (user[@"objectId"] == currentUser[@"objectId"]) {
+        NSLog(@"User id: %@", user.objectId);
+        NSLog(@"Current user id: %@", currentUser.objectId);
+        if ([user.objectId isEqualToString:currentUser.objectId]) {
             self.likeButton.selected = YES;
+            break;
         }
-        break;
     }
      
+
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[likedByUsers count]];
     
-//    [self setUpVideoPlayerWithUrl:videoFileUrl];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
     
@@ -147,6 +150,7 @@ static void * cellContext = &cellContext;
 
 - (IBAction)onLikeButtonTapped:(UIButton *)sender {
     PFUser *user = [PFUser currentUser];
+    NSLog(@"%@", user);
     
     if (!self.likeButton.selected) {
         [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
