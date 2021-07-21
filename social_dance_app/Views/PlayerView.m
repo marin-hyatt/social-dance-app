@@ -30,11 +30,22 @@
     [self printDimensions];
 }
 
+
 - (void)updateAutolayoutWithHeight:(CGFloat)height withWidth:(CGFloat)width {
     // TODO: right now this sets dimensions to correct ratio but multiplied by a very small number, need to fix that
     NSLog(@"Track width: %f, Track height: %f", width, height);
     if (width != 0 && height != 0) {
-        NSLog(@"Adding constraints");
+        /*
+        [self addConstraint:[NSLayoutConstraint
+                             constraintWithItem:self
+                             attribute:NSLayoutAttributeHeight
+                             relatedBy:NSLayoutRelationEqual
+                             toItem:self.superview
+                             attribute:NSLayoutAttributeHeight
+                             multiplier:2/3
+                             constant:0]];
+         */
+        
         [self addConstraint:[NSLayoutConstraint
                              constraintWithItem:self
                              attribute:NSLayoutAttributeHeight
@@ -43,8 +54,11 @@
                              attribute:NSLayoutAttributeWidth
                              multiplier:(height / width)
                              constant:0]];
+        
+        
     }
 }
+
 
 -(void)printDimensions {
     NSLog(@"Width: %f, Height: %f", self.frame.size.width, self.frame.size.height);
