@@ -39,6 +39,12 @@
     PFFileObject *videoFile = post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
+    // Update autolayout corresponding to video aspect ratio
+    CGFloat videoHeight = [post[@"videoHeight"] doubleValue];
+    CGFloat videoWidth = [post[@"videoWidth"] doubleValue];
+    
+    [self.videoPlayerView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+    
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
     
