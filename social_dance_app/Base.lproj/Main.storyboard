@@ -142,6 +142,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeButton" destination="AHV-C2-0SQ" id="EwQ-X3-b13"/>
                                             <outlet property="profilePictureView" destination="aDg-t8-vu0" id="Ahq-Rw-drp"/>
                                             <outlet property="usernameLabel" destination="duE-Fe-jOg" id="EM2-gF-Qtw"/>
                                             <outlet property="videoView" destination="rtx-9z-dFC" id="Piy-N6-bLE"/>

@@ -43,8 +43,8 @@
     [newPost saveInBackgroundWithBlock: completion];
 }
 
-- (void)likePostWithUser:(PFUser *)currentUser withCompletion:(PFBooleanResultBlock)completion {
-    [self.likedByUsers arrayByAddingObject:currentUser];
+- (void)likePostWithUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
+    self.likedByUsers = [self.likedByUsers arrayByAddingObject:user];
     [self saveInBackgroundWithBlock: completion];
 }
 

@@ -54,31 +54,6 @@ static void * cellContext = &cellContext;
     
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [cell.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:&cellContext];
-//}
-//
-//- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [cell.playerItem removeObserver:self forKeyPath:@"status"];
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    for (HomeTableViewCell *cell in self.tableView.visibleCells) {
-//        // note! didEndDisplayingCell: isn't sent when the entire controller is going away!
-//        [cell.playerItem removeObserver:self forKeyPath:@"status"];
-//    }
-//}
-
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if(indexPath.row + 1 == [self.feed count] && !self.isMoreDataLoading){
-//        self.isMoreDataLoading = true;
-//        self.numDataToLoad++;
-//        [self loadPosts:self.numDataToLoad];
-//    }
-//}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.feed.count;
 }
@@ -93,6 +68,7 @@ static void * cellContext = &cellContext;
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"song"];
+    [postQuery includeKey:@"likedByUsers"];
     postQuery.limit = limit;
 
     // fetch data asynchronously

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *videoHeight;
 
 + (void) postUserVideo: ( PFFileObject * _Nullable )videoFile withCaption: ( NSString * _Nullable )caption withSong:(Song * _Nullable )song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+- (void)likePostWithUser:(PFUser *)currentUser withCompletion:(PFBooleanResultBlock)completion;
 
 @end
 

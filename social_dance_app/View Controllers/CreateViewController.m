@@ -41,18 +41,7 @@
 }
 
 - (IBAction)onChooseSongPressed:(id)sender {
-//    [[APIManager shared] openSpotify];
-//    [[APIManager shared] getAccessToken];
-//    NSLog(@"Access token: %@", [[APIManager shared] accessToken]);
     [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
-    
-//    if ([[APIManager shared] shouldRefreshToken]) {
-//        [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
-//    } else {
-//        [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
-//    }
-
-    
     
 }
 

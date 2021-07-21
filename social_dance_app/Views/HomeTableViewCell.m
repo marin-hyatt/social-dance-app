@@ -30,10 +30,6 @@ static void * cellContext = &cellContext;
     [self.profilePictureView setUserInteractionEnabled:YES];
     [self.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
     [self.usernameLabel setUserInteractionEnabled:YES];
-
-//    // Do KVO stuff here?
-//    self.playerItem = [[AVPlayerItem alloc] initWithAsset:nil];
-//    [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:&cellContext];
 }
 
 - (void)updateAppearance {
@@ -49,6 +45,21 @@ static void * cellContext = &cellContext;
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
     
     [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+    
+    
+    // Figure out if user liked video or not
+    NSArray *likedByUsers = self.post[@"likedByUsers"];
+    PFUser *currentUser = [PFUser currentUser];
+    
+    // TODO: potentially find out a better way to do this
+    for (PFUser *user in likedByUsers) {
+        if (user[@"objectId"] == currentUser[@"objectId"]) {
+            NSLog(@"Liked by current user");
+            self.likeButton.selected = YES;
+        }
+        break;
+    }
+     
     
 //    [self setUpVideoPlayerWithUrl:videoFileUrl];
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -82,11 +93,6 @@ static void * cellContext = &cellContext;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.player == nil) {
                 self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                
-//                // Add observer for KVO
-//                [self.playerItem addObserver:self forKeyPath:@"status" options:
-//                 NSKeyValueObservingOptionNew
-//                                context:&cellContext];
                 
                 self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
                 [self.videoView setPlayer:self.player];
@@ -161,8 +167,10 @@ static void * cellContext = &cellContext;
 }
 
 - (IBAction)onLikeButtonTapped:(UIButton *)sender {
-    NSLog(@"Post liked");
-    [self updateAppearance];
+    PFUser *user = [PFUser currentUser];
+    [self.post likePostWithUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [self updateAppearance];
+    }];
 }
 
 @end
