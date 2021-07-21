@@ -27,6 +27,8 @@
 
 @implementation HomeViewController
 
+static void * cellContext = &cellContext;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.delegate = self;
@@ -51,7 +53,23 @@
     return cell;
     
 }
-  
+
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [cell.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:&cellContext];
+//}
+//
+//- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(HomeTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [cell.playerItem removeObserver:self forKeyPath:@"status"];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    for (HomeTableViewCell *cell in self.tableView.visibleCells) {
+//        // note! didEndDisplayingCell: isn't sent when the entire controller is going away!
+//        [cell.playerItem removeObserver:self forKeyPath:@"status"];
+//    }
+//}
 
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 //    if(indexPath.row + 1 == [self.feed count] && !self.isMoreDataLoading){

@@ -30,7 +30,10 @@ static void * cellContext = &cellContext;
     [self.profilePictureView setUserInteractionEnabled:YES];
     [self.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
     [self.usernameLabel setUserInteractionEnabled:YES];
-    
+
+//    // Do KVO stuff here?
+//    self.playerItem = [[AVPlayerItem alloc] initWithAsset:nil];
+//    [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:&cellContext];
 }
 
 - (void)updateAppearance {
@@ -92,23 +95,13 @@ static void * cellContext = &cellContext;
 }
 
 
+
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == cellContext) {
         if ([keyPath isEqualToString:@"status"]) {
-            AVPlayerItem *playerItem = (AVPlayerItem *)object;
-            NSLog(@"%ld", playerItem.status);
-            
-            AVAsset *asset = playerItem.asset;
-            NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-            AVAssetTrack *track = [tracks objectAtIndex:0];
-            CGFloat trackHeight = track.naturalSize.height;
-            CGFloat trackWidth = track.naturalSize.width;
-            
-            // Update UI
-            [self.videoView printDimensions];
-            [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
-            
+            [self updateVideoAspect];
             @try {
                 [object removeObserver:self forKeyPath:keyPath];
             }
@@ -117,6 +110,21 @@ static void * cellContext = &cellContext;
     } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+-(void)updateVideoAspect {
+//    AVPlayerItem *playerItem = (AVPlayerItem *)object;
+//    NSLog(@"%ld", playerItem.status);
+    
+    AVAsset *asset = self.playerItem.asset;
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    AVAssetTrack *track = [tracks objectAtIndex:0];
+    CGFloat trackHeight = track.naturalSize.height;
+    CGFloat trackWidth = track.naturalSize.width;
+    
+    // Update UI
+    [self.videoView printDimensions];
+    [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
@@ -142,6 +150,11 @@ static void * cellContext = &cellContext;
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.player = nil;
+}
+
+- (IBAction)onLikeButtonTapped:(UIButton *)sender {
+    NSLog(@"Post liked");
+    [self updateAppearance];
 }
 
 @end
