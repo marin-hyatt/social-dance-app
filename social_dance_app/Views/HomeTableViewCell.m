@@ -48,13 +48,14 @@ static void * cellContext = &cellContext;
     
     
     // Figure out if user liked video or not
+    self.likeButton.selected = NO;
     NSArray *likedByUsers = self.post[@"likedByUsers"];
+    NSLog(@"%@", likedByUsers);
     PFUser *currentUser = [PFUser currentUser];
     
     // TODO: potentially find out a better way to do this
     for (PFUser *user in likedByUsers) {
         if (user[@"objectId"] == currentUser[@"objectId"]) {
-            NSLog(@"Liked by current user");
             self.likeButton.selected = YES;
         }
         break;
@@ -96,34 +97,12 @@ static void * cellContext = &cellContext;
                 
                 self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
                 [self.videoView setPlayer:self.player];
-                
-                // TODO: UI stuff
-                
-                NSLog(@"I'm in the main queue");
             }
             
         });
         
     }];
     [task resume];
-}
-
-
-
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if (context == cellContext) {
-        if ([keyPath isEqualToString:@"status"]) {
-            [self updateVideoAspect];
-            @try {
-                [object removeObserver:self forKeyPath:keyPath];
-            }
-            @catch (NSException * __unused exception) {}
-        }
-    } else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
 }
 
 -(void)updateVideoAspect {
@@ -168,9 +147,26 @@ static void * cellContext = &cellContext;
 
 - (IBAction)onLikeButtonTapped:(UIButton *)sender {
     PFUser *user = [PFUser currentUser];
-    [self.post likePostWithUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        [self updateAppearance];
-    }];
+    
+    if (!self.likeButton.selected) {
+        [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateAppearance];
+            } else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+    } else {
+        // Unlike post
+        [Post unlikePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateAppearance];
+            } else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+    }
+    
 }
 
 @end

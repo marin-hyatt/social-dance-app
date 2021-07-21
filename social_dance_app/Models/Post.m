@@ -43,9 +43,26 @@
     [newPost saveInBackgroundWithBlock: completion];
 }
 
-- (void)likePostWithUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
-    self.likedByUsers = [self.likedByUsers arrayByAddingObject:user];
-    [self saveInBackgroundWithBlock: completion];
++ (void)likePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {;
+    post.likedByUsers = [post.likedByUsers arrayByAddingObject:user];
+    [post saveInBackgroundWithBlock: completion];
 }
+
+
++ (void)unlikePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
+    // Convert to mutable array. There HAS to be a better way to to this...
+    NSMutableArray *mutableLikedByUsers = [[NSMutableArray alloc] initWithArray:post[@"likedByUsers"]];
+    
+    [mutableLikedByUsers enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(PFUser *likedUser, NSUInteger index, BOOL *stop) {
+        if ([likedUser.objectId isEqualToString:user.objectId]) {
+            [mutableLikedByUsers removeObjectAtIndex:index];
+            NSLog(@"user removed from like list");
+        }
+    }];
+    
+    post.likedByUsers = [[NSArray alloc] initWithArray:mutableLikedByUsers];
+    [post saveInBackgroundWithBlock:completion];
+}
+ 
 
 @end
