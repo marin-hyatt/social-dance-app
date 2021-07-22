@@ -660,16 +660,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-12-ZYh">
+                                <rect key="frame" x="175" y="118.5" width="44" height="30"/>
+                                <state key="normal" title="Follow"/>
+                                <connections>
+                                    <action selector="onFollowButtonPressed:" destination="0hQ-4P-Izj" eventType="touchUpInside" id="6a1-jt-ZMt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7JF-c9-KM3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Vrl-fP-A48" firstAttribute="trailing" secondItem="7JF-c9-KM3" secondAttribute="trailing" id="8uf-P5-1YS"/>
                             <constraint firstItem="Vrl-fP-A48" firstAttribute="top" secondItem="2yd-sA-kyf" secondAttribute="bottom" constant="18" id="BPG-b5-8GL"/>
+                            <constraint firstItem="eLy-12-ZYh" firstAttribute="leading" secondItem="Kwn-pF-g5P" secondAttribute="trailing" constant="8" id="EnI-pE-dkq"/>
                             <constraint firstItem="2yd-sA-kyf" firstAttribute="top" secondItem="7JF-c9-KM3" secondAttribute="top" constant="8" id="FsW-Zt-hhB"/>
+                            <constraint firstItem="Kwn-pF-g5P" firstAttribute="centerY" secondItem="2yd-sA-kyf" secondAttribute="centerY" id="LWt-hX-1PF"/>
                             <constraint firstAttribute="bottom" secondItem="Vrl-fP-A48" secondAttribute="bottom" id="hcV-md-hiQ"/>
-                            <constraint firstItem="7JF-c9-KM3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Kwn-pF-g5P" secondAttribute="trailing" constant="8" id="i0i-kZ-F2L"/>
                             <constraint firstItem="Kwn-pF-g5P" firstAttribute="leading" secondItem="2yd-sA-kyf" secondAttribute="trailing" constant="8" id="kyE-tN-Eq1"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eLy-12-ZYh" secondAttribute="trailing" constant="8" id="mSR-cu-Iwm"/>
+                            <constraint firstItem="eLy-12-ZYh" firstAttribute="centerY" secondItem="2yd-sA-kyf" secondAttribute="centerY" id="mdD-Gi-U7a"/>
                             <constraint firstItem="2yd-sA-kyf" firstAttribute="leading" secondItem="7JF-c9-KM3" secondAttribute="leading" constant="8" id="pbF-B9-CgO"/>
                             <constraint firstItem="Vrl-fP-A48" firstAttribute="leading" secondItem="7JF-c9-KM3" secondAttribute="leading" id="t2K-TI-PgB"/>
                             <constraint firstItem="Kwn-pF-g5P" firstAttribute="centerY" secondItem="2yd-sA-kyf" secondAttribute="centerY" id="zA5-TO-TOt"/>
@@ -889,7 +899,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="hg0-wf-NGo"/>
+        <segue reference="QUm-Pj-Hsc"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>

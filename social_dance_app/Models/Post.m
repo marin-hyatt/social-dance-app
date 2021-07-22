@@ -14,7 +14,6 @@
 @dynamic userID;
 @dynamic author;
 @dynamic caption;
-@dynamic likeCount;
 @dynamic commentCount;
 @dynamic createdAt;
 @dynamic videoFile;
@@ -34,7 +33,6 @@
     newPost.caption = caption;
     newPost.videoFile = videoFile;
     newPost.song = song;
-    newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.likedByUsers = @[];
     newPost.videoWidth = width;
@@ -56,7 +54,6 @@
     [mutableLikedByUsers enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(PFUser *likedUser, NSUInteger index, BOOL *stop) {
         if ([likedUser.objectId isEqualToString:user.objectId]) {
             [mutableLikedByUsers removeObjectAtIndex:index];
-            NSLog(@"user removed from like list");
         }
     }];
     

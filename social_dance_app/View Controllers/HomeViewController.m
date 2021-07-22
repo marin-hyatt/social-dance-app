@@ -13,6 +13,7 @@
 #import "Post.h"
 #import "DetailViewController.h"
 #import "ProfileViewController.h"
+#import "FollowerRelation.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, HomeTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -59,17 +60,19 @@ static void * cellContext = &cellContext;
 }
 
 -(void)loadPosts:(int)limit {
-    NSLog(@"Load posts");
     
-    //Querys Parse for posts
-    
-    // construct PFQuery
+
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"song"];
     [postQuery includeKey:@"likedByUsers"];
     postQuery.limit = limit;
+    
+    PFQuery *followerQuery = [FollowerRelation query];
+    [followerQuery whereKey:@"follower" equalTo:[PFUser currentUser]];
+    
+    [postQuery whereKey:@"author" matchesKey:@"user" inQuery:followerQuery];
 
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {

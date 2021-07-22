@@ -16,9 +16,6 @@ static void * cellContext = &cellContext;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-    
-//    [self.videoView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoView addGestureRecognizer:tapGestureRecognizer];
@@ -43,6 +40,13 @@ static void * cellContext = &cellContext;
     // Update autolayout corresponding to video aspect ratio
     CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
+    
+    /*
+    if ([self.post[@"caption"] isEqualToString:@"test post video and aspect ratio 2"]) {
+        NSLog(@"%@", self.post[@"videoHeight"]);
+        NSLog(@"%@", self.post[@"videoWidth"]);
+    }
+     */
     
     [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
     
@@ -86,9 +90,7 @@ static void * cellContext = &cellContext;
         
         self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
         
-        
 
-        // Code needs to be here, not in main queue
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
@@ -108,6 +110,7 @@ static void * cellContext = &cellContext;
     [task resume];
 }
 
+/*
 -(void)updateVideoAspect {
 //    AVPlayerItem *playerItem = (AVPlayerItem *)object;
 //    NSLog(@"%ld", playerItem.status);
@@ -122,6 +125,7 @@ static void * cellContext = &cellContext;
     [self.videoView printDimensions];
     [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
 }
+ */
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];

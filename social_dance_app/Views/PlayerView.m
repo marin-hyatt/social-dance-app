@@ -32,7 +32,6 @@
 
 
 - (void)updateAutolayoutWithHeight:(CGFloat)height withWidth:(CGFloat)width {
-    // TODO: right now this sets dimensions to correct ratio but multiplied by a very small number, need to fix that
     NSLog(@"Track width: %f, Track height: %f", width, height);
     if (width != 0 && height != 0) {
         /*

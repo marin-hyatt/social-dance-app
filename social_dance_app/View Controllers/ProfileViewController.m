@@ -12,12 +12,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DetailViewController.h"
 #import "Post.h"
+#import "FollowerRelation.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
 @property (strong, nonatomic) NSArray *feed;
 @property (weak, nonatomic) IBOutlet UICollectionView *profileCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+- (IBAction)onFollowButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -63,23 +65,41 @@
     PFFileObject *videoFile = cell.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    // TODO: cache image thumbnails
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:videoFileUrl];
+    
+    // As I understand it, the task runs on a background thread
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // generate a temporary file URL
+        NSString *filename = [[NSUUID UUID] UUIDString];
+        
+        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        NSURL *fileURL = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
+
+        NSError *fileError;
+        [data writeToURL:fileURL options:0 error:&fileError];
+        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
+        
         // Get video thumbnail
-        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoFileUrl options:nil];
         AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-        NSError *error = NULL;
+        [generateImg setAppliesPreferredTrackTransform:YES];
+        NSError *imgError = NULL;
         CMTime time = CMTimeMake(1, 2);
-        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
-        NSLog(@"error==%@, Refimage==%@", error, refImg);
+        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&imgError];
+        NSLog(@"error==%@, Refimage==%@", imgError, refImg);
         UIImage *thumbnailImage = [[UIImage alloc] initWithCGImage:refImg];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell updateAppearanceWithImage:thumbnailImage];
-            cell.thumbnailView.transform = CGAffineTransformMakeRotation(M_PI_2);
-            [self updateViewConstraints];
         });
-    });
-    
+        
+    }];
+    [task resume];
+
     return cell;
 }
 
@@ -88,7 +108,6 @@
 }
 
 -(void)loadPosts {
-    NSLog(@"Load posts");
     
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
@@ -126,4 +145,17 @@
 }
 
 
+- (IBAction)onFollowButtonPressed:(UIButton *)sender {
+    NSLog(@"follow button pressed");
+    NSLog(@"%@", self.user[@"followedByUsers"]);
+    NSLog(@"%@", [PFUser currentUser]);
+    
+    [FollowerRelation newRelationWithUser:self.user withFollower:[PFUser currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Follower relation added");
+        } else {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+    }];
+}
 @end

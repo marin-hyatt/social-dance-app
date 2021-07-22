@@ -28,10 +28,6 @@
     self.artist = dictionary[@"artists"][0][@"name"];
     self.albumImageURLString = dictionary[@"album"][@"images"][0][@"url"];
     
-//    NSLog(@"Song name: %@", self.title);
-//    NSLog(@"Song artist: %@", self.artist);
-//    NSLog(@"Album image url: %@", self.albumImageURLString);
-    
     return self;
 }
 
