@@ -13,6 +13,7 @@
 #import "DetailViewController.h"
 #import "Post.h"
 #import "FollowerRelation.h"
+#import "EditProfileViewController.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *profileCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 - (IBAction)onFollowButtonPressed:(UIButton *)sender;
+- (IBAction)onEditProfileButtonPressed:(UIBarButtonItem *)sender;
+
 
 @end
 
@@ -33,6 +36,20 @@
     
     
     self.profileView.user = self.user;
+    
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor clearColor];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFUser *currentUser = [PFUser currentUser];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (![self.user.objectId isEqual:currentUser.objectId]) {
+                self.navigationItem.rightBarButtonItem = nil;
+            } else {
+                self.navigationItem.rightBarButtonItem.tintColor = [UIColor blueColor];
+            }
+        });
+    });
     
     
     [self loadPosts];
@@ -162,11 +179,19 @@
         
         DetailViewController *vc = [segue destinationViewController];
         vc.post = post;
+    } else if ([[segue identifier] isEqual:@"EditProfileViewController"]) {
+        EditProfileViewController *vc = [segue destinationViewController];
+        vc.user = self.user;
     }
 }
 
 
-- (IBAction)onFollowButtonPressed:(UIButton *)sender {    
+- (IBAction)onEditProfileButtonPressed:(UIBarButtonItem *)sender {
+    NSLog(@"Edit profile button pressed");
+    [self performSegueWithIdentifier:@"EditProfileViewController" sender:nil];
+}
+
+- (IBAction)onFollowButtonPressed:(UIButton *)sender {
     PFUser *currentUser = [PFUser currentUser];
     
     // Check for duplicate entries

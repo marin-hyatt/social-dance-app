@@ -708,16 +708,39 @@
                             <outlet property="usernameLabel" destination="Kwn-pF-g5P" id="CED-MP-Qeu"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="hVI-Ej-Jh8"/>
+                    <navigationItem key="navigationItem" id="hVI-Ej-Jh8">
+                        <barButtonItem key="rightBarButtonItem" image="pencil" catalog="system" id="h3l-J3-Z8H">
+                            <connections>
+                                <action selector="onEditProfileButtonPressed:" destination="0hQ-4P-Izj" id="UE9-2S-MR6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="flowLayout" destination="Ib2-MX-bVw" id="f1d-c9-5ZG"/>
                         <outlet property="profileCollectionView" destination="Vrl-fP-A48" id="IyH-g5-41f"/>
                         <outlet property="profileView" destination="HYL-VR-R1W" id="WPh-vk-HCs"/>
+                        <segue destination="5hA-Nf-dVb" kind="show" identifier="EditProfileViewController" id="U6m-65-1k6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7JB-GH-4n5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3389.8550724637685" y="1770.5357142857142"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="Do0-Ou-HbF">
+            <objects>
+                <viewController id="5hA-Nf-dVb" customClass="EditProfileViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="web-4j-euW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Knq-1O-6er"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Isi-vg-kEj"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VoW-hI-dP8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4547" y="1781"/>
         </scene>
         <!--Spotify Auth View Controller-->
         <scene sceneID="xph-Eh-nYU">
@@ -926,6 +949,7 @@
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="music.note" catalog="system" width="97" height="128"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
