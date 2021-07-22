@@ -73,6 +73,7 @@ static void * cellContext = &cellContext;
     [followerQuery whereKey:@"follower" equalTo:[PFUser currentUser]];
     
     [postQuery whereKey:@"author" matchesKey:@"user" inQuery:followerQuery];
+ 
 
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {

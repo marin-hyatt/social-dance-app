@@ -166,16 +166,25 @@
 }
 
 
-- (IBAction)onFollowButtonPressed:(UIButton *)sender {
-    NSLog(@"follow button pressed");
-    NSLog(@"%@", self.user[@"followedByUsers"]);
-    NSLog(@"%@", [PFUser currentUser]);
+- (IBAction)onFollowButtonPressed:(UIButton *)sender {    
+    PFUser *currentUser = [PFUser currentUser];
     
-    [FollowerRelation newRelationWithUser:self.user withFollower:[PFUser currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"Follower relation added");
-        } else {
+    // Check for duplicate entries
+    PFQuery *followerQuery = [FollowerRelation query];
+    [followerQuery whereKey:@"follower" equalTo:currentUser];
+    [followerQuery whereKey:@"user" equalTo:self.user];
+
+    [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number == 0) {
+            [FollowerRelation newRelationWithUser:self.user withFollower:[PFUser currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"Follower relation added");
+                } else {
+                    NSLog(@"Error: %@", error.localizedDescription);
+                }
+            }];
         }
     }];
 }
