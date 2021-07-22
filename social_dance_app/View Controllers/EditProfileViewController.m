@@ -6,8 +6,11 @@
 //
 
 #import "EditProfileViewController.h"
+#import "EditProfileView.h"
 
-@interface EditProfileViewController ()
+@interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (strong, nonatomic) IBOutlet EditProfileView *editProfileView;
+- (IBAction)onChangeProfilePictureButtonTapped:(UIButton *)sender;
 
 @end
 
@@ -19,6 +22,34 @@
     NSLog(@"%@", self.user.username);
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    NSLog(@"Finished picking/taking a photo!");
+
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    
+    UIImage *resizedOriginalImage = [self resizeImage:originalImage withSize: CGSizeMake(originalImage.size.width * 0.6, originalImage.size.height * 0.6)];
+    
+    // Pass image back to compose view controller
+    [self.editProfileView.profilePictureView setImage:resizedOriginalImage];
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// Resizes image to get under 10MB limit for Parse
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 /*
 #pragma mark - Navigation
 
@@ -29,4 +60,23 @@
 }
 */
 
+- (IBAction)onChangeProfilePictureButtonTapped:(UIButton *)sender {
+    [self showImagePicker];
+}
+
+-(void) showImagePicker {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
 @end

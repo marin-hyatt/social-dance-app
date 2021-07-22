@@ -8,6 +8,8 @@
 #import "HomeTableViewCell.h"
 #import "Parse/Parse.h"
 #import "PlayerView.h"
+#import "UIImageView+AFNetworking.h"
+#import "CacheManager.h"
 
 
 @implementation HomeTableViewCell
@@ -34,19 +36,18 @@ static void * cellContext = &cellContext;
     
     self.usernameLabel.text = user[@"username"];
     
+    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
+    self.profilePictureView.layer.masksToBounds = true;
+    PFFileObject * postImage = user[@"profilePicture"];
+    NSURL * imageURL = [NSURL URLWithString:postImage.url];
+    [self.profilePictureView setImageWithURL:imageURL];
+    
     PFFileObject *videoFile = self.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
     // Update autolayout corresponding to video aspect ratio
     CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
-    
-    /*
-    if ([self.post[@"caption"] isEqualToString:@"test post video and aspect ratio 2"]) {
-        NSLog(@"%@", self.post[@"videoHeight"]);
-        NSLog(@"%@", self.post[@"videoWidth"]);
-    }
-     */
     
     [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
     
@@ -70,62 +71,23 @@ static void * cellContext = &cellContext;
 
     self.likeCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[likedByUsers count]];
     
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:videoFileUrl];
-    
-    // As I understand it, the task runs on a background thread
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        // generate a temporary file URL
-        NSString *filename = [[NSUUID UUID] UUIDString];
-        
-        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-        NSURL *fileURL = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
-
-        NSError *fileError;
-        [data writeToURL:fileURL options:0 error:&fileError];
-        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
-        
-        self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        
-
+    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
+        self.playerItem = playerItem;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
-                                                   object:self.playerItem];
+                                                   object:playerItem];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.player == nil) {
-                self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                
-                self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-                [self.videoView setPlayer:self.player];
-            }
+    } withMainBlock:^(AVPlayerItem * _Nonnull playerItem) {
+        if (self.player == nil) {
+            self.player = [AVPlayer playerWithPlayerItem:playerItem];
             
-        });
-        
+            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+            [self.videoView setPlayer:self.player];
+        }
     }];
-    [task resume];
 }
-
-/*
--(void)updateVideoAspect {
-//    AVPlayerItem *playerItem = (AVPlayerItem *)object;
-//    NSLog(@"%ld", playerItem.status);
-    
-    AVAsset *asset = self.playerItem.asset;
-    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-    AVAssetTrack *track = [tracks objectAtIndex:0];
-    CGFloat trackHeight = track.naturalSize.height;
-    CGFloat trackWidth = track.naturalSize.width;
-    
-    // Update UI
-    [self.videoView printDimensions];
-    [self.videoView updateAutolayoutWithHeight:trackHeight withWidth:trackWidth];
-}
- */
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];

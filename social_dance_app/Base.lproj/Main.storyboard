@@ -730,17 +730,48 @@
         <scene sceneID="Do0-Ou-HbF">
             <objects>
                 <viewController id="5hA-Nf-dVb" customClass="EditProfileViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="web-4j-euW">
+                    <view key="view" contentMode="scaleToFill" id="web-4j-euW" customClass="EditProfileView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-2a-A3X">
+                                <rect key="frame" x="132" y="373" width="150" height="150"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="04P-2A-Oqt"/>
+                                    <constraint firstAttribute="height" constant="150" id="wuQ-As-Zkk"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yy9-gw-v64">
+                                <rect key="frame" x="130" y="531" width="154" height="30"/>
+                                <state key="normal" title="Change Profile Picture"/>
+                                <connections>
+                                    <action selector="onChangeProfilePictureButtonTapped:" destination="5hA-Nf-dVb" eventType="touchUpInside" id="KYj-8Q-g3h"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Knq-1O-6er"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ab4-2a-A3X" firstAttribute="centerY" secondItem="web-4j-euW" secondAttribute="centerY" id="5UM-xo-SDJ"/>
+                            <constraint firstItem="yy9-gw-v64" firstAttribute="centerX" secondItem="web-4j-euW" secondAttribute="centerX" id="Pcy-47-bDE"/>
+                            <constraint firstItem="yy9-gw-v64" firstAttribute="top" secondItem="ab4-2a-A3X" secondAttribute="bottom" constant="8" id="dy6-cy-7Yb"/>
+                            <constraint firstItem="ab4-2a-A3X" firstAttribute="centerX" secondItem="web-4j-euW" secondAttribute="centerX" id="hTp-sC-N1d"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="profilePictureView" destination="ab4-2a-A3X" id="bjE-EN-C8r"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="Isi-vg-kEj"/>
+                    <navigationItem key="navigationItem" id="Isi-vg-kEj">
+                        <barButtonItem key="rightBarButtonItem" image="checkmark" catalog="system" id="ahU-pt-8So"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="editProfileView" destination="web-4j-euW" id="zNT-eC-glE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoW-hI-dP8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4547" y="1781"/>
+            <point key="canvasLocation" x="4548" y="1771"/>
         </scene>
         <!--Spotify Auth View Controller-->
         <scene sceneID="xph-Eh-nYU">
@@ -944,6 +975,7 @@
         <segue reference="QUm-Pj-Hsc"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>

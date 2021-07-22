@@ -6,6 +6,7 @@
 //
 
 #import "ProfileView.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation ProfileView
 
@@ -27,9 +28,10 @@
     
     self.numFollowersLabel.text = [NSString stringWithFormat:@"%d", followerCount];
     
-//    PFFileObject * postImage = self.user[@"profilePhoto"];
-//    NSURL * imageURL = [NSURL URLWithString:postImage.url];
-//    [self.profilePicture setImageWithURL:imageURL];
+    
+    PFFileObject * postImage = self.user[@"profilePicture"];
+    NSURL * imageURL = [NSURL URLWithString:postImage.url];
+    [self.profilePictureView setImageWithURL:imageURL];
 }
 
 @end

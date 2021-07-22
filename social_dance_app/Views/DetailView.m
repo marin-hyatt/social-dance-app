@@ -8,6 +8,7 @@
 #import "DetailView.h"
 #import "UIImageView+AFNetworking.h"
 #import "Parse/Parse.h"
+#import "CacheManager.h"
 
 
 @implementation DetailView
@@ -45,28 +46,9 @@
     
     [self.videoPlayerView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
     
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:videoFileUrl];
-    
-    // As I understand it, the task runs on a background thread
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        // generate a temporary file URL
-        NSString *filename = [[NSUUID UUID] UUIDString];
-        
-        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-        NSURL *fileURL = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
-
-        NSError *fileError;
-        [data writeToURL:fileURL options:0 error:&fileError];
-
-        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
+    } withMainBlock:^(AVPlayerItem * _Nonnull playerItem) {
+        if (self.player == nil) {
             self.player = [AVPlayer playerWithPlayerItem:playerItem];
             self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
             [[NSNotificationCenter defaultCenter] addObserver:self
@@ -74,9 +56,9 @@
                                                          name:AVPlayerItemDidPlayToEndTimeNotification
                                                        object:[self.player currentItem]];
             [self.videoPlayerView setPlayer:self.player];
-        });
+        }
     }];
-    [task resume];
+    
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {

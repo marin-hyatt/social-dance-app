@@ -84,13 +84,6 @@
     }
 
     [NSUserDefaults.standardUserDefaults setValue:[NSDate.now dateByAddingTimeInterval:[dataDictionary[@"expires_in"] doubleValue]] forKey:@"expiration_date"];
-    
-    /*
-    [self.cache setValue:dataDictionary[@"access_token"] forKey:@"access_token"];
-    [self.cache setValue:dataDictionary[@"refresh_token"] forKey:@"refresh_token"];
-    [self.cache setValue:[NSDate.now dateByAddingTimeInterval:[dataDictionary[@"expires_in"] doubleValue]] forKey:@"expiration_date"];
-     */
-    
 }
 
 - (void)refreshTokenIfNeededWithCompletion:(void (^)(BOOL, NSError *))completion {
@@ -157,27 +150,20 @@
 
 -(NSString *)accessToken {
     return [NSUserDefaults.standardUserDefaults stringForKey:@"access_token"];
-//    return [self.cache objectForKey:@"access_token"];
     
 }
 
 - (NSString *)refreshToken {
     return [NSUserDefaults.standardUserDefaults stringForKey:@"refresh_token"];
-//    return [self.cache objectForKey:@"refresh_token"];
 }
 
 - (NSDate *)expirationDate {
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    NSLog(@"Expiration date: %@", [NSUserDefaults.standardUserDefaults stringForKey:@"expiration_date"]);
-//    NSLog(@"Formatted expiration date: %@", [dateFormatter dateFromString:[NSUserDefaults.standardUserDefaults stringForKey:@"expiration_date"]]);
     return [NSUserDefaults.standardUserDefaults objectForKey:@"expiration_date"];
-//    return [dateFormatter dateFromString:[self.cache objectForKey:@"expiration_date"]];
 }
 
 - (BOOL)shouldRefreshToken {
     // Should refresh token when it is 5 min away from expiring
     [self printUserDefaults];
-//    NSLog(@"Access token: %@", [self.cache objectForKey:@"access_token"]);
     NSDate *currentDate = [NSDate now];
     double fiveMinutes = 300;
     return [currentDate dateByAddingTimeInterval:fiveMinutes] >= self.expirationDate;
