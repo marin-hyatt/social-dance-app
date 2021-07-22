@@ -11,6 +11,7 @@
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet EditProfileView *editProfileView;
 - (IBAction)onChangeProfilePictureButtonTapped:(UIButton *)sender;
+- (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender;
 
 @end
 
@@ -19,7 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"%@", self.user.username);
+    self.editProfileView.user = self.user;
+    [self.editProfileView updateAppearance];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
@@ -29,10 +31,8 @@
     
     UIImage *resizedOriginalImage = [self resizeImage:originalImage withSize: CGSizeMake(originalImage.size.width * 0.6, originalImage.size.height * 0.6)];
     
-    // Pass image back to compose view controller
     [self.editProfileView.profilePictureView setImage:resizedOriginalImage];
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -59,6 +59,27 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onSaveButtonPressed:(UIBarButtonItem *)sender {
+    if (self.editProfileView.profilePictureView.image) {
+        NSData *imageData = UIImagePNGRepresentation(self.editProfileView.profilePictureView.image);
+        
+        if (imageData) {
+            PFFileObject *file = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+            PFUser *user = self.user;
+            user[@"profilePicture"] = file;
+            
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Profile picture updated!");
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    NSLog(@"Error: %@", error.description);
+                }
+            }];
+        }
+    }
+}
 
 - (IBAction)onChangeProfilePictureButtonTapped:(UIButton *)sender {
     [self showImagePicker];

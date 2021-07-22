@@ -6,11 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EditProfileView : UIView
+@property PFUser *user;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
+- (void)updateAppearance;
 
 @end
 

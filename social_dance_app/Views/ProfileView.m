@@ -27,8 +27,7 @@
     self.profilePictureView.layer.masksToBounds = true;
     
     self.numFollowersLabel.text = [NSString stringWithFormat:@"%d", followerCount];
-    
-    
+
     PFFileObject * postImage = self.user[@"profilePicture"];
     NSURL * imageURL = [NSURL URLWithString:postImage.url];
     [self.profilePictureView setImageWithURL:imageURL];
