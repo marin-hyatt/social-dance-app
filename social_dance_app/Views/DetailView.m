@@ -29,6 +29,13 @@
         }
     }
     
+    PFFileObject * profileImage =  post.author[@"profilePicture"];
+    NSURL * imageURL = [NSURL URLWithString:profileImage.url];
+    [self.profilePictureView setImageWithURL:imageURL];
+    
+    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
+    self.profilePictureView.layer.masksToBounds = true;
+    
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
