@@ -17,13 +17,15 @@
 }
 */
 
-- (void)updateAppearance {
+- (void)updateAppearanceWithFollowerCount:(int)followerCount {
     // Sets username
     self.usernameLabel.text = self.user.username;
     
     // Sets profile picture
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.layer.masksToBounds = true;
+    
+    self.numFollowersLabel.text = [NSString stringWithFormat:@"%d", followerCount];
     
 //    PFFileObject * postImage = self.user[@"profilePhoto"];
 //    NSURL * imageURL = [NSURL URLWithString:postImage.url];

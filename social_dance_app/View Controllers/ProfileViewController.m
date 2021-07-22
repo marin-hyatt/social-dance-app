@@ -33,9 +33,10 @@
     
     
     self.profileView.user = self.user;
-    [self.profileView updateAppearance];
+    
     
     [self loadPosts];
+    [self loadNumFollowers];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -126,6 +127,26 @@
             NSLog(@"Error: %@", error.localizedDescription);
         }
     }];
+}
+
+-(int)loadNumFollowers {
+    // Load number of followers
+    __block int numFollowers = 0;
+    
+    PFQuery *followerQuery = [FollowerRelation query];
+    [followerQuery whereKey:@"user" equalTo:self.user];
+    
+    [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Number of followers: %d", number);
+            numFollowers = number;
+            [self.profileView updateAppearanceWithFollowerCount:number];
+        }
+    }];
+    
+    return numFollowers;
 }
 
 
