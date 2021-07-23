@@ -74,6 +74,22 @@
             </objects>
             <point key="canvasLocation" x="-648" y="113"/>
         </scene>
+        <!--Comment View Controller-->
+        <scene sceneID="otR-Da-SNT">
+            <objects>
+                <viewController id="Iho-SZ-gng" customClass="CommentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ggE-sj-NmY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0eD-40-gsf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KEn-eQ-I5y"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g7o-Gr-y1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="499" y="2583"/>
+        </scene>
         <!--Home-->
         <scene sceneID="Uxi-8W-JUb">
             <objects>
@@ -128,20 +144,43 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSi-7c-Zaa">
+                                                    <rect key="frame" x="133.5" y="654" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="Akw-Z0-qgG"/>
+                                                        <constraint firstAttribute="height" constant="30" id="nnH-qZ-ndh"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="bubble.left" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="onCommentButtonTapped:" destination="QTU-Bd-W6y" eventType="touchUpInside" id="7Pu-aB-qwL"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="commentCount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7v-0J-uzx">
+                                                    <rect key="frame" x="171.5" y="658.5" width="118" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="aDg-t8-vu0" secondAttribute="bottom" priority="999" constant="8" id="1IC-aL-RaD"/>
                                                 <constraint firstItem="AHV-C2-0SQ" firstAttribute="top" secondItem="rtx-9z-dFC" secondAttribute="bottom" constant="8" id="4nc-09-IT5"/>
+                                                <constraint firstItem="gSi-7c-Zaa" firstAttribute="centerY" secondItem="AHV-C2-0SQ" secondAttribute="centerY" id="Gan-GV-Uaw"/>
+                                                <constraint firstItem="cbK-c5-C2z" firstAttribute="centerY" secondItem="AHV-C2-0SQ" secondAttribute="centerY" id="Kdh-gi-S86"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="trailing" constant="8" id="Mdu-JJ-JIW"/>
                                                 <constraint firstItem="AHV-C2-0SQ" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" constant="8" id="Mjl-jR-z4d"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cbK-c5-C2z" secondAttribute="trailing" constant="8" id="PDp-sl-fOJ"/>
+                                                <constraint firstItem="cbK-c5-C2z" firstAttribute="centerY" secondItem="AHV-C2-0SQ" secondAttribute="centerY" id="Msi-c8-Uzr"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="top" secondItem="Ud9-6D-Mck" secondAttribute="top" constant="5" id="PWQ-kr-3LT"/>
+                                                <constraint firstItem="u7v-0J-uzx" firstAttribute="leading" secondItem="gSi-7c-Zaa" secondAttribute="trailing" constant="8" id="Qcx-2E-4Dw"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="u7v-0J-uzx" secondAttribute="trailing" constant="8" id="UEv-pN-3O9"/>
                                                 <constraint firstItem="duE-Fe-jOg" firstAttribute="centerY" secondItem="aDg-t8-vu0" secondAttribute="centerY" id="VIA-Ju-bAV"/>
+                                                <constraint firstItem="gSi-7c-Zaa" firstAttribute="leading" secondItem="cbK-c5-C2z" secondAttribute="trailing" constant="16" id="bjF-jf-Xdh"/>
                                                 <constraint firstItem="cbK-c5-C2z" firstAttribute="leading" secondItem="AHV-C2-0SQ" secondAttribute="trailing" constant="8" id="d56-xq-PP2"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" constant="8" id="oZx-Q4-T2J"/>
                                                 <constraint firstAttribute="bottom" secondItem="AHV-C2-0SQ" secondAttribute="bottom" constant="8" id="pvw-En-RQN"/>
                                                 <constraint firstItem="cbK-c5-C2z" firstAttribute="centerY" secondItem="AHV-C2-0SQ" secondAttribute="centerY" id="rBk-h6-Fmz"/>
                                                 <constraint firstItem="duE-Fe-jOg" firstAttribute="leading" secondItem="aDg-t8-vu0" secondAttribute="trailing" constant="8" id="s7L-yn-aDE"/>
+                                                <constraint firstItem="u7v-0J-uzx" firstAttribute="centerY" secondItem="gSi-7c-Zaa" secondAttribute="centerY" id="suR-Hc-Kr3"/>
                                                 <constraint firstItem="rtx-9z-dFC" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" id="uOf-D4-frR"/>
                                                 <constraint firstAttribute="trailing" secondItem="rtx-9z-dFC" secondAttribute="trailing" id="vH1-IZ-8Pw"/>
                                                 <constraint firstItem="rtx-9z-dFC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="bottom" constant="18" id="wkF-12-1K1"/>
@@ -179,6 +218,7 @@
                     <connections>
                         <outlet property="tableView" destination="SU0-i9-O1G" id="gLB-Wk-pxg"/>
                         <segue destination="0hQ-4P-Izj" kind="show" identifier="ProfileViewController" id="kQC-ax-5Di"/>
+                        <segue destination="Iho-SZ-gng" kind="show" identifier="CommentViewController" id="lPi-2L-cUQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nv9-L2-oTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -326,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36d-uI-Dhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-39.130434782608695" y="2542.6339285714284"/>
+            <point key="canvasLocation" x="-649" y="2583"/>
         </scene>
         <!--Spotify Web View Controller-->
         <scene sceneID="nFH-bp-UqC">
@@ -977,11 +1017,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qR1-Ct-2ka"/>
+        <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
         <segue reference="hg0-wf-NGo"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="bubble.left" catalog="system" width="128" height="110"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

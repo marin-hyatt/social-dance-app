@@ -14,6 +14,7 @@
 #import "DetailViewController.h"
 #import "ProfileViewController.h"
 #import "FollowerRelation.h"
+#import "CommentViewController.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, HomeTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -104,6 +105,9 @@ static void * cellContext = &cellContext;
     } else if ([[segue identifier]  isEqual: @"ProfileViewController"]) {
         ProfileViewController *vc = [segue destinationViewController];
         vc.user = sender;
+    } else if ([[segue identifier]  isEqual: @"CommentViewController"]) {
+        CommentViewController *vc = [segue destinationViewController];
+        vc.post = sender;
     }
 }
 
@@ -124,6 +128,10 @@ static void * cellContext = &cellContext;
 
 - (void)feedCell:(nonnull HomeTableViewCell *)feedCell didTap:(nonnull PFUser *)user {
     [self performSegueWithIdentifier:@"ProfileViewController" sender:user];
+}
+
+- (void)feedCell:(HomeTableViewCell *)feedCell didTapWithPost:(Post *)post {
+    [self performSegueWithIdentifier:@"CommentViewController" sender:post];
 }
 
 

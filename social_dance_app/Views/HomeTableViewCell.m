@@ -111,7 +111,6 @@ static void * cellContext = &cellContext;
 
 -(void)onProfileTapped:(UITapGestureRecognizer *)sender {
     [self.delegate feedCell:self didTap:self.post[@"author"]];
-    
 }
 
 - (void)prepareForReuse {
@@ -140,6 +139,10 @@ static void * cellContext = &cellContext;
         }];
     }
     
+}
+
+- (IBAction)onCommentButtonTapped:(UIButton *)sender {
+    [self.delegate feedCell:self didTapWithPost:self.post];
 }
 
 @end

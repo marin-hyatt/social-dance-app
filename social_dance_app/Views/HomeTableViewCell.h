@@ -14,6 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol HomeTableViewCellDelegate;
 
+
 @interface HomeTableViewCell : UITableViewCell
 @property Post *post;
 @property AVPlayer *player;
@@ -30,7 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @protocol HomeTableViewCellDelegate <NSObject>
-- (void)feedCell:(HomeTableViewCell *) feedCell didTap: (PFUser *)user;
+-(void)feedCell:(HomeTableViewCell *)feedCell didTap: (PFUser *)user;
+-(void)feedCell:(HomeTableViewCell *)feedCell didTapWithPost:(Post *)post;
 
 @end
 

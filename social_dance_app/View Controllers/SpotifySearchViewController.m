@@ -47,7 +47,6 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     NSString *query = self.searchBar.text;
     NSString *formattedQuery = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    NSLog(@"%@", formattedQuery);
     
     [self searchForSongsWithQuery:formattedQuery];
     
