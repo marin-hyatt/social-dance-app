@@ -8,10 +8,13 @@
 #import "CommentViewController.h"
 #import "Comment.h"
 #import "CommentTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CommentViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
 @property (weak, nonatomic) IBOutlet UITextField *commentField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *comments;
 @end
 
@@ -24,6 +27,17 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadComments) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
+    self.profilePictureView.layer.masksToBounds = true;
+    PFFileObject * postImage = currentUser[@"profilePicture"];
+    NSURL * imageURL = [NSURL URLWithString:postImage.url];
+    [self.profilePictureView setImageWithURL:imageURL];
+    
     [self loadComments];
 }
 
@@ -33,6 +47,8 @@
     [Comment newCommentWithPost:self.post withAuthor:user withText:self.commentField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
+        } else {
+            self.commentField.text = @"";
         }
     }];
 }
@@ -61,6 +77,7 @@
         if (comments) {
             self.comments = comments;
             [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
         }
         else {
             NSLog(@"Parse error: %@", error.localizedDescription);
