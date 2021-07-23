@@ -23,7 +23,11 @@
     comment.author = user;
     comment.text = text;
     
+    float likeCount = [post.commentCount doubleValue];
+    post.commentCount = [NSNumber numberWithFloat:likeCount + 1];
+    
     [comment saveInBackgroundWithBlock:completion];
+    [post saveInBackgroundWithBlock:completion];
 }
 
 @end

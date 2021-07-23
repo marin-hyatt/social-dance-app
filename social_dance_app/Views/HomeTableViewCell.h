@@ -24,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
 @property (strong, nonatomic) IBOutlet PlayerView *videoView;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) id<HomeTableViewCellDelegate> delegate;
 -(void)updateAppearance;
 

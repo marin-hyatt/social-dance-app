@@ -23,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"%@", self.post);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

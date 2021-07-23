@@ -10,6 +10,7 @@
 #import "PlayerView.h"
 #import "UIImageView+AFNetworking.h"
 #import "CacheManager.h"
+#import "Comment.h"
 
 
 @implementation HomeTableViewCell
@@ -36,13 +37,35 @@ static void * cellContext = &cellContext;
     
     [self updateUsernameAndProfilePictureWithUser:user];
     
+    [self updateComment];
+    
     [self updateLikeView];
     
     [self updateVideo];
     
 }
 
--(void)updateUsernameAndProfilePictureWithUser:(PFUser *)user {
+- (void)updateComment {
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount];
+    
+    self.commentButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *query = [Comment query];
+    [query whereKey:@"author" equalTo:currentUser];
+    [query whereKey:@"post" equalTo:self.post];
+    
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            NSLog(@"%d", number);
+            self.commentButton.selected = YES;
+        }
+    }];
+}
+
+- (void)updateUsernameAndProfilePictureWithUser:(PFUser *)user {
     self.usernameLabel.text = user[@"username"];
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.layer.masksToBounds = true;
@@ -51,7 +74,7 @@ static void * cellContext = &cellContext;
     [self.profilePictureView setImageWithURL:imageURL];
 }
 
--(void)updateLikeView {
+- (void)updateLikeView {
     self.likeButton.selected = NO;
     PFUser *currentUser = [PFUser currentUser];
     PFRelation *likeRelation = [self.post relationForKey:@"likeRelation"];
@@ -69,7 +92,7 @@ static void * cellContext = &cellContext;
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
 }
 
--(void)updateVideo {
+- (void)updateVideo {
     PFFileObject *videoFile = self.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
@@ -101,7 +124,7 @@ static void * cellContext = &cellContext;
     [p seekToTime:kCMTimeZero completionHandler:nil];
 }
 
--(void)startPlayback {
+- (void)startPlayback {
     if (self.player.rate != 0) {
         [self.player pause];
     } else {
@@ -109,7 +132,7 @@ static void * cellContext = &cellContext;
     }
 }
 
--(void)onProfileTapped:(UITapGestureRecognizer *)sender {
+- (void)onProfileTapped:(UITapGestureRecognizer *)sender {
     [self.delegate feedCell:self didTap:self.post[@"author"]];
 }
 
