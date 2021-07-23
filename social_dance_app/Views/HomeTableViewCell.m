@@ -53,23 +53,22 @@ static void * cellContext = &cellContext;
     
     
     // Figure out if user liked video or not
-    self.likeButton.selected = NO;
-    NSArray *likedByUsers = self.post[@"likedByUsers"];
-    NSLog(@"%@", likedByUsers);
-    PFUser *currentUser = [PFUser currentUser];
     
-    // TODO: potentially find out a better way to do this
-    for (PFUser *user in likedByUsers) {
-        NSLog(@"User id: %@", user.objectId);
-        NSLog(@"Current user id: %@", currentUser.objectId);
-        if ([user.objectId isEqualToString:currentUser.objectId]) {
+    self.likeButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFRelation *likeRelation = [self.post relationForKey:@"likeRelation"];
+    PFQuery *query = [likeRelation query];
+    [query whereKey:@"objectId" equalTo:currentUser.objectId];
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
             self.likeButton.selected = YES;
-            break;
         }
-    }
-     
-
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[likedByUsers count]];
+    }];
+    
+    self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
     
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {

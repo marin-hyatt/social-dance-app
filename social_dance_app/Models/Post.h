@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *videoFile;
 @property (nonatomic, strong) Song *song;
 @property (nonatomic, strong) NSString *caption;
+@property (nonatomic, strong) NSNumber *likeCount;
 @property (nonatomic, strong) NSNumber *commentCount;
 @property (nonatomic, strong) NSNumber *videoWidth;
 @property (nonatomic, strong) NSNumber *videoHeight;

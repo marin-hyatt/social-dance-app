@@ -14,6 +14,7 @@
 @dynamic userID;
 @dynamic author;
 @dynamic caption;
+@dynamic likeCount;
 @dynamic commentCount;
 @dynamic createdAt;
 @dynamic videoFile;
@@ -33,6 +34,7 @@
     newPost.caption = caption;
     newPost.videoFile = videoFile;
     newPost.song = song;
+    newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     newPost.likedByUsers = @[];
     newPost.videoWidth = width;
@@ -41,24 +43,22 @@
     [newPost saveInBackgroundWithBlock: completion];
 }
 
-+ (void)likePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {;
-    post.likedByUsers = [post.likedByUsers arrayByAddingObject:user];
++ (void)likePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
+    PFRelation *likeRelation = [post relationForKey:@"likeRelation"];
+    [likeRelation addObject:user];
+    float likeCount = [post.likeCount doubleValue];
+    post.likeCount = [NSNumber numberWithFloat:likeCount + 1];
     [post saveInBackgroundWithBlock: completion];
+    
 }
 
 
 + (void)unlikePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
-    // Convert to mutable array. There HAS to be a better way to to this...
-    NSMutableArray *mutableLikedByUsers = [[NSMutableArray alloc] initWithArray:post[@"likedByUsers"]];
-    
-    [mutableLikedByUsers enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(PFUser *likedUser, NSUInteger index, BOOL *stop) {
-        if ([likedUser.objectId isEqualToString:user.objectId]) {
-            [mutableLikedByUsers removeObjectAtIndex:index];
-        }
-    }];
-    
-    post.likedByUsers = [[NSArray alloc] initWithArray:mutableLikedByUsers];
-    [post saveInBackgroundWithBlock:completion];
+    PFRelation *likeRelation = [post relationForKey:@"likeRelation"];
+    [likeRelation removeObject:user];
+    float likeCount = [post.likeCount doubleValue];
+    post.likeCount = [NSNumber numberWithFloat:likeCount - 1];
+    [post saveInBackgroundWithBlock: completion];
 }
  
 
