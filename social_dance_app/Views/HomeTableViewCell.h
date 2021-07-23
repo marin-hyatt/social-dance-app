@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *bookmarkButton;
 @property (weak, nonatomic) id<HomeTableViewCellDelegate> delegate;
 -(void)updateAppearance;
 

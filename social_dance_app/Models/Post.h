@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) postUserVideo: ( PFFileObject * _Nullable )videoFile withCaption: ( NSString * _Nullable )caption withSong:(Song * _Nullable )song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 + (void)likePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;
 + (void)unlikePost:(Post *)post withUser:(PFUser *)currentUser withCompletion:(PFBooleanResultBlock)completion;
++ (void)bookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;
++ (void)unbookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;
 
 @end
 

@@ -52,13 +52,24 @@
     
 }
 
-
 + (void)unlikePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
     PFRelation *likeRelation = [post relationForKey:@"likeRelation"];
     [likeRelation removeObject:user];
     float likeCount = [post.likeCount doubleValue];
     post.likeCount = [NSNumber numberWithFloat:likeCount - 1];
     [post saveInBackgroundWithBlock: completion];
+}
+
++ (void)bookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
+    PFRelation *relation = [post relationForKey:@"bookmarkRelation"];
+    [relation addObject:user];
+    [post saveInBackgroundWithBlock:completion];
+}
+
++ (void)unbookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion {
+    PFRelation *relation = [post relationForKey:@"bookmarkRelation"];
+    [relation removeObject:user];
+    [post saveInBackgroundWithBlock:completion];
 }
  
 

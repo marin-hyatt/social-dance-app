@@ -8,6 +8,7 @@
 #import "BookmarkViewController.h"
 #import "ProfileCollectionViewCell.h"
 #import "CacheManager.h"
+#import "Post.h"
 
 @interface BookmarkViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -23,6 +24,22 @@
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    [self loadPosts];
+}
+
+- (void)loadPosts {
+    PFQuery *query = [Post query];
+    [query whereKey:@"bookmarkRelation" equalTo:self.user];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else {
+            self.bookmarks = objects;
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

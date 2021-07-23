@@ -59,7 +59,6 @@ static void * cellContext = &cellContext;
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else if (number > 0) {
-            NSLog(@"%d", number);
             self.commentButton.selected = YES;
         }
     }];
@@ -161,11 +160,27 @@ static void * cellContext = &cellContext;
             }
         }];
     }
-    
 }
 
 - (IBAction)onCommentButtonTapped:(UIButton *)sender {
     [self.delegate feedCell:self didTapWithPost:self.post];
+}
+- (IBAction)onBookmarkButtonTapped:(UIButton *)sender {
+    PFUser *user = [PFUser currentUser];
+    
+    if (!self.bookmarkButton.selected) {
+        [Post bookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateAppearance];
+            }
+        }];
+    } else {
+        [Post unbookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateAppearance];
+            }
+        }];
+    }
 }
 
 @end
