@@ -25,8 +25,6 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    NSLog(@"Finished picking/taking a photo!");
-
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     
     UIImage *resizedOriginalImage = [self resizeImage:originalImage withSize: CGSizeMake(originalImage.size.width * 0.6, originalImage.size.height * 0.6)];
@@ -36,7 +34,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-// Resizes image to get under 10MB limit for Parse
+
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -90,14 +88,12 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
 
-
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
-
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 @end

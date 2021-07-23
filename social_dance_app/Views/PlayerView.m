@@ -21,7 +21,6 @@
     
     [(AVPlayerLayer *)[self layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     
-    [self updateAutolayoutWithHeight:[(AVPlayerLayer *)[self layer] videoRect].size.height withWidth:[(AVPlayerLayer *)[self layer] videoRect].size.width];
 }
 
 
@@ -35,7 +34,6 @@
                              attribute:NSLayoutAttributeWidth
                              multiplier:(height / width)
                              constant:0]];
-        
     }
 }
 

@@ -34,26 +34,24 @@ static void * cellContext = &cellContext;
 - (void)updateAppearance {
     PFUser *user = self.post[@"author"];
     
-    self.usernameLabel.text = user[@"username"];
+    [self updateUsernameAndProfilePictureWithUser:user];
     
+    [self updateLikeView];
+    
+    [self updateVideo];
+    
+}
+
+-(void)updateUsernameAndProfilePictureWithUser:(PFUser *)user {
+    self.usernameLabel.text = user[@"username"];
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.layer.masksToBounds = true;
     PFFileObject * postImage = user[@"profilePicture"];
     NSURL * imageURL = [NSURL URLWithString:postImage.url];
     [self.profilePictureView setImageWithURL:imageURL];
-    
-    PFFileObject *videoFile = self.post[@"videoFile"];
-    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
-    
-    // Update autolayout corresponding to video aspect ratio
-    CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
-    CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
-    
-    [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
-    
-    
-    // Figure out if user liked video or not
-    
+}
+
+-(void)updateLikeView {
     self.likeButton.selected = NO;
     PFUser *currentUser = [PFUser currentUser];
     PFRelation *likeRelation = [self.post relationForKey:@"likeRelation"];
@@ -69,7 +67,17 @@ static void * cellContext = &cellContext;
     }];
     
     self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+}
+
+-(void)updateVideo {
+    PFFileObject *videoFile = self.post[@"videoFile"];
+    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
+    // Update autolayout corresponding to video aspect ratio
+    CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
+    CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
+    
+    [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
         self.playerItem = playerItem;
@@ -94,7 +102,6 @@ static void * cellContext = &cellContext;
 }
 
 -(void)startPlayback {
-    NSLog(@"Playback time");
     if (self.player.rate != 0) {
         [self.player pause];
     } else {
@@ -103,7 +110,6 @@ static void * cellContext = &cellContext;
 }
 
 -(void)onProfileTapped:(UITapGestureRecognizer *)sender {
-    NSLog(@"Profile picture tapped");
     [self.delegate feedCell:self didTap:self.post[@"author"]];
     
 }
@@ -115,7 +121,6 @@ static void * cellContext = &cellContext;
 
 - (IBAction)onLikeButtonTapped:(UIButton *)sender {
     PFUser *user = [PFUser currentUser];
-    NSLog(@"%@", user);
     
     if (!self.likeButton.selected) {
         [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -126,7 +131,6 @@ static void * cellContext = &cellContext;
             }
         }];
     } else {
-        // Unlike post
         [Post unlikePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 [self updateAppearance];

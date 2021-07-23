@@ -95,9 +95,6 @@
                                             <subviews>
                                                 <view contentMode="scaleAspectFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="rtx-9z-dFC" customClass="PlayerView">
                                                     <rect key="frame" x="0.0" y="53" width="414" height="593"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="593" id="Ocg-pi-OxG"/>
-                                                    </constraints>
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDg-t8-vu0">
                                                     <rect key="frame" x="8" y="5" width="40" height="40"/>

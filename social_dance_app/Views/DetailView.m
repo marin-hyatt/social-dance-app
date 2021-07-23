@@ -9,6 +9,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "Parse/Parse.h"
 #import "CacheManager.h"
+#import "Post.h"
 
 
 @implementation DetailView
@@ -17,10 +18,19 @@
     self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
     
+    [self updateSongWithPost:post];
+    
+    [self updateProfilePictureWithPost:post];
+    
+    [self updateVideoWithPost:post];
+    
+}
+
+-(void)updateSongWithPost:(Post *)post {
     if (post.song == nil) {
         [self.songView setHidden:YES];
     } else {
-        self.songNameLabel.text = post[@"song"][@"title"];
+        self.songNameLabel.text = post.song.title;
         
         self.albumImageView.image = nil;
         
@@ -28,21 +38,22 @@
             [self.albumImageView setImageWithURL: [NSURL URLWithString:post.song.albumImageURLString]];
         }
     }
-    
+}
+
+-(void)updateProfilePictureWithPost:(Post *)post {
     PFFileObject * profileImage =  post.author[@"profilePicture"];
     NSURL * imageURL = [NSURL URLWithString:profileImage.url];
     [self.profilePictureView setImageWithURL:imageURL];
     
     self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
     self.profilePictureView.layer.masksToBounds = true;
-    
-    
+}
+
+-(void)updateVideoWithPost:(Post *)post {
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
     [self.videoPlayerView setUserInteractionEnabled:YES];
-    
     [self.videoPlayerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
-    
     
     PFFileObject *videoFile = post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
@@ -65,10 +76,9 @@
             [self.videoPlayerView setPlayer:self.player];
         }
     }];
-    
 }
 
-- (void)playerItemDidReachEnd:(NSNotification *)notification {
+-(void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
     [p seekToTime:kCMTimeZero completionHandler:nil];
 }
