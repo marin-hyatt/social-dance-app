@@ -14,9 +14,11 @@
 #import "Post.h"
 #import "FollowerRelation.h"
 #import "EditProfileViewController.h"
+#import "CacheManager.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *feed;
 @property (weak, nonatomic) IBOutlet UICollectionView *profileCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
@@ -34,6 +36,9 @@
     self.profileCollectionView.delegate = self;
     self.profileCollectionView.dataSource = self;
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
+    [self.profileCollectionView insertSubview:self.refreshControl atIndex:0];
     
     self.profileView.user = self.user;
     
@@ -78,46 +83,25 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ProfileCollectionViewCell *cell = [self.profileCollectionView dequeueReusableCellWithReuseIdentifier:@"ProfileCollectionViewCell" forIndexPath:indexPath];
     
-
     cell.post = self.feed[indexPath.row];
     PFFileObject *videoFile = cell.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
-    // TODO: cache image thumbnails
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:videoFileUrl];
-    
-    // As I understand it, the task runs on a background thread
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        // generate a temporary file URL
-        NSString *filename = [[NSUUID UUID] UUIDString];
-        
-        NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-        NSURL *fileURL = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
-
-        NSError *fileError;
-        [data writeToURL:fileURL options:0 error:&fileError];
-        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
-        
-        // Get video thumbnail
+    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
+        AVAsset *asset = [playerItem asset];
         AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         [generateImg setAppliesPreferredTrackTransform:YES];
         NSError *imgError = NULL;
         CMTime time = CMTimeMake(1, 2);
         CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&imgError];
-        NSLog(@"error==%@, Refimage==%@", imgError, refImg);
         UIImage *thumbnailImage = [[UIImage alloc] initWithCGImage:refImg];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [cell updateAppearanceWithImage:thumbnailImage];
         });
-        
+    } withMainBlock:^(AVPlayerItem * playerItem) {
     }];
-    [task resume];
-
+    
     return cell;
 }
 
@@ -125,8 +109,7 @@
     return self.feed.count;
 }
 
--(void)loadPosts {
-    
+-(void)loadPosts{
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
@@ -136,9 +119,9 @@
 
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
-            NSLog(@"Feed successfully loaded");
             self.feed = posts;
             [self.profileCollectionView reloadData];
+            [self.refreshControl endRefreshing];
         }
         else {
             NSLog(@"Error: %@", error.localizedDescription);
@@ -147,7 +130,6 @@
 }
 
 -(int)loadNumFollowers {
-    // Load number of followers
     __block int numFollowers = 0;
     
     PFQuery *followerQuery = [FollowerRelation query];
@@ -157,25 +139,20 @@
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
-            NSLog(@"Number of followers: %d", number);
             numFollowers = number;
             [self.profileView updateAppearanceWithFollowerCount:number];
         }
     }];
-    
     return numFollowers;
 }
 
 
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier]  isEqual: @"DetailViewController"]) {
         UICollectionViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.profileCollectionView indexPathForCell:tappedCell];
         Post *post = self.feed[indexPath.item];
-        NSLog(@"%@", post);
         
         DetailViewController *vc = [segue destinationViewController];
         vc.post = post;
@@ -187,7 +164,6 @@
 
 
 - (IBAction)onEditProfileButtonPressed:(UIBarButtonItem *)sender {
-    NSLog(@"Edit profile button pressed");
     [self performSegueWithIdentifier:@"EditProfileViewController" sender:nil];
 }
 
@@ -204,9 +180,7 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else if (number == 0) {
             [FollowerRelation newRelationWithUser:self.user withFollower:[PFUser currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded) {
-                    NSLog(@"Follower relation added");
-                } else {
+                if (error != nil) {
                     NSLog(@"Error: %@", error.localizedDescription);
                 }
             }];

@@ -100,11 +100,6 @@
 }
 
 -(void)loadUsers:(int)limit {
-    NSLog(@"Load posts");
-    
-    //Querys Parse for posts
-    
-    // construct PFQuery
     PFQuery *postQuery = [PFUser query];
     [postQuery orderByDescending:@"createdAt"];
     postQuery.limit = limit;
@@ -112,13 +107,11 @@
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
         if (users) {
-            NSLog(@"Users successfully loaded");
             self.users = users;
             self.filteredUsers = self.users;
             [self.searchCollectionView reloadData];
         }
         else {
-            // handle error
             NSLog(@"Error: %@", error.localizedDescription);
         }
     }];

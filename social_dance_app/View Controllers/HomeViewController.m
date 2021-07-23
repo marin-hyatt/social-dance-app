@@ -79,13 +79,11 @@ static void * cellContext = &cellContext;
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.isMoreDataLoading = false;
-            NSLog(@"Feed successfully loaded");
             self.feed = posts;
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         }
         else {
-            // handle error
             NSLog(@"Parse error: %@", error.localizedDescription);
         }
     }];

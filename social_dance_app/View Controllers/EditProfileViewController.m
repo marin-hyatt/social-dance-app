@@ -69,7 +69,6 @@
             
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
-                    NSLog(@"Profile picture updated!");
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     NSLog(@"Error: %@", error.description);

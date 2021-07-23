@@ -21,20 +21,13 @@
     
     // Connecting to Parse backend
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-
         configuration.applicationId = @"zVL08kNrweRta8rt4nst3UFJnMnOWZG2byENCDmf";
         configuration.clientKey = @"kDERu6tpqihAOIrFMzGpJe0hOWqv6fpyauniU04l";
         configuration.server = @"https://parseapi.back4app.com";
     }];
     
     [Parse initializeWithConfiguration:config];
-    
-    // TODO: add ability to refresh access token instead of exchanging for a new token every time
-//    [[APIManager shared] refreshTokenIfNeededWithCompletion:^(BOOL success, NSError *error) {
-//        if (success) {
-//            NSLog(@"Success!");
-//        }
-//    }];
+
     [NSURLCache sharedURLCache].diskCapacity = 1000 * 1024 * 1024; // 1000 MB
     // Override point for customization after application launch.
     return YES;
