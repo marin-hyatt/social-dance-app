@@ -9,6 +9,7 @@
 #import "BookmarkCollectionViewCell.h"
 #import "CacheManager.h"
 #import "Post.h"
+#import "DetailViewController.h"
 
 @interface BookmarkViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -50,6 +51,8 @@
 - (void)loadPosts {
     PFQuery *query = [Post query];
     [query whereKey:@"bookmarkRelation" equalTo:self.user];
+    [query includeKey:@"author"];
+    [query includeKey:@"song"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
@@ -91,14 +94,20 @@
     return self.bookmarks.count;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqual:@"DetailViewController"]) {
+        UICollectionViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+        Post *post = self.bookmarks[indexPath.item];
+        
+        DetailViewController *vc = [segue destinationViewController];
+        vc.post = post;
+    }
 }
-*/
+
 
 @end

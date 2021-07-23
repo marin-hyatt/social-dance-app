@@ -15,6 +15,8 @@
 @implementation DetailView
 
 - (void)updateAppearanceWithPost:(Post *)post {
+    NSLog(@"%@", post);
+    
     self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
     

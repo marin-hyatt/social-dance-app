@@ -947,6 +947,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="thumbnailView" destination="UFS-Fx-jSP" id="G2j-bR-nfX"/>
+                                            <segue destination="LTi-52-sZA" kind="show" identifier="DetailViewController" id="f1U-7T-Vi1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1221,7 +1222,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="hg0-wf-NGo"/>
+        <segue reference="f1U-7T-Vi1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>

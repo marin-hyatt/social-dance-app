@@ -37,12 +37,30 @@ static void * cellContext = &cellContext;
     
     [self updateUsernameAndProfilePictureWithUser:user];
     
+    [self updateBookmark];
+    
     [self updateComment];
     
     [self updateLikeView];
     
     [self updateVideo];
     
+}
+
+- (void)updateBookmark {
+    self.bookmarkButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFRelation *likeRelation = [self.post relationForKey:@"bookmarkRelation"];
+    PFQuery *query = [likeRelation query];
+    [query whereKey:@"objectId" equalTo:currentUser.objectId];
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            self.bookmarkButton.selected = YES;
+        }
+    }];
 }
 
 - (void)updateComment {
