@@ -15,6 +15,7 @@
 #import "FollowerRelation.h"
 #import "EditProfileViewController.h"
 #import "CacheManager.h"
+#import "BookmarkViewController.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
@@ -159,12 +160,19 @@
     } else if ([[segue identifier] isEqual:@"EditProfileViewController"]) {
         EditProfileViewController *vc = [segue destinationViewController];
         vc.user = self.user;
+    } else if ([[segue identifier] isEqual:@"BookmarkViewController"]) {
+        BookmarkViewController *vc = [segue destinationViewController];
+        vc.user = self.user;
     }
 }
 
 
 - (IBAction)onEditProfileButtonPressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"EditProfileViewController" sender:nil];
+}
+
+- (IBAction)onBookmarkButtonPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"BookmarkViewController" sender:nil];
 }
 
 - (IBAction)onFollowButtonPressed:(UIButton *)sender {

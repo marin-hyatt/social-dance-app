@@ -308,7 +308,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" selectedImage="house" catalog="system" id="3sF-aj-THh"/>
-                    <navigationItem key="navigationItem" id="bAb-Pz-uNl">
+                    <navigationItem key="navigationItem" title="Home" id="bAb-Pz-uNl">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="Ww2-jL-9kh">
                             <connections>
                                 <action selector="onLogoutButtonPressed:" destination="99N-S4-3fk" id="x7F-4P-S2M"/>
@@ -867,24 +867,92 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="hVI-Ej-Jh8">
-                        <barButtonItem key="rightBarButtonItem" image="pencil" catalog="system" id="h3l-J3-Z8H">
-                            <connections>
-                                <action selector="onEditProfileButtonPressed:" destination="0hQ-4P-Izj" id="UE9-2S-MR6"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="pencil" catalog="system" id="h3l-J3-Z8H">
+                                <connections>
+                                    <action selector="onEditProfileButtonPressed:" destination="0hQ-4P-Izj" id="UE9-2S-MR6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="bookmark" catalog="system" id="lzj-VU-zdU">
+                                <connections>
+                                    <action selector="onBookmarkButtonPressed:" destination="0hQ-4P-Izj" id="VgG-Vi-fCd"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="flowLayout" destination="Ib2-MX-bVw" id="f1d-c9-5ZG"/>
                         <outlet property="profileCollectionView" destination="Vrl-fP-A48" id="IyH-g5-41f"/>
                         <outlet property="profileView" destination="HYL-VR-R1W" id="WPh-vk-HCs"/>
                         <segue destination="5hA-Nf-dVb" kind="show" identifier="EditProfileViewController" id="U6m-65-1k6"/>
+                        <segue destination="2AF-eE-jRf" kind="show" identifier="BookmarkViewController" id="Ze6-Vd-0eL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7JB-GH-4n5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3389.8550724637685" y="1770.5357142857142"/>
         </scene>
-        <!--Edit Profile View Controller-->
+        <!--Bookmarks-->
+        <scene sceneID="P1k-7r-HLm">
+            <objects>
+                <viewController id="2AF-eE-jRf" customClass="BookmarkViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S1W-H0-ZAX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-hc-XYu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TuK-p9-dhZ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BookmarkCollectionViewCell" id="Sgc-lG-f6m" customClass="ProfileCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4oQ-u7-61C">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UFS-Fx-jSP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UFS-Fx-jSP" firstAttribute="top" secondItem="4oQ-u7-61C" secondAttribute="top" id="UoN-bg-6o7"/>
+                                                <constraint firstAttribute="bottom" secondItem="UFS-Fx-jSP" secondAttribute="bottom" id="dAi-bi-rYf"/>
+                                                <constraint firstAttribute="trailing" secondItem="UFS-Fx-jSP" secondAttribute="trailing" id="eeA-S8-8sZ"/>
+                                                <constraint firstItem="UFS-Fx-jSP" firstAttribute="leading" secondItem="4oQ-u7-61C" secondAttribute="leading" id="tBN-0p-la1"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6jR-JL-NTs"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="J1Y-hc-XYu" firstAttribute="top" secondItem="S1W-H0-ZAX" secondAttribute="top" id="1ms-kR-y1w"/>
+                            <constraint firstItem="J1Y-hc-XYu" firstAttribute="trailing" secondItem="6jR-JL-NTs" secondAttribute="trailing" id="5BD-Gf-OYM"/>
+                            <constraint firstAttribute="bottom" secondItem="J1Y-hc-XYu" secondAttribute="bottom" id="Ajf-IF-RuN"/>
+                            <constraint firstItem="J1Y-hc-XYu" firstAttribute="leading" secondItem="6jR-JL-NTs" secondAttribute="leading" id="Lyk-9e-JZV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bookmarks" id="3Jl-vc-oNE"/>
+                    <connections>
+                        <outlet property="collectionView" destination="J1Y-hc-XYu" id="NgR-WV-KXe"/>
+                        <outlet property="flowLayout" destination="TuK-p9-dhZ" id="VNr-BU-mP5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zvf-oh-Sf3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4382.608695652174" y="2189.7321428571427"/>
+        </scene>
+        <!--Edit Profile-->
         <scene sceneID="Do0-Ou-HbF">
             <objects>
                 <viewController id="5hA-Nf-dVb" customClass="EditProfileViewController" sceneMemberID="viewController">
@@ -920,7 +988,7 @@
                             <outlet property="profilePictureView" destination="ab4-2a-A3X" id="bjE-EN-C8r"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="Isi-vg-kEj">
+                    <navigationItem key="navigationItem" title="Edit Profile" id="Isi-vg-kEj">
                         <barButtonItem key="rightBarButtonItem" image="checkmark" catalog="system" id="ahU-pt-8So">
                             <connections>
                                 <action selector="onSaveButtonPressed:" destination="5hA-Nf-dVb" id="2qG-7M-C0U"/>
@@ -933,7 +1001,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoW-hI-dP8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4548" y="1771"/>
+            <point key="canvasLocation" x="4384" y="1505"/>
         </scene>
         <!--Spotify Auth View Controller-->
         <scene sceneID="xph-Eh-nYU">
@@ -1134,9 +1202,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="hg0-wf-NGo"/>
+        <segue reference="QUm-Pj-Hsc"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bubble.left" catalog="system" width="128" height="110"/>
         <image name="bubble.left.fill" catalog="system" width="128" height="110"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
