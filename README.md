@@ -241,3 +241,11 @@ commentsCount | Number | number of comments on post
 ![](sprint_1_gif_3.gif)
 ![](sprint_1_gif_4.gif)
 
+**Sprint 2**
+
+![](sprint_2_gif_1.gif)
+![](sprint_2_gif_2.gif)
+![](sprint_2_gif_3.gif)
+![](sprint_2_gif_4.gif)
+![](sprint_2_gif_5.gif)
+
