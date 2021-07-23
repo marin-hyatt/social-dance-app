@@ -27,6 +27,7 @@
     [self.detailView updateAppearanceWithPost:self.post];
     [self updateLikeButton];
     [self updateComment];
+    [self updateBookmark];
 
 }
 
@@ -59,6 +60,22 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else if (number > 0) {
             self.detailView.commentButton.selected = YES;
+        }
+    }];
+}
+
+- (void)updateBookmark {
+    self.detailView.bookmarkButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFRelation *likeRelation = [self.post relationForKey:@"bookmarkRelation"];
+    PFQuery *query = [likeRelation query];
+    [query whereKey:@"objectId" equalTo:currentUser.objectId];
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            self.detailView.bookmarkButton.selected = YES;
         }
     }];
 }
@@ -109,6 +126,21 @@
 }
 
 - (IBAction)onBookmarkButtonPressed:(UIButton *)sender {
+    PFUser *user = [PFUser currentUser];
+    
+    if (!self.detailView.bookmarkButton.selected) {
+        [Post bookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateBookmark];
+            }
+        }];
+    } else {
+        [Post unbookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateBookmark];
+            }
+        }];
+    }
 }
 
 
