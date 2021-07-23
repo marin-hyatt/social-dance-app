@@ -6,7 +6,7 @@
 //
 
 #import "BookmarkViewController.h"
-#import "ProfileCollectionViewCell.h"
+#import "BookmarkCollectionViewCell.h"
 #import "CacheManager.h"
 #import "Post.h"
 
@@ -28,6 +28,25 @@
     [self loadPosts];
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.flowLayout invalidateLayout];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.flowLayout.minimumInteritemSpacing = 0;
+    self.flowLayout.minimumLineSpacing = 0;
+    self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    int totalwidth = self.collectionView.bounds.size.width;
+    int numberOfCellsPerRow = 3;
+    int dimensions = (CGFloat)(totalwidth / numberOfCellsPerRow);
+    return CGSizeMake(dimensions, dimensions);
+}
+
 - (void)loadPosts {
     PFQuery *query = [Post query];
     [query whereKey:@"bookmarkRelation" equalTo:self.user];
@@ -37,14 +56,14 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             self.bookmarks = objects;
+            NSLog(@"%@", objects);
             [self.collectionView reloadData];
         }
     }];
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ProfileCollectionViewCell *cell
-    = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"BookmarkCollectionViewCell" forIndexPath:indexPath];
+    BookmarkCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"BookmarkCollectionViewCell" forIndexPath:indexPath];
     
     cell.post = self.bookmarks[indexPath.row];
     PFFileObject *videoFile = cell.post[@"videoFile"];
