@@ -425,22 +425,65 @@
                                                             <constraint firstItem="oeb-hp-cEv" firstAttribute="leading" secondItem="DU2-81-ezb" secondAttribute="leading" constant="3" id="sFv-3I-wW4"/>
                                                         </constraints>
                                                     </view>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guY-pd-T6j">
+                                                        <rect key="frame" x="300" y="18" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="fsp-Hm-boI"/>
+                                                            <constraint firstAttribute="height" constant="30" id="sXA-vh-0UI"/>
+                                                        </constraints>
+                                                        <state key="normal" image="heart" catalog="system"/>
+                                                        <state key="selected" image="heart.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="onLikeButtonPressed:" destination="LTi-52-sZA" eventType="touchUpInside" id="L18-BM-ooc"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i0-rz-ILt">
+                                                        <rect key="frame" x="338" y="18" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="hds-WN-qOk"/>
+                                                            <constraint firstAttribute="width" constant="30" id="vsy-z3-P8c"/>
+                                                        </constraints>
+                                                        <state key="normal" image="bubble.left" catalog="system"/>
+                                                        <state key="selected" image="bubble.left.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="onCommentButtonPressed:" destination="LTi-52-sZA" eventType="touchUpInside" id="ml7-t8-iHG"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNP-4K-OZu">
+                                                        <rect key="frame" x="376" y="18" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="A41-Rt-2hc"/>
+                                                            <constraint firstAttribute="width" constant="30" id="bHI-Fs-aJ5"/>
+                                                        </constraints>
+                                                        <state key="normal" image="bookmark" catalog="system"/>
+                                                        <state key="selected" image="bookmark.fill" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="onBookmarkButtonPressed:" destination="LTi-52-sZA" eventType="touchUpInside" id="JnF-Mb-2Hm"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="DU2-81-ezb" firstAttribute="leading" secondItem="lbN-or-GGy" secondAttribute="leading" constant="8" id="1Zr-k5-vxV"/>
+                                                    <constraint firstItem="MNP-4K-OZu" firstAttribute="centerY" secondItem="1DL-lp-tSB" secondAttribute="centerY" id="9qQ-uS-iBG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MNP-4K-OZu" secondAttribute="trailing" constant="8" id="Bqj-k1-Mp5"/>
                                                     <constraint firstItem="of5-h0-hhd" firstAttribute="top" secondItem="lbN-or-GGy" secondAttribute="top" constant="8" id="Guo-a3-DiL"/>
+                                                    <constraint firstItem="7i0-rz-ILt" firstAttribute="leading" secondItem="guY-pd-T6j" secondAttribute="trailing" constant="8" id="HaM-yE-hCg"/>
                                                     <constraint firstItem="20Y-DJ-61i" firstAttribute="leading" secondItem="of5-h0-hhd" secondAttribute="leading" id="NeL-1q-hkk"/>
                                                     <constraint firstAttribute="trailing" secondItem="20Y-DJ-61i" secondAttribute="trailing" constant="8" id="Nqk-B5-728"/>
+                                                    <constraint firstItem="MNP-4K-OZu" firstAttribute="leading" secondItem="7i0-rz-ILt" secondAttribute="trailing" constant="8" id="Pww-jh-RBG"/>
                                                     <constraint firstItem="1DL-lp-tSB" firstAttribute="leading" secondItem="of5-h0-hhd" secondAttribute="trailing" constant="8" id="VWv-nw-kIe"/>
                                                     <constraint firstItem="1DL-lp-tSB" firstAttribute="centerY" secondItem="of5-h0-hhd" secondAttribute="centerY" id="WiA-bW-UHz"/>
                                                     <constraint firstItem="20Y-DJ-61i" firstAttribute="top" secondItem="DU2-81-ezb" secondAttribute="bottom" constant="8" id="Yry-KM-wk0"/>
                                                     <constraint firstItem="of5-h0-hhd" firstAttribute="leading" secondItem="lbN-or-GGy" secondAttribute="leading" constant="8" id="ZbJ-MV-kDA"/>
+                                                    <constraint firstItem="guY-pd-T6j" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1DL-lp-tSB" secondAttribute="trailing" constant="8" id="fsK-Lg-vR3"/>
                                                     <constraint firstItem="1DL-lp-tSB" firstAttribute="leading" secondItem="of5-h0-hhd" secondAttribute="trailing" constant="8" id="ibh-0b-XcR"/>
                                                     <constraint firstAttribute="trailing" secondItem="DU2-81-ezb" secondAttribute="trailing" constant="8" id="kLj-op-Exx"/>
                                                     <constraint firstAttribute="bottom" secondItem="20Y-DJ-61i" secondAttribute="bottom" constant="8" id="mli-1C-V5L"/>
                                                     <constraint firstItem="DU2-81-ezb" firstAttribute="top" secondItem="of5-h0-hhd" secondAttribute="bottom" constant="8" id="qhi-5M-OVn"/>
+                                                    <constraint firstItem="guY-pd-T6j" firstAttribute="centerY" secondItem="1DL-lp-tSB" secondAttribute="centerY" id="rw6-DY-sSE"/>
                                                     <constraint firstItem="DU2-81-ezb" firstAttribute="top" secondItem="of5-h0-hhd" secondAttribute="bottom" constant="8" id="tBr-AM-FEf"/>
+                                                    <constraint firstItem="7i0-rz-ILt" firstAttribute="centerY" secondItem="1DL-lp-tSB" secondAttribute="centerY" id="vnX-Ek-jBF"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -481,7 +524,10 @@
                         </constraints>
                         <connections>
                             <outlet property="albumImageView" destination="oeb-hp-cEv" id="KCn-Bm-1YT"/>
+                            <outlet property="bookmarkButton" destination="MNP-4K-OZu" id="syN-sq-hMm"/>
                             <outlet property="captionLabel" destination="20Y-DJ-61i" id="ZLG-MZ-7JS"/>
+                            <outlet property="commentButton" destination="7i0-rz-ILt" id="Xot-Vq-n6V"/>
+                            <outlet property="likeButton" destination="guY-pd-T6j" id="HtZ-BX-4j3"/>
                             <outlet property="profilePictureView" destination="of5-h0-hhd" id="gX9-KA-DKp"/>
                             <outlet property="songNameLabel" destination="6vy-Eg-8IS" id="13e-aW-cvU"/>
                             <outlet property="songView" destination="DU2-81-ezb" id="5NV-QH-cr7"/>

@@ -9,6 +9,8 @@
 #import "DetailView.h"
 #import "APIManager.h"
 #import "SpotifyWebViewController.h"
+#import "Post.h"
+#import "Comment.h"
 
 
 @interface DetailViewController ()
@@ -22,6 +24,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.detailView updateAppearanceWithPost:self.post];
+    [self updateLikeButton];
+
+}
+
+- (void)updateLikeButton {
+    self.detailView.likeButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFRelation *likeRelation = [self.post relationForKey:@"likeRelation"];
+    PFQuery *query = [likeRelation query];
+    [query whereKey:@"objectId" equalTo:currentUser.objectId];
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            self.detailView.likeButton.selected = YES;
+        }
+    }];
 }
 
 - (IBAction)onListenButtonPressed:(UIButton *)sender {
@@ -41,6 +61,34 @@
         // Segue to web view since app can't be opened
         [self performSegueWithIdentifier:@"SpotifyWebViewController" sender:nil];
     }
+}
+
+- (IBAction)onLikeButtonPressed:(UIButton *)sender {
+    PFUser *user = [PFUser currentUser];
+    
+    if (!self.detailView.likeButton.selected) {
+        [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateLikeButton];
+            } else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+    } else {
+        [Post unlikePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [self updateLikeButton];
+            } else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+    }
+}
+
+- (IBAction)onCommentButtonPressed:(UIButton *)sender {
+}
+
+- (IBAction)onBookmarkButtonPressed:(UIButton *)sender {
 }
 
 
