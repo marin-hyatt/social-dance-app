@@ -43,16 +43,19 @@
     
     self.profileView.user = self.user;
     
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor clearColor];
+//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor clearColor];
+    self.navigationItem.rightBarButtonItems[0].tintColor = [UIColor clearColor];
+    self.navigationItem.rightBarButtonItems[1].tintColor = [UIColor clearColor];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         PFUser *currentUser = [PFUser currentUser];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (![self.user.objectId isEqual:currentUser.objectId]) {
-                self.navigationItem.rightBarButtonItem = nil;
+                self.navigationItem.rightBarButtonItems = nil;
             } else {
-                self.navigationItem.rightBarButtonItem.tintColor = [UIColor blueColor];
+                self.navigationItem.rightBarButtonItems[0].tintColor = [UIColor systemBlueColor];
+                self.navigationItem.rightBarButtonItems[1].tintColor = [UIColor systemBlueColor];
             }
         });
     });
