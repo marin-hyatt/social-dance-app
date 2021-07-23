@@ -61,8 +61,6 @@ static void * cellContext = &cellContext;
 }
 
 -(void)loadPosts:(int)limit {
-    
-
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
