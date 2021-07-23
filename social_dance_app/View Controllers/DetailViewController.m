@@ -11,6 +11,7 @@
 #import "SpotifyWebViewController.h"
 #import "Post.h"
 #import "Comment.h"
+#import "CommentViewController.h"
 
 
 @interface DetailViewController ()
@@ -25,6 +26,7 @@
     // Do any additional setup after loading the view.
     [self.detailView updateAppearanceWithPost:self.post];
     [self updateLikeButton];
+    [self updateComment];
 
 }
 
@@ -40,6 +42,23 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else if (number > 0) {
             self.detailView.likeButton.selected = YES;
+        }
+    }];
+}
+
+- (void)updateComment {
+    self.detailView.commentButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFQuery *query = [Comment query];
+    [query whereKey:@"author" equalTo:currentUser];
+    [query whereKey:@"post" equalTo:self.post];
+    
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            self.detailView.commentButton.selected = YES;
         }
     }];
 }
@@ -86,6 +105,7 @@
 }
 
 - (IBAction)onCommentButtonPressed:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"CommentViewController" sender:nil];
 }
 
 - (IBAction)onBookmarkButtonPressed:(UIButton *)sender {
@@ -99,6 +119,9 @@
     if ([segue.identifier isEqualToString:@"SpotifyWebViewController"]) {
         SpotifyWebViewController *vc = [segue destinationViewController];
         vc.url = [NSURL URLWithString:self.post.song.webURL];
+    } else if ([segue.identifier isEqualToString:@"CommentViewController"]) {
+        CommentViewController *vc = [segue destinationViewController];
+        vc.post = self.post;
     }
 }
 

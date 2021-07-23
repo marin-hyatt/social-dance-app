@@ -539,6 +539,7 @@
                     <connections>
                         <outlet property="detailView" destination="09u-gM-xUE" id="kk6-S8-b2J"/>
                         <segue destination="tYV-Oo-UUA" kind="show" identifier="SpotifyWebViewController" id="XXe-TN-jrX"/>
+                        <segue destination="Iho-SZ-gng" kind="show" identifier="CommentViewController" id="q0o-vQ-l7I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36d-uI-Dhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1269,6 +1270,7 @@
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
         <segue reference="f1U-7T-Vi1"/>
+        <segue reference="q0o-vQ-l7I"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>

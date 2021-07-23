@@ -183,6 +183,7 @@ static void * cellContext = &cellContext;
 - (IBAction)onCommentButtonTapped:(UIButton *)sender {
     [self.delegate feedCell:self didTapWithPost:self.post];
 }
+
 - (IBAction)onBookmarkButtonTapped:(UIButton *)sender {
     PFUser *user = [PFUser currentUser];
     
