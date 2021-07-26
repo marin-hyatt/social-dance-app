@@ -56,7 +56,6 @@ static void * cellContext = &cellContext;
     [self updateCellVideoWithCell:cell];
     
     [cell updateAppearance];
-    [self updateCellBookmarkWithCell:cell];
     
     return cell;
     
@@ -85,22 +84,6 @@ static void * cellContext = &cellContext;
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
     [p seekToTime:kCMTimeZero completionHandler:nil];
-}
-
-- (void)updateCellBookmarkWithCell:(HomeTableViewCell *)cell {
-    cell.bookmarkButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFRelation *likeRelation = [cell.post relationForKey:@"bookmarkRelation"];
-    PFQuery *query = [likeRelation query];
-    [query whereKey:@"objectId" equalTo:currentUser.objectId];
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else if (number > 0) {
-            cell.bookmarkButton.selected = YES;
-        }
-    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

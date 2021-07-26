@@ -46,6 +46,7 @@
 		9B4841DA26AB445200BB8988 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841D926AB445200BB8988 /* CommentTableViewCell.m */; };
 		9B4841DD26AB55AF00BB8988 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841DC26AB55AF00BB8988 /* BookmarkViewController.m */; };
 		9B4841E326AB61EF00BB8988 /* BookmarkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841E226AB61EF00BB8988 /* BookmarkCollectionViewCell.m */; };
+		9B7AB14526AF50AA00EAA177 /* UIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB14426AF50AA00EAA177 /* UIManager.m */; };
 		9BE67B46269E1A3C0047611E /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B45269E1A3C0047611E /* SearchView.m */; };
 		9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */; };
 		9BE67B4C269E3D360047611E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE67B4B269E3D360047611E /* Keys.plist */; };
@@ -153,6 +154,8 @@
 		9B4841DC26AB55AF00BB8988 /* BookmarkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
 		9B4841E126AB61EF00BB8988 /* BookmarkCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookmarkCollectionViewCell.h; sourceTree = "<group>"; };
 		9B4841E226AB61EF00BB8988 /* BookmarkCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkCollectionViewCell.m; sourceTree = "<group>"; };
+		9B7AB14326AF50AA00EAA177 /* UIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIManager.h; sourceTree = "<group>"; };
+		9B7AB14426AF50AA00EAA177 /* UIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIManager.m; sourceTree = "<group>"; };
 		9BE67B44269E1A3C0047611E /* SearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		9BE67B45269E1A3C0047611E /* SearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 				9BE67B4E269E3DCC0047611E /* APIManager.m */,
 				9B4841CF26AA157E00BB8988 /* CacheManager.h */,
 				9B4841D026AA157E00BB8988 /* CacheManager.m */,
+				9B7AB14326AF50AA00EAA177 /* UIManager.h */,
+				9B7AB14426AF50AA00EAA177 /* UIManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B4841E326AB61EF00BB8988 /* BookmarkCollectionViewCell.m in Sources */,
+				9B7AB14526AF50AA00EAA177 /* UIManager.m in Sources */,
 				9B4841C226A73BA400BB8988 /* ProfileCollectionViewCell.m in Sources */,
 				9B4841DA26AB445200BB8988 /* CommentTableViewCell.m in Sources */,
 				9B4841C826A9CF1700BB8988 /* FollowerRelation.m in Sources */,

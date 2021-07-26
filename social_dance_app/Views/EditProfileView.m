@@ -7,6 +7,7 @@
 
 #import "EditProfileView.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @implementation EditProfileView
 
@@ -19,12 +20,8 @@
 */
 
 - (void)updateAppearance {
-    PFFileObject * profileImage = self.user[@"profilePicture"];
-    NSURL * imageURL = [NSURL URLWithString:profileImage.url];
-    [self.profilePictureView setImageWithURL:imageURL];
-    
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
+    PFFileObject *profileImage = self.user[@"profilePicture"];
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:profileImage];
 }
 
 @end

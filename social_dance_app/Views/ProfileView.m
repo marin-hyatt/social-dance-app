@@ -7,6 +7,7 @@
 
 #import "ProfileView.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @implementation ProfileView
 
@@ -20,18 +21,11 @@
 
 - (void)updateAppearanceWithFollowerCount:(int)followerCount {
     self.usernameLabel.text = self.user.username;
-    
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
-    
     self.numFollowersLabel.text = [NSString stringWithFormat:@"%d", followerCount];
-
-    PFFileObject *postImage = self.user[@"profilePicture"];
-    NSURL *imageURL = [NSURL URLWithString:postImage.url];
     
-    NSLog(@"%@", self.user);
-    NSLog(@"%@", imageURL);
-    [self.profilePictureView setImageWithURL:imageURL];
+    
+    PFFileObject *postImage = self.user[@"profilePicture"];
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
 }
 
 @end

@@ -14,6 +14,7 @@
 #import "SpotifySearchViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
+#import "SVProgressHUD.h"
 
 @interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
@@ -37,8 +38,7 @@
     [self.view addGestureRecognizer:tap];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
     [UIView animateWithDuration:0.3 animations:^{
@@ -48,8 +48,7 @@
     }];
 }
 
--(void)keyboardWillHide:(NSNotification *)notification
-{
+- (void)keyboardWillHide:(NSNotification *)notification {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect frame = self.createView.frame;
         frame.origin.y = 0.0f;
@@ -57,7 +56,7 @@
     }];
 }
 
--(void)dismissKeyboard {
+- (void)dismissKeyboard {
     [self.createView.captionField resignFirstResponder];
 }
 
@@ -78,11 +77,12 @@
     NSString *caption = self.createView.captionField.text;
     Song *song = self.chosenSong;
 
+    [SVProgressHUD showWithStatus:@"Posting"];
     [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error! %@", error.localizedDescription);
         } else {
-            NSLog(@"Video posted!");
+            [SVProgressHUD dismiss];
         }
     }];
     
@@ -109,27 +109,22 @@
     // Get video width and height, need to switch based on orientation of video
     AVAssetTrack* videoTrack = [[[AVAsset assetWithURL:url] tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     CGSize size = [videoTrack naturalSize];
-    NSLog(@"size.width = %f size.height = %f", size.width, size.height);
     
     CGAffineTransform txf = [videoTrack preferredTransform];
     
     if (size.width == txf.tx && size.height == txf.ty) {
-        NSLog(@"Landscape right: %ld", (long)UIInterfaceOrientationLandscapeRight);
         self.videoWidth = [NSNumber numberWithDouble:size.width];
         self.videoHeight = [NSNumber numberWithDouble:size.height];
     }
     else if (txf.tx == 0 && txf.ty == 0) {
-        NSLog(@"Landscape Left: %ld", UIInterfaceOrientationLandscapeLeft);
         self.videoWidth = [NSNumber numberWithDouble:size.width];
         self.videoHeight = [NSNumber numberWithDouble:size.height];
     }
     else if (txf.tx == 0 && txf.ty == size.width) {
-        NSLog(@"Upside down: %ld", UIInterfaceOrientationPortraitUpsideDown);
         self.videoWidth = [NSNumber numberWithDouble:size.height];
         self.videoHeight = [NSNumber numberWithDouble:size.width];
     }
     else {
-        NSLog(@"Portrait: %ld", UIInterfaceOrientationPortrait);
         self.videoWidth = [NSNumber numberWithDouble:size.height];
         self.videoHeight = [NSNumber numberWithDouble:size.width];
     }

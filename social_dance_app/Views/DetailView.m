@@ -10,7 +10,7 @@
 #import "Parse/Parse.h"
 #import "CacheManager.h"
 #import "Post.h"
-
+#import "UIManager.h"
 
 @implementation DetailView
 
@@ -43,12 +43,8 @@
 }
 
 -(void)updateProfilePictureWithPost:(Post *)post {
-    PFFileObject * profileImage =  post.author[@"profilePicture"];
-    NSURL * imageURL = [NSURL URLWithString:profileImage.url];
-    [self.profilePictureView setImageWithURL:imageURL];
-    
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
+    PFFileObject *profileImage =  post.author[@"profilePicture"];
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:profileImage];
 }
 
 -(void)updateVideoWithPost:(Post *)post {

@@ -7,6 +7,7 @@
 
 #import "CommentTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @implementation CommentTableViewCell
 
@@ -20,11 +21,8 @@
     self.commentTextLabel.text = self.comment.text;
     self.usernameLabel.text = self.comment.author.username;
     
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
-    PFFileObject * postImage = self.comment.author[@"profilePicture"];
-    NSURL * imageURL = [NSURL URLWithString:postImage.url];
-    [self.profilePictureView setImageWithURL:imageURL];
+    PFFileObject *postImage = self.comment.author[@"profilePicture"];
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

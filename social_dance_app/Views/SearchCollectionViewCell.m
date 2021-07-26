@@ -7,17 +7,15 @@
 
 #import "SearchCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @implementation SearchCollectionViewCell
 
 - (void)updateAppearance {
     self.usernameLabel.text = self.user[@"username"];
     
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
     PFFileObject *postImage = self.user[@"profilePicture"];
-    NSURL *imageURL = [NSURL URLWithString:postImage.url];
-    [self.profilePictureView setImageWithURL:imageURL];
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
 }
 
 @end

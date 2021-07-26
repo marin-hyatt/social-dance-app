@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "CacheManager.h"
 #import "Comment.h"
+#import "UIManager.h"
 
 
 @implementation HomeTableViewCell
@@ -37,7 +38,7 @@ static void * cellContext = &cellContext;
     
     [self updateUsernameAndProfilePictureWithUser:user];
     
-//    [self updateBookmark];
+    [self updateBookmark];
     
     [self updateComment];
     
@@ -84,11 +85,9 @@ static void * cellContext = &cellContext;
 
 - (void)updateUsernameAndProfilePictureWithUser:(PFUser *)user {
     self.usernameLabel.text = user[@"username"];
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
-    PFFileObject * postImage = user[@"profilePicture"];
-    NSURL * imageURL = [NSURL URLWithString:postImage.url];
-    [self.profilePictureView setImageWithURL:imageURL];
+    PFFileObject *postImage = user[@"profilePicture"];
+    
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
 }
 
 - (void)updateLikeView {
