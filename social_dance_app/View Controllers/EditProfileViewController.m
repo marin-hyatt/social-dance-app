@@ -7,6 +7,8 @@
 
 #import "EditProfileViewController.h"
 #import "EditProfileView.h"
+#import "SVProgressHUD.h"
+
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet EditProfileView *editProfileView;
@@ -67,8 +69,10 @@
             PFUser *user = self.user;
             user[@"profilePicture"] = file;
             
+            [SVProgressHUD showWithStatus:@"Changing profile picture"];
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
+                    [SVProgressHUD dismiss];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
                     NSLog(@"Error: %@", error.description);

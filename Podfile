@@ -9,6 +9,8 @@ target 'social_dance_app' do
 pod 'Parse'
 pod 'Parse/UI'
 pod 'AFNetworking'
+pod 'SVProgressHUD'
+
 
   target 'social_dance_appTests' do
     inherit! :search_paths

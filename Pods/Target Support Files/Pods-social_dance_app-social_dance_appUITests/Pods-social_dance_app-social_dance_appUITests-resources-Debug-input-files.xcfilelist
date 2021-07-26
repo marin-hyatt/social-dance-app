@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources.sh
 ${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Parse/ParseUI.bundle
+${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle

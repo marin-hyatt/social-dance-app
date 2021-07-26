@@ -7,6 +7,7 @@
 
 #import "SceneDelegate.h"
 #import "Parse/Parse.h"
+#import "AppDelegate.h"
 
 @interface SceneDelegate ()
 
@@ -20,6 +21,11 @@
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     // Checks to see if user is cached already
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.window = self.window;
+
+    
     PFUser *user = [PFUser currentUser];
     
     if (user != nil) {
