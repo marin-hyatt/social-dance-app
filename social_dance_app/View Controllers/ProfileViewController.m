@@ -38,8 +38,8 @@
     self.profileCollectionView.dataSource = self;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
-    [self.profileCollectionView insertSubview:self.refreshControl atIndex:0];
+    [self.refreshControl addTarget:self action:@selector(updateProfile) forControlEvents:UIControlEventValueChanged];
+    [self.profileView.scrollView insertSubview:self.refreshControl atIndex:0];
     
     self.profileView.user = self.user;
     
@@ -58,8 +58,11 @@
             }
         });
     });
-    
-    
+     
+    [self updateProfile];
+}
+
+- (void)updateProfile {
     [self loadPosts];
     [self loadNumFollowers];
     [self updateFollowerButton];
@@ -150,7 +153,7 @@
     }];
 }
 
--(int)loadNumFollowers {
+- (int)loadNumFollowers {
     __block int numFollowers = 0;
     
     PFQuery *followerQuery = [FollowerRelation query];
