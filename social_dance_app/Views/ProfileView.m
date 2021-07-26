@@ -26,8 +26,11 @@
     
     self.numFollowersLabel.text = [NSString stringWithFormat:@"%d", followerCount];
 
-    PFFileObject * postImage = self.user[@"profilePicture"];
-    NSURL * imageURL = [NSURL URLWithString:postImage.url];
+    PFFileObject *postImage = self.user[@"profilePicture"];
+    NSURL *imageURL = [NSURL URLWithString:postImage.url];
+    
+    NSLog(@"%@", self.user);
+    NSLog(@"%@", imageURL);
     [self.profilePictureView setImageWithURL:imageURL];
 }
 

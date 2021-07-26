@@ -21,15 +21,13 @@
     // Do any additional setup after loading the view.
     self.delegate = self;
     self.user = [PFUser currentUser];
-    NSLog(@"%@", self.user);
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController
  didSelectViewController:(UIViewController *)viewController {
     // Checks if profile tab has been selected
     if (tabBarController.selectedIndex == 3) {
-        NSLog(@"Profile view controller selected");
-        // Pass current user to profile view
+        NSLog(@"%@", self.user);
         ProfileViewController *vc = (ProfileViewController*) [[(UINavigationController*)[[tabBarController viewControllers] objectAtIndex:3] viewControllers] objectAtIndex:0];
         vc.user = self.user;
     }

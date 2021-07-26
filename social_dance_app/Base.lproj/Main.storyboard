@@ -897,6 +897,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-12-ZYh">
                                 <rect key="frame" x="185" y="139.5" width="44" height="30"/>
                                 <state key="normal" title="Follow"/>
+                                <state key="selected" title="Unfollow"/>
                                 <connections>
                                     <action selector="onFollowButtonPressed:" destination="0hQ-4P-Izj" eventType="touchUpInside" id="6a1-jt-ZMt"/>
                                 </connections>
@@ -924,6 +925,7 @@
                             <constraint firstItem="Kwn-pF-g5P" firstAttribute="centerY" secondItem="2yd-sA-kyf" secondAttribute="centerY" id="zA5-TO-TOt"/>
                         </constraints>
                         <connections>
+                            <outlet property="followerButton" destination="eLy-12-ZYh" id="hMi-17-7dE"/>
                             <outlet property="numFollowersLabel" destination="MAZ-Nv-FGp" id="3Lb-40-lTC"/>
                             <outlet property="profilePictureView" destination="2yd-sA-kyf" id="doV-k4-tNP"/>
                             <outlet property="usernameLabel" destination="Kwn-pF-g5P" id="CED-MP-Qeu"/>
@@ -1269,7 +1271,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="f1U-7T-Vi1"/>
+        <segue reference="QUm-Pj-Hsc"/>
         <segue reference="q0o-vQ-l7I"/>
     </inferredMetricsTieBreakers>
     <resources>

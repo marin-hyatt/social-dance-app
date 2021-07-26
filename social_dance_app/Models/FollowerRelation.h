@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property PFUser *follower;
 
 + (void)newRelationWithUser:(PFUser *)user withFollower:(PFUser *)follower withCompletion:(PFBooleanResultBlock  _Nullable)completion;
++ (void)removeRelationWithUser:(PFUser *)user withFollower:(PFUser *)follower withCompletion:(PFBooleanResultBlock)completion;
 
 @end
 

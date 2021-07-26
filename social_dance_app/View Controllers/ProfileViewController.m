@@ -43,7 +43,6 @@
     
     self.profileView.user = self.user;
     
-//    self.navigationItem.rightBarButtonItem.tintColor = [UIColor clearColor];
     self.navigationItem.rightBarButtonItems[0].tintColor = [UIColor clearColor];
     self.navigationItem.rightBarButtonItems[1].tintColor = [UIColor clearColor];
     
@@ -63,6 +62,24 @@
     
     [self loadPosts];
     [self loadNumFollowers];
+    [self updateFollowerButton];
+}
+
+- (void)updateFollowerButton {
+    self.profileView.followerButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    // Check if current user follows this user
+    PFQuery *query = [FollowerRelation query];
+    [query whereKey:@"user" equalTo:self.user];
+    [query whereKey:@"follower" equalTo:currentUser];
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            self.profileView.followerButton.selected = YES;
+        }
+    }];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -181,21 +198,35 @@
 - (IBAction)onFollowButtonPressed:(UIButton *)sender {
     PFUser *currentUser = [PFUser currentUser];
     
-    // Check for duplicate entries
-    PFQuery *followerQuery = [FollowerRelation query];
-    [followerQuery whereKey:@"follower" equalTo:currentUser];
-    [followerQuery whereKey:@"user" equalTo:self.user];
+    if (self.profileView.followerButton.selected) {
+        [FollowerRelation removeRelationWithUser:self.user withFollower:currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            } else {
+                [self updateFollowerButton];
+            }
+        }];
+    } else {
+        // Check for duplicate entries
+        PFQuery *followerQuery = [FollowerRelation query];
+        [followerQuery whereKey:@"follower" equalTo:currentUser];
+        [followerQuery whereKey:@"user" equalTo:self.user];
 
-    [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else if (number == 0) {
-            [FollowerRelation newRelationWithUser:self.user withFollower:[PFUser currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-                if (error != nil) {
-                    NSLog(@"Error: %@", error.localizedDescription);
-                }
-            }];
-        }
-    }];
+        [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            } else if (number == 0) {
+                [FollowerRelation newRelationWithUser:self.user withFollower:currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error != nil) {
+                        NSLog(@"Error: %@", error.localizedDescription);
+                    } else {
+                        [self updateFollowerButton];
+                    }
+                }];
+            }
+        }];
+    }
+    
+    
 }
 @end

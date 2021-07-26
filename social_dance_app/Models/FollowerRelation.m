@@ -24,4 +24,15 @@
     [relation saveInBackgroundWithBlock:completion];
 }
 
++ (void)removeRelationWithUser:(PFUser *)user withFollower:(PFUser *)follower withCompletion:(PFBooleanResultBlock)completion {
+    PFQuery *query = [FollowerRelation query];
+    [query whereKey:@"user" equalTo:user];
+    [query whereKey:@"follower" equalTo:follower];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        [object deleteInBackground];
+        [object saveInBackgroundWithBlock:completion];
+    }];
+}
+
 @end
