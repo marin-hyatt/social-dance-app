@@ -11,6 +11,9 @@
 @implementation TutorialView
 
 - (void)updateVideoWithPost:(Post *)post {
+    // Mirror video
+    self.playerView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.playerView addGestureRecognizer:tapGestureRecognizer];
     [self.playerView setUserInteractionEnabled:YES];
