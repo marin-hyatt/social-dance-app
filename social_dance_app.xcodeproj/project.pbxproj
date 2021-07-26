@@ -47,6 +47,8 @@
 		9B4841DD26AB55AF00BB8988 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841DC26AB55AF00BB8988 /* BookmarkViewController.m */; };
 		9B4841E326AB61EF00BB8988 /* BookmarkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4841E226AB61EF00BB8988 /* BookmarkCollectionViewCell.m */; };
 		9B7AB14526AF50AA00EAA177 /* UIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB14426AF50AA00EAA177 /* UIManager.m */; };
+		9B7AB14826AF584C00EAA177 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB14726AF584C00EAA177 /* TutorialViewController.m */; };
+		9B7AB14B26AF5D1C00EAA177 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB14A26AF5D1C00EAA177 /* TutorialView.m */; };
 		9BE67B46269E1A3C0047611E /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B45269E1A3C0047611E /* SearchView.m */; };
 		9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */; };
 		9BE67B4C269E3D360047611E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE67B4B269E3D360047611E /* Keys.plist */; };
@@ -156,6 +158,10 @@
 		9B4841E226AB61EF00BB8988 /* BookmarkCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookmarkCollectionViewCell.m; sourceTree = "<group>"; };
 		9B7AB14326AF50AA00EAA177 /* UIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIManager.h; sourceTree = "<group>"; };
 		9B7AB14426AF50AA00EAA177 /* UIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIManager.m; sourceTree = "<group>"; };
+		9B7AB14626AF584C00EAA177 /* TutorialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
+		9B7AB14726AF584C00EAA177 /* TutorialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
+		9B7AB14926AF5D1C00EAA177 /* TutorialView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TutorialView.h; sourceTree = "<group>"; };
+		9B7AB14A26AF5D1C00EAA177 /* TutorialView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TutorialView.m; sourceTree = "<group>"; };
 		9BE67B44269E1A3C0047611E /* SearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		9BE67B45269E1A3C0047611E /* SearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
@@ -318,6 +324,8 @@
 				9B4841D326AB2D3600BB8988 /* CommentViewController.m */,
 				9B4841DB26AB55AF00BB8988 /* BookmarkViewController.h */,
 				9B4841DC26AB55AF00BB8988 /* BookmarkViewController.m */,
+				9B7AB14626AF584C00EAA177 /* TutorialViewController.h */,
+				9B7AB14726AF584C00EAA177 /* TutorialViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -368,6 +376,8 @@
 				9B4841D926AB445200BB8988 /* CommentTableViewCell.m */,
 				9B4841E126AB61EF00BB8988 /* BookmarkCollectionViewCell.h */,
 				9B4841E226AB61EF00BB8988 /* BookmarkCollectionViewCell.m */,
+				9B7AB14926AF5D1C00EAA177 /* TutorialView.h */,
+				9B7AB14A26AF5D1C00EAA177 /* TutorialView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -641,6 +651,7 @@
 				9B4841B626A0A16700BB8988 /* SpotifySearchTableViewCell.m in Sources */,
 				9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */,
 				9B3C09BF269CE30600B244DE /* DetailView.m in Sources */,
+				9B7AB14826AF584C00EAA177 /* TutorialViewController.m in Sources */,
 				9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */,
 				9B4841CB26A9F61600BB8988 /* EditProfileViewController.m in Sources */,
 				9B4841BC26A73B1600BB8988 /* ProfileViewController.m in Sources */,
@@ -658,6 +669,7 @@
 				9B4841BF26A73B9100BB8988 /* ProfileView.m in Sources */,
 				9B3C09C2269CE3AC00B244DE /* SearchCollectionViewCell.m in Sources */,
 				9B2EE199269CACA200391917 /* SearchViewController.m in Sources */,
+				9B7AB14B26AF5D1C00EAA177 /* TutorialView.m in Sources */,
 				9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */,
 				9B3C09CE269DD81400B244DE /* PlayerView.m in Sources */,
 			);

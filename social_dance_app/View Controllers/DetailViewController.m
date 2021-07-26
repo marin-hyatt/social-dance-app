@@ -13,7 +13,7 @@
 #import "Comment.h"
 #import "CommentViewController.h"
 #import "CacheManager.h"
-
+#import "TutorialViewController.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
@@ -168,6 +168,9 @@
     }
 }
 
+- (IBAction)onLearnButtonPressed:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"TutorialViewController" sender:nil];
+}
 
 #pragma mark - Navigation
 
@@ -178,6 +181,9 @@
         vc.url = [NSURL URLWithString:self.post.song.webURL];
     } else if ([segue.identifier isEqualToString:@"CommentViewController"]) {
         CommentViewController *vc = [segue destinationViewController];
+        vc.post = self.post;
+    } else if ([segue.identifier isEqualToString:@"TutorialViewController"]) {
+        TutorialViewController *vc = [segue destinationViewController];
         vc.post = self.post;
     }
 }

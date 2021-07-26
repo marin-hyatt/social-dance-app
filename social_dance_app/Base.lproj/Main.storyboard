@@ -533,16 +533,57 @@
                             <outlet property="videoPlayerView" destination="g3E-U2-jyO" id="Jcr-Vp-Pry"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="U7E-vT-SA0"/>
+                    <navigationItem key="navigationItem" id="U7E-vT-SA0">
+                        <barButtonItem key="rightBarButtonItem" title="Learn!" id="bDN-xW-yu1">
+                            <connections>
+                                <action selector="onLearnButtonPressed:" destination="LTi-52-sZA" id="jIk-yP-W2u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailView" destination="09u-gM-xUE" id="kk6-S8-b2J"/>
                         <segue destination="tYV-Oo-UUA" kind="show" identifier="SpotifyWebViewController" id="XXe-TN-jrX"/>
                         <segue destination="Iho-SZ-gng" kind="show" identifier="CommentViewController" id="q0o-vQ-l7I"/>
+                        <segue destination="Quh-3o-mLf" kind="show" identifier="TutorialViewController" id="L9K-jg-8g0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36d-uI-Dhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-649.27536231884062" y="2582.8125"/>
+        </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="7Zr-ap-RqP">
+            <objects>
+                <viewController id="Quh-3o-mLf" customClass="TutorialViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dx4-34-8pT" customClass="TutorialView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-Xu-717" customClass="PlayerView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Avh-DS-yG3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0GU-Xu-717" firstAttribute="top" secondItem="Dx4-34-8pT" secondAttribute="top" id="FDA-fQ-Fg9"/>
+                            <constraint firstAttribute="bottom" secondItem="0GU-Xu-717" secondAttribute="bottom" id="KEc-xQ-r8W"/>
+                            <constraint firstAttribute="trailing" secondItem="0GU-Xu-717" secondAttribute="trailing" id="diz-E1-j4g"/>
+                            <constraint firstItem="0GU-Xu-717" firstAttribute="leading" secondItem="Dx4-34-8pT" secondAttribute="leading" id="qPa-NB-LdT"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="playerView" destination="0GU-Xu-717" id="8Cr-RR-Lxe"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="POC-Qq-L8C"/>
+                    <connections>
+                        <outlet property="tutorialView" destination="Dx4-34-8pT" id="ezR-Ol-jfr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vom-wS-DTb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-649" y="3508"/>
         </scene>
         <!--Spotify Web View Controller-->
         <scene sceneID="nFH-bp-UqC">
@@ -1298,8 +1339,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="hg0-wf-NGo"/>
-        <segue reference="lPi-2L-cUQ"/>
+        <segue reference="QUm-Pj-Hsc"/>
+        <segue reference="q0o-vQ-l7I"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
