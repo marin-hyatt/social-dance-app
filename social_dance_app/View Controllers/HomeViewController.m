@@ -15,6 +15,7 @@
 #import "ProfileViewController.h"
 #import "FollowerRelation.h"
 #import "CommentViewController.h"
+#import "CacheManager.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, HomeTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -50,10 +51,56 @@ static void * cellContext = &cellContext;
     
     cell.post = self.feed[indexPath.row];
     cell.delegate = self;
+    
+    // Refactor cell methods to here?
+    [self updateCellVideoWithCell:cell];
+    
     [cell updateAppearance];
+    [self updateCellBookmarkWithCell:cell];
     
     return cell;
     
+}
+
+- (void)updateCellVideoWithCell:(HomeTableViewCell *)cell {
+    PFFileObject *videoFile = cell.post[@"videoFile"];
+    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
+    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
+        cell.playerItem = playerItem;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playerItemDidReachEnd:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:playerItem];
+        
+    } withMainBlock:^(AVPlayerItem * _Nonnull playerItem) {
+        if (cell.player == nil) {
+            cell.player = [AVPlayer playerWithPlayerItem:playerItem];
+            
+            cell.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+            [cell.videoView setPlayer:cell.player];
+        }
+    }];
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero completionHandler:nil];
+}
+
+- (void)updateCellBookmarkWithCell:(HomeTableViewCell *)cell {
+    cell.bookmarkButton.selected = NO;
+    PFUser *currentUser = [PFUser currentUser];
+    PFRelation *likeRelation = [cell.post relationForKey:@"bookmarkRelation"];
+    PFQuery *query = [likeRelation query];
+    [query whereKey:@"objectId" equalTo:currentUser.objectId];
+    
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        } else if (number > 0) {
+            cell.bookmarkButton.selected = YES;
+        }
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

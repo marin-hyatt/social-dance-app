@@ -57,32 +57,11 @@
     [self.videoPlayerView setUserInteractionEnabled:YES];
     [self.videoPlayerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
     
-    PFFileObject *videoFile = post[@"videoFile"];
-    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
-    
     // Update autolayout corresponding to video aspect ratio
     CGFloat videoHeight = [post[@"videoHeight"] doubleValue];
     CGFloat videoWidth = [post[@"videoWidth"] doubleValue];
     
     [self.videoPlayerView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
-    
-    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
-    } withMainBlock:^(AVPlayerItem * _Nonnull playerItem) {
-        if (self.player == nil) {
-            self.player = [AVPlayer playerWithPlayerItem:playerItem];
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(playerItemDidReachEnd:)
-                                                         name:AVPlayerItemDidPlayToEndTimeNotification
-                                                       object:[self.player currentItem]];
-            [self.videoPlayerView setPlayer:self.player];
-        }
-    }];
-}
-
--(void)playerItemDidReachEnd:(NSNotification *)notification {
-    AVPlayerItem *p = [notification object];
-    [p seekToTime:kCMTimeZero completionHandler:nil];
 }
 
 -(void)startPlayback {

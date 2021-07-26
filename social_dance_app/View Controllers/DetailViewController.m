@@ -12,6 +12,7 @@
 #import "Post.h"
 #import "Comment.h"
 #import "CommentViewController.h"
+#import "CacheManager.h"
 
 
 @interface DetailViewController ()
@@ -25,10 +26,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.detailView updateAppearanceWithPost:self.post];
+    [self updateVideo];
     [self updateLikeButton];
     [self updateComment];
     [self updateBookmark];
 
+}
+
+- (void)updateVideo {
+    PFFileObject *videoFile = self.post[@"videoFile"];
+    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
+    
+    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
+    } withMainBlock:^(AVPlayerItem * _Nonnull playerItem) {
+        if (self.detailView.player == nil) {
+            self.detailView.player = [AVPlayer playerWithPlayerItem:playerItem];
+            self.detailView.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(playerItemDidReachEnd:)
+                                                         name:AVPlayerItemDidPlayToEndTimeNotification
+                                                       object:[self.detailView.player currentItem]];
+            [self.detailView.videoPlayerView setPlayer:self.detailView.player];
+        }
+    }];
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero completionHandler:nil];
 }
 
 - (void)updateLikeButton {

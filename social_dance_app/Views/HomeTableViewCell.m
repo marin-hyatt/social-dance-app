@@ -37,7 +37,7 @@ static void * cellContext = &cellContext;
     
     [self updateUsernameAndProfilePictureWithUser:user];
     
-    [self updateBookmark];
+//    [self updateBookmark];
     
     [self updateComment];
     
@@ -110,35 +110,11 @@ static void * cellContext = &cellContext;
 }
 
 - (void)updateVideo {
-    PFFileObject *videoFile = self.post[@"videoFile"];
-    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
-    
     // Update autolayout corresponding to video aspect ratio
     CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
     
     [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
-    
-    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * _Nonnull playerItem) {
-        self.playerItem = playerItem;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(playerItemDidReachEnd:)
-                                                     name:AVPlayerItemDidPlayToEndTimeNotification
-                                                   object:playerItem];
-        
-    } withMainBlock:^(AVPlayerItem * _Nonnull playerItem) {
-        if (self.player == nil) {
-            self.player = [AVPlayer playerWithPlayerItem:playerItem];
-            
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
-            [self.videoView setPlayer:self.player];
-        }
-    }];
-}
-
-- (void)playerItemDidReachEnd:(NSNotification *)notification {
-    AVPlayerItem *p = [notification object];
-    [p seekToTime:kCMTimeZero completionHandler:nil];
 }
 
 - (void)startPlayback {
@@ -164,7 +140,7 @@ static void * cellContext = &cellContext;
     if (!self.likeButton.selected) {
         [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateAppearance];
+                [self updateLikeView];
             } else {
                 NSLog(@"Error: %@", error.localizedDescription);
             }
@@ -172,7 +148,7 @@ static void * cellContext = &cellContext;
     } else {
         [Post unlikePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateAppearance];
+                [self updateLikeView];
             } else {
                 NSLog(@"Error: %@", error.localizedDescription);
             }
@@ -190,13 +166,13 @@ static void * cellContext = &cellContext;
     if (!self.bookmarkButton.selected) {
         [Post bookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateAppearance];
+                [self updateBookmark];
             }
         }];
     } else {
         [Post unbookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateAppearance];
+                [self updateBookmark];
             }
         }];
     }
