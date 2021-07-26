@@ -71,7 +71,7 @@
 - (void)updateFollowerButton {
     self.profileView.followerButton.selected = NO;
     PFUser *currentUser = [PFUser currentUser];
-    // Check if current user follows this user
+
     PFQuery *query = [FollowerRelation query];
     [query whereKey:@"user" equalTo:self.user];
     [query whereKey:@"follower" equalTo:currentUser];

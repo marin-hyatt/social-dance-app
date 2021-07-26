@@ -113,7 +113,15 @@ static void * cellContext = &cellContext;
     CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
     
+    [self fadeIn];
     [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+}
+
+- (void)fadeIn {
+    [self.videoView setAlpha:0];
+    [PlayerView animateWithDuration:1 animations:^{
+            [self.videoView setAlpha:1];
+    }];
 }
 
 - (void)startPlayback {

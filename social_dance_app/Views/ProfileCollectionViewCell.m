@@ -11,6 +11,14 @@
 
 - (void)updateAppearanceWithImage:(UIImage *)image {
     self.thumbnailView.image = image;
+    [self fadeIn];
+}
+
+- (void)fadeIn {
+    [self.thumbnailView setAlpha:0];
+    [UIImageView animateWithDuration:1 animations:^{
+            [self.thumbnailView setAlpha:1];
+    }];
 }
 
 @end
