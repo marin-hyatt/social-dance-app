@@ -1107,7 +1107,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J1Y-hc-XYu">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TuK-p9-dhZ">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="TuK-p9-dhZ">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1144,9 +1144,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="J1Y-hc-XYu" firstAttribute="top" secondItem="S1W-H0-ZAX" secondAttribute="top" id="1ms-kR-y1w"/>
-                            <constraint firstItem="J1Y-hc-XYu" firstAttribute="trailing" secondItem="6jR-JL-NTs" secondAttribute="trailing" id="5BD-Gf-OYM"/>
+                            <constraint firstItem="J1Y-hc-XYu" firstAttribute="leading" secondItem="S1W-H0-ZAX" secondAttribute="leading" id="AHn-Ir-35m"/>
                             <constraint firstAttribute="bottom" secondItem="J1Y-hc-XYu" secondAttribute="bottom" id="Ajf-IF-RuN"/>
-                            <constraint firstItem="J1Y-hc-XYu" firstAttribute="leading" secondItem="6jR-JL-NTs" secondAttribute="leading" id="Lyk-9e-JZV"/>
+                            <constraint firstAttribute="trailing" secondItem="J1Y-hc-XYu" secondAttribute="trailing" id="i5Q-PK-inO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Bookmarks" id="3Jl-vc-oNE"/>
@@ -1408,7 +1408,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="QUm-Pj-Hsc"/>
+        <segue reference="f1U-7T-Vi1"/>
         <segue reference="q0o-vQ-l7I"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -60,6 +60,7 @@
     });
      
     [self updateProfile];
+    
 }
 
 - (void)updateProfile {
@@ -86,8 +87,16 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [self.flowLayout invalidateLayout];
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  __nonnull context) {
+        [self.flowLayout invalidateLayout];
+        [self.profileCollectionView layoutIfNeeded];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  __nonnull context) {
+        
+    }];
 }
+
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
