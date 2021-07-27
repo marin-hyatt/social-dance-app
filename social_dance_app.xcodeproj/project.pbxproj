@@ -51,6 +51,8 @@
 		9B7AB14B26AF5D1C00EAA177 /* TutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB14A26AF5D1C00EAA177 /* TutorialView.m */; };
 		9B7AB14E26AF654400EAA177 /* TutorialSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB14D26AF654400EAA177 /* TutorialSettingViewController.m */; };
 		9B7AB15126AF657E00EAA177 /* TutorialSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB15026AF657E00EAA177 /* TutorialSettingView.m */; };
+		9B7AB15726B08E2400EAA177 /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB15626B08E2400EAA177 /* UserSearchViewController.m */; };
+		9B7AB15A26B090CD00EAA177 /* UserSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7AB15926B090CD00EAA177 /* UserSearchTableViewCell.m */; };
 		9BE67B46269E1A3C0047611E /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B45269E1A3C0047611E /* SearchView.m */; };
 		9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */; };
 		9BE67B4C269E3D360047611E /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BE67B4B269E3D360047611E /* Keys.plist */; };
@@ -168,6 +170,10 @@
 		9B7AB14D26AF654400EAA177 /* TutorialSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TutorialSettingViewController.m; sourceTree = "<group>"; };
 		9B7AB14F26AF657E00EAA177 /* TutorialSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TutorialSettingView.h; sourceTree = "<group>"; };
 		9B7AB15026AF657E00EAA177 /* TutorialSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TutorialSettingView.m; sourceTree = "<group>"; };
+		9B7AB15526B08E2400EAA177 /* UserSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
+		9B7AB15626B08E2400EAA177 /* UserSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
+		9B7AB15826B090CD00EAA177 /* UserSearchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserSearchTableViewCell.h; sourceTree = "<group>"; };
+		9B7AB15926B090CD00EAA177 /* UserSearchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserSearchTableViewCell.m; sourceTree = "<group>"; };
 		9BE67B44269E1A3C0047611E /* SearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		9BE67B45269E1A3C0047611E /* SearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		9BE67B49269E3AFE0047611E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
@@ -334,6 +340,8 @@
 				9B7AB14726AF584C00EAA177 /* TutorialViewController.m */,
 				9B7AB14C26AF654400EAA177 /* TutorialSettingViewController.h */,
 				9B7AB14D26AF654400EAA177 /* TutorialSettingViewController.m */,
+				9B7AB15526B08E2400EAA177 /* UserSearchViewController.h */,
+				9B7AB15626B08E2400EAA177 /* UserSearchViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -388,6 +396,8 @@
 				9B7AB14A26AF5D1C00EAA177 /* TutorialView.m */,
 				9B7AB14F26AF657E00EAA177 /* TutorialSettingView.h */,
 				9B7AB15026AF657E00EAA177 /* TutorialSettingView.m */,
+				9B7AB15826B090CD00EAA177 /* UserSearchTableViewCell.h */,
+				9B7AB15926B090CD00EAA177 /* UserSearchTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -654,6 +664,7 @@
 				9B4841DD26AB55AF00BB8988 /* BookmarkViewController.m in Sources */,
 				9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */,
 				9B4841C526A74F4000BB8988 /* TabBarController.m in Sources */,
+				9B7AB15726B08E2400EAA177 /* UserSearchViewController.m in Sources */,
 				9B7AB14E26AF654400EAA177 /* TutorialSettingViewController.m in Sources */,
 				9BE67B4F269E3DCC0047611E /* APIManager.m in Sources */,
 				9B2EE16C269CA8B900391917 /* main.m in Sources */,
@@ -662,6 +673,7 @@
 				9B4841B626A0A16700BB8988 /* SpotifySearchTableViewCell.m in Sources */,
 				9B2EE19F269CAF2500391917 /* DetailViewController.m in Sources */,
 				9B3C09BF269CE30600B244DE /* DetailView.m in Sources */,
+				9B7AB15A26B090CD00EAA177 /* UserSearchTableViewCell.m in Sources */,
 				9B7AB14826AF584C00EAA177 /* TutorialViewController.m in Sources */,
 				9B3C09C5269CE41C00B244DE /* CreateView.m in Sources */,
 				9B4841CB26A9F61600BB8988 /* EditProfileViewController.m in Sources */,
