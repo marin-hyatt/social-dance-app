@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet PlayerView *playerView;
 @property AVPlayer *player;
 @property AVPlayerLayer *playerLayer;
-- (void)updateVideoWithPost:(Post *)post;
+- (void)updateViewWithMirrorSetting:(BOOL)isMirrored;
+- (void)mirrorViewWithSetting:(BOOL)isMirrored;
 
 @end
 

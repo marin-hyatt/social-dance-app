@@ -10,9 +10,8 @@
 
 @implementation TutorialView
 
-- (void)updateVideoWithPost:(Post *)post {
-    // Mirror video
-    self.playerView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+- (void)updateViewWithMirrorSetting:(BOOL)isMirrored {
+    [self mirrorViewWithSetting:isMirrored];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
     [self.playerView addGestureRecognizer:tapGestureRecognizer];
@@ -25,6 +24,14 @@
         [self.player pause];
     } else {
         [self.player play];
+    }
+}
+
+- (void)mirrorViewWithSetting:(BOOL)isMirrored {
+    if (isMirrored) {
+        self.playerView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    } else {
+        self.playerView.transform = CGAffineTransformMakeScale(1.0, 1.0);
     }
 }
 

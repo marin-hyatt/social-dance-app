@@ -560,30 +560,99 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GU-Xu-717" customClass="PlayerView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Avh-DS-yG3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0GU-Xu-717" firstAttribute="top" secondItem="Dx4-34-8pT" secondAttribute="top" id="FDA-fQ-Fg9"/>
-                            <constraint firstAttribute="bottom" secondItem="0GU-Xu-717" secondAttribute="bottom" id="KEc-xQ-r8W"/>
-                            <constraint firstAttribute="trailing" secondItem="0GU-Xu-717" secondAttribute="trailing" id="diz-E1-j4g"/>
-                            <constraint firstItem="0GU-Xu-717" firstAttribute="leading" secondItem="Dx4-34-8pT" secondAttribute="leading" id="qPa-NB-LdT"/>
+                            <constraint firstItem="0GU-Xu-717" firstAttribute="top" secondItem="Avh-DS-yG3" secondAttribute="top" id="919-HD-rgp"/>
+                            <constraint firstItem="0GU-Xu-717" firstAttribute="bottom" secondItem="Avh-DS-yG3" secondAttribute="bottom" id="BXz-VL-18U"/>
+                            <constraint firstItem="0GU-Xu-717" firstAttribute="leading" secondItem="Avh-DS-yG3" secondAttribute="leading" id="YzI-vk-YoR"/>
+                            <constraint firstItem="0GU-Xu-717" firstAttribute="trailing" secondItem="Avh-DS-yG3" secondAttribute="trailing" id="dnZ-PG-UPR"/>
                         </constraints>
                         <connections>
                             <outlet property="playerView" destination="0GU-Xu-717" id="8Cr-RR-Lxe"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="POC-Qq-L8C"/>
+                    <navigationItem key="navigationItem" id="POC-Qq-L8C">
+                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="8gb-aU-RBu">
+                            <connections>
+                                <action selector="onSettingsButtonPressed:" destination="Quh-3o-mLf" id="ykl-Zi-iKb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tutorialView" destination="Dx4-34-8pT" id="ezR-Ol-jfr"/>
+                        <segue destination="Lc4-40-nHX" kind="show" identifier="TutorialSettingViewController" id="XdI-qM-24d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vom-wS-DTb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="3508"/>
+            <point key="canvasLocation" x="-649.27536231884062" y="3507.5892857142858"/>
+        </scene>
+        <!--Tutorial Settings-->
+        <scene sceneID="dCl-md-fy0">
+            <objects>
+                <viewController id="Lc4-40-nHX" customClass="TutorialSettingViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fdQ-af-S8V" customClass="TutorialSettingView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCW-Fs-ecM">
+                                <rect key="frame" x="182.5" y="378.5" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onMirrorVideoSwitchChanged:" destination="Lc4-40-nHX" eventType="valueChanged" id="Xqp-UT-gI5"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPa-tp-xWt">
+                                <rect key="frame" x="155.5" y="459.5" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="yuV-tK-WAy">
+                                <rect key="frame" x="97.5" y="500.5" width="219" height="32"/>
+                                <segments>
+                                    <segment title="25%"/>
+                                    <segment title="50%"/>
+                                    <segment title="75%"/>
+                                    <segment title="100%"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onVideoSpeedControlChanged:" destination="Lc4-40-nHX" eventType="valueChanged" id="Yyk-g0-Ea6"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mirror Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVc-67-28i">
+                                <rect key="frame" x="156" y="337.5" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wt8-Bh-Bba"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yuV-tK-WAy" firstAttribute="top" secondItem="bPa-tp-xWt" secondAttribute="bottom" constant="20" id="0bh-Fs-jf1"/>
+                            <constraint firstItem="yuV-tK-WAy" firstAttribute="centerX" secondItem="fdQ-af-S8V" secondAttribute="centerX" id="3ee-dK-xs4"/>
+                            <constraint firstItem="bPa-tp-xWt" firstAttribute="centerX" secondItem="fdQ-af-S8V" secondAttribute="centerX" id="A1l-SH-386"/>
+                            <constraint firstItem="yVc-67-28i" firstAttribute="centerY" secondItem="fdQ-af-S8V" secondAttribute="centerY" constant="-100" id="KD9-hL-r3c"/>
+                            <constraint firstItem="bPa-tp-xWt" firstAttribute="top" secondItem="gCW-Fs-ecM" secondAttribute="bottom" constant="50" id="KTA-kx-6pQ"/>
+                            <constraint firstItem="yVc-67-28i" firstAttribute="centerX" secondItem="fdQ-af-S8V" secondAttribute="centerX" id="Uos-Ga-h6a"/>
+                            <constraint firstItem="gCW-Fs-ecM" firstAttribute="top" secondItem="yVc-67-28i" secondAttribute="bottom" constant="20" id="tuT-Xz-fOb"/>
+                            <constraint firstItem="gCW-Fs-ecM" firstAttribute="centerX" secondItem="fdQ-af-S8V" secondAttribute="centerX" id="ujg-ny-lCJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tutorial Settings" id="b5q-kL-lZO"/>
+                    <connections>
+                        <outlet property="mirrorVideoSwitch" destination="gCW-Fs-ecM" id="6iI-8n-2uE"/>
+                        <outlet property="videoSpeedControl" destination="yuV-tK-WAy" id="QMH-P0-qvC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NHg-xJ-rZ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="369.56521739130437" y="3507.5892857142858"/>
         </scene>
         <!--Spotify Web View Controller-->
         <scene sceneID="nFH-bp-UqC">
@@ -1348,6 +1417,7 @@
         <image name="bubble.left" catalog="system" width="128" height="110"/>
         <image name="bubble.left.fill" catalog="system" width="128" height="110"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
