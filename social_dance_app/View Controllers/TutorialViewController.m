@@ -29,6 +29,7 @@
     self.videoSpeedMultiplier = 1;
     
     [self.tutorialView updateViewWithMirrorSetting:self.isMirrored];
+    self.tutorialView.playbackSpeed = 1;
     [self updateVideo];
     
     
@@ -69,6 +70,8 @@
 
 - (void)videoSpeedChangedWithNewMultiplier:(float)multiplier {
     self.videoSpeedMultiplier = multiplier;
+    
+    [self.tutorialView changePlaybackRateWithRate:self.videoSpeedMultiplier];
 }
 
 

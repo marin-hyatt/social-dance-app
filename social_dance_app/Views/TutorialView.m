@@ -13,17 +13,17 @@
 - (void)updateViewWithMirrorSetting:(BOOL)isMirrored {
     [self mirrorViewWithSetting:isMirrored];
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlaybackWithRate:)];
     [self.playerView addGestureRecognizer:tapGestureRecognizer];
     [self.playerView setUserInteractionEnabled:YES];
     [self.playerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
 }
 
-- (void)startPlayback {
+- (void)startPlaybackWithRate:(float)playbackSpeed {
     if (self.player.rate != 0) {
         [self.player pause];
     } else {
-        [self.player play];
+        [self.player playImmediatelyAtRate:self.playbackSpeed];
     }
 }
 
@@ -33,6 +33,11 @@
     } else {
         self.playerView.transform = CGAffineTransformMakeScale(1.0, 1.0);
     }
+}
+
+- (void)changePlaybackRateWithRate:(float)playbackSpeed {
+    self.playbackSpeed = playbackSpeed;
+    [self.player setRate:self.playbackSpeed];
 }
 
 /*

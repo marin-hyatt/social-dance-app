@@ -26,6 +26,8 @@
         self.videoSpeedControl.selectedSegmentIndex = 1;
     } else if (self.videoSpeedMutliplier == 0.75) {
         self.videoSpeedControl.selectedSegmentIndex = 2;
+    } else {
+        self.videoSpeedControl.selectedSegmentIndex = 3;
     }
 }
 
@@ -42,6 +44,8 @@
         self.videoSpeedMutliplier = 0.5;
     } else if (self.videoSpeedControl.selectedSegmentIndex == 2) {
         self.videoSpeedMutliplier = 0.75;
+    } else {
+        self.videoSpeedMutliplier = 1;
     }
     
     [self.delegate videoSpeedChangedWithNewMultiplier:self.videoSpeedMutliplier];
