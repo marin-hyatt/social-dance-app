@@ -25,8 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *commentCount;
 @property (nonatomic, strong) NSNumber *videoWidth;
 @property (nonatomic, strong) NSNumber *videoHeight;
+@property (nonatomic, strong) PFFileObject *thumbnailImage;
 
-+ (void) postUserVideo: ( PFFileObject * _Nullable )videoFile withCaption: ( NSString * _Nullable )caption withSong:(Song * _Nullable )song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postUserVideo: ( PFFileObject * _Nullable )videoFile withCaption: ( NSString * _Nullable )caption withSong:(Song * _Nullable )song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withThumbnail:( PFFileObject * _Nullable )thumbnailImage withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 + (void)likePost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;
 + (void)unlikePost:(Post *)post withUser:(PFUser *)currentUser withCompletion:(PFBooleanResultBlock)completion;
 + (void)bookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;

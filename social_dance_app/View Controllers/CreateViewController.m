@@ -21,6 +21,7 @@
 @property (strong, nonatomic) PFFileObject *videoFile;
 @property (strong, nonatomic) NSNumber *videoWidth;
 @property (strong, nonatomic) NSNumber *videoHeight;
+@property (strong, nonatomic) PFFileObject *thumbnailImage;
 @property (strong, nonatomic) Song *chosenSong;
 
 
@@ -78,7 +79,7 @@
     Song *song = self.chosenSong;
 
     [SVProgressHUD showWithStatus:@"Posting"];
-    [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error! %@", error.localizedDescription);
         } else {
@@ -97,6 +98,7 @@
     NSData *videoData = [NSData dataWithContentsOfURL:chosenMovie];
     
     [self setVideoDimensionsWithVideoURL:chosenMovie];
+    [self setVideoThumbnailWithVideoURL:chosenMovie];
 
     self.videoFile = [PFFileObject fileObjectWithName:@"video.mp4" data:videoData];
 
@@ -105,7 +107,7 @@
         
 }
 
--(void)setVideoDimensionsWithVideoURL:(NSURL *)url {
+- (void)setVideoDimensionsWithVideoURL:(NSURL *)url {
     // Get video width and height, need to switch based on orientation of video
     AVAssetTrack* videoTrack = [[[AVAsset assetWithURL:url] tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     CGSize size = [videoTrack naturalSize];
@@ -130,7 +132,29 @@
     }
 }
 
--(void) showImagePicker:(BOOL) userIsRecording {
+- (void)setVideoThumbnailWithVideoURL:(NSURL *)url {
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    [generateImg setAppliesPreferredTrackTransform:YES];
+    NSError *imgError = NULL;
+    
+    
+    CMTime end = asset.duration;
+    
+    CMTime thumbnailTime = CMTimeMake(CMTimeGetSeconds(end) / 2, 1);
+    NSLog(@"End: %f", CMTimeGetSeconds(end));
+    NSLog(@"%f", CMTimeGetSeconds(thumbnailTime));
+    CMTime time = CMTimeMake(1, 2);
+    
+    CGImageRef image = [generateImg copyCGImageAtTime:thumbnailTime actualTime:NULL error:&imgError];
+    UIImage *thumbnail = [[UIImage alloc] initWithCGImage:image];
+    NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);
+    
+    PFFileObject *thumbnailImage = [PFFileObject fileObjectWithName:@"thumbnail.png" data:thumbnailData];
+    self.thumbnailImage = thumbnailImage;
+}
+
+- (void) showImagePicker:(BOOL) userIsRecording {
     // Sets up image picker
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
