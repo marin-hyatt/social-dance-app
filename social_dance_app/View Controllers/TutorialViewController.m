@@ -27,6 +27,7 @@
     // Do any additional setup after loading the view.
     self.isMirrored = YES;
     self.videoSpeedMultiplier = 1;
+    self.tutorialView.slider.value = 0;
     
     [self.tutorialView updateViewWithMirrorSetting:self.isMirrored];
     self.tutorialView.playbackSpeed = 1;
@@ -74,6 +75,27 @@
     [self.tutorialView changePlaybackRateWithRate:self.videoSpeedMultiplier];
 }
 
+- (IBAction)onSliderValueChanged:(UISlider *)sender {
+    // Jump to appropriate point in video
+    
+    CMTime playerDuration = self.tutorialView.player.currentItem.duration;
+    
+    if (CMTIME_IS_INVALID(playerDuration)) {
+        return;
+    }
+    
+    double duration = CMTimeGetSeconds(playerDuration);
+    if (isfinite(duration)) {
+        float minValue = [self.tutorialView.slider minimumValue];
+        float maxValue = [self.tutorialView.slider maximumValue];
+        float value = [self.tutorialView.slider value];
+        
+        double time = duration * (value - minValue) / (maxValue - minValue);
+        
+        [self.tutorialView.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    }
+    [self.tutorialView.player pause];
+}
 
 #pragma mark - Navigation
 
