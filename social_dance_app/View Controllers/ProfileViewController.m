@@ -118,6 +118,7 @@
     
     cell.post = self.feed[indexPath.row];
     PFFileObject *videoFile = cell.post[@"videoFile"];
+    PFFileObject *thumbnail = cell.post[@"thumbnailImage"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
@@ -130,7 +131,13 @@
         UIImage *thumbnailImage = [[UIImage alloc] initWithCGImage:refImg];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [cell updateAppearanceWithImage:thumbnailImage];
+            if (thumbnail == nil) {
+                [cell updateAppearanceWithImage:thumbnailImage];
+            } else {
+                NSURL *thumbnailURL = [NSURL URLWithString:cell.post.thumbnailImage.url];
+                UIImage *thumbnailImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:thumbnailURL]];
+                [cell updateAppearanceWithImage:thumbnailImage];
+            }
         });
     } withMainBlock:^(AVPlayerItem * playerItem) {
     }];

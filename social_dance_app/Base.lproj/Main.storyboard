@@ -822,17 +822,6 @@
                                     <action selector="onRecordVideoPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="cgX-rU-OPJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
-                                <rect key="frame" x="253" y="387" width="131" height="36"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Choose Video">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onChooseVideoPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="IBH-C9-pVg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZN-vV-83Q">
                                 <rect key="frame" x="144.5" y="481" width="125" height="35"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
@@ -887,6 +876,17 @@
                                     <constraint firstItem="EPZ-Q2-VU3" firstAttribute="top" secondItem="NMA-Cw-8zO" secondAttribute="top" constant="16" id="vxX-ad-wmR"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B19-XJ-PSl">
+                                <rect key="frame" x="253" y="387" width="131" height="36"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Choose Video">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onChooseVideoPressed:" destination="lg2-K0-mCn" eventType="touchUpInside" id="IBH-C9-pVg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7yB-3f-mzb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
