@@ -8,7 +8,6 @@
 #import "ProfileViewController.h"
 #import "ProfileView.h"
 #import "Parse/Parse.h"
-#import "ProfileCollectionViewCell.h"
 #import <AVFoundation/AVFoundation.h>
 #import "DetailViewController.h"
 #import "Post.h"
@@ -16,6 +15,7 @@
 #import "EditProfileViewController.h"
 #import "CacheManager.h"
 #import "BookmarkViewController.h"
+#import "PostCell.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
@@ -61,6 +61,7 @@
      
     [self updateProfile];
     
+    [self.profileCollectionView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellWithReuseIdentifier:@"ProfileCollectionViewCell"];
 }
 
 - (void)updateProfile {
@@ -97,7 +98,6 @@
     }];
 }
 
-
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
@@ -114,7 +114,7 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ProfileCollectionViewCell *cell = [self.profileCollectionView dequeueReusableCellWithReuseIdentifier:@"ProfileCollectionViewCell" forIndexPath:indexPath];
+    PostCell *cell = [self.profileCollectionView dequeueReusableCellWithReuseIdentifier:@"ProfileCollectionViewCell" forIndexPath:indexPath];
     
     cell.post = self.feed[indexPath.row];
     PFFileObject *videoFile = cell.post[@"videoFile"];
@@ -140,6 +140,11 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.feed.count;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = (PostCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"DetailViewController" sender:cell];
 }
 
 -(void)loadPosts{

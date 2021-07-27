@@ -10,6 +10,9 @@
 #import "SearchCollectionViewCell.h"
 #import "ProfileViewController.h"
 #import "Post.h"
+#import "PostCell.h"
+#import "CacheManager.h"
+#import "DetailViewController.h"
 
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -29,7 +32,9 @@
     self.searchCollectionView.delegate = self;
     self.searchBar.delegate = self;
     
-    [self loadUsers:20];
+    [self loadPosts:20];
+    
+    [self.searchCollectionView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellWithReuseIdentifier:@"SearchCollectionViewCell"];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -59,10 +64,29 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    SearchCollectionViewCell *cell = [self.searchCollectionView dequeueReusableCellWithReuseIdentifier:@"SearchCollectionViewCell" forIndexPath:indexPath];
+    PostCell *cell = [self.searchCollectionView dequeueReusableCellWithReuseIdentifier:@"SearchCollectionViewCell" forIndexPath:indexPath];
 
-    cell.user = self.filteredFeed[indexPath.item];
-    [cell updateAppearance];
+    cell.post = self.filteredFeed[indexPath.item];
+    
+    PFFileObject *videoFile = cell.post[@"videoFile"];
+    NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
+    
+    NSLog(@"%@", cell.post);
+    
+    [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
+        AVAsset *asset = [playerItem asset];
+        AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        [generateImg setAppliesPreferredTrackTransform:YES];
+        NSError *imgError = NULL;
+        CMTime time = CMTimeMake(1, 2);
+        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&imgError];
+        UIImage *thumbnailImage = [[UIImage alloc] initWithCGImage:refImg];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [cell updateAppearanceWithImage:thumbnailImage];
+        });
+    } withMainBlock:^(AVPlayerItem * playerItem) {
+    }];
     
     return cell;
 }
@@ -70,6 +94,11 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.filteredFeed.count;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = (PostCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"DetailViewController" sender:cell];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -102,24 +131,6 @@
     [self.searchCollectionView reloadData];
 }
 
-- (void)loadUsers:(int)limit {
-    PFQuery *postQuery = [PFUser query];
-    [postQuery orderByDescending:@"createdAt"];
-    postQuery.limit = limit;
-
-    // fetch data asynchronously
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
-        if (users) {
-            self.feed = users;
-            self.filteredFeed = self.feed;
-            [self.searchCollectionView reloadData];
-        }
-        else {
-            NSLog(@"Error: %@", error.localizedDescription);
-        }
-    }];
-}
-
 - (void)loadPosts:(int)limit {
     PFQuery *postQuery = [Post query];
     
@@ -133,6 +144,7 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.feed = posts;
+            self.filteredFeed = self.feed;
             [self.searchCollectionView reloadData];
         }
         else {
@@ -151,13 +163,13 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier]  isEqual: @"ProfileViewController"]) {
+    if ([[segue identifier] isEqual:@"DetailViewController"]) {
         UICollectionViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.searchCollectionView indexPathForCell:tappedCell];
-        PFUser *user = self.filteredFeed[indexPath.item];
+        Post *post = self.filteredFeed[indexPath.item];
         
-        ProfileViewController *vc = [segue destinationViewController];
-        vc.user = user;
+        DetailViewController *vc = [segue destinationViewController];
+        vc.post = post;
     }
 }
 

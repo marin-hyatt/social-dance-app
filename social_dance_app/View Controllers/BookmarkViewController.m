@@ -6,7 +6,7 @@
 //
 
 #import "BookmarkViewController.h"
-#import "BookmarkCollectionViewCell.h"
+#import "PostCell.h"
 #import "CacheManager.h"
 #import "Post.h"
 #import "DetailViewController.h"
@@ -27,6 +27,8 @@
     self.collectionView.dataSource = self;
     
     [self loadPosts];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellWithReuseIdentifier:@"BookmarkCollectionViewCell"];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -73,7 +75,7 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    BookmarkCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"BookmarkCollectionViewCell" forIndexPath:indexPath];
+    PostCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"BookmarkCollectionViewCell" forIndexPath:indexPath];
     
     cell.post = self.bookmarks[indexPath.row];
     PFFileObject *videoFile = cell.post[@"videoFile"];
@@ -101,6 +103,10 @@
     return self.bookmarks.count;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PostCell *cell = (PostCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"DetailViewController" sender:cell];
+}
 
 #pragma mark - Navigation
 

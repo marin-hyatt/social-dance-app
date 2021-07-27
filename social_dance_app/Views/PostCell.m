@@ -1,13 +1,13 @@
 //
-//  ProfileCollectionViewCell.m
+//  PostCell.m
 //  social_dance_app
 //
-//  Created by Marin Hyatt on 7/20/21.
+//  Created by Marin Hyatt on 7/27/21.
 //
 
-#import "ProfileCollectionViewCell.h"
+#import "PostCell.h"
 
-@implementation ProfileCollectionViewCell
+@implementation PostCell
 
 - (void)updateAppearanceWithImage:(UIImage *)image {
     self.thumbnailView.image = image;
