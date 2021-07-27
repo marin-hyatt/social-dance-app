@@ -13,6 +13,7 @@
 #import "TutorialView.h"
 #import "TutorialSettingViewController.h"
 
+
 @interface TutorialViewController () <TutorialSettingDelegate>
 @property (strong, nonatomic) IBOutlet TutorialView *tutorialView;
 @property BOOL isMirrored;
@@ -33,7 +34,7 @@
     self.tutorialView.playbackSpeed = 1;
     [self updateVideo];
     
-    
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateSliderWithTimestamp:) userInfo:nil repeats:YES];
 }
 
 - (void)updateVideo {
@@ -77,7 +78,6 @@
 
 - (IBAction)onSliderValueChanged:(UISlider *)sender {
     // Jump to appropriate point in video
-    
     CMTime playerDuration = self.tutorialView.player.currentItem.duration;
     
     if (CMTIME_IS_INVALID(playerDuration)) {
@@ -95,6 +95,11 @@
         [self.tutorialView.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }
     [self.tutorialView.player pause];
+}
+
+
+- (void)updateSliderWithTimestamp:(CMTime)timestamp {
+    self.tutorialView.slider.value = CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime)  / CMTimeGetSeconds(self.tutorialView.player.currentItem.duration);
 }
 
 #pragma mark - Navigation
