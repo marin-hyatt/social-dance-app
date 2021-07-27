@@ -9,7 +9,7 @@
 #import "UserSearchTableViewCell.h"
 #import "ProfileViewController.h"
 
-@interface UserSearchViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface UserSearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSArray *feed;
@@ -24,6 +24,7 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.searchBar.delegate = self;
     
     [self loadUsers:20];
 }
@@ -57,6 +58,34 @@
             NSLog(@"Error: %@", error.localizedDescription);
         }
     }];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length != 0) {
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PFUser *user, NSDictionary *bindings) {
+                return [user[@"username"] containsString:searchText];
+            }];
+            self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
+        }
+        else {
+            self.filteredFeed = self.feed;
+        }
+        [self.tableView reloadData];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    //Takes away cancel button, deletes text, hides keyboard
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+    
+    //Removes filter and refreshes data
+    self.filteredFeed = self.feed;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Navigation

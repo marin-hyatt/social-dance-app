@@ -88,7 +88,6 @@
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    //Display cancel button when user beigns typing
     self.searchBar.showsCancelButton = YES;
 }
 
