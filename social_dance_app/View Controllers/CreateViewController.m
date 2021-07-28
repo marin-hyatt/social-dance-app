@@ -83,7 +83,6 @@
 
     self.videoFile = [PFFileObject fileObjectWithName:@"video.mp4" data:videoData];
 
-    // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
         
 }
@@ -125,7 +124,6 @@
     CMTime thumbnailTime = CMTimeMake(CMTimeGetSeconds(end) / 2, 1);
     NSLog(@"End: %f", CMTimeGetSeconds(end));
     NSLog(@"%f", CMTimeGetSeconds(thumbnailTime));
-    CMTime time = CMTimeMake(1, 2);
     
     CGImageRef image = [generateImg copyCGImageAtTime:thumbnailTime actualTime:NULL error:&imgError];
     UIImage *thumbnail = [[UIImage alloc] initWithCGImage:image];
@@ -133,6 +131,8 @@
     
     PFFileObject *thumbnailImage = [PFFileObject fileObjectWithName:@"thumbnail.png" data:thumbnailData];
     self.thumbnailImage = thumbnailImage;
+    
+    [self.createView.thumbnailView setImage:[UIImage imageWithData:thumbnailData]];
 }
 
 - (void) showImagePicker:(BOOL) userIsRecording {

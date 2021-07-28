@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *bookmarkButton;
 @property (weak, nonatomic) id<HomeTableViewCellDelegate> delegate;
 -(void)updateAppearance;
-
+- (void)updateVideo;
 @end
 
 @protocol HomeTableViewCellDelegate <NSObject>

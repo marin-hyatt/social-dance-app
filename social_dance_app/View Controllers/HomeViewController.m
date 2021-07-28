@@ -52,6 +52,13 @@ static void * cellContext = &cellContext;
     cell.post = self.feed[indexPath.row];
     cell.delegate = self;
     
+//    if (cell.videoView.constraint == nil) {
+//        [cell updateVideo];
+//    } else {
+//        cell.videoView.constraint = nil;
+//        [cell updateVideo];
+//    }
+    
     // Refactor cell methods to here?
     [self updateCellVideoWithCell:cell];
     

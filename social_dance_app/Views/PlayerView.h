@@ -13,10 +13,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayerView : UIView
-
-
+@property NSLayoutConstraint *constraint;
 @property AVPlayer *player;
--(void)updateAutolayoutWithHeight:(CGFloat) height withWidth:(CGFloat) width;
+- (void)updateAutolayoutWithHeight:(CGFloat) height withWidth:(CGFloat) width;
  
 
 @end

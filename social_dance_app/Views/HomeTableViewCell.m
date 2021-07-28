@@ -17,6 +17,7 @@
 @implementation HomeTableViewCell
 
 static void * cellContext = &cellContext;
+BOOL didSetupConstraints = NO;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -33,6 +34,15 @@ static void * cellContext = &cellContext;
     [self.usernameLabel setUserInteractionEnabled:YES];
 }
 
+- (void)updateConstraints {
+    [super updateConstraints];
+    CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
+    CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
+    
+    [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+    NSLog(@"Constraints: %@", self.videoView.constraints);
+}
+
 - (void)updateAppearance {
     PFUser *user = self.post[@"author"];
     
@@ -44,7 +54,7 @@ static void * cellContext = &cellContext;
     
     [self updateLikeView];
     
-    [self updateVideo];
+//    [self updateVideo];
     
 }
 
@@ -109,12 +119,18 @@ static void * cellContext = &cellContext;
 }
 
 - (void)updateVideo {
-    // Update autolayout corresponding to video aspect ratio
     CGFloat videoHeight = [self.post[@"videoHeight"] doubleValue];
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
     
     [self fadeIn];
-    [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+    
+    NSLog(@"Constraints: %@", self.videoView.constraints);
+    NSLog(@"%@", self.videoView.constraint);
+    
+    if (self.videoView.constraint == nil) {
+        [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+    }
+    
 }
 
 - (void)fadeIn {
@@ -139,6 +155,7 @@ static void * cellContext = &cellContext;
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.player = nil;
+//    self.videoView.constraint = nil;
 }
 
 - (IBAction)onLikeButtonTapped:(UIButton *)sender {
