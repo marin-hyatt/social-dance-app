@@ -34,6 +34,11 @@
     
     self.songButton.layer.cornerRadius = 5;
     self.songButton.layer.masksToBounds = true;
+    
+    self.songView.layer.cornerRadius = 5;
+    self.songView.layer.masksToBounds = true;
+    self.songView.layer.borderColor = [UIColor systemGreenColor].CGColor;
+    self.songView.layer.borderWidth = 1.0f;
 }
 
 - (void)updateSongViewWithSong:(Song *)song {

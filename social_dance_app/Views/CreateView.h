@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIButton *chooseButton;
 @property (weak, nonatomic) IBOutlet UIButton *songButton;
+@property (weak, nonatomic) IBOutlet UIView *songView;
 - (void)updateSongViewWithSong:(Song *)song;
 - (void)updateAppearance;
 

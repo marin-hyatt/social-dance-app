@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSNumber *videoHeight;
 @property (strong, nonatomic) PFFileObject *thumbnailImage;
 @property (strong, nonatomic) Song *chosenSong;
+@property (strong, nonatomic) AVAssetExportSession *exportSession;
 
 
 @end
@@ -72,20 +73,46 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    // grab our movie URL
     NSURL *chosenMovie = [info objectForKey:UIImagePickerControllerMediaURL];
-    NSLog(@"%@", chosenMovie);
     
-    NSData *videoData = [NSData dataWithContentsOfURL:chosenMovie];
+    NSString *filename = [[NSUUID UUID] UUIDString];
+    NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    NSURL *lowQualityMovie = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
     
-    [self setVideoDimensionsWithVideoURL:chosenMovie];
-    [self setVideoThumbnailWithVideoURL:chosenMovie];
+    [self convertVideoToLowQuailtyWithInputURL:chosenMovie outputURL:lowQualityMovie handler:^(AVAssetExportSession *exportSession) {
+        if (exportSession.status == AVAssetExportSessionStatusCompleted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSData *videoData = [NSData dataWithContentsOfURL:exportSession.outputURL];
+                [self setVideoDimensionsWithVideoURL:chosenMovie];
+                [self setVideoThumbnailWithVideoURL:chosenMovie];
 
-    self.videoFile = [PFFileObject fileObjectWithName:@"video.mp4" data:videoData];
+                self.videoFile = [PFFileObject fileObjectWithName:@"video.mp4" data:videoData];
 
-    [self dismissViewControllerAnimated:YES completion:nil];
-        
+                [self dismissViewControllerAnimated:YES completion:nil];
+            });
+        } else if (exportSession.status == AVAssetExportSessionStatusFailed) {
+            NSLog(@"Error: %@", exportSession.error.localizedDescription);
+        } else {
+            NSLog(@"Error: %ld", (long)exportSession.status);
+        }
+    }];
 }
+
+
+- (void)convertVideoToLowQuailtyWithInputURL:(NSURL*)inputURL
+                                   outputURL:(NSURL*)outputURL
+                                     handler:(void (^)(AVAssetExportSession *))completion {
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:inputURL options:nil];
+    self.exportSession = [[AVAssetExportSession alloc] initWithAsset:urlAsset presetName:AVAssetExportPresetMediumQuality];
+    self.exportSession.outputURL = outputURL;
+    self.exportSession.outputFileType = AVFileTypeMPEG4;
+    self.exportSession.shouldOptimizeForNetworkUse = YES;
+    
+    [self.exportSession exportAsynchronouslyWithCompletionHandler:^{
+        completion(self.exportSession);
+    }];
+}
+ 
 
 - (void)setVideoDimensionsWithVideoURL:(NSURL *)url {
     // Get video width and height, need to switch based on orientation of video
@@ -140,6 +167,7 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
+    imagePickerVC.videoQuality = UIImagePickerControllerQualityTypeMedium;
     NSArray *availableMediaTypes = [UIImagePickerController
                                     availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
     
