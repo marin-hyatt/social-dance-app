@@ -16,7 +16,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SVProgressHUD.h"
 
-@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, SpotifySearchDelegate>
+@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
 @property (strong, nonatomic) PFFileObject *videoFile;
 @property (strong, nonatomic) NSNumber *videoWidth;
@@ -24,6 +24,7 @@
 @property (strong, nonatomic) PFFileObject *thumbnailImage;
 @property (strong, nonatomic) Song *chosenSong;
 @property (strong, nonatomic) AVAssetExportSession *exportSession;
+@property (strong, nonatomic) NSMutableArray *tags;
 
 
 @end
@@ -37,10 +38,19 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    self.tags = [[NSMutableArray alloc] init];
+    self.createView.tagField.delegate = self;
+    
+    [self.createView.tagView setAxis:UILayoutConstraintAxisHorizontal];
+    [self.createView.tagView setDistribution:UIStackViewDistributionFillProportionally];
+    [self.createView.tagView setAlignment:UIStackViewAlignmentCenter];
+    [self.createView.tagView setSpacing:3];
 }
 
 - (void)dismissKeyboard {
     [self.createView.captionField resignFirstResponder];
+    [self.createView.tagField resignFirstResponder];
 }
 
 - (IBAction)onRecordVideoPressed:(UIButton *)sender {
@@ -54,6 +64,58 @@
 - (IBAction)onChooseSongPressed:(id)sender {
     [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
     
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.tags addObject:self.createView.tagField.text];
+    [self.createView.tagField setText:@""];
+    
+    CGSize stringsize = [[self.tags lastObject] sizeWithAttributes: @{
+        NSFontAttributeName: [UIFont systemFontOfSize:17.0f],
+    }];
+    UIButton *tag = [[UIButton alloc] init];
+    [tag setFrame:CGRectMake(0,0, stringsize.width + 4, stringsize.height)];
+    [tag addTarget:self
+            action:@selector(removeTagAtIndex:)
+  forControlEvents:UIControlEventTouchUpInside];
+    
+    [tag setBackgroundColor:[UIColor systemBlueColor]];
+    [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
+    
+    [self.createView.tagView addArrangedSubview:tag];
+    [tag.heightAnchor constraintEqualToConstant:30].active = true;
+    return YES;
+}
+
+- (void)removeTagAtIndex:(UIButton *)sender {
+    for (NSString *tag in [self.tags copy]) {
+        if ([tag isEqualToString:sender.titleLabel.text]) {
+            [self.tags removeObject:tag];
+        }
+    }
+
+    [self.createView.tagView removeArrangedSubview:[self.createView.tagView viewWithTag:sender.tag]];
+    [sender removeFromSuperview];
+}
+
+- (IBAction)onTagFieldEditingEnded:(UITextField *)sender {
+    [self.tags addObject:self.createView.tagField.text];
+    [self.createView.tagField setText:@""];
+    
+    CGSize stringsize = [[self.tags lastObject] sizeWithAttributes: @{
+        NSFontAttributeName: [UIFont systemFontOfSize:17.0f],
+    }];
+    UIButton *tag = [[UIButton alloc] init];
+    [tag setFrame:CGRectMake(0,0, stringsize.width + 4, stringsize.height)];
+    [tag addTarget:self
+            action:@selector(removeTagAtIndex:)
+  forControlEvents:UIControlEventTouchUpInside];
+    
+    [tag setBackgroundColor:[UIColor systemBlueColor]];
+    [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
+    
+    [self.createView.tagView addArrangedSubview:tag];
+    [tag.heightAnchor constraintEqualToConstant:30].active = true;
 }
 
 - (IBAction)onPostPressed:(UIBarButtonItem *)sender {

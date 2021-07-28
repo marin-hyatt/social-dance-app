@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *chooseButton;
 @property (weak, nonatomic) IBOutlet UIButton *songButton;
 @property (weak, nonatomic) IBOutlet UIView *songView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIStackView *tagView;
+@property (weak, nonatomic) IBOutlet UITextField *tagField;
 - (void)updateSongViewWithSong:(Song *)song;
 - (void)updateAppearance;
 
