@@ -25,6 +25,15 @@
     NSLog(@"%@", file);
     
     [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:file];
+    
+    self.recordButton.layer.cornerRadius = 5;
+    self.recordButton.layer.masksToBounds = true;
+    
+    self.chooseButton.layer.cornerRadius = 5;
+    self.chooseButton.layer.masksToBounds = true;
+    
+    self.songButton.layer.cornerRadius = 5;
+    self.songButton.layer.masksToBounds = true;
 }
 
 - (void)updateSongViewWithSong:(Song *)song {

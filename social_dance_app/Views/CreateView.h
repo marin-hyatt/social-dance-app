@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
+@property (weak, nonatomic) IBOutlet UIButton *recordButton;
+@property (weak, nonatomic) IBOutlet UIButton *chooseButton;
+@property (weak, nonatomic) IBOutlet UIButton *songButton;
 - (void)updateSongViewWithSong:(Song *)song;
 - (void)updateAppearance;
 
