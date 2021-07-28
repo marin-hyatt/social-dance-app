@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *albumImageView;
 @property (weak, nonatomic) IBOutlet UILabel *trackNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
--(void)updateAppearanceWithSong:(Song *)song;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
+- (void)updateSongViewWithSong:(Song *)song;
+- (void)updateAppearance;
 
 @end
 

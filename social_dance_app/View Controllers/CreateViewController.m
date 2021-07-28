@@ -32,29 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [self.createView updateAppearance];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect frame = self.createView.frame;
-        frame.origin.y = -keyboardSize.height;
-        self.createView.frame = frame;
-    }];
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect frame = self.createView.frame;
-        frame.origin.y = 0.0f;
-        self.createView.frame = frame;
-    }];
 }
 
 - (void)dismissKeyboard {
@@ -177,7 +158,7 @@
 
 - (void)didPickSong:(Song *)song {
     self.chosenSong = song;
-    [self.createView updateAppearanceWithSong:song];
+    [self.createView updateSongViewWithSong:song];
 }
 
 

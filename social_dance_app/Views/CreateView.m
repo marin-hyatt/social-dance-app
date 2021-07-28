@@ -7,6 +7,7 @@
 
 #import "CreateView.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @implementation CreateView
 
@@ -18,7 +19,15 @@
 }
 */
 
-- (void)updateAppearanceWithSong:(Song *)song {
+- (void)updateAppearance {
+    PFUser *currentUser = [PFUser currentUser];
+    PFFileObject *file = currentUser[@"profilePicture"];
+    NSLog(@"%@", file);
+    
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:file];
+}
+
+- (void)updateSongViewWithSong:(Song *)song {
     self.trackNameLabel.text = song.title;
     self.artistNameLabel.text = song.artist;
     
