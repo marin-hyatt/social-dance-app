@@ -159,6 +159,7 @@
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"song"];
+    [postQuery includeKey:@"tags"];
     [postQuery whereKey:@"author" equalTo:self.user];
     postQuery.limit = 20;
 

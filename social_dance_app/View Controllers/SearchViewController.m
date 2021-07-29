@@ -33,7 +33,7 @@
     self.searchCollectionView.delegate = self;
     self.searchBar.delegate = self;
     
-    [self loadPosts:20];
+    [self loadPosts:50];
     
     [self.searchCollectionView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellWithReuseIdentifier:@"SearchCollectionViewCell"];
 }
@@ -111,8 +111,8 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchText.length != 0) {
-            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PFUser *user, NSDictionary *bindings) {
-                return [user[@"username"] containsString:searchText];
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
+                return [post[@"tags"] containsObject:[searchText lowercaseString]];
             }];
 
             self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
@@ -146,6 +146,8 @@
     [postQuery orderByDescending:@"likeCount"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"song"];
+    [postQuery includeKey:@"tags"];
+    
     postQuery.limit = limit;
 
     // fetch data asynchronously

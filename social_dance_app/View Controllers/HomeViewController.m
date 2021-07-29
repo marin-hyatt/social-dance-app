@@ -103,6 +103,7 @@ static void * cellContext = &cellContext;
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"song"];
     [postQuery includeKey:@"likedByUsers"];
+    [postQuery includeKey:@"tags"];
     postQuery.limit = limit;
     
     PFQuery *followerQuery = [FollowerRelation query];

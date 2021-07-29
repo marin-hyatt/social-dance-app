@@ -63,6 +63,7 @@
     [query whereKey:@"bookmarkRelation" equalTo:self.user];
     [query includeKey:@"author"];
     [query includeKey:@"song"];
+    [query includeKey:@"tags"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
