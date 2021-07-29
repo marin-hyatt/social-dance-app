@@ -725,7 +725,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e8B-zQ-491">
-                                <rect key="frame" x="0.0" y="139" width="414" height="757"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jHy-ja-JzT">
                                     <size key="itemSize" width="209" height="197"/>
@@ -757,21 +757,33 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" placeholder="Search for user" translatesAutoresizingMaskIntoConstraints="NO" id="kix-Pp-9eg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                            <searchBar contentMode="redraw" placeholder="Search for..." translatesAutoresizingMaskIntoConstraints="NO" id="kix-Pp-9eg">
+                                <rect key="frame" x="0.0" y="88" width="317" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="cpO-Ea-CUv"/>
+                                </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qyk-PT-9Pv">
+                                <rect key="frame" x="317" y="91" width="97" height="45"/>
+                                <segments>
+                                    <segment title="User"/>
+                                    <segment title="Post"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eu1-Sd-qE2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="kix-Pp-9eg" firstAttribute="trailing" secondItem="Eu1-Sd-qE2" secondAttribute="trailing" id="3Il-65-rAW"/>
                             <constraint firstItem="kix-Pp-9eg" firstAttribute="leading" secondItem="Eu1-Sd-qE2" secondAttribute="leading" id="3qU-fL-yvO"/>
+                            <constraint firstItem="Qyk-PT-9Pv" firstAttribute="top" secondItem="Eu1-Sd-qE2" secondAttribute="top" constant="3" id="5ZG-8h-DKj"/>
                             <constraint firstItem="e8B-zQ-491" firstAttribute="trailing" secondItem="Eu1-Sd-qE2" secondAttribute="trailing" id="Gan-dj-xt4"/>
                             <constraint firstItem="e8B-zQ-491" firstAttribute="top" secondItem="kix-Pp-9eg" secondAttribute="bottom" id="MoE-xp-R83"/>
                             <constraint firstAttribute="bottom" secondItem="e8B-zQ-491" secondAttribute="bottom" id="Oiu-q2-Iia"/>
-                            <constraint firstItem="e8B-zQ-491" firstAttribute="top" secondItem="kix-Pp-9eg" secondAttribute="bottom" id="Rzd-Ok-pXn"/>
+                            <constraint firstItem="e8B-zQ-491" firstAttribute="top" secondItem="Qyk-PT-9Pv" secondAttribute="bottom" constant="3" id="QUf-tH-5E3"/>
+                            <constraint firstItem="Eu1-Sd-qE2" firstAttribute="trailing" secondItem="Qyk-PT-9Pv" secondAttribute="trailing" id="bRM-75-HbX"/>
                             <constraint firstItem="kix-Pp-9eg" firstAttribute="top" secondItem="Eu1-Sd-qE2" secondAttribute="top" id="hy7-oq-uQc"/>
+                            <constraint firstItem="Qyk-PT-9Pv" firstAttribute="leading" secondItem="kix-Pp-9eg" secondAttribute="trailing" id="qaB-t4-cIJ"/>
                             <constraint firstItem="e8B-zQ-491" firstAttribute="leading" secondItem="Eu1-Sd-qE2" secondAttribute="leading" id="tla-6M-nz4"/>
                         </constraints>
                     </view>
@@ -781,6 +793,7 @@
                         <outlet property="flowLayout" destination="jHy-ja-JzT" id="eCb-zp-VYn"/>
                         <outlet property="searchBar" destination="kix-Pp-9eg" id="MtZ-Ey-5MK"/>
                         <outlet property="searchCollectionView" destination="e8B-zQ-491" id="bhU-ih-y0T"/>
+                        <outlet property="segmentedControl" destination="Qyk-PT-9Pv" id="QVt-Vp-Xsp"/>
                         <segue destination="iuD-zB-GZA" kind="show" identifier="UserSearchViewController" id="MMY-hN-3SW"/>
                         <segue destination="LTi-52-sZA" kind="show" identifier="DetailViewController" id="dgV-59-Pyb"/>
                     </connections>
@@ -1595,7 +1608,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="kQC-ax-5Di"/>
         <segue reference="XXe-TN-jrX"/>
-        <segue reference="QUm-Pj-Hsc"/>
+        <segue reference="dgV-59-Pyb"/>
         <segue reference="q0o-vQ-l7I"/>
     </inferredMetricsTieBreakers>
     <resources>

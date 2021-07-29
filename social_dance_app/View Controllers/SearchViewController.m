@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *searchCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic) NSArray *feed;
 @property (strong, nonatomic) NSMutableArray *filteredFeed;
 
@@ -161,8 +162,18 @@
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    [self performSegueWithIdentifier:@"UserSearchViewController" sender:nil];
-    return NO;
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        [self performSegueWithIdentifier:@"UserSearchViewController" sender:nil];
+        return NO;
+    } else {
+        [self.segmentedControl setEnabled:NO forSegmentAtIndex:0];
+        return YES;
+    }
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [self.segmentedControl setEnabled:YES forSegmentAtIndex:0];
+    [self.segmentedControl setEnabled:YES forSegmentAtIndex:1];
 }
 
 
