@@ -123,7 +123,7 @@
     Song *song = self.chosenSong;
 
     [SVProgressHUD showWithStatus:@"Posting"];
-    [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"Error! %@", error.localizedDescription);
         } else {

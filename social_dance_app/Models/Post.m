@@ -19,16 +19,16 @@
 @dynamic createdAt;
 @dynamic videoFile;
 @dynamic song;
-@dynamic likedByUsers;
 @dynamic videoWidth;
 @dynamic videoHeight;
 @dynamic thumbnailImage;
+@dynamic tags;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
 
-+ (void)postUserVideo:(PFFileObject *)videoFile withCaption:(NSString *)caption withSong:(Song *)song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withThumbnail:(PFFileObject * _Nullable)thumbnailImage withCompletion:(PFBooleanResultBlock _Nullable)completion {
++ (void)postUserVideo:(PFFileObject *)videoFile withCaption:(NSString *)caption withSong:(Song *)song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withThumbnail:(PFFileObject * _Nullable)thumbnailImage withTags:(NSArray *)tags withCompletion:(PFBooleanResultBlock _Nullable)completion {
     Post *newPost = [Post new];
 
     newPost.author = [PFUser currentUser];
@@ -37,10 +37,10 @@
     newPost.song = song;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
-    newPost.likedByUsers = @[];
     newPost.videoWidth = width;
     newPost.videoHeight = height;
     newPost.thumbnailImage = thumbnailImage;
+    newPost.tags = tags;
     
     [newPost saveInBackgroundWithBlock: completion];
 }
