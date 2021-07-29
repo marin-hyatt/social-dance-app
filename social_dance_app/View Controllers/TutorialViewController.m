@@ -102,6 +102,10 @@
     self.tutorialView.slider.value = CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime)  / CMTimeGetSeconds(self.tutorialView.player.currentItem.duration);
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tutorialView.player pause];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
