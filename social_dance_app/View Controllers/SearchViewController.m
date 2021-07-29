@@ -13,6 +13,7 @@
 #import "PostCell.h"
 #import "CacheManager.h"
 #import "DetailViewController.h"
+#import "UIManager.h"
 
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -135,17 +136,25 @@
     
     postQuery.limit = limit;
 
-    // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.feed = posts;
             self.filteredFeed = self.feed;
+            [self sortFilteredFeed];
             [self.searchCollectionView reloadData];
         }
         else {
-            NSLog(@"Parse error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         }
     }];
+}
+
+- (void)sortFilteredFeed {
+    NSSortDescriptor *likeSorter = [[NSSortDescriptor alloc] initWithKey:@"likeCount" ascending:NO];
+    NSSortDescriptor *commentSorter = [[NSSortDescriptor alloc] initWithKey:@"commentCount" ascending:NO];
+
+//    [self.filteredFeed sortUsingDescriptors:[NSArray arrayWithObjects:likeSorter, commentSorter, nil]];
+    [self.filteredFeed sortUsingSelector:@selector(comparewithPost:)];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {

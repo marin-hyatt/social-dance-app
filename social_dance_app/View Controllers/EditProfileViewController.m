@@ -8,6 +8,7 @@
 #import "EditProfileViewController.h"
 #import "EditProfileView.h"
 #import "SVProgressHUD.h"
+#import "UIManager.h"
 
 
 @interface EditProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -75,7 +76,7 @@
                     [SVProgressHUD dismiss];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
-                    NSLog(@"Error: %@", error.description);
+                    [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
                 }
             }];
         }

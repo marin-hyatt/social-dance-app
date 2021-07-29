@@ -40,7 +40,7 @@ BOOL didSetupConstraints = NO;
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
     
     [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
-    NSLog(@"Constraints: %@", self.videoView.constraints);
+
 }
 
 - (void)updateAppearance {

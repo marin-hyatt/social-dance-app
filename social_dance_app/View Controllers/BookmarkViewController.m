@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "DetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @interface BookmarkViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -67,7 +68,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else {
             self.bookmarks = objects;
             NSLog(@"%@", objects);

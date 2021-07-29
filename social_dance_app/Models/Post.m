@@ -74,5 +74,20 @@
     [post saveInBackgroundWithBlock:completion];
 }
  
+- (NSComparisonResult)comparewithPost:(Post *)post {
+    NSDate *firstDate = self.createdAt;
+    NSDate *secondDate = post.createdAt;
+
+    NSTimeInterval timeSinceFirstPosted = [firstDate timeIntervalSinceNow];
+    NSTimeInterval timeSinceSecondPosted = [secondDate timeIntervalSinceNow];
+    
+    if ([self.likeCount doubleValue] / timeSinceFirstPosted > [post.likeCount doubleValue] / timeSinceSecondPosted) {
+        return NSOrderedDescending;
+    } else if ([self.likeCount doubleValue] / timeSinceFirstPosted == [post.likeCount doubleValue] / timeSinceSecondPosted) {
+        return NSOrderedSame;
+    } else {
+        return NSOrderedAscending;
+    }
+}
 
 @end

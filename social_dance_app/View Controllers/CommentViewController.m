@@ -9,6 +9,7 @@
 #import "Comment.h"
 #import "CommentTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "UIManager.h"
 
 @interface CommentViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
@@ -45,7 +46,7 @@
     // Post comment to Parse
     [Comment newCommentWithPost:self.post withAuthor:user withText:self.commentField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else {
             self.commentField.text = @"";
         }
@@ -79,7 +80,7 @@
             [self.refreshControl endRefreshing];
         }
         else {
-            NSLog(@"Parse error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         }
     }];
 }

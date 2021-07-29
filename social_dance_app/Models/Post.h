@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)unlikePost:(Post *)post withUser:(PFUser *)currentUser withCompletion:(PFBooleanResultBlock)completion;
 + (void)bookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;
 + (void)unbookmarkPost:(Post *)post withUser:(PFUser *)user withCompletion:(PFBooleanResultBlock)completion;
+- (NSComparisonResult)comparewithPost:(Post *)post;
 
 @end
 

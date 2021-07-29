@@ -9,6 +9,7 @@
 #import <WebKit/WebKit.h>
 #import "APIManager.h"
 #import "SpotifyAuthView.h"
+#import "UIManager.h"
 
 @interface SpotifyAuthViewController () <WKNavigationDelegate>
 @property (strong, nonatomic) IBOutlet SpotifyAuthView *authView;
@@ -20,17 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    NSLog(@"Access token: %@", [[APIManager shared] accessToken]);
-//    if (![[APIManager shared] shouldRefreshToken]) {
-//        [self performSegueWithIdentifier:@"SpotifySearchViewController" sender:nil];
-//    }
-    
     self.authView.webView.navigationDelegate = self;
     
-    // Log in to Spotify
-    
-    // TODO: refactor this code into APIManager
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
     
@@ -44,39 +36,23 @@
     NSURL *url = [NSURL URLWithString:signInString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.authView.webView loadRequest:request];
-    
 }
-
-//- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-//    NSURL *url = self.authView.webView.URL;
-//    NSString *urlString = url.absoluteString;
-//    NSLog(@"URL string: %@", urlString);
-//    NSURLComponents *components = [NSURLComponents componentsWithString:url.absoluteString];
-//}
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString *urlString = navigationAction.request.URL.absoluteString;
     
-    // check for custom scheme
     if ([urlString hasPrefix:@"social-dance-app"]) {
-        // if we find a redirect with custom scheme, pull the needed code from the url, exchange it for the access token dictionary
         NSString *code = [urlString stringByReplacingOccurrencesOfString:@"social-dance-app://social-dance-app-callback/?code=" withString:@""];
-        NSLog(@"Code: %@", code);
         
-        // exchange for access token
         [[APIManager shared]exchangeCodeForAccessTokenWithCode:code withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
             if (error != nil) {
-                NSLog(@"Error! %@", error.localizedDescription);
-            } else {
-                NSLog(@"%@", dataDictionary);
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
         }];
         
-        // cancel the redirect and dismiss this view controller
         decisionHandler(WKNavigationActionPolicyCancel);
-        // segue to login
+
         [self performSegueWithIdentifier:@"HomeSegue" sender:nil];
-//        [self dismissViewControllerAnimated:true completion:nil];
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }

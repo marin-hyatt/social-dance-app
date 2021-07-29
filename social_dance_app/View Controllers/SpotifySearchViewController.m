@@ -10,6 +10,7 @@
 #import "Song.h"
 #import "SpotifySearchTableViewCell.h"
 #import "SpotifyWebViewController.h"
+#import "UIManager.h"
 
 @interface SpotifySearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SpotifySearchCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,9 +34,8 @@
     // Test search
     [[APIManager shared]searchForTrackWithQuery:query withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
             if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             } else {
-                NSLog(@"Successful search!");
                 self.songArray = [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
@@ -83,11 +83,6 @@
     
     if ([[UIApplication sharedApplication] canOpenURL:uri]) {
         [[UIApplication sharedApplication] openURL:webUrl options:@{} completionHandler:^(BOOL success) {
-            if (success) {
-                NSLog(@"Success");
-            } else {
-                NSLog(@"Error");
-            }
         }];
     } else {
         // Segue to web view since app can't be opened

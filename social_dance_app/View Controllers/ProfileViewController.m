@@ -16,6 +16,7 @@
 #import "CacheManager.h"
 #import "BookmarkViewController.h"
 #import "PostCell.h"
+#import "UIManager.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
@@ -80,7 +81,7 @@
     
     [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else if (number > 0) {
             self.profileView.followerButton.selected = YES;
         }
@@ -157,7 +158,7 @@
             [self.refreshControl endRefreshing];
         }
         else {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         }
     }];
 }
@@ -170,7 +171,7 @@
     
     [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else {
             numFollowers = number;
             [self.profileView updateAppearanceWithFollowerCount:number];
@@ -186,7 +187,6 @@
         UICollectionViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.profileCollectionView indexPathForCell:tappedCell];
         Post *post = self.feed[indexPath.item];
-        
         DetailViewController *vc = [segue destinationViewController];
         vc.post = post;
     } else if ([[segue identifier] isEqual:@"EditProfileViewController"]) {
@@ -213,7 +213,7 @@
     if (self.profileView.followerButton.selected) {
         [FollowerRelation removeRelationWithUser:self.user withFollower:currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             } else {
                 [self updateFollowerButton];
             }
@@ -226,11 +226,11 @@
 
         [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
             if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             } else if (number == 0) {
                 [FollowerRelation newRelationWithUser:self.user withFollower:currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                     if (error != nil) {
-                        NSLog(@"Error: %@", error.localizedDescription);
+                        [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
                     } else {
                         [self updateFollowerButton];
                     }
@@ -238,7 +238,5 @@
             }
         }];
     }
-    
-    
 }
 @end
