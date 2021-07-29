@@ -81,7 +81,7 @@
                 action:@selector(removeTagAtIndex:)
       forControlEvents:UIControlEventTouchUpInside];
         
-        [tag setBackgroundColor:[UIColor systemBlueColor]];
+        [tag setBackgroundColor:[UIColor colorWithRed:149/255.0 green:189/255.0 blue:220/255.0 alpha:1]];
         [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
         
         [self.createView.tagView addArrangedSubview:tag];
@@ -111,10 +111,9 @@
         [SVProgressHUD showWithStatus:@"Posting"];
         [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                NSLog(@"Error! %@", error.localizedDescription);
-            } else {
-                [SVProgressHUD dismiss];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
+            [SVProgressHUD dismiss];
         }];
         
         self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
@@ -142,9 +141,7 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
             });
         } else if (exportSession.status == AVAssetExportSessionStatusFailed) {
-            NSLog(@"Error: %@", exportSession.error.localizedDescription);
-        } else {
-            NSLog(@"Error: %ld", (long)exportSession.status);
+            [UIManager presentAlertWithMessage:exportSession.error.localizedDescription overViewController:self];
         }
     }];
 }
@@ -200,9 +197,7 @@
     CMTime end = asset.duration;
     
     CMTime thumbnailTime = CMTimeMake(CMTimeGetSeconds(end) / 2, 1);
-    NSLog(@"End: %f", CMTimeGetSeconds(end));
-    NSLog(@"%f", CMTimeGetSeconds(thumbnailTime));
-    
+
     CGImageRef image = [generateImg copyCGImageAtTime:thumbnailTime actualTime:NULL error:&imgError];
     UIImage *thumbnail = [[UIImage alloc] initWithCGImage:image];
     NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);

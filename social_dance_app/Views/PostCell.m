@@ -16,7 +16,7 @@
 
 - (void)fadeIn {
     [self.thumbnailView setAlpha:0];
-    [UIImageView animateWithDuration:1 animations:^{
+    [UIImageView animateWithDuration:0.5 animations:^{
             [self.thumbnailView setAlpha:1];
     }];
 }

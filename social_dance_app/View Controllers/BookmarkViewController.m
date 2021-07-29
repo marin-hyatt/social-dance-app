@@ -81,26 +81,13 @@
     
     cell.post = self.bookmarks[indexPath.row];
     PFFileObject *videoFile = cell.post[@"videoFile"];
-    PFFileObject *thumbnail = cell.post[@"thumbnailImage"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
-        AVAsset *asset = [playerItem asset];
-        AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-        [generateImg setAppliesPreferredTrackTransform:YES];
-        NSError *imgError = NULL;
-        CMTime time = CMTimeMake(1, 2);
-        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&imgError];
-        UIImage *thumbnailImage = [[UIImage alloc] initWithCGImage:refImg];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (thumbnail == nil) {
-                [cell updateAppearanceWithImage:thumbnailImage];
-            } else {
-                NSURL *thumbnailURL = [NSURL URLWithString:cell.post.thumbnailImage.url];
-                UIImage *thumbnailImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:thumbnailURL]];
-                [cell updateAppearanceWithImage:thumbnailImage];
-            }
+            NSURL *thumbnailURL = [NSURL URLWithString:cell.post.thumbnailImage.url];
+            UIImage *thumbnailImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:thumbnailURL]];
+            [cell updateAppearanceWithImage:thumbnailImage];
         });
     } withMainBlock:^(AVPlayerItem * playerItem) {
     }];

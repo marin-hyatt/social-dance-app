@@ -14,6 +14,7 @@
 #import "CommentViewController.h"
 #import "CacheManager.h"
 #import "TutorialViewController.h"
+#import "UIManager.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
@@ -86,7 +87,7 @@
     
     [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else if (number > 0) {
             self.detailView.likeButton.selected = YES;
         }
@@ -103,7 +104,7 @@
     
     [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else if (number > 0) {
             self.detailView.commentButton.selected = YES;
         }
@@ -119,7 +120,7 @@
     
     [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         } else if (number > 0) {
             self.detailView.bookmarkButton.selected = YES;
         }
@@ -133,11 +134,6 @@
     
     if ([[UIApplication sharedApplication] canOpenURL:uri]) {
         [[UIApplication sharedApplication] openURL:webUrl options:@{} completionHandler:^(BOOL success) {
-            if (success) {
-                NSLog(@"Success");
-            } else {
-                NSLog(@"Error");
-            }
         }];
     } else {
         // Segue to web view since app can't be opened
@@ -153,7 +149,7 @@
             if (succeeded) {
                 [self updateLikeButton];
             } else {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
         }];
     } else {
@@ -161,7 +157,7 @@
             if (succeeded) {
                 [self updateLikeButton];
             } else {
-                NSLog(@"Error: %@", error.localizedDescription);
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
         }];
     }
