@@ -17,4 +17,19 @@
     [profilePictureView setImageWithURL:imageURL];
 }
 
++ (void)presentAlertWithMessage:(NSString *)message overViewController:(UIViewController *)vc {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:message
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    [alert addAction:okAction];
+    [vc presentViewController:alert animated:YES completion:^{
+    }];
+}
+
 @end

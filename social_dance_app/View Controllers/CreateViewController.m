@@ -15,6 +15,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 #import "SVProgressHUD.h"
+#import "UIManager.h"
 
 @interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
@@ -67,24 +68,29 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.tags addObject:self.createView.tagField.text];
-    [self.createView.tagField setText:@""];
+    if (![self.createView.tagField.text isEqualToString:@""]) {
+        [self.tags addObject:[self.createView.tagField.text lowercaseString]];
+        [self.createView.tagField setText:@""];
+        
+        CGSize stringsize = [[self.tags lastObject] sizeWithAttributes: @{
+            NSFontAttributeName: [UIFont systemFontOfSize:17.0f],
+        }];
+        UIButton *tag = [[UIButton alloc] init];
+        [tag setFrame:CGRectMake(0,0, stringsize.width + 4, stringsize.height)];
+        [tag addTarget:self
+                action:@selector(removeTagAtIndex:)
+      forControlEvents:UIControlEventTouchUpInside];
+        
+        [tag setBackgroundColor:[UIColor systemBlueColor]];
+        [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
+        
+        [self.createView.tagView addArrangedSubview:tag];
+        [tag.heightAnchor constraintEqualToConstant:30].active = true;
+        return YES;
+    } else {
+        return NO;
+    }
     
-    CGSize stringsize = [[self.tags lastObject] sizeWithAttributes: @{
-        NSFontAttributeName: [UIFont systemFontOfSize:17.0f],
-    }];
-    UIButton *tag = [[UIButton alloc] init];
-    [tag setFrame:CGRectMake(0,0, stringsize.width + 4, stringsize.height)];
-    [tag addTarget:self
-            action:@selector(removeTagAtIndex:)
-  forControlEvents:UIControlEventTouchUpInside];
-    
-    [tag setBackgroundColor:[UIColor systemBlueColor]];
-    [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
-    
-    [self.createView.tagView addArrangedSubview:tag];
-    [tag.heightAnchor constraintEqualToConstant:30].active = true;
-    return YES;
 }
 
 - (void)removeTagAtIndex:(UIButton *)sender {
@@ -93,45 +99,28 @@
             [self.tags removeObject:tag];
         }
     }
-
     [self.createView.tagView removeArrangedSubview:[self.createView.tagView viewWithTag:sender.tag]];
     [sender removeFromSuperview];
 }
 
-- (IBAction)onTagFieldEditingEnded:(UITextField *)sender {
-    [self.tags addObject:self.createView.tagField.text];
-    [self.createView.tagField setText:@""];
-    
-    CGSize stringsize = [[self.tags lastObject] sizeWithAttributes: @{
-        NSFontAttributeName: [UIFont systemFontOfSize:17.0f],
-    }];
-    UIButton *tag = [[UIButton alloc] init];
-    [tag setFrame:CGRectMake(0,0, stringsize.width + 4, stringsize.height)];
-    [tag addTarget:self
-            action:@selector(removeTagAtIndex:)
-  forControlEvents:UIControlEventTouchUpInside];
-    
-    [tag setBackgroundColor:[UIColor systemBlueColor]];
-    [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
-    
-    [self.createView.tagView addArrangedSubview:tag];
-    [tag.heightAnchor constraintEqualToConstant:30].active = true;
-}
-
 - (IBAction)onPostPressed:(UIBarButtonItem *)sender {
-    NSString *caption = self.createView.captionField.text;
-    Song *song = self.chosenSong;
+    if (self.videoFile != nil) {
+        NSString *caption = self.createView.captionField.text;
+        Song *song = self.chosenSong;
 
-    [SVProgressHUD showWithStatus:@"Posting"];
-    [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error! %@", error.localizedDescription);
-        } else {
-            [SVProgressHUD dismiss];
-        }
-    }];
-    
-    self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
+        [SVProgressHUD showWithStatus:@"Posting"];
+        [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Error! %@", error.localizedDescription);
+            } else {
+                [SVProgressHUD dismiss];
+            }
+        }];
+        
+        self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
+    } else {
+        [UIManager presentAlertWithMessage:@"Choose a video before posting!" overViewController:self];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {

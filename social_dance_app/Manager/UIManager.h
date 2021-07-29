@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIManager : NSObject
 + (void)updateProfilePicture:(UIImageView *)profilePictureView withPFFileObject:(PFFileObject *)file;
++ (void)presentAlertWithMessage:(NSString *)message overViewController:(UIViewController *)vc;
 
 @end
 
