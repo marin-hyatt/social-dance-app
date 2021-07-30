@@ -32,18 +32,15 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
     PFUser *currentUser = [PFUser currentUser];
-    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width / 2;
-    self.profilePictureView.layer.masksToBounds = true;
-    PFFileObject * postImage = currentUser[@"profilePicture"];
-    NSURL * imageURL = [NSURL URLWithString:postImage.url];
-    [self.profilePictureView setImageWithURL:imageURL];
+    PFFileObject *postImage = currentUser[@"profilePicture"];
+    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
     
     [self loadComments];
 }
 
 - (IBAction)onSendButtonPressed:(UIButton *)sender {
     PFUser *user = [PFUser currentUser];
-    // Post comment to Parse
+
     [Comment newCommentWithPost:self.post withAuthor:user withText:self.commentField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];

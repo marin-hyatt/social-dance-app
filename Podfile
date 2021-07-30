@@ -10,6 +10,7 @@ pod 'Parse'
 pod 'Parse/UI'
 pod 'AFNetworking'
 pod 'SVProgressHUD'
+pod 'DateTools'
 
 
   target 'social_dance_appTests' do

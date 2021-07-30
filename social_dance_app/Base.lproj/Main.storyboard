@@ -272,6 +272,12 @@
                                                         <action selector="onBookmarkButtonTapped:" destination="QTU-Bd-W6y" eventType="touchUpInside" id="8V1-Dy-Hc9"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smV-xY-Gkc">
+                                                    <rect key="frame" x="326" y="14.5" width="80" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="rtx-9z-dFC" firstAttribute="top" secondItem="aDg-t8-vu0" secondAttribute="bottom" constant="8" id="1IC-aL-RaD"/>
@@ -280,13 +286,15 @@
                                                 <constraint firstAttribute="trailing" secondItem="9OP-aR-xYk" secondAttribute="trailing" constant="8" id="JrP-2I-h6g"/>
                                                 <constraint firstItem="9OP-aR-xYk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="u7v-0J-uzx" secondAttribute="trailing" constant="8" id="KXT-0n-Fma"/>
                                                 <constraint firstItem="cbK-c5-C2z" firstAttribute="centerY" secondItem="AHV-C2-0SQ" secondAttribute="centerY" id="Kdh-gi-S86"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="trailing" constant="8" id="Mdu-JJ-JIW"/>
                                                 <constraint firstItem="AHV-C2-0SQ" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" constant="8" id="Mjl-jR-z4d"/>
                                                 <constraint firstItem="cbK-c5-C2z" firstAttribute="centerY" secondItem="AHV-C2-0SQ" secondAttribute="centerY" id="Msi-c8-Uzr"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="top" secondItem="Ud9-6D-Mck" secondAttribute="top" constant="5" id="PWQ-kr-3LT"/>
                                                 <constraint firstItem="u7v-0J-uzx" firstAttribute="leading" secondItem="gSi-7c-Zaa" secondAttribute="trailing" constant="3" id="Qcx-2E-4Dw"/>
+                                                <constraint firstItem="smV-xY-Gkc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="duE-Fe-jOg" secondAttribute="trailing" constant="8" id="TRa-hT-TIz"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="u7v-0J-uzx" secondAttribute="trailing" constant="8" id="UEv-pN-3O9"/>
                                                 <constraint firstItem="duE-Fe-jOg" firstAttribute="centerY" secondItem="aDg-t8-vu0" secondAttribute="centerY" id="VIA-Ju-bAV"/>
+                                                <constraint firstItem="smV-xY-Gkc" firstAttribute="centerY" secondItem="duE-Fe-jOg" secondAttribute="centerY" id="auG-yh-4AI"/>
+                                                <constraint firstAttribute="trailing" secondItem="smV-xY-Gkc" secondAttribute="trailing" constant="8" id="bNX-KE-le8"/>
                                                 <constraint firstItem="gSi-7c-Zaa" firstAttribute="leading" secondItem="cbK-c5-C2z" secondAttribute="trailing" constant="16" id="bjF-jf-Xdh"/>
                                                 <constraint firstItem="cbK-c5-C2z" firstAttribute="leading" secondItem="AHV-C2-0SQ" secondAttribute="trailing" constant="3" id="d56-xq-PP2"/>
                                                 <constraint firstItem="aDg-t8-vu0" firstAttribute="leading" secondItem="Ud9-6D-Mck" secondAttribute="leading" constant="8" id="oZx-Q4-T2J"/>
@@ -307,6 +315,7 @@
                                             <outlet property="likeButton" destination="AHV-C2-0SQ" id="EwQ-X3-b13"/>
                                             <outlet property="likeCountLabel" destination="cbK-c5-C2z" id="f6a-Iz-NZC"/>
                                             <outlet property="profilePictureView" destination="aDg-t8-vu0" id="Ahq-Rw-drp"/>
+                                            <outlet property="timestampLabel" destination="smV-xY-Gkc" id="X4m-bF-5N8"/>
                                             <outlet property="usernameLabel" destination="duE-Fe-jOg" id="EM2-gF-Qtw"/>
                                             <outlet property="videoView" destination="rtx-9z-dFC" id="Piy-N6-bLE"/>
                                             <segue destination="LTi-52-sZA" kind="show" identifier="DetailViewController" id="hg0-wf-NGo"/>

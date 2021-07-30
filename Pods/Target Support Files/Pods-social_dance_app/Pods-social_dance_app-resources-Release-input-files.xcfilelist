@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-resources.sh
+${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/Parse/ParseUI.bundle
 ${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle

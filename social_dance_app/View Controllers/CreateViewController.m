@@ -151,7 +151,7 @@
                                    outputURL:(NSURL*)outputURL
                                      handler:(void (^)(AVAssetExportSession *))completion {
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:inputURL options:nil];
-    self.exportSession = [[AVAssetExportSession alloc] initWithAsset:urlAsset presetName:AVAssetExportPresetMediumQuality];
+    self.exportSession = [[AVAssetExportSession alloc] initWithAsset:urlAsset presetName:AVAssetExportPresetLowQuality];
     self.exportSession.outputURL = outputURL;
     self.exportSession.outputFileType = AVFileTypeMPEG4;
     self.exportSession.shouldOptimizeForNetworkUse = YES;

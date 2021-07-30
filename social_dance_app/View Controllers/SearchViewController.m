@@ -140,21 +140,13 @@
         if (posts) {
             self.feed = posts;
             self.filteredFeed = self.feed;
-            [self sortFilteredFeed];
+            [self.filteredFeed sortUsingSelector:@selector(comparewithPost:)];
             [self.searchCollectionView reloadData];
         }
         else {
             [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         }
     }];
-}
-
-- (void)sortFilteredFeed {
-    NSSortDescriptor *likeSorter = [[NSSortDescriptor alloc] initWithKey:@"likeCount" ascending:NO];
-    NSSortDescriptor *commentSorter = [[NSSortDescriptor alloc] initWithKey:@"commentCount" ascending:NO];
-
-//    [self.filteredFeed sortUsingDescriptors:[NSArray arrayWithObjects:likeSorter, commentSorter, nil]];
-    [self.filteredFeed sortUsingSelector:@selector(comparewithPost:)];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {

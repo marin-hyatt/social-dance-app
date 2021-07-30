@@ -15,14 +15,10 @@
 @implementation DetailView
 
 - (void)updateAppearanceWithPost:(Post *)post {
-    NSLog(@"%@", post);
-    
-    self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
     
     [self updateSongWithPost:post];
     
-    [self updateProfilePictureWithPost:post];
     
     [self updateVideoWithPost:post];
     
@@ -40,11 +36,6 @@
             [self.albumImageView setImageWithURL: [NSURL URLWithString:post.song.albumImageURLString]];
         }
     }
-}
-
--(void)updateProfilePictureWithPost:(Post *)post {
-    PFFileObject *profileImage =  post.author[@"profilePicture"];
-    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:profileImage];
 }
 
 -(void)updateVideoWithPost:(Post *)post {

@@ -12,7 +12,8 @@
 #import "CacheManager.h"
 #import "Comment.h"
 #import "UIManager.h"
-
+#import "DateTools.h"
+#import "PostUtility.h"
 
 @implementation HomeTableViewCell
 
@@ -44,78 +45,13 @@ BOOL didSetupConstraints = NO;
 }
 
 - (void)updateAppearance {
-    PFUser *user = self.post[@"author"];
-    
-    [self updateUsernameAndProfilePictureWithUser:user];
-    
-    [self updateBookmark];
-    
-    [self updateComment];
-    
-    [self updateLikeView];
-    
-//    [self updateVideo];
-    
-}
-
-- (void)updateBookmark {
-    self.bookmarkButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFRelation *likeRelation = [self.post relationForKey:@"bookmarkRelation"];
-    PFQuery *query = [likeRelation query];
-    [query whereKey:@"objectId" equalTo:currentUser.objectId];
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else if (number > 0) {
-            self.bookmarkButton.selected = YES;
-        }
-    }];
-}
-
-- (void)updateComment {
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount];
-    
-    self.commentButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFQuery *query = [Comment query];
-    [query whereKey:@"author" equalTo:currentUser];
-    [query whereKey:@"post" equalTo:self.post];
-    
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else if (number > 0) {
-            self.commentButton.selected = YES;
-        }
-    }];
-}
-
-- (void)updateUsernameAndProfilePictureWithUser:(PFUser *)user {
-    self.usernameLabel.text = user[@"username"];
-    PFFileObject *postImage = user[@"profilePicture"];
-    
-    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
-}
-
-- (void)updateLikeView {
-    self.likeButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFRelation *likeRelation = [self.post relationForKey:@"likeRelation"];
-    PFQuery *query = [likeRelation query];
-    [query whereKey:@"objectId" equalTo:currentUser.objectId];
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-        } else if (number > 0) {
-            self.likeButton.selected = YES;
-        }
-    }];
-    
-    self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    [PostUtility updateBookmarkButton:self.bookmarkButton usingPost:self.post];
+    [PostUtility updateTimestampForLabel:self.timestampLabel usingPost:self.post];
+    [PostUtility updateCommentButton:self.commentButton withPost:self.post];
+    [PostUtility updateCommentLabel:self.commentCountLabel withPost:self.post];
+    [PostUtility updateLikeButton:self.likeButton withPost:self.post];
+    [PostUtility updateLikeLabel:self.likeCountLabel withPost:self.post];
+    [PostUtility updateUsernameLabel:self.usernameLabel andProfilePicture:self.profilePictureView WithUser:self.post.author];
 }
 
 - (void)updateVideo {
@@ -123,9 +59,6 @@ BOOL didSetupConstraints = NO;
     CGFloat videoWidth = [self.post[@"videoWidth"] doubleValue];
     
     [self fadeIn];
-    
-    NSLog(@"Constraints: %@", self.videoView.constraints);
-    NSLog(@"%@", self.videoView.constraint);
     
     if (self.videoView.constraint == nil) {
         [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
@@ -155,7 +88,6 @@ BOOL didSetupConstraints = NO;
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.player = nil;
-//    self.videoView.constraint = nil;
 }
 
 - (IBAction)onLikeButtonTapped:(UIButton *)sender {
@@ -164,7 +96,8 @@ BOOL didSetupConstraints = NO;
     if (!self.likeButton.selected) {
         [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateLikeView];
+                [PostUtility updateLikeLabel:self.likeCountLabel withPost:self.post];
+                [PostUtility updateLikeButton:self.likeButton withPost:self.post];
             } else {
                 NSLog(@"Error: %@", error.localizedDescription);
             }
@@ -172,7 +105,8 @@ BOOL didSetupConstraints = NO;
     } else {
         [Post unlikePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateLikeView];
+                [PostUtility updateLikeLabel:self.likeCountLabel withPost:self.post];
+                [PostUtility updateLikeButton:self.likeButton withPost:self.post];
             } else {
                 NSLog(@"Error: %@", error.localizedDescription);
             }
@@ -190,13 +124,13 @@ BOOL didSetupConstraints = NO;
     if (!self.bookmarkButton.selected) {
         [Post bookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateBookmark];
+                [PostUtility updateBookmarkButton:self.bookmarkButton usingPost:self.post];
             }
         }];
     } else {
         [Post unbookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateBookmark];
+                [PostUtility updateBookmarkButton:self.bookmarkButton usingPost:self.post];
             }
         }];
     }

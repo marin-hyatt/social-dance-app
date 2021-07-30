@@ -15,6 +15,7 @@
 #import "CacheManager.h"
 #import "TutorialViewController.h"
 #import "UIManager.h"
+#import "PostUtility.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
@@ -28,10 +29,11 @@
     // Do any additional setup after loading the view.
     [self.detailView updateAppearanceWithPost:self.post];
     [self updateVideo];
-    [self updateLikeButton];
-    [self updateComment];
-    [self updateBookmark];
-    
+
+    [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
+    [PostUtility updateCommentButton:self.detailView.commentButton withPost:self.post];
+    [PostUtility updateBookmarkButton:self.detailView.bookmarkButton usingPost:self.post];
+    [PostUtility updateUsernameLabel:self.detailView.usernameLabel andProfilePicture:self.detailView.profilePictureView WithUser:self.post.author];
     
     [self.detailView.tagView setAxis:UILayoutConstraintAxisHorizontal];
     [self.detailView.tagView setDistribution:UIStackViewDistributionFillProportionally];
@@ -78,54 +80,6 @@
     [p seekToTime:kCMTimeZero completionHandler:nil];
 }
 
-- (void)updateLikeButton {
-    self.detailView.likeButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFRelation *likeRelation = [self.post relationForKey:@"likeRelation"];
-    PFQuery *query = [likeRelation query];
-    [query whereKey:@"objectId" equalTo:currentUser.objectId];
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
-        } else if (number > 0) {
-            self.detailView.likeButton.selected = YES;
-        }
-    }];
-}
-
-- (void)updateComment {
-    self.detailView.commentButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFQuery *query = [Comment query];
-    [query whereKey:@"author" equalTo:currentUser];
-    [query whereKey:@"post" equalTo:self.post];
-    
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
-        } else if (number > 0) {
-            self.detailView.commentButton.selected = YES;
-        }
-    }];
-}
-
-- (void)updateBookmark {
-    self.detailView.bookmarkButton.selected = NO;
-    PFUser *currentUser = [PFUser currentUser];
-    PFRelation *likeRelation = [self.post relationForKey:@"bookmarkRelation"];
-    PFQuery *query = [likeRelation query];
-    [query whereKey:@"objectId" equalTo:currentUser.objectId];
-    
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-        if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
-        } else if (number > 0) {
-            self.detailView.bookmarkButton.selected = YES;
-        }
-    }];
-}
 
 - (IBAction)onListenButtonPressed:(UIButton *)sender {
     // Check to see if Spotify app is installed
@@ -147,7 +101,7 @@
     if (!self.detailView.likeButton.selected) {
         [Post likePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateLikeButton];
+                [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
             } else {
                 [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
@@ -155,7 +109,7 @@
     } else {
         [Post unlikePost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateLikeButton];
+                [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
             } else {
                 [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
@@ -173,13 +127,13 @@
     if (!self.detailView.bookmarkButton.selected) {
         [Post bookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateBookmark];
+                [PostUtility updateBookmarkButton:self.detailView.bookmarkButton usingPost:self.post];
             }
         }];
     } else {
         [Post unbookmarkPost:self.post withUser:user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
-                [self updateBookmark];
+                [PostUtility updateBookmarkButton:self.detailView.bookmarkButton usingPost:self.post];
             }
         }];
     }

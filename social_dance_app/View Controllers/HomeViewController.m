@@ -51,15 +51,7 @@ static void * cellContext = &cellContext;
     
     cell.post = self.feed[indexPath.row];
     cell.delegate = self;
-    
-//    if (cell.videoView.constraint == nil) {
-//        [cell updateVideo];
-//    } else {
-//        cell.videoView.constraint = nil;
-//        [cell updateVideo];
-//    }
-    
-    // Refactor cell methods to here?
+
     [self updateCellVideoWithCell:cell];
     
     [cell updateAppearance];
@@ -111,8 +103,6 @@ static void * cellContext = &cellContext;
     
     [postQuery whereKey:@"author" matchesKey:@"user" inQuery:followerQuery];
  
-
-    // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.isMoreDataLoading = false;
@@ -149,16 +139,13 @@ static void * cellContext = &cellContext;
 
 
 - (IBAction)onLogoutButtonPressed:(id)sender {
-    //Creates app delegate, Main storyboard, and Login view controller. Then sets the root view controller (the one the user sees) to the Login view controller
     SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     myDelegate.window.rootViewController = loginViewController;
     
-    // Logs out user
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // PFUser.current() will now be nil
     }];
 }
 
