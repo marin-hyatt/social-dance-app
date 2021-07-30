@@ -6,10 +6,14 @@
 //
 
 #import "TutorialSettingViewController.h"
+#import "TutorialSettingView.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
-@interface TutorialSettingViewController ()
+@interface TutorialSettingViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *mirrorVideoSwitch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *videoSpeedControl;
+@property (strong, nonatomic) IBOutlet TutorialSettingView *tutorialSettingView;
 
 @end
 
@@ -29,6 +33,11 @@
     } else {
         self.videoSpeedControl.selectedSegmentIndex = 3;
     }
+    
+    self.tutorialSettingView.beginningMinuteField.delegate = self;
+    self.tutorialSettingView.beginningSecondField.delegate = self;
+    self.tutorialSettingView.endMinuteField.delegate = self;
+    self.tutorialSettingView.endSecondField.delegate = self;
 }
 
 - (IBAction)onMirrorVideoSwitchChanged:(id)sender {
@@ -49,6 +58,32 @@
     }
     
     [self.delegate videoSpeedChangedWithNewMultiplier:self.videoSpeedMutliplier];
+}
+
+- (void)updateStartTime {
+    float startTimeInSeconds = [self.tutorialSettingView.beginningMinuteField.text floatValue] * 60 + [self.tutorialSettingView.beginningSecondField.text floatValue];
+    NSLog(@"%f", startTimeInSeconds);
+    CMTime startTime = CMTimeMakeWithSeconds(startTimeInSeconds, NSEC_PER_SEC);
+    NSLog(@"%f", CMTimeGetSeconds(startTime));
+    self.startTime = startTime;
+    NSLog(@"%f", CMTimeGetSeconds(self.startTime));
+    [self.delegate startTimeChangedToTime:self.startTime];
+}
+
+- (void)updateEndTime {
+    float endTimeInSeconds = [self.tutorialSettingView.endMinuteField.text floatValue] * 60 + [self.tutorialSettingView.endSecondField.text floatValue];
+    CMTime endTime = CMTimeMakeWithSeconds(endTimeInSeconds, NSEC_PER_SEC);
+    self.endTime = endTime;
+    [self.delegate endTimeChangedToTime:self.endTime];
+    NSLog(@"%f", endTimeInSeconds);
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 0) {
+        [self updateStartTime];
+    } else {
+        [self updateEndTime];
+    }
 }
 
 /*

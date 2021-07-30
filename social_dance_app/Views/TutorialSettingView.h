@@ -10,6 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TutorialSettingView : UIView
+@property (weak, nonatomic) IBOutlet UITextField *beginningMinuteField;
+@property (weak, nonatomic) IBOutlet UITextField *beginningSecondField;
+@property (weak, nonatomic) IBOutlet UITextField *endMinuteField;
+@property (weak, nonatomic) IBOutlet UITextField *endSecondField;
+
 
 @end
 

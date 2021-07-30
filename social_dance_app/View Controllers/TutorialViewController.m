@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet TutorialView *tutorialView;
 @property BOOL isMirrored;
 @property float videoSpeedMultiplier;
+@property CMTime startTime;
+@property CMTime endTime;
 
 @end
 
@@ -29,6 +31,8 @@
     self.isMirrored = YES;
     self.videoSpeedMultiplier = 1;
     self.tutorialView.slider.value = 0;
+    self.startTime = CMTimeMakeWithSeconds(0, NSEC_PER_SEC);
+    self.endTime = self.tutorialView.player.currentItem.duration;
     
     [self.tutorialView updateViewWithMirrorSetting:self.isMirrored];
     self.tutorialView.playbackSpeed = 1;
@@ -58,7 +62,7 @@
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
-    [p seekToTime:kCMTimeZero completionHandler:nil];
+    [p seekToTime:self.startTime completionHandler:nil];
 }
 
 - (IBAction)onSettingsButtonPressed:(UIBarButtonItem *)sender {
@@ -92,6 +96,7 @@
         
         double time = duration * (value - minValue) / (maxValue - minValue);
         
+        
         [self.tutorialView.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }
     [self.tutorialView.player pause];
@@ -99,7 +104,21 @@
 
 
 - (void)updateSliderWithTimestamp:(CMTime)timestamp {
+    // Check loop
+    if (CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime) > CMTimeGetSeconds(self.endTime)) {
+        [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    }
     self.tutorialView.slider.value = CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime)  / CMTimeGetSeconds(self.tutorialView.player.currentItem.duration);
+}
+
+- (void)startTimeChangedToTime:(CMTime)startTime {
+    self.startTime = startTime;
+    NSLog(@"%f", CMTimeGetSeconds(self.startTime));
+    [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+}
+
+- (void)endTimeChangedToTime:(CMTime)endTime {
+    self.endTime = endTime;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

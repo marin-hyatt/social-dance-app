@@ -6,6 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mirrorVideoChangedWithNewValue:(BOOL)isMirrored;
 - (void)videoSpeedChangedWithNewMultiplier:(float)multiplier;
+- (void)startTimeChangedToTime:(CMTime)startTime;
+- (void)endTimeChangedToTime:(CMTime)endTime;
 
 @end
 
@@ -20,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<TutorialSettingDelegate> delegate;
 @property BOOL isMirrored;
 @property float videoSpeedMutliplier;
+@property CMTime startTime;
+@property CMTime endTime;
 
 @end
 
