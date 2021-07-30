@@ -38,6 +38,7 @@
     self.tutorialSettingView.beginningSecondField.delegate = self;
     self.tutorialSettingView.endMinuteField.delegate = self;
     self.tutorialSettingView.endSecondField.delegate = self;
+
 }
 
 - (IBAction)onMirrorVideoSwitchChanged:(id)sender {
@@ -62,20 +63,18 @@
 
 - (void)updateStartTime {
     float startTimeInSeconds = [self.tutorialSettingView.beginningMinuteField.text floatValue] * 60 + [self.tutorialSettingView.beginningSecondField.text floatValue];
-    NSLog(@"%f", startTimeInSeconds);
+ 
     CMTime startTime = CMTimeMakeWithSeconds(startTimeInSeconds, NSEC_PER_SEC);
-    NSLog(@"%f", CMTimeGetSeconds(startTime));
-    self.startTime = startTime;
-    NSLog(@"%f", CMTimeGetSeconds(self.startTime));
-    [self.delegate startTimeChangedToTime:self.startTime];
+
+    [self.delegate startTimeChangedToTime:startTime];
 }
 
 - (void)updateEndTime {
     float endTimeInSeconds = [self.tutorialSettingView.endMinuteField.text floatValue] * 60 + [self.tutorialSettingView.endSecondField.text floatValue];
     CMTime endTime = CMTimeMakeWithSeconds(endTimeInSeconds, NSEC_PER_SEC);
-    self.endTime = endTime;
-    [self.delegate endTimeChangedToTime:self.endTime];
-    NSLog(@"%f", endTimeInSeconds);
+
+    [self.delegate endTimeChangedToTime:endTime];
+
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -84,6 +83,16 @@
     } else {
         [self updateEndTime];
     }
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if(range.length + range.location > textField.text.length) {
+        return NO;
+    }
+        
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return newLength <= 2;
 }
 
 /*

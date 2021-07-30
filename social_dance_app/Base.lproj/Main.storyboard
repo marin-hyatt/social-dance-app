@@ -731,45 +731,45 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eAh-n7-nGL">
-                                <rect key="frame" x="245" y="416.5" width="30" height="34"/>
+                                <rect key="frame" x="245" y="416.5" width="40" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="NkW-6M-4rt"/>
+                                    <constraint firstAttribute="width" constant="40" id="NkW-6M-4rt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7i-Sp-x3v">
-                                <rect key="frame" x="96" y="423" width="5" height="21"/>
+                                <rect key="frame" x="116" y="423" width="5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="esz-Ba-Uzm">
-                                <rect key="frame" x="109" y="416.5" width="60" height="34"/>
+                                <rect key="frame" x="129" y="416.5" width="40" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="XYq-xu-Kx3"/>
+                                    <constraint firstAttribute="width" constant="40" id="XYq-xu-Kx3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOB-6x-oPW">
-                                <rect key="frame" x="283" y="423" width="5" height="21"/>
+                                <rect key="frame" x="293" y="423" width="5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Yl-YW-qXM">
-                                <rect key="frame" x="296" y="416.5" width="60" height="34"/>
+                                <rect key="frame" x="306" y="416.5" width="40" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="bkN-5u-9go"/>
+                                    <constraint firstAttribute="width" constant="40" id="bkN-5u-9go"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8H-qW-o4q">
-                                <rect key="frame" x="58" y="416.5" width="30" height="34"/>
+                                <rect key="frame" x="68" y="416.5" width="40" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="VwI-qJ-J1r"/>
+                                    <constraint firstAttribute="width" constant="40" id="VwI-qJ-J1r"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>

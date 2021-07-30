@@ -24,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<TutorialSettingDelegate> delegate;
 @property BOOL isMirrored;
 @property float videoSpeedMutliplier;
-@property CMTime startTime;
-@property CMTime endTime;
+@property NSString *startTimePlaceholder;
+@property NSString *endTimePlaceholder;
 
 @end
 

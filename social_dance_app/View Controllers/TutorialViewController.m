@@ -43,26 +43,21 @@
 }
 
 - (void)setStartLabel {
-    NSUInteger currentTime = CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime);
-
-    NSUInteger minutes = floor(currentTime % 3600 / 60);
-    NSUInteger seconds = floor(currentTime % 3600 % 60);
-
-    NSString *startTime = [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)minutes, (unsigned long)seconds];
-    
-    self.tutorialView.startLabel.text = startTime;
+    self.tutorialView.startLabel.text = [self convertCMTimeToReadableFormatWithCMTime:self.startTime];
 }
 
 - (void)setEndLabel {
-    NSUInteger duration = CMTimeGetSeconds(self.tutorialView.player.currentItem.asset.duration);
-    NSLog(@"%lu", (unsigned long)duration);
+    self.tutorialView.endLabel.text = [self convertCMTimeToReadableFormatWithCMTime:self.endTime];
+}
 
-    NSUInteger minutes = floor(duration % 3600 / 60);
-    NSUInteger seconds = floor(duration % 3600 % 60);
+- (NSString *)convertCMTimeToReadableFormatWithCMTime:(CMTime)time {
+    NSUInteger timeInSeconds = CMTimeGetSeconds(time);
 
-    NSString *endTime = [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)minutes, (unsigned long)seconds];
-    
-    self.tutorialView.endLabel.text = endTime;
+    NSUInteger minutes = floor(timeInSeconds % 3600 / 60);
+    NSUInteger seconds = floor(timeInSeconds % 3600 % 60);
+
+    NSString *readableTime = [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)minutes, (unsigned long)seconds];
+    return readableTime;
 }
 
 - (void)updateVideo {
@@ -80,8 +75,8 @@
                                                        object:[self.tutorialView.player currentItem]];
             [self.tutorialView.playerView setPlayer:self.tutorialView.player];
             [(AVPlayerLayer *)[self.tutorialView.playerView layer] setVideoGravity:AVLayerVideoGravityResizeAspect];
+            self.endTime = self.tutorialView.player.currentItem.asset.duration;
             [self setEndLabel];
-            self.endTime = self.tutorialView.player.currentItem.duration;
         }
     }];
 }
@@ -135,7 +130,7 @@
 
 
 - (void)updateSliderWithTimestamp:(CMTime)timestamp {
-    [self setStartLabel];
+    self.tutorialView.startLabel.text = [self convertCMTimeToReadableFormatWithCMTime:self.tutorialView.player.currentTime];
     
     if (CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime) > CMTimeGetSeconds(self.endTime)) {
         [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
@@ -165,6 +160,8 @@
         vc.delegate = self;
         vc.isMirrored = self.isMirrored;
         vc.videoSpeedMutliplier = self.videoSpeedMultiplier;
+        vc.startTimePlaceholder = [self convertCMTimeToReadableFormatWithCMTime:self.startTime];
+        vc.endTimePlaceholder = [self convertCMTimeToReadableFormatWithCMTime:self.endTime];
     }
 }
 
