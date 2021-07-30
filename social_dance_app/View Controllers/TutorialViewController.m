@@ -96,15 +96,19 @@
         
         double time = duration * (value - minValue) / (maxValue - minValue);
         
+        if (time > CMTimeGetSeconds(self.endTime)) {
+            [self.tutorialView.player seekToTime:self.endTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+        } else if (time < CMTimeGetSeconds(self.startTime)) {
+        } else {
+            [self.tutorialView.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+        }
         
-        [self.tutorialView.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }
     [self.tutorialView.player pause];
 }
 
 
 - (void)updateSliderWithTimestamp:(CMTime)timestamp {
-    // Check loop
     if (CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime) > CMTimeGetSeconds(self.endTime)) {
         [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }
@@ -113,7 +117,6 @@
 
 - (void)startTimeChangedToTime:(CMTime)startTime {
     self.startTime = startTime;
-    NSLog(@"%f", CMTimeGetSeconds(self.startTime));
     [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
