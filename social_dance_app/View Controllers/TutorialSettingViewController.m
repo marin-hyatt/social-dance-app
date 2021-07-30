@@ -39,6 +39,13 @@
     self.tutorialSettingView.endMinuteField.delegate = self;
     self.tutorialSettingView.endSecondField.delegate = self;
 
+    NSArray *startPlaceholder = [self.startTimePlaceholder componentsSeparatedByString:@":"];
+    self.tutorialSettingView.beginningMinuteField.placeholder = startPlaceholder[0];
+    self.tutorialSettingView.beginningSecondField.placeholder = startPlaceholder[1];
+    
+    NSArray *endPlaceholder = [self.endTimePlaceholder componentsSeparatedByString:@":"];
+    self.tutorialSettingView.endMinuteField.placeholder = endPlaceholder[0];
+    self.tutorialSettingView.endSecondField.placeholder = endPlaceholder[1];
 }
 
 - (IBAction)onMirrorVideoSwitchChanged:(id)sender {
