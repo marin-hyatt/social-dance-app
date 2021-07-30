@@ -622,28 +622,46 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zfl-70-cea">
-                                <rect key="frame" x="14" y="775" width="386" height="31"/>
+                                <rect key="frame" x="41" y="775" width="338" height="31"/>
                                 <color key="minimumTrackTintColor" red="0.58431372550000005" green="0.74117647060000003" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="maximumTrackTintColor" systemColor="systemGray5Color"/>
                                 <connections>
                                     <action selector="onSliderValueChanged:" destination="Quh-3o-mLf" eventType="valueChanged" id="tbU-bN-Oxi"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="end" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxe-0J-9zV">
+                                <rect key="frame" x="381" y="779.5" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vt1-mG-vKc">
+                                <rect key="frame" x="4" y="779.5" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Avh-DS-yG3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0GU-Xu-717" firstAttribute="top" secondItem="Avh-DS-yG3" secondAttribute="top" id="919-HD-rgp"/>
                             <constraint firstItem="0GU-Xu-717" firstAttribute="bottom" secondItem="Avh-DS-yG3" secondAttribute="bottom" id="BXz-VL-18U"/>
+                            <constraint firstItem="zfl-70-cea" firstAttribute="leading" secondItem="vt1-mG-vKc" secondAttribute="trailing" constant="4" id="KE1-c5-ISG"/>
+                            <constraint firstItem="Mxe-0J-9zV" firstAttribute="centerY" secondItem="zfl-70-cea" secondAttribute="centerY" id="KKK-eq-IFn"/>
+                            <constraint firstItem="Mxe-0J-9zV" firstAttribute="leading" secondItem="zfl-70-cea" secondAttribute="trailing" constant="4" id="KbX-s1-fUj"/>
                             <constraint firstItem="Avh-DS-yG3" firstAttribute="bottom" secondItem="zfl-70-cea" secondAttribute="bottom" constant="8" id="VsI-SE-7Cc"/>
                             <constraint firstItem="0GU-Xu-717" firstAttribute="leading" secondItem="Avh-DS-yG3" secondAttribute="leading" id="YzI-vk-YoR"/>
+                            <constraint firstItem="Avh-DS-yG3" firstAttribute="trailing" secondItem="Mxe-0J-9zV" secondAttribute="trailing" constant="4" id="b9c-EJ-J2b"/>
                             <constraint firstItem="0GU-Xu-717" firstAttribute="trailing" secondItem="Avh-DS-yG3" secondAttribute="trailing" id="dnZ-PG-UPR"/>
-                            <constraint firstItem="Avh-DS-yG3" firstAttribute="trailing" secondItem="zfl-70-cea" secondAttribute="trailing" constant="16" id="fFU-5u-jC2"/>
-                            <constraint firstItem="zfl-70-cea" firstAttribute="leading" secondItem="Avh-DS-yG3" secondAttribute="leading" constant="16" id="lwP-bd-TeY"/>
+                            <constraint firstItem="vt1-mG-vKc" firstAttribute="leading" secondItem="Avh-DS-yG3" secondAttribute="leading" constant="4" id="gZm-3e-CpD"/>
+                            <constraint firstItem="vt1-mG-vKc" firstAttribute="centerY" secondItem="zfl-70-cea" secondAttribute="centerY" id="uPf-Ha-jfe"/>
                         </constraints>
                         <connections>
+                            <outlet property="endLabel" destination="Mxe-0J-9zV" id="kIZ-w3-VfO"/>
                             <outlet property="playerView" destination="0GU-Xu-717" id="8Cr-RR-Lxe"/>
                             <outlet property="slider" destination="zfl-70-cea" id="l7K-51-iDv"/>
+                            <outlet property="startLabel" destination="vt1-mG-vKc" id="Y1h-e8-Atr"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="POC-Qq-L8C">

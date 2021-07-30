@@ -32,13 +32,37 @@
     self.videoSpeedMultiplier = 1;
     self.tutorialView.slider.value = 0;
     self.startTime = CMTimeMakeWithSeconds(0, NSEC_PER_SEC);
-    self.endTime = self.tutorialView.player.currentItem.duration;
+    
     
     [self.tutorialView updateViewWithMirrorSetting:self.isMirrored];
     self.tutorialView.playbackSpeed = 1;
     [self updateVideo];
     
+    
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateSliderWithTimestamp:) userInfo:nil repeats:YES];
+}
+
+- (void)setStartLabel {
+    NSUInteger currentTime = CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime);
+
+    NSUInteger minutes = floor(currentTime % 3600 / 60);
+    NSUInteger seconds = floor(currentTime % 3600 % 60);
+
+    NSString *startTime = [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)minutes, (unsigned long)seconds];
+    
+    self.tutorialView.startLabel.text = startTime;
+}
+
+- (void)setEndLabel {
+    NSUInteger duration = CMTimeGetSeconds(self.tutorialView.player.currentItem.asset.duration);
+    NSLog(@"%lu", (unsigned long)duration);
+
+    NSUInteger minutes = floor(duration % 3600 / 60);
+    NSUInteger seconds = floor(duration % 3600 % 60);
+
+    NSString *endTime = [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)minutes, (unsigned long)seconds];
+    
+    self.tutorialView.endLabel.text = endTime;
 }
 
 - (void)updateVideo {
@@ -56,6 +80,8 @@
                                                        object:[self.tutorialView.player currentItem]];
             [self.tutorialView.playerView setPlayer:self.tutorialView.player];
             [(AVPlayerLayer *)[self.tutorialView.playerView layer] setVideoGravity:AVLayerVideoGravityResizeAspect];
+            [self setEndLabel];
+            self.endTime = self.tutorialView.player.currentItem.duration;
         }
     }];
 }
@@ -109,6 +135,8 @@
 
 
 - (void)updateSliderWithTimestamp:(CMTime)timestamp {
+    [self setStartLabel];
+    
     if (CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime) > CMTimeGetSeconds(self.endTime)) {
         [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }

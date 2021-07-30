@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property AVPlayer *player;
 @property AVPlayerLayer *playerLayer;
 @property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UILabel *startLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endLabel;
 @property float playbackSpeed;
 - (void)updateViewWithMirrorSetting:(BOOL)isMirrored;
 - (void)mirrorViewWithSetting:(BOOL)isMirrored;
