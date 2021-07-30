@@ -34,6 +34,7 @@
     [PostUtility updateCommentButton:self.detailView.commentButton withPost:self.post];
     [PostUtility updateBookmarkButton:self.detailView.bookmarkButton usingPost:self.post];
     [PostUtility updateUsernameLabel:self.detailView.usernameLabel andProfilePicture:self.detailView.profilePictureView WithUser:self.post.author];
+    [PostUtility updateTimestampForLabel:self.detailView.timestampLabel usingPost:self.post];
     
     [self.detailView.tagView setAxis:UILayoutConstraintAxisHorizontal];
     [self.detailView.tagView setDistribution:UIStackViewDistributionFillProportionally];
