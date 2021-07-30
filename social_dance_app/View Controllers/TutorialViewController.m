@@ -139,12 +139,16 @@
 }
 
 - (void)startTimeChangedToTime:(CMTime)startTime {
-    self.startTime = startTime;
-    [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    if (CMTimeGetSeconds(startTime) >= CMTimeGetSeconds(self.startTime)) {
+        self.startTime = startTime;
+        [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    }
 }
 
 - (void)endTimeChangedToTime:(CMTime)endTime {
-    self.endTime = endTime;
+    if (CMTimeGetSeconds(endTime) <= CMTimeGetSeconds(self.endTime)) {
+        self.endTime = endTime;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

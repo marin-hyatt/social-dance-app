@@ -766,6 +766,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaS-wn-WIE">
+                                <rect key="frame" x="161.5" y="470.5" width="91" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Set new interval"/>
+                                <connections>
+                                    <action selector="onSetNewIntervalButtonPressed:" destination="Lc4-40-nHX" eventType="touchUpInside" id="x21-c5-QjP"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8H-qW-o4q">
                                 <rect key="frame" x="68" y="416.5" width="40" height="34"/>
                                 <constraints>
@@ -783,7 +791,9 @@
                             <constraint firstItem="V7i-Sp-x3v" firstAttribute="centerY" secondItem="x8H-qW-o4q" secondAttribute="centerY" id="1Gi-QJ-fXk"/>
                             <constraint firstItem="yuV-tK-WAy" firstAttribute="centerX" secondItem="fdQ-af-S8V" secondAttribute="centerX" id="3ee-dK-xs4"/>
                             <constraint firstItem="6Yl-YW-qXM" firstAttribute="leading" secondItem="rOB-6x-oPW" secondAttribute="trailing" constant="8" id="4a6-so-nBo"/>
+                            <constraint firstItem="MaS-wn-WIE" firstAttribute="centerX" secondItem="njI-R4-VRg" secondAttribute="centerX" id="8oi-11-X3Q"/>
                             <constraint firstItem="bPa-tp-xWt" firstAttribute="centerX" secondItem="fdQ-af-S8V" secondAttribute="centerX" id="A1l-SH-386"/>
+                            <constraint firstItem="MaS-wn-WIE" firstAttribute="top" secondItem="eAh-n7-nGL" secondAttribute="bottom" constant="20" id="EIB-vj-9Yr"/>
                             <constraint firstItem="V7i-Sp-x3v" firstAttribute="leading" secondItem="x8H-qW-o4q" secondAttribute="trailing" constant="8" id="EhG-a2-3WD"/>
                             <constraint firstItem="njI-R4-VRg" firstAttribute="top" secondItem="fud-aH-MEL" secondAttribute="bottom" constant="20" id="H0n-ql-gdK"/>
                             <constraint firstItem="rOB-6x-oPW" firstAttribute="leading" secondItem="eAh-n7-nGL" secondAttribute="trailing" constant="8" id="Ibd-HL-zst"/>

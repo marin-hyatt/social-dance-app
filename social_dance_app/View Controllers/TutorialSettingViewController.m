@@ -9,11 +9,14 @@
 #import "TutorialSettingView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "UIManager.h"
 
 @interface TutorialSettingViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *mirrorVideoSwitch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *videoSpeedControl;
 @property (strong, nonatomic) IBOutlet TutorialSettingView *tutorialSettingView;
+@property float startTime;
+@property float endTime;
 
 @end
 
@@ -46,6 +49,16 @@
     NSArray *endPlaceholder = [self.endTimePlaceholder componentsSeparatedByString:@":"];
     self.tutorialSettingView.endMinuteField.placeholder = endPlaceholder[0];
     self.tutorialSettingView.endSecondField.placeholder = endPlaceholder[1];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)dismissKeyboard {
+    [self.tutorialSettingView.beginningMinuteField resignFirstResponder];
+    [self.tutorialSettingView.beginningSecondField resignFirstResponder];
+    [self.tutorialSettingView.endMinuteField resignFirstResponder];
+    [self.tutorialSettingView.endSecondField resignFirstResponder];
 }
 
 - (IBAction)onMirrorVideoSwitchChanged:(id)sender {
@@ -70,25 +83,35 @@
 
 - (void)updateStartTime {
     float startTimeInSeconds = [self.tutorialSettingView.beginningMinuteField.text floatValue] * 60 + [self.tutorialSettingView.beginningSecondField.text floatValue];
- 
-    CMTime startTime = CMTimeMakeWithSeconds(startTimeInSeconds, NSEC_PER_SEC);
-
-    [self.delegate startTimeChangedToTime:startTime];
+    self.startTime = startTimeInSeconds;
+    
+    /*
+    if (self.startTime < self.endTime) {
+        CMTime startTime = CMTimeMakeWithSeconds(startTimeInSeconds, NSEC_PER_SEC);
+        [self.delegate startTimeChangedToTime:startTime];
+    }
+     */
 }
 
 - (void)updateEndTime {
     float endTimeInSeconds = [self.tutorialSettingView.endMinuteField.text floatValue] * 60 + [self.tutorialSettingView.endSecondField.text floatValue];
-    CMTime endTime = CMTimeMakeWithSeconds(endTimeInSeconds, NSEC_PER_SEC);
-
-    [self.delegate endTimeChangedToTime:endTime];
-
+    self.endTime = endTimeInSeconds;
+    
+    /*
+    if (self.endTime > self.startTime) {
+        CMTime endTime = CMTimeMakeWithSeconds(endTimeInSeconds, NSEC_PER_SEC);
+        [self.delegate endTimeChangedToTime:endTime];
+    }
+     */
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.tag == 0) {
-        [self updateStartTime];
-    } else {
-        [self updateEndTime];
+    if (![textField.text isEqualToString:@""]) {
+        if (textField.tag == 0) {
+            [self updateStartTime];
+        } else {
+            [self updateEndTime];
+        }
     }
 }
 
@@ -101,6 +124,33 @@
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return newLength <= 2;
 }
+
+- (IBAction)onSetNewIntervalButtonPressed:(UIButton *)sender {
+    [self updateStartTime];
+    [self updateEndTime];
+    
+    if (self.endTime > self.startTime) {
+        [self.delegate startTimeChangedToTime:CMTimeMakeWithSeconds(self.startTime, NSEC_PER_SEC)];
+        [self.delegate endTimeChangedToTime:CMTimeMakeWithSeconds(self.endTime, NSEC_PER_SEC)];
+    } else {
+        [UIManager presentAlertWithMessage:@"Choose an end time that is greater than the start time." overViewController:self];
+    }
+}
+
+/*
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    [self updateStartTime];
+    [self updateEndTime];
+    
+    if (self.endTime > self.startTime) {
+        [self.delegate startTimeChangedToTime:CMTimeMakeWithSeconds(self.startTime, NSEC_PER_SEC)];
+        [self.delegate endTimeChangedToTime:CMTimeMakeWithSeconds(self.endTime, NSEC_PER_SEC)];
+    } else {
+        [UIManager presentAlertWithMessage:@"Choose an end time that is greater than the start time." overViewController:self];
+    }
+}
+ */
 
 /*
 #pragma mark - Navigation
