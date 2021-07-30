@@ -249,3 +249,8 @@ commentsCount | Number | number of comments on post
 ![](sprint_2_gif_4.gif)
 ![](sprint_2_gif_5.gif)
 
+**Sprint 3**
+![](sprint_3_gif_1.gif)
+![](sprint_3_gif_2.gif)
+![](sprint_3_gif_3.gif)
+![](sprint_3_gif_4.gif)

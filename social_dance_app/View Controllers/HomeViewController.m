@@ -16,6 +16,7 @@
 #import "FollowerRelation.h"
 #import "CommentViewController.h"
 #import "CacheManager.h"
+#import "UIManager.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, HomeTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -111,7 +112,7 @@ static void * cellContext = &cellContext;
             [self.refreshControl endRefreshing];
         }
         else {
-            NSLog(@"Parse error: %@", error.localizedDescription);
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
         }
     }];
 }

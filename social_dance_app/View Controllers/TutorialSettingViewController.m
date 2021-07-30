@@ -138,21 +138,6 @@
 }
 
 /*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:YES];
-    [self updateStartTime];
-    [self updateEndTime];
-    
-    if (self.endTime > self.startTime) {
-        [self.delegate startTimeChangedToTime:CMTimeMakeWithSeconds(self.startTime, NSEC_PER_SEC)];
-        [self.delegate endTimeChangedToTime:CMTimeMakeWithSeconds(self.endTime, NSEC_PER_SEC)];
-    } else {
-        [UIManager presentAlertWithMessage:@"Choose an end time that is greater than the start time." overViewController:self];
-    }
-}
- */
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

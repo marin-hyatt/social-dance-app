@@ -20,7 +20,20 @@
     [(AVPlayerLayer *)[self layer] setPlayer:player];
     
     [(AVPlayerLayer *)[self layer] setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [player addObserver:self forKeyPath:@"status" options:0 context:nil];
     
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context {
+    if (object == self.player && [keyPath isEqualToString:@"status"]) {
+        if (self.player.currentItem.status == AVPlayerStatusReadyToPlay) {
+            NSLog(@"Ready to play");
+            [object removeObserver:self];
+        } else if (self.player.status == AVPlayerStatusFailed) {
+            // something went wrong. player.error should contain some information
+        }
+    }
 }
 
 
