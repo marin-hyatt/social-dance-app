@@ -141,7 +141,7 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
             });
         } else if (exportSession.status == AVAssetExportSessionStatusFailed) {
-            [UIManager presentAlertWithMessage:exportSession.error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:[NSString stringWithFormat:@"%@. Try uploading a shorter video.", exportSession.error.localizedDescription] overViewController:self];
         }
     }];
 }
@@ -151,7 +151,7 @@
                                    outputURL:(NSURL*)outputURL
                                      handler:(void (^)(AVAssetExportSession *))completion {
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:inputURL options:nil];
-    self.exportSession = [[AVAssetExportSession alloc] initWithAsset:urlAsset presetName:AVAssetExportPresetLowQuality];
+    self.exportSession = [[AVAssetExportSession alloc] initWithAsset:urlAsset presetName:AVAssetExportPresetMediumQuality];
     self.exportSession.outputURL = outputURL;
     self.exportSession.outputFileType = AVFileTypeMPEG4;
     self.exportSession.shouldOptimizeForNetworkUse = YES;
@@ -209,7 +209,6 @@
 }
 
 - (void) showImagePicker:(BOOL) userIsRecording {
-    // Sets up image picker
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;

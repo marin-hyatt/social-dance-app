@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *bookmarkButton;
 @property (weak, nonatomic) IBOutlet UIStackView *tagView;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UIButton *listenWithSpotifyButton;
 -(void)updateAppearanceWithPost:(Post *)post;
 
 @end

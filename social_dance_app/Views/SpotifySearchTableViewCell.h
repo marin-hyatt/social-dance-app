@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *trackNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (nonatomic, weak) id<SpotifySearchCellDelegate> delegate;
-
+@property (weak, nonatomic) IBOutlet UIButton *listenWithSpotifyButton;
 -(void)updateAppearance;
 
 @end

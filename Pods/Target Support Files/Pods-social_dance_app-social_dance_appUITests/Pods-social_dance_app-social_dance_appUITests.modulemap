@@ -1,4 +1,4 @@
-framework module Pods_social_dance_app_social_dance_appUITests {
+module Pods_social_dance_app_social_dance_appUITests {
   umbrella header "Pods-social_dance_app-social_dance_appUITests-umbrella.h"
 
   export *

@@ -17,9 +17,10 @@
 - (void)updateAppearanceWithPost:(Post *)post {
     self.captionLabel.text = post.caption;
     
+    self.listenWithSpotifyButton.layer.cornerRadius = 5;
+    self.listenWithSpotifyButton.layer.masksToBounds = true;
+    
     [self updateSongWithPost:post];
-    
-    
     [self updateVideoWithPost:post];
     
 }

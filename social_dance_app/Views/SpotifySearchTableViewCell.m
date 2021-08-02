@@ -23,6 +23,8 @@
 }
 
 - (void)updateAppearance {
+    self.listenWithSpotifyButton.layer.cornerRadius = 5;
+    self.listenWithSpotifyButton.layer.masksToBounds = true;
     
     self.trackNameLabel.text = self.song.title;
     self.artistNameLabel.text = self.song.artist;
