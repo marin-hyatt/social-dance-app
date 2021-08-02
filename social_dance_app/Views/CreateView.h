@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Song.h"
+#import "RKTagsView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,8 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *songButton;
 @property (weak, nonatomic) IBOutlet UIView *songView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIStackView *tagView;
-@property (weak, nonatomic) IBOutlet UITextField *tagField;
+@property (weak, nonatomic) IBOutlet RKTagsView *tagView;
 - (void)updateSongViewWithSong:(Song *)song;
 - (void)updateAppearance;
 

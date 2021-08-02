@@ -36,26 +36,12 @@
     [PostUtility updateUsernameLabel:self.detailView.usernameLabel andProfilePicture:self.detailView.profilePictureView WithUser:self.post.author];
     [PostUtility updateTimestampForLabel:self.detailView.timestampLabel usingPost:self.post];
     
-    [self.detailView.tagView setAxis:UILayoutConstraintAxisHorizontal];
-    [self.detailView.tagView setDistribution:UIStackViewDistributionFillProportionally];
-    [self.detailView.tagView setAlignment:UIStackViewAlignmentCenter];
-    [self.detailView.tagView setSpacing:3];
+    
     NSArray *tags = self.post.tags;
     for (NSString *tag in tags) {
-        [self addTag:tag];
+        [self.detailView.tagView addTag:tag];
     }
 
-}
-
-- (void)addTag:(NSString *)tag {
-    NSString *tagWithHashtag = [NSString stringWithFormat:@" #%@ ", tag];
-    
-    UILabel *tagLabel = [[UILabel alloc] init];
-    [tagLabel setFont:[UIFont systemFontOfSize:17.0f weight:UIFontWeightUltraLight]];
-    [tagLabel setText:tagWithHashtag];
-    
-    [self.detailView.tagView addArrangedSubview:tagLabel];
-    [tagLabel.heightAnchor constraintEqualToConstant:30].active = true;
 }
 
 - (void)updateVideo {

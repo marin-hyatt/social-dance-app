@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2542290A3C7EDEA00F422254 /* libPods-social_dance_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE246066181B68E3A84A314 /* libPods-social_dance_appTests.a */; };
+		990CA2E8A6BAC1D607CC84E1 /* libPods-social_dance_appTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5305AA569E5102E263BCBE93 /* libPods-social_dance_appTests.a */; };
 		9B2EE15B269CA8B700391917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE15A269CA8B700391917 /* AppDelegate.m */; };
 		9B2EE15E269CA8B700391917 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE15D269CA8B700391917 /* SceneDelegate.m */; };
 		9B2EE164269CA8B700391917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2EE162269CA8B700391917 /* Main.storyboard */; };
@@ -60,8 +60,8 @@
 		9BE67B54269F557A0047611E /* SpotifyAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B53269F557A0047611E /* SpotifyAuthViewController.m */; };
 		9BE67B56269F56320047611E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE67B55269F56320047611E /* WebKit.framework */; };
 		9BE67B59269F568B0047611E /* SpotifyAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE67B58269F568B0047611E /* SpotifyAuthView.m */; };
-		AD33CC62423B1765744B0031 /* libPods-social_dance_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 211C827D2F5576AEE7180A96 /* libPods-social_dance_app.a */; };
-		D92DDA366BC37EAE89F5F722 /* libPods-social_dance_app-social_dance_appUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A71E9708548FC7A8C2CE0C /* libPods-social_dance_app-social_dance_appUITests.a */; };
+		EA0BDFEA6042CB76BF917F61 /* libPods-social_dance_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DFBBF947D48AC2217E34B4F /* libPods-social_dance_app.a */; };
+		FFFF1DD87E133184C26FA59A /* libPods-social_dance_app-social_dance_appUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2B1926EE0800411D46F303 /* libPods-social_dance_app-social_dance_appUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,11 +82,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1BE246066181B68E3A84A314 /* libPods-social_dance_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		211C827D2F5576AEE7180A96 /* libPods-social_dance_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DFBBF947D48AC2217E34B4F /* libPods-social_dance_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5305AA569E5102E263BCBE93 /* libPods-social_dance_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5DCFE0532BEF04914AE73A /* Pods-social_dance_app-social_dance_appUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app-social_dance_appUITests.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7D9A099D56EC4B08A86C6C20 /* Pods-social_dance_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.debug.xcconfig"; sourceTree = "<group>"; };
 		7DEDF84A2EE0DA8859D07251 /* Pods-social_dance_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.release.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.release.xcconfig"; sourceTree = "<group>"; };
+		7F2B1926EE0800411D46F303 /* libPods-social_dance_app-social_dance_appUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_app-social_dance_appUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2EE156269CA8B700391917 /* social_dance_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = social_dance_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2EE159269CA8B700391917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9B2EE15A269CA8B700391917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		9BE67B58269F568B0047611E /* SpotifyAuthView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifyAuthView.m; sourceTree = "<group>"; };
 		9DDD14C4A779EF5D93F4F777 /* Pods-social_dance_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_appTests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_appTests/Pods-social_dance_appTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB179721461108F7E7DF4AED /* Pods-social_dance_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app.release.xcconfig"; path = "Target Support Files/Pods-social_dance_app/Pods-social_dance_app.release.xcconfig"; sourceTree = "<group>"; };
-		D1A71E9708548FC7A8C2CE0C /* libPods-social_dance_app-social_dance_appUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-social_dance_app-social_dance_appUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F7D4FC576299881AD2703C /* Pods-social_dance_app-social_dance_appUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-social_dance_app-social_dance_appUITests.debug.xcconfig"; path = "Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,7 +200,7 @@
 			files = (
 				9BE67B4A269E3AFE0047611E /* SpotifyiOS.framework in Frameworks */,
 				9BE67B56269F56320047611E /* WebKit.framework in Frameworks */,
-				AD33CC62423B1765744B0031 /* libPods-social_dance_app.a in Frameworks */,
+				EA0BDFEA6042CB76BF917F61 /* libPods-social_dance_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2542290A3C7EDEA00F422254 /* libPods-social_dance_appTests.a in Frameworks */,
+				990CA2E8A6BAC1D607CC84E1 /* libPods-social_dance_appTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D92DDA366BC37EAE89F5F722 /* libPods-social_dance_app-social_dance_appUITests.a in Frameworks */,
+				FFFF1DD87E133184C26FA59A /* libPods-social_dance_app-social_dance_appUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,9 +240,9 @@
 			isa = PBXGroup;
 			children = (
 				9BE67B55269F56320047611E /* WebKit.framework */,
-				211C827D2F5576AEE7180A96 /* libPods-social_dance_app.a */,
-				D1A71E9708548FC7A8C2CE0C /* libPods-social_dance_app-social_dance_appUITests.a */,
-				1BE246066181B68E3A84A314 /* libPods-social_dance_appTests.a */,
+				2DFBBF947D48AC2217E34B4F /* libPods-social_dance_app.a */,
+				7F2B1926EE0800411D46F303 /* libPods-social_dance_app-social_dance_appUITests.a */,
+				5305AA569E5102E263BCBE93 /* libPods-social_dance_appTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -429,7 +429,7 @@
 				9B2EE152269CA8B700391917 /* Sources */,
 				9B2EE153269CA8B700391917 /* Frameworks */,
 				9B2EE154269CA8B700391917 /* Resources */,
-				0852DEE70E18648BF36837AC /* [CP] Copy Pods Resources */,
+				20B22EC322137B51E0AE423F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -467,7 +467,7 @@
 				9B2EE178269CA8B900391917 /* Sources */,
 				9B2EE179269CA8B900391917 /* Frameworks */,
 				9B2EE17A269CA8B900391917 /* Resources */,
-				EE09BC51D3CF1889C8AD94DC /* [CP] Copy Pods Resources */,
+				273F6CEACFC3F6D9FDA1B324 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -550,7 +550,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0852DEE70E18648BF36837AC /* [CP] Copy Pods Resources */ = {
+		20B22EC322137B51E0AE423F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -565,6 +565,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app/Pods-social_dance_app-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		273F6CEACFC3F6D9FDA1B324 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		636169E21DDFE2E37F61E60B /* [CP] Check Pods Manifest.lock */ = {
@@ -609,23 +626,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EE09BC51D3CF1889C8AD94DC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-social_dance_app-social_dance_appUITests/Pods-social_dance_app-social_dance_appUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F603AB30624C4698BCCDF812 /* [CP] Check Pods Manifest.lock */ = {

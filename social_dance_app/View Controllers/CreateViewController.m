@@ -17,7 +17,7 @@
 #import "SVProgressHUD.h"
 #import "UIManager.h"
 
-@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, SpotifySearchDelegate>
+@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, RKTagsViewDelegate, SpotifySearchDelegate>
 @property (strong, nonatomic) IBOutlet CreateView *createView;
 @property (strong, nonatomic) PFFileObject *videoFile;
 @property (strong, nonatomic) NSNumber *videoWidth;
@@ -25,7 +25,6 @@
 @property (strong, nonatomic) PFFileObject *thumbnailImage;
 @property (strong, nonatomic) Song *chosenSong;
 @property (strong, nonatomic) AVAssetExportSession *exportSession;
-@property (strong, nonatomic) NSMutableArray *tags;
 
 
 @end
@@ -39,19 +38,13 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-    
-    self.tags = [[NSMutableArray alloc] init];
-    self.createView.tagField.delegate = self;
-    
-    [self.createView.tagView setAxis:UILayoutConstraintAxisHorizontal];
-    [self.createView.tagView setDistribution:UIStackViewDistributionFillProportionally];
-    [self.createView.tagView setAlignment:UIStackViewAlignmentCenter];
-    [self.createView.tagView setSpacing:3];
+
+    self.createView.tagView.delegate = self;
 }
 
 - (void)dismissKeyboard {
     [self.createView.captionField resignFirstResponder];
-    [self.createView.tagField resignFirstResponder];
+    [self.createView.tagView resignFirstResponder];
 }
 
 - (IBAction)onRecordVideoPressed:(UIButton *)sender {
@@ -67,49 +60,13 @@
     
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (![self.createView.tagField.text isEqualToString:@""]) {
-        [self.tags addObject:[self.createView.tagField.text lowercaseString]];
-        [self.createView.tagField setText:@""];
-        
-        CGSize stringsize = [[self.tags lastObject] sizeWithAttributes: @{
-            NSFontAttributeName: [UIFont systemFontOfSize:17.0f],
-        }];
-        UIButton *tag = [[UIButton alloc] init];
-        [tag setFrame:CGRectMake(0,0, stringsize.width + 4, stringsize.height)];
-        [tag addTarget:self
-                action:@selector(removeTagAtIndex:)
-      forControlEvents:UIControlEventTouchUpInside];
-        
-        [tag setBackgroundColor:[UIColor colorWithRed:149/255.0 green:189/255.0 blue:220/255.0 alpha:1]];
-        [tag setTitle:[self.tags lastObject] forState:UIControlStateNormal];
-        
-        [self.createView.tagView addArrangedSubview:tag];
-        [tag.heightAnchor constraintEqualToConstant:30].active = true;
-        return YES;
-    } else {
-        return NO;
-    }
-    
-}
-
-- (void)removeTagAtIndex:(UIButton *)sender {
-    for (NSString *tag in [self.tags copy]) {
-        if ([tag isEqualToString:sender.titleLabel.text]) {
-            [self.tags removeObject:tag];
-        }
-    }
-    [self.createView.tagView removeArrangedSubview:[self.createView.tagView viewWithTag:sender.tag]];
-    [sender removeFromSuperview];
-}
-
 - (IBAction)onPostPressed:(UIBarButtonItem *)sender {
     if (self.videoFile != nil) {
         NSString *caption = self.createView.captionField.text;
         Song *song = self.chosenSong;
 
         [SVProgressHUD showWithStatus:@"Posting"];
-        [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.createView.tagView.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }

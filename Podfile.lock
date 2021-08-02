@@ -22,6 +22,7 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
   - Parse/UI (1.19.2):
     - Parse/Core
+  - RKTagsView (1.4.0)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - DateTools
   - Parse
   - Parse/UI
+  - RKTagsView
   - SVProgressHUD
 
 SPEC REPOS:
@@ -37,6 +39,7 @@ SPEC REPOS:
     - Bolts
     - DateTools
     - Parse
+    - RKTagsView
     - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -44,8 +47,9 @@ SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
+  RKTagsView: 0632355471af641d49f5824b92dee7296660af70
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 4b7ba03a1485365266c6df71068c0f4df7f47970
+PODFILE CHECKSUM: 8c039044950fbba0e480f07d348c8afdd27acefe
 
 COCOAPODS: 1.10.1

@@ -11,6 +11,7 @@ pod 'Parse/UI'
 pod 'AFNetworking'
 pod 'SVProgressHUD'
 pod 'DateTools'
+pod "RKTagsView"
 
 
   target 'social_dance_appTests' do
