@@ -20,6 +20,7 @@
 @property float videoSpeedMultiplier;
 @property CMTime startTime;
 @property CMTime endTime;
+@property CMTime duration;
 
 @end
 
@@ -76,6 +77,7 @@
             [self.tutorialView.playerView setPlayer:self.tutorialView.player];
             [(AVPlayerLayer *)[self.tutorialView.playerView layer] setVideoGravity:AVLayerVideoGravityResizeAspect];
             self.endTime = self.tutorialView.player.currentItem.asset.duration;
+            self.duration = self.tutorialView.player.currentItem.asset.duration;
             [self setEndLabel];
         }
     }];
@@ -138,15 +140,15 @@
     self.tutorialView.slider.value = CMTimeGetSeconds(self.tutorialView.player.currentItem.currentTime)  / CMTimeGetSeconds(self.tutorialView.player.currentItem.duration);
 }
 
-- (void)startTimeChangedToTime:(CMTime)startTime {
-    if (CMTimeGetSeconds(startTime) >= CMTimeGetSeconds(self.startTime)) {
+- (void)startTimeChangedToTime:(CMTime)startTime withReset:(BOOL)reset {
+    if (CMTimeGetSeconds(startTime) >= CMTimeGetSeconds(self.startTime) || reset) {
         self.startTime = startTime;
         [self.tutorialView.player seekToTime:self.startTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     }
 }
 
-- (void)endTimeChangedToTime:(CMTime)endTime {
-    if (CMTimeGetSeconds(endTime) <= CMTimeGetSeconds(self.endTime)) {
+- (void)endTimeChangedToTime:(CMTime)endTime withReset:(BOOL)reset {
+    if (CMTimeGetSeconds(endTime) <= CMTimeGetSeconds(self.endTime) || reset) {
         self.endTime = endTime;
     }
 }
@@ -164,8 +166,8 @@
         vc.delegate = self;
         vc.isMirrored = self.isMirrored;
         vc.videoSpeedMutliplier = self.videoSpeedMultiplier;
-        vc.startTimePlaceholder = [self convertCMTimeToReadableFormatWithCMTime:self.startTime];
-        vc.endTimePlaceholder = [self convertCMTimeToReadableFormatWithCMTime:self.endTime];
+        vc.startTimePlaceholder = @"00:00";
+        vc.endTimePlaceholder = [self convertCMTimeToReadableFormatWithCMTime:self.duration];
     }
 }
 

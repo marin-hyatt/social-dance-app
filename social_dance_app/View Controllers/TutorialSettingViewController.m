@@ -62,12 +62,20 @@
 }
 
 - (IBAction)onMirrorVideoSwitchChanged:(id)sender {
+    [self changeMirrorSetting];
+}
+
+- (void)changeMirrorSetting {
     self.isMirrored = self.mirrorVideoSwitch.on;
     
     [self.delegate mirrorVideoChangedWithNewValue:self.isMirrored];
 }
 
 - (IBAction)onVideoSpeedControlChanged:(UISegmentedControl *)sender {
+    [self changeVideoSetting];
+}
+
+- (void)changeVideoSetting {
     if (self.videoSpeedControl.selectedSegmentIndex == 0) {
         self.videoSpeedMutliplier = 0.25;
     } else if (self.videoSpeedControl.selectedSegmentIndex == 1) {
@@ -84,25 +92,11 @@
 - (void)updateStartTime {
     float startTimeInSeconds = [self.tutorialSettingView.beginningMinuteField.text floatValue] * 60 + [self.tutorialSettingView.beginningSecondField.text floatValue];
     self.startTime = startTimeInSeconds;
-    
-    /*
-    if (self.startTime < self.endTime) {
-        CMTime startTime = CMTimeMakeWithSeconds(startTimeInSeconds, NSEC_PER_SEC);
-        [self.delegate startTimeChangedToTime:startTime];
-    }
-     */
 }
 
 - (void)updateEndTime {
     float endTimeInSeconds = [self.tutorialSettingView.endMinuteField.text floatValue] * 60 + [self.tutorialSettingView.endSecondField.text floatValue];
     self.endTime = endTimeInSeconds;
-    
-    /*
-    if (self.endTime > self.startTime) {
-        CMTime endTime = CMTimeMakeWithSeconds(endTimeInSeconds, NSEC_PER_SEC);
-        [self.delegate endTimeChangedToTime:endTime];
-    }
-     */
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -126,16 +120,42 @@
 }
 
 - (IBAction)onResetButtonPressed:(UIBarButtonItem *)sender {
+    NSArray *startPlaceholder = [self.startTimePlaceholder componentsSeparatedByString:@":"];
+    self.tutorialSettingView.beginningMinuteField.placeholder = startPlaceholder[0];
+    self.tutorialSettingView.beginningMinuteField.text = startPlaceholder[0];
+    self.tutorialSettingView.beginningSecondField.placeholder = startPlaceholder[1];
+    self.tutorialSettingView.beginningSecondField.text = startPlaceholder[1];
     
+    NSArray *endPlaceholder = [self.endTimePlaceholder componentsSeparatedByString:@":"];
+    self.tutorialSettingView.endMinuteField.placeholder = endPlaceholder[0];
+    self.tutorialSettingView.endMinuteField.text = endPlaceholder[0];
+    self.tutorialSettingView.endSecondField.placeholder = endPlaceholder[1];
+    self.tutorialSettingView.endSecondField.text = endPlaceholder[1];
+    
+    [self updateStartTime];
+    [self updateEndTime];
+    
+    [self setNewLoopingIntervalWithReset:YES];
+    
+    self.mirrorVideoSwitch.on = YES;
+    [self changeMirrorSetting];
+    [self.videoSpeedControl setSelectedSegmentIndex:3];
+    [self changeVideoSetting];
 }
 
 - (IBAction)onSetNewIntervalButtonPressed:(UIButton *)sender {
     [self updateStartTime];
     [self updateEndTime];
     
+    [self setNewLoopingIntervalWithReset:NO];
+}
+
+- (void)setNewLoopingIntervalWithReset:(BOOL)reset {
+    NSLog(@"%f", self.endTime);
+    NSLog(@"%f", self.startTime);
     if (self.endTime > self.startTime) {
-        [self.delegate startTimeChangedToTime:CMTimeMakeWithSeconds(self.startTime, NSEC_PER_SEC)];
-        [self.delegate endTimeChangedToTime:CMTimeMakeWithSeconds(self.endTime, NSEC_PER_SEC)];
+        [self.delegate startTimeChangedToTime:CMTimeMakeWithSeconds(self.startTime, NSEC_PER_SEC) withReset:reset];
+        [self.delegate endTimeChangedToTime:CMTimeMakeWithSeconds(self.endTime, NSEC_PER_SEC) withReset:reset];
     } else {
         [UIManager presentAlertWithMessage:@"Choose an end time that is greater than the start time." overViewController:self];
     }

@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mirrorVideoChangedWithNewValue:(BOOL)isMirrored;
 - (void)videoSpeedChangedWithNewMultiplier:(float)multiplier;
-- (void)startTimeChangedToTime:(CMTime)startTime;
-- (void)endTimeChangedToTime:(CMTime)endTime;
+- (void)startTimeChangedToTime:(CMTime)startTime withReset:(BOOL)reset;
+- (void)endTimeChangedToTime:(CMTime)endTime withReset:(BOOL)reset;
 
 @end
 
