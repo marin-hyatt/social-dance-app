@@ -16,9 +16,11 @@
 #import "TutorialViewController.h"
 #import "UIManager.h"
 #import "PostUtility.h"
+#import "RKTagsView.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <RKTagsViewDelegate>
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
+@property int tagCount;
 
 @end
 
@@ -36,12 +38,40 @@
     [PostUtility updateUsernameLabel:self.detailView.usernameLabel andProfilePicture:self.detailView.profilePictureView WithUser:self.post.author];
     [PostUtility updateTimestampForLabel:self.detailView.timestampLabel usingPost:self.post];
     
-    
+    self.detailView.tagView.delegate = self;
     NSArray *tags = self.post.tags;
+    self.tagCount = [self.post.tags count];
     for (NSString *tag in tags) {
         [self.detailView.tagView addTag:tag];
     }
 
+}
+
+- (UIButton *)tagsView:(RKTagsView *)tagsView buttonForTagAtIndex:(NSInteger)index {
+    UIButton *button = [[UIButton alloc] init];
+    UIColor *perfectBlue = [UIColor colorWithRed:149.0f/255.0f green:189.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
+    button.titleLabel.font = self.detailView.tagView.font;
+    NSLog(@"Count: %lu", (unsigned long)self.tagCount);
+    NSLog(@"%ld", (long)index);
+    
+    if (index == self.tagCount - 1) {
+        [button setTitle:[NSString stringWithFormat:@"%@", self.detailView.tagView.tags[index]] forState:UIControlStateNormal];
+    } else {
+        [button setTitle:[NSString stringWithFormat:@"%@,", self.detailView.tagView.tags[index]] forState:UIControlStateNormal];
+    }
+    
+    [button setTintColor:perfectBlue];
+    [button setTitleColor:perfectBlue forState:UIControlStateNormal];
+    [button.layer setBorderColor:[perfectBlue CGColor]];
+    
+    [button addTarget:self
+               action:@selector(searchForTag:)
+       forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
+- (void)searchForTag:(UIButton *)sender {
+    NSLog(@"search for tag");
 }
 
 - (void)updateVideo {

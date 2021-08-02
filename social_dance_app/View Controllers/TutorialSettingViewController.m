@@ -125,6 +125,10 @@
     return newLength <= 2;
 }
 
+- (IBAction)onResetButtonPressed:(UIBarButtonItem *)sender {
+    
+}
+
 - (IBAction)onSetNewIntervalButtonPressed:(UIButton *)sender {
     [self updateStartTime];
     [self updateEndTime];

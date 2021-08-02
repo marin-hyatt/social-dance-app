@@ -43,8 +43,7 @@
 }
 
 - (void)dismissKeyboard {
-    [self.createView.captionField resignFirstResponder];
-    [self.createView.tagView resignFirstResponder];
+    [self.createView endEditing:YES];
 }
 
 - (IBAction)onRecordVideoPressed:(UIButton *)sender {
@@ -81,7 +80,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     NSURL *chosenMovie = [info objectForKey:UIImagePickerControllerMediaURL];
-    
     NSString *filename = [[NSUUID UUID] UUIDString];
     NSURL *temporaryDirectoryURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
     NSURL *lowQualityMovie = [[temporaryDirectoryURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"mp4"];
@@ -117,7 +115,11 @@
         completion(self.exportSession);
     }];
 }
- 
+
+- (NSString *)sizeOfLocalURL:(NSURL *)url {
+NSData *fileData = [[NSData alloc] initWithContentsOfURL:url];
+return [NSString stringWithFormat:@"%.2f mb", fileData.length/1000000.00];
+}
 
 - (void)setVideoDimensionsWithVideoURL:(NSURL *)url {
     // Get video width and height, need to switch based on orientation of video
@@ -170,6 +172,7 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     imagePickerVC.videoQuality = UIImagePickerControllerQualityTypeMedium;
+    imagePickerVC.videoMaximumDuration = 5 * 60; // 5 min max video
     NSArray *availableMediaTypes = [UIImagePickerController
                                     availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
     

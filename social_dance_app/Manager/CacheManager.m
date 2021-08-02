@@ -27,7 +27,6 @@
         NSError *fileError;
         [data writeToURL:fileURL options:0 error:&fileError];
         
-        
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
         
