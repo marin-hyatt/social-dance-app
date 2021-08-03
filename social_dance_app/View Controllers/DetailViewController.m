@@ -19,6 +19,7 @@
 #import "RKTagsView.h"
 #import "SearchViewController.h"
 #import "SVProgressHUD.h"
+#import "ProfileViewController.h"
 
 @interface DetailViewController () <RKTagsViewDelegate>
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
@@ -65,6 +66,16 @@
     });
      
 
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
+    UITapGestureRecognizer *usernameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
+    [self.detailView.profilePictureView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.detailView.profilePictureView setUserInteractionEnabled:YES];
+    [self.detailView.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
+    [self.detailView.usernameLabel setUserInteractionEnabled:YES];
+}
+
+- (void)onProfileTapped:(UITapGestureRecognizer *)sender {
+    [self performSegueWithIdentifier:@"ProfileViewController" sender:nil];
 }
 
 - (UIButton *)tagsView:(RKTagsView *)tagsView buttonForTagAtIndex:(NSInteger)index {
@@ -227,6 +238,9 @@
     } else if ([segue.identifier isEqualToString:@"TutorialViewController"]) {
         TutorialViewController *vc = [segue destinationViewController];
         vc.post = self.post;
+    } else if ([segue.identifier isEqualToString:@"ProfileViewController"]) {
+        ProfileViewController *vc = [segue destinationViewController];
+        vc.user = self.post.author;
     }
 }
 

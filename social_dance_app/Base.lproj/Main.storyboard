@@ -611,6 +611,7 @@
                         <segue destination="tYV-Oo-UUA" kind="show" identifier="SpotifyWebViewController" id="XXe-TN-jrX"/>
                         <segue destination="Iho-SZ-gng" kind="show" identifier="CommentViewController" id="q0o-vQ-l7I"/>
                         <segue destination="Quh-3o-mLf" kind="show" identifier="TutorialViewController" id="L9K-jg-8g0"/>
+                        <segue destination="0hQ-4P-Izj" kind="show" identifier="ProfileViewController" id="TxR-NI-VHh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="36d-uI-Dhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1774,7 +1775,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kQC-ax-5Di"/>
+        <segue reference="TxR-NI-VHh"/>
         <segue reference="XXe-TN-jrX"/>
         <segue reference="hg0-wf-NGo"/>
         <segue reference="q0o-vQ-l7I"/>
