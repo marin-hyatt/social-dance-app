@@ -106,8 +106,8 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQn-xL-wyR">
-                                                    <rect key="frame" x="46" y="12.5" width="81.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <rect key="frame" x="46" y="12.5" width="79.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -180,6 +180,7 @@
                         <outlet property="commentField" destination="3AX-hq-68M" id="0ZR-eJ-2T6"/>
                         <outlet property="profilePictureView" destination="zFB-lM-wdi" id="nZb-hi-cyb"/>
                         <outlet property="tableView" destination="Beh-lg-pD2" id="afe-Oe-3EL"/>
+                        <segue destination="0hQ-4P-Izj" kind="show" identifier="ProfileViewController" id="hcG-1j-jDw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7o-Gr-y1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1775,7 +1776,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TxR-NI-VHh"/>
+        <segue reference="hcG-1j-jDw"/>
         <segue reference="XXe-TN-jrX"/>
         <segue reference="hg0-wf-NGo"/>
         <segue reference="q0o-vQ-l7I"/>

@@ -49,7 +49,17 @@
         [self.detailView.tagView addTag:tag];
     }
     
+    [self addDeleteButtonIfNeeded];
 
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
+    UITapGestureRecognizer *usernameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
+    [self.detailView.profilePictureView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.detailView.profilePictureView setUserInteractionEnabled:YES];
+    [self.detailView.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
+    [self.detailView.usernameLabel setUserInteractionEnabled:YES];
+}
+
+- (void)addDeleteButtonIfNeeded {
     NSMutableArray *rightBarButtons = [self.navigationItem.rightBarButtonItems mutableCopy];
     [rightBarButtons removeObject:self.deleteButton];
     [self.navigationItem setRightBarButtonItems:rightBarButtons animated:YES];
@@ -64,14 +74,6 @@
             }
         });
     });
-     
-
-    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
-    UITapGestureRecognizer *usernameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
-    [self.detailView.profilePictureView addGestureRecognizer:profileTapGestureRecognizer];
-    [self.detailView.profilePictureView setUserInteractionEnabled:YES];
-    [self.detailView.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
-    [self.detailView.usernameLabel setUserInteractionEnabled:YES];
 }
 
 - (void)onProfileTapped:(UITapGestureRecognizer *)sender {
