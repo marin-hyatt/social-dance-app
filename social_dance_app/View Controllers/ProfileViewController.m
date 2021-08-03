@@ -66,6 +66,10 @@
     [self.profileCollectionView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellWithReuseIdentifier:@"ProfileCollectionViewCell"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateProfile];
+}
+
 - (void)updateProfile {
     [self loadPosts];
     [self loadNumFollowers];

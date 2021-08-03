@@ -22,6 +22,8 @@
 - (void)updateAppearance {
     PFFileObject *profileImage = self.user[@"profilePicture"];
     [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:profileImage];
+    
+    self.editUsernameField.text = self.user.username;
 }
 
 @end

@@ -11,10 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchCollectionViewCell : UICollectionViewCell
-@property PFUser *user;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
-- (void)updateAppearance;
 
 @end
 

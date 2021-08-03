@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface EditProfileView : UIView
 @property PFUser *user;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
+@property (weak, nonatomic) IBOutlet UITextField *editUsernameField;
 - (void)updateAppearance;
 
 @end

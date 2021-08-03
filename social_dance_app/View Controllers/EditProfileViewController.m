@@ -25,6 +25,9 @@
     // Do any additional setup after loading the view.
     self.editProfileView.user = self.user;
     [self.editProfileView updateAppearance];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
@@ -35,6 +38,10 @@
     [self.editProfileView.profilePictureView setImage:resizedOriginalImage];
 
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)dismissKeyboard {
+    [self.editProfileView endEditing:YES];
 }
 
 
@@ -81,6 +88,14 @@
             }];
         }
     }
+    
+    PFUser *user = self.user;
+    user.username = self.editProfileView.editUsernameField.text;
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+        }
+    }];
 }
 
 - (IBAction)onChangeProfilePictureButtonTapped:(UIButton *)sender {
@@ -100,4 +115,5 @@
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
+
 @end

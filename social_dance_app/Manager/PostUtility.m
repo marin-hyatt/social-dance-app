@@ -105,7 +105,6 @@
         
         [UIView animateWithDuration:0.3
                          animations:^{
-            
             imageView.alpha = 1.0;
             
         } completion:^(BOOL finished) {
@@ -114,12 +113,10 @@
                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
                 imageView.image = largeImage;
             }
-                                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            }];
+                                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {}];
         }];
     }
-                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-    }];
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {}];
 }
 
 @end

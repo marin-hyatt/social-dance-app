@@ -11,11 +11,4 @@
 
 @implementation SearchCollectionViewCell
 
-- (void)updateAppearance {
-    self.usernameLabel.text = self.user[@"username"];
-    
-    PFFileObject *postImage = self.user[@"profilePicture"];
-    [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
-}
-
 @end

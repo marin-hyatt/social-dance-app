@@ -1440,29 +1440,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-2a-A3X">
-                                <rect key="frame" x="132" y="373" width="150" height="150"/>
+                                <rect key="frame" x="132" y="108" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="04P-2A-Oqt"/>
                                     <constraint firstAttribute="height" constant="150" id="wuQ-As-Zkk"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yy9-gw-v64">
-                                <rect key="frame" x="130" y="531" width="154" height="30"/>
-                                <state key="normal" title="Change Profile Picture"/>
+                                <rect key="frame" x="130.5" y="266" width="153" height="30"/>
+                                <state key="normal" title="Change profile picture"/>
                                 <connections>
                                     <action selector="onChangeProfilePictureButtonTapped:" destination="5hA-Nf-dVb" eventType="touchUpInside" id="KYj-8Q-g3h"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edit username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RE1-me-ui2">
+                                <rect key="frame" x="20" y="316" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Knq-1O-6er"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ab4-2a-A3X" firstAttribute="centerY" secondItem="web-4j-euW" secondAttribute="centerY" id="5UM-xo-SDJ"/>
                             <constraint firstItem="yy9-gw-v64" firstAttribute="centerX" secondItem="web-4j-euW" secondAttribute="centerX" id="Pcy-47-bDE"/>
+                            <constraint firstItem="RE1-me-ui2" firstAttribute="centerX" secondItem="web-4j-euW" secondAttribute="centerX" id="Snj-0a-gHl"/>
+                            <constraint firstItem="ab4-2a-A3X" firstAttribute="top" secondItem="Knq-1O-6er" secondAttribute="top" constant="20" id="Ycn-Kw-sdS"/>
                             <constraint firstItem="yy9-gw-v64" firstAttribute="top" secondItem="ab4-2a-A3X" secondAttribute="bottom" constant="8" id="dy6-cy-7Yb"/>
-                            <constraint firstItem="ab4-2a-A3X" firstAttribute="centerX" secondItem="web-4j-euW" secondAttribute="centerX" id="hTp-sC-N1d"/>
+                            <constraint firstItem="RE1-me-ui2" firstAttribute="leading" secondItem="Knq-1O-6er" secondAttribute="leading" constant="20" id="haG-4p-W9K"/>
+                            <constraint firstItem="RE1-me-ui2" firstAttribute="top" secondItem="yy9-gw-v64" secondAttribute="bottom" constant="20" id="idx-x4-Ejm"/>
+                            <constraint firstItem="ab4-2a-A3X" firstAttribute="centerX" secondItem="web-4j-euW" secondAttribute="centerX" id="zv5-qX-EY6"/>
                         </constraints>
                         <connections>
+                            <outlet property="editUsernameField" destination="RE1-me-ui2" id="zXt-h3-yt0"/>
                             <outlet property="profilePictureView" destination="ab4-2a-A3X" id="bjE-EN-C8r"/>
                         </connections>
                     </view>
