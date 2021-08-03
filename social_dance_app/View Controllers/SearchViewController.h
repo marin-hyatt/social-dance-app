@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchViewController : UIViewController
+@property NSString *searchQuery;
+- (void)searchPostsWithQuery:(NSString *)query;
 
 @end
 

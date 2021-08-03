@@ -17,6 +17,7 @@
 #import "UIManager.h"
 #import "PostUtility.h"
 #import "RKTagsView.h"
+#import "SearchViewController.h"
 
 @interface DetailViewController () <RKTagsViewDelegate>
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
@@ -51,8 +52,6 @@
     UIButton *button = [[UIButton alloc] init];
     UIColor *perfectBlue = [UIColor colorWithRed:149.0f/255.0f green:189.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     button.titleLabel.font = self.detailView.tagView.font;
-    NSLog(@"Count: %lu", (unsigned long)self.tagCount);
-    NSLog(@"%ld", (long)index);
     
     if (index == self.tagCount - 1) {
         [button setTitle:[NSString stringWithFormat:@"%@", self.detailView.tagView.tags[index]] forState:UIControlStateNormal];
@@ -71,7 +70,19 @@
 }
 
 - (void)searchForTag:(UIButton *)sender {
-    NSLog(@"search for tag");
+    UINavigationController *searchNavigationController = [self.tabBarController.viewControllers objectAtIndex:1];
+    if (self.tabBarController.selectedViewController != searchNavigationController) {
+        SearchViewController *vc = (SearchViewController*) [[searchNavigationController viewControllers] objectAtIndex:0];
+        vc.searchQuery = [sender.titleLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+        [vc searchPostsWithQuery:vc.searchQuery];
+        self.tabBarController.selectedViewController = searchNavigationController;
+    } else {
+        SearchViewController *vc = [self.navigationController.viewControllers objectAtIndex:0];
+        vc.searchQuery = [sender.titleLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+        [vc searchPostsWithQuery:vc.searchQuery];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+
 }
 
 - (void)updateVideo {

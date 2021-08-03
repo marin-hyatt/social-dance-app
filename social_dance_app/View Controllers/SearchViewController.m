@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.searchCollectionView.dataSource = self;
     self.searchCollectionView.delegate = self;
     self.searchBar.delegate = self;
@@ -96,18 +97,22 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (searchText.length != 0) {
-            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
-                return [post[@"tags"] containsObject:[searchText lowercaseString]];
-            }];
+    [self searchPostsWithQuery:searchText];
+}
 
-            self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
-        }
-        else {
-            self.filteredFeed = self.feed;
-        }
-        [self.searchCollectionView reloadData];
-    
+- (void)searchPostsWithQuery:(NSString *)query {
+    if (query.length != 0) {
+        self.searchBar.text = self.searchQuery;
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
+            return [post[@"tags"] containsObject:[query lowercaseString]];
+        }];
+        
+        self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
+    }
+    else {
+        self.filteredFeed = self.feed;
+    }
+    [self.searchCollectionView reloadData];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -127,8 +132,7 @@
 
 - (void)loadPosts:(int)limit {
     PFQuery *postQuery = [Post query];
-    
-    // TODO: possibly implement better algorithm rather than just sorting by number of likes
+
     [postQuery orderByDescending:@"likeCount"];
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"song"];
@@ -141,6 +145,12 @@
             self.feed = posts;
             self.filteredFeed = self.feed;
             [self.filteredFeed sortUsingSelector:@selector(comparewithPost:)];
+            
+            if (self.searchQuery != nil) {
+                [self searchPostsWithQuery:self.searchQuery];
+                [self.segmentedControl setSelectedSegmentIndex:1];
+            }
+            
             [self.searchCollectionView reloadData];
         }
         else {
