@@ -27,11 +27,11 @@
 
 - (void)registerUser {
     if ([self.loginView.usernameField.text isEqual:@""]) {
-        [UIManager presentAlertWithMessage:@"Username cannot be empty." overViewController:self];
+        [UIManager presentAlertWithMessage:@"Username cannot be empty." overViewController:self withHandler:nil];
     }
     
     if ([self.loginView.passwordField.text isEqual:@""]) {
-        [UIManager presentAlertWithMessage:@"Password cannot be empty." overViewController:self];
+        [UIManager presentAlertWithMessage:@"Password cannot be empty." overViewController:self withHandler:nil];
     }
     
     PFUser *newUser = [PFUser user];
@@ -41,7 +41,7 @@
     
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
         }
@@ -51,11 +51,11 @@
 
 - (void)loginUser {
     if ([self.loginView.usernameField.text isEqual:@""]) {
-        [UIManager presentAlertWithMessage:@"Username cannot be empty." overViewController:self];
+        [UIManager presentAlertWithMessage:@"Username cannot be empty." overViewController:self withHandler:nil];
     }
     
     if ([self.loginView.passwordField.text isEqual:@""]) {
-        [UIManager presentAlertWithMessage:@"Password cannot be empty." overViewController:self];
+        [UIManager presentAlertWithMessage:@"Password cannot be empty." overViewController:self withHandler:nil];
     }
     
     NSString *username = self.loginView.usernameField.text;
@@ -64,7 +64,7 @@
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             [self performSegueWithIdentifier:@"SpotifyAuthViewController" sender:nil];
         }

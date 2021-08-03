@@ -60,4 +60,6 @@
     }
 }
 
+- (IBAction)deleteButton:(UIBarButtonItem *)sender {
+}
 @end

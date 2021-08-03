@@ -591,13 +591,22 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="U7E-vT-SA0">
-                        <barButtonItem key="rightBarButtonItem" title="Learn!" id="bDN-xW-yu1">
-                            <connections>
-                                <action selector="onLearnButtonPressed:" destination="LTi-52-sZA" id="jIk-yP-W2u"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="trash" catalog="system" id="E14-rR-3Bm">
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <connections>
+                                    <action selector="onTrashButtonPressed:" destination="LTi-52-sZA" id="96A-iC-QVF"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Learn!" id="bDN-xW-yu1">
+                                <connections>
+                                    <action selector="onLearnButtonPressed:" destination="LTi-52-sZA" id="jIk-yP-W2u"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="E14-rR-3Bm" id="scg-st-PWt"/>
                         <outlet property="detailView" destination="09u-gM-xUE" id="kk6-S8-b2J"/>
                         <segue destination="tYV-Oo-UUA" kind="show" identifier="SpotifyWebViewController" id="XXe-TN-jrX"/>
                         <segue destination="Iho-SZ-gng" kind="show" identifier="CommentViewController" id="q0o-vQ-l7I"/>
@@ -1789,6 +1798,7 @@
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="thumbnail_default" width="225" height="225"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <image name="video" catalog="system" width="128" height="83"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1798,6 +1808,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

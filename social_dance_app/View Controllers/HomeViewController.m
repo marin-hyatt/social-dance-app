@@ -112,7 +112,7 @@ static void * cellContext = &cellContext;
             [self.refreshControl endRefreshing];
         }
         else {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         }
     }];
 }

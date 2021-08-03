@@ -68,14 +68,14 @@
         [SVProgressHUD showWithStatus:@"Posting"];
         [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withLowQualityThumbnail:self.lowQualityThumbnailImage withThumbnail:self.thumbnailImage withTags:self.createView.tagView.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             }
             [SVProgressHUD dismiss];
         }];
         
         self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:0];
     } else {
-        [UIManager presentAlertWithMessage:@"Choose a video before posting!" overViewController:self];
+        [UIManager presentAlertWithMessage:@"Choose a video before posting!" overViewController:self withHandler:nil];
     }
 }
 
@@ -97,7 +97,7 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
             });
         } else if (exportSession.status == AVAssetExportSessionStatusFailed) {
-            [UIManager presentAlertWithMessage:[NSString stringWithFormat:@"%@. Try uploading a shorter video.", exportSession.error.localizedDescription] overViewController:self];
+            [UIManager presentAlertWithMessage:[NSString stringWithFormat:@"%@. Try uploading a shorter video.", exportSession.error.localizedDescription] overViewController:self withHandler:nil];
         }
     }];
 }

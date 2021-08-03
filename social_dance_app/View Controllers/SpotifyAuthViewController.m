@@ -46,7 +46,7 @@
         
         [[APIManager shared]exchangeCodeForAccessTokenWithCode:code withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
             if (error != nil) {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             }
         }];
         

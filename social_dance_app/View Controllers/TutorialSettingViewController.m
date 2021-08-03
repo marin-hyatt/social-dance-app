@@ -157,7 +157,7 @@
         [self.delegate startTimeChangedToTime:CMTimeMakeWithSeconds(self.startTime, NSEC_PER_SEC) withReset:reset];
         [self.delegate endTimeChangedToTime:CMTimeMakeWithSeconds(self.endTime, NSEC_PER_SEC) withReset:reset];
     } else {
-        [UIManager presentAlertWithMessage:@"Choose an end time that is greater than the start time." overViewController:self];
+        [UIManager presentAlertWithMessage:@"Choose an end time that is greater than the start time." overViewController:self withHandler:nil];
     }
 }
 

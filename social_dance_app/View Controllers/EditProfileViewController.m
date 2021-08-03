@@ -83,7 +83,7 @@
                     [SVProgressHUD dismiss];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
-                    [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                    [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
                 }
             }];
         }
@@ -93,7 +93,7 @@
     user.username = self.editProfileView.editUsernameField.text;
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         }
     }];
 }

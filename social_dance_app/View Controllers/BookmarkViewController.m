@@ -69,7 +69,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             self.bookmarks = objects;
             NSLog(@"%@", objects);

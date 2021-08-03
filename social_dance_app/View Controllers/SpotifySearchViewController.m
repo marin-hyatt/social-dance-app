@@ -34,7 +34,7 @@
     // Test search
     [[APIManager shared]searchForTrackWithQuery:query withCompletion:^(NSDictionary * dataDictionary, NSError * error) {
             if (error != nil) {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             } else {
                 self.songArray = [Song songsWithDictionaries:dataDictionary[@"tracks"][@"items"]];
                 dispatch_async(dispatch_get_main_queue(), ^{

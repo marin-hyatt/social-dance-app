@@ -18,10 +18,12 @@
 #import "PostUtility.h"
 #import "RKTagsView.h"
 #import "SearchViewController.h"
+#import "SVProgressHUD.h"
 
 @interface DetailViewController () <RKTagsViewDelegate>
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
 @property int tagCount;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 @end
 
@@ -45,6 +47,23 @@
     for (NSString *tag in tags) {
         [self.detailView.tagView addTag:tag];
     }
+    
+
+    NSMutableArray *rightBarButtons = [self.navigationItem.rightBarButtonItems mutableCopy];
+    [rightBarButtons removeObject:self.deleteButton];
+    [self.navigationItem setRightBarButtonItems:rightBarButtons animated:YES];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFUser *currentUser = [PFUser currentUser];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if ([self.post.author.objectId isEqual:currentUser.objectId]) {
+                [rightBarButtons addObject:self.deleteButton];
+                [self.navigationItem setRightBarButtonItems:rightBarButtons];
+            }
+        });
+    });
+     
 
 }
 
@@ -131,7 +150,7 @@
             if (succeeded) {
                 [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
             } else {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             }
         }];
     } else {
@@ -139,7 +158,7 @@
             if (succeeded) {
                 [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
             } else {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             }
         }];
     }
@@ -165,6 +184,30 @@
             }
         }];
     }
+}
+
+- (IBAction)onTrashButtonPressed:(UIBarButtonItem *)sender {
+    [UIManager presentAlertWithMessage:@"Are you sure you want to delete this post?" overViewController:self withHandler:^{
+        [self deletePost];
+    }];
+}
+
+- (void)deletePost {
+    [SVProgressHUD showWithStatus:@"Deleting post"];
+    [self.post deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+        } else {
+            [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error != nil) {
+                    [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+                }
+            }];
+        }
+        [SVProgressHUD dismiss];
+    }];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onLearnButtonPressed:(UIBarButtonItem *)sender {

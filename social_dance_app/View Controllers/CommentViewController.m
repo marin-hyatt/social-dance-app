@@ -43,7 +43,7 @@
 
     [Comment newCommentWithPost:self.post withAuthor:user withText:self.commentField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             self.commentField.text = @"";
         }
@@ -77,7 +77,7 @@
             [self.refreshControl endRefreshing];
         }
         else {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         }
     }];
 }

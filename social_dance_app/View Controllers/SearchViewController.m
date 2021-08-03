@@ -153,7 +153,7 @@
             [self.searchCollectionView reloadData];
         }
         else {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         }
     }];
 }

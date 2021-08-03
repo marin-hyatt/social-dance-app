@@ -86,7 +86,7 @@
     
     [query countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else if (number > 0) {
             self.profileView.followerButton.selected = YES;
         }
@@ -161,7 +161,7 @@
             [self.refreshControl endRefreshing];
         }
         else {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         }
     }];
 }
@@ -174,7 +174,7 @@
     
     [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
         if (error != nil) {
-            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             numFollowers = number;
             [self.profileView updateAppearanceWithFollowerCount:number];
@@ -216,7 +216,7 @@
     if (self.profileView.followerButton.selected) {
         [FollowerRelation removeRelationWithUser:self.user withFollower:currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             } else {
                 [self updateFollowerButton];
             }
@@ -229,11 +229,11 @@
 
         [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
             if (error != nil) {
-                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
             } else if (number == 0) {
                 [FollowerRelation newRelationWithUser:self.user withFollower:currentUser withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                     if (error != nil) {
-                        [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
+                        [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
                     } else {
                         [self updateFollowerButton];
                     }
