@@ -58,7 +58,6 @@ static void * cellContext = &cellContext;
     [cell updateAppearance];
     
     return cell;
-    
 }
 
 - (void)updateCellVideoWithCell:(HomeTableViewCell *)cell {

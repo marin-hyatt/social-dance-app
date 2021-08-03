@@ -19,11 +19,9 @@
 }
 */
 
-- (void)updateAppearanceWithFollowerCount:(int)followerCount {
+- (void)updateAppearance {
     self.usernameLabel.text = self.user.username;
-    self.numFollowersLabel.text = [NSString stringWithFormat:@"%d", followerCount];
-    
-    
+
     PFFileObject *postImage = self.user[@"profilePicture"];
     [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
 }

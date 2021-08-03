@@ -73,7 +73,9 @@
 - (void)updateProfile {
     [self loadPosts];
     [self loadNumFollowers];
+    [self loadNumFollowing];
     [self updateFollowerButton];
+    [self.profileView updateAppearance];
 }
 
 - (void)updateFollowerButton {
@@ -177,10 +179,27 @@
             [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             numFollowers = number;
-            [self.profileView updateAppearanceWithFollowerCount:number];
+            self.profileView.numFollowersLabel.text = [NSString stringWithFormat:@"%d", numFollowers];
         }
     }];
     return numFollowers;
+}
+
+- (int)loadNumFollowing {
+    __block int numFollowing = 0;
+    
+    PFQuery *followerQuery = [FollowerRelation query];
+    [followerQuery whereKey:@"follower" equalTo:self.user];
+    
+    [followerQuery countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+        if (error != nil) {
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+        } else {
+            numFollowing = number;
+            self.profileView.numFollowingLabel.text = [NSString stringWithFormat:@"%d", numFollowing];
+        }
+    }];
+    return numFollowing;
 }
 
 
