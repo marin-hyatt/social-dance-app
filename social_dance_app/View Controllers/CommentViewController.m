@@ -46,6 +46,7 @@
             [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
         } else {
             self.commentField.text = @"";
+            [self loadComments];
         }
     }];
 }
