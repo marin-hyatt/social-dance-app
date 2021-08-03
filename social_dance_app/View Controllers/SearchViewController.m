@@ -14,6 +14,7 @@
 #import "CacheManager.h"
 #import "DetailViewController.h"
 #import "UIManager.h"
+#import "PostUtility.h"
 
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -75,13 +76,11 @@
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSURL *thumbnailURL = [NSURL URLWithString:cell.post.thumbnailImage.url];
-            UIImage *thumbnailImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:thumbnailURL]];
-            [cell updateAppearanceWithImage:thumbnailImage];
-        });
     } withMainBlock:^(AVPlayerItem * playerItem) {
     }];
+    
+    __weak PostCell *weakCell = cell;
+    [PostUtility updateThumbnailView:weakCell.thumbnailView withPost:cell.post];
     
     return cell;
 }
@@ -102,7 +101,7 @@
 
 - (void)searchPostsWithQuery:(NSString *)query {
     if (query.length != 0) {
-        self.searchBar.text = self.searchQuery;
+        self.searchBar.text = query;
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
             return [post[@"tags"] containsObject:[query lowercaseString]];
         }];

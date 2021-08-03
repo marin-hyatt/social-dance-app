@@ -12,6 +12,7 @@
 #import "DetailViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "UIManager.h"
+#import "PostUtility.h"
 
 @interface BookmarkViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -85,13 +86,11 @@
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSURL *thumbnailURL = [NSURL URLWithString:cell.post.thumbnailImage.url];
-            UIImage *thumbnailImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:thumbnailURL]];
-            [cell updateAppearanceWithImage:thumbnailImage];
-        });
     } withMainBlock:^(AVPlayerItem * playerItem) {
     }];
+    
+    __weak PostCell *weakCell = cell;
+    [PostUtility updateThumbnailView:weakCell.thumbnailView withPost:cell.post];
 
     return cell;
 }

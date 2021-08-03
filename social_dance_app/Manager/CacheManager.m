@@ -29,7 +29,7 @@
         
         AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL options:nil];
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
-        
+
         backgroundBlock(playerItem);
         
         dispatch_async(dispatch_get_main_queue(), ^{

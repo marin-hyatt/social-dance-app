@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)updateUsernameLabel:(UILabel *)label andProfilePicture:(UIImageView *)imageView WithUser:(PFUser *)user;
 + (void)updateLikeButton:(UIButton *)button withPost:(Post *)post;
 + (void)updateLikeLabel:(UILabel *)label withPost:(Post *)post;
++ (void)updateThumbnailView:(__weak UIImageView *)imageView withPost:(Post *)post;
 
 @end
 

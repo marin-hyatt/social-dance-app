@@ -17,6 +17,7 @@
 #import "BookmarkViewController.h"
 #import "PostCell.h"
 #import "UIManager.h"
+#import "PostUtility.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (strong, nonatomic) IBOutlet ProfileView *profileView;
@@ -122,13 +123,11 @@
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
     [CacheManager retrieveVideoFromCacheWithURL:videoFileUrl withBackgroundBlock:^(AVPlayerItem * playerItem) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSURL *thumbnailURL = [NSURL URLWithString:cell.post.thumbnailImage.url];
-            UIImage *thumbnailImage = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:thumbnailURL]];
-            [cell updateAppearanceWithImage:thumbnailImage];
-        });
     } withMainBlock:^(AVPlayerItem * playerItem) {
     }];
+    
+    __weak PostCell *weakCell = cell;
+    [PostUtility updateThumbnailView:weakCell.thumbnailView withPost:cell.post];
     
     return cell;
 }

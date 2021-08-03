@@ -92,4 +92,34 @@
     label.text = [NSString stringWithFormat:@"%@", post.likeCount];
 }
 
++ (void)updateThumbnailView:(__weak UIImageView *)imageView withPost:(Post *)post {
+    NSURLRequest *requestSmall = [NSURLRequest requestWithURL:[NSURL URLWithString:post.smallThumbnailImage.url]];
+    NSURLRequest *requestLarge = [NSURLRequest requestWithURL:[NSURL URLWithString:post.thumbnailImage.url]];
+    
+    [imageView setImageWithURLRequest:requestSmall
+                              placeholderImage:nil
+                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *smallImage) {
+        
+        imageView.alpha = 0.0;
+        imageView.image = smallImage;
+        
+        [UIView animateWithDuration:0.3
+                         animations:^{
+            
+            imageView.alpha = 1.0;
+            
+        } completion:^(BOOL finished) {
+            [imageView setImageWithURLRequest:requestLarge
+                                          placeholderImage:smallImage
+                                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage * largeImage) {
+                imageView.image = largeImage;
+            }
+                                                   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            }];
+        }];
+    }
+                                       failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    }];
+}
+
 @end
