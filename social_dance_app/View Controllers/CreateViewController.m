@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSNumber *videoWidth;
 @property (strong, nonatomic) NSNumber *videoHeight;
 @property (strong, nonatomic) PFFileObject *thumbnailImage;
+@property (strong, nonatomic) PFFileObject *lowQualityThumbnailImage;
 @property (strong, nonatomic) Song *chosenSong;
 @property (strong, nonatomic) AVAssetExportSession *exportSession;
 
@@ -65,7 +66,7 @@
         Song *song = self.chosenSong;
 
         [SVProgressHUD showWithStatus:@"Posting"];
-        [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withThumbnail:self.thumbnailImage withTags:self.createView.tagView.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [Post postUserVideo:self.videoFile withCaption:caption withSong:song withHeight:self.videoHeight withWidth:self.videoWidth withLowQualityThumbnail:self.lowQualityThumbnailImage withThumbnail:self.thumbnailImage withTags:self.createView.tagView.tags withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
                 [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self];
             }
@@ -159,9 +160,12 @@ return [NSString stringWithFormat:@"%.2f mb", fileData.length/1000000.00];
 
     CGImageRef image = [generateImg copyCGImageAtTime:thumbnailTime actualTime:NULL error:&imgError];
     UIImage *thumbnail = [[UIImage alloc] initWithCGImage:image];
-    NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);
     
-    PFFileObject *thumbnailImage = [PFFileObject fileObjectWithName:@"thumbnail.png" data:thumbnailData];
+    NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);
+    NSData *lowQualityData = UIImageJPEGRepresentation(thumbnail, 0.0);
+    
+    self.lowQualityThumbnailImage = [PFFileObject fileObjectWithName:@"low_quality_thumbnail.jpg" data:lowQualityData];
+    PFFileObject *thumbnailImage = [PFFileObject fileObjectWithName:@"thumbnail.jpg" data:thumbnailData];
     self.thumbnailImage = thumbnailImage;
     
     [self.createView.thumbnailView setImage:[UIImage imageWithData:thumbnailData]];

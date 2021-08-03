@@ -22,13 +22,14 @@
 @dynamic videoWidth;
 @dynamic videoHeight;
 @dynamic thumbnailImage;
+@dynamic smallThumbnailImage;
 @dynamic tags;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
 
-+ (void)postUserVideo:(PFFileObject *)videoFile withCaption:(NSString *)caption withSong:(Song *)song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withThumbnail:(PFFileObject * _Nullable)thumbnailImage withTags:(NSArray *)tags withCompletion:(PFBooleanResultBlock _Nullable)completion {
++ (void)postUserVideo:(PFFileObject *)videoFile withCaption:(NSString *)caption withSong:(Song *)song withHeight:(NSNumber *)height withWidth:(NSNumber *)width withLowQualityThumbnail:( PFFileObject * _Nullable )lowQualityThumbnailImage withThumbnail:(PFFileObject * _Nullable)thumbnailImage withTags:(NSArray *)tags withCompletion:(PFBooleanResultBlock _Nullable)completion {
     Post *newPost = [Post new];
 
     newPost.author = [PFUser currentUser];
@@ -39,6 +40,7 @@
     newPost.commentCount = @(0);
     newPost.videoWidth = width;
     newPost.videoHeight = height;
+    newPost.smallThumbnailImage = lowQualityThumbnailImage;
     newPost.thumbnailImage = thumbnailImage;
     newPost.tags = tags;
     
