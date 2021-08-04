@@ -27,6 +27,7 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadComments) forControlEvents:UIControlEventValueChanged];
@@ -65,8 +66,44 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    Comment *comment = self.comments[indexPath.row];
+    PFUser *currentUser = [PFUser currentUser];
+    
+    return [comment.author.objectId isEqual:currentUser.objectId];
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self deleteComment:self.comments[indexPath.row]];
+    }
+}
+
 - (void)feedCell:(CommentTableViewCell *)feedCell didTap:(PFUser *)user {
     [self performSegueWithIdentifier:@"ProfileViewController" sender:user];
+}
+
+- (void)deleteComment:(Comment *)comment {
+    [comment deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            [comment saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error != nil) {
+                    [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+                }
+            }];
+        } else {
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+        }
+    }];
+    
+    float commentCount = [self.post.commentCount doubleValue];
+    self.post.commentCount = [NSNumber numberWithFloat:commentCount - 1];
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+            [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+        }
+    }];
 }
 
 - (void)loadComments {
