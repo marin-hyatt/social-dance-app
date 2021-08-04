@@ -11,7 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchViewController : UIViewController
 @property NSString *searchQuery;
-- (void)searchPostsWithQuery:(NSString *)query;
+@property BOOL isTag;
+- (void)searchPostsWithQuery:(NSString *)query isTag:(BOOL)isTag;
 
 @end
 

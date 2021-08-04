@@ -48,7 +48,6 @@
         [self.flowLayout invalidateLayout];
         [self.searchCollectionView layoutIfNeeded];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  __nonnull context) {
-        
     }];
 }
 
@@ -96,15 +95,34 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self searchPostsWithQuery:searchText];
+    BOOL userSegmentSelected = self.segmentedControl.selectedSegmentIndex == 0;
+    BOOL tagSegmentSelected = self.segmentedControl.selectedSegmentIndex == 1;
+    
+    if (userSegmentSelected) {
+        [self performSegueWithIdentifier:@"UserSearchViewController" sender:nil];
+    } else {
+        [self searchPostsWithQuery:searchText isTag:tagSegmentSelected];
+    }
+    
 }
 
-- (void)searchPostsWithQuery:(NSString *)query {
+- (void)searchPostsWithQuery:(NSString *)query isTag:(BOOL)isTag {
     if (query.length != 0) {
         self.searchBar.text = query;
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
-            return [post[@"tags"] containsObject:[query lowercaseString]];
-        }];
+        [self.segmentedControl setSelectedSegmentIndex: isTag ? 1 : 2];
+        NSPredicate *predicate;
+        
+        if (self.segmentedControl.selectedSegmentIndex == 1) {
+            // Search using tags
+            predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
+                return [post[@"tags"] containsObject:[query lowercaseString]];
+            }];
+        } else {
+            // Search using songs
+            predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
+                return [[post.song[@"title"] lowercaseString] containsString:[query lowercaseString]];
+            }];
+        }
         
         self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
     }
@@ -146,8 +164,7 @@
             [self.filteredFeed sortUsingSelector:@selector(comparewithPost:)];
             
             if (self.searchQuery != nil) {
-                [self searchPostsWithQuery:self.searchQuery];
-                [self.segmentedControl setSelectedSegmentIndex:1];
+                [self searchPostsWithQuery:self.searchQuery isTag:self.isTag];
             }
             
             [self.searchCollectionView reloadData];
@@ -163,16 +180,9 @@
         [self performSegueWithIdentifier:@"UserSearchViewController" sender:nil];
         return NO;
     } else {
-        [self.segmentedControl setEnabled:NO forSegmentAtIndex:0];
         return YES;
     }
 }
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [self.segmentedControl setEnabled:YES forSegmentAtIndex:0];
-    [self.segmentedControl setEnabled:YES forSegmentAtIndex:1];
-}
-
 
 #pragma mark - Navigation
 

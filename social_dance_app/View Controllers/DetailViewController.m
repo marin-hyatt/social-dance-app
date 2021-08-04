@@ -50,13 +50,22 @@
     }
     
     [self addDeleteButtonIfNeeded];
+    [self addGestureRecognizers];
+}
 
+- (void)addGestureRecognizers {
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
     UITapGestureRecognizer *usernameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
     [self.detailView.profilePictureView addGestureRecognizer:profileTapGestureRecognizer];
     [self.detailView.profilePictureView setUserInteractionEnabled:YES];
     [self.detailView.usernameLabel addGestureRecognizer:usernameTapGestureRecognizer];
     [self.detailView.usernameLabel setUserInteractionEnabled:YES];
+    
+    UITapGestureRecognizer *songNameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchForSong:)];
+    [self.detailView.songNameLabel addGestureRecognizer:songNameTapGestureRecognizer];
+    [self.detailView.songNameLabel setUserInteractionEnabled:YES];
+    [self.detailView.albumImageView addGestureRecognizer:songNameTapGestureRecognizer];
+    [self.detailView.albumImageView setUserInteractionEnabled:YES];
 }
 
 - (void)addDeleteButtonIfNeeded {
@@ -102,19 +111,29 @@
 }
 
 - (void)searchForTag:(UIButton *)sender {
+    [self searchInExploreScreenWithQuery:[sender.titleLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""] isTag:YES];
+}
+
+- (void)searchForSong:(UITapGestureRecognizer *)sender {
+    NSString *songName = self.detailView.songNameLabel.text;
+    [self searchInExploreScreenWithQuery:songName isTag:NO];
+}
+
+- (void)searchInExploreScreenWithQuery:(NSString *)query isTag:(BOOL)isTag {
     UINavigationController *searchNavigationController = [self.tabBarController.viewControllers objectAtIndex:1];
     if (self.tabBarController.selectedViewController != searchNavigationController) {
         SearchViewController *vc = (SearchViewController*) [[searchNavigationController viewControllers] objectAtIndex:0];
-        vc.searchQuery = [sender.titleLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-        [vc searchPostsWithQuery:vc.searchQuery];
+        vc.searchQuery = query;
+        vc.isTag = isTag;
+        [vc searchPostsWithQuery:vc.searchQuery isTag:isTag];
         self.tabBarController.selectedViewController = searchNavigationController;
     } else {
         SearchViewController *vc = [self.navigationController.viewControllers objectAtIndex:0];
-        vc.searchQuery = [sender.titleLabel.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-        [vc searchPostsWithQuery:vc.searchQuery];
+        vc.searchQuery = query;
+        vc.isTag = isTag;
+        [vc searchPostsWithQuery:vc.searchQuery isTag:isTag];
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
-
 }
 
 - (void)updateVideo {
