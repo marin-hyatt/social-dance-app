@@ -114,17 +114,14 @@
         
         if (self.segmentedControl.selectedSegmentIndex == 1) {
             // Search using tags
-            predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
-                return [post[@"tags"] containsObject:[query lowercaseString]];
-            }];
+            self.filteredFeed = [self.feed filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"ANY %K LIKE[cd] %@", @"tags", [query stringByAppendingString:@"*"]]];
         } else {
             // Search using songs
             predicate = [NSPredicate predicateWithBlock:^BOOL(Post *post, NSDictionary *bindings) {
                 return [[post.song[@"title"] lowercaseString] containsString:[query lowercaseString]];
             }];
+            self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
         }
-        
-        self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
     }
     else {
         self.filteredFeed = self.feed;
