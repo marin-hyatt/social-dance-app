@@ -161,7 +161,7 @@ return [NSString stringWithFormat:@"%.2f mb", fileData.length/1000000.00];
     CGImageRef image = [generateImg copyCGImageAtTime:thumbnailTime actualTime:NULL error:&imgError];
     UIImage *thumbnail = [[UIImage alloc] initWithCGImage:image];
     
-    NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);
+    NSData *thumbnailData = UIImageJPEGRepresentation(thumbnail, 1.0);
     NSData *lowQualityData = UIImageJPEGRepresentation(thumbnail, 0.0);
     
     self.lowQualityThumbnailImage = [PFFileObject fileObjectWithName:@"low_quality_thumbnail.jpg" data:lowQualityData];

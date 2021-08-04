@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol HomeTableViewCellDelegate;
 
 
-@interface HomeTableViewCell : UITableViewCell
+@interface HomeTableViewCell : UITableViewCell <PlayerViewDelegate>
+
 @property Post *post;
 @property AVPlayer *player;
 @property AVPlayerItem *playerItem;

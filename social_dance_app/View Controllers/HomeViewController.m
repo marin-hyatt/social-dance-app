@@ -25,8 +25,6 @@
 @property (assign, nonatomic) BOOL isMoreDataLoading;
 @property int numDataToLoad;
 - (IBAction)onLogoutButtonPressed:(id)sender;
-
-
 @end
 
 @implementation HomeViewController

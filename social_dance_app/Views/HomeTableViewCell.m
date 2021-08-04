@@ -27,6 +27,8 @@ BOOL didSetupConstraints = NO;
     [self.videoView addGestureRecognizer:tapGestureRecognizer];
     [self.videoView setUserInteractionEnabled:YES];
     
+    self.videoView.delegate = self;
+    
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
     UITapGestureRecognizer *usernameTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onProfileTapped:)];
     [self.profilePictureView addGestureRecognizer:profileTapGestureRecognizer];
@@ -63,7 +65,26 @@ BOOL didSetupConstraints = NO;
     if (self.videoView.constraint == nil) {
         [self.videoView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
     }
+}
+
+- (void)displayVideoThumbnail {
+    UIImageView *thumbnailView = [[UIImageView alloc] initWithFrame:self.videoView.frame];
+
+    NSURL *thumbnailURL = [NSURL URLWithString:self.post.thumbnailImage.url];
+    [thumbnailView setImageWithURL:thumbnailURL];
+    [self.videoView addSubview:thumbnailView];
+    [thumbnailView setBounds:self.videoView.bounds];
+    [thumbnailView setClipsToBounds:YES];
     
+    thumbnailView.center = CGPointMake(self.videoView.bounds.size.width  / 2,
+                                     self.videoView.bounds.size.height / 2);
+    [self.videoView layoutIfNeeded];
+}
+
+- (void)removeVideoThumbnail {
+    for (UIImageView *subview in self.videoView.subviews) {
+        [subview removeFromSuperview];
+    }
 }
 
 - (void)fadeIn {
@@ -77,6 +98,7 @@ BOOL didSetupConstraints = NO;
     if (self.player.rate != 0) {
         [self.player pause];
     } else {
+        [self removeVideoThumbnail];
         [self.player play];
     }
 }

@@ -40,7 +40,9 @@
 }
 
 + (void)executeAlertBlock:(void (^)(void))handler {
-    handler();
+    if (handler != nil) {
+        handler();
+    }
 }
 
 @end

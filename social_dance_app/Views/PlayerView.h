@@ -12,9 +12,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PlayerViewDelegate <NSObject>
+
+- (void)displayVideoThumbnail;
+- (void)removeVideoThumbnail;
+
+@end
+
 @interface PlayerView : UIView
 @property NSLayoutConstraint *constraint;
 @property AVPlayer *player;
+@property (weak, nonatomic) id<PlayerViewDelegate> delegate;
 - (void)updateAutolayoutWithHeight:(CGFloat) height withWidth:(CGFloat) width;
  
 
