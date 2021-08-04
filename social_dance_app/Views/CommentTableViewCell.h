@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CommentTableViewCell : UITableViewCell
 @property (nonatomic, strong) Comment *comment;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
 @property (weak, nonatomic) IBOutlet UILabel *commentTextLabel;
 @property (weak, nonatomic) id<CommentTableViewCellDelegate> delegate;

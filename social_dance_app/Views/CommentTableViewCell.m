@@ -8,6 +8,7 @@
 #import "CommentTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "UIManager.h"
+#import "DateTools.h"
 
 @implementation CommentTableViewCell
 
@@ -31,6 +32,23 @@
 - (void)updateAppearance {
     self.commentTextLabel.text = self.comment.text;
     self.usernameLabel.text = self.comment.author.username;
+    
+    self.timestampLabel.text = [NSString stringWithFormat:@"%@", self.comment.createdAt];
+    
+    double timeInterval = self.comment.createdAt.timeIntervalSinceNow;
+    
+    NSDate *timeAgoDate = [NSDate dateWithTimeIntervalSinceNow:timeInterval];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterNoStyle;
+
+    int oneWeek = 604800;
+    if (fabs(timeInterval) > oneWeek) {
+        self.timestampLabel.text = [formatter stringFromDate:self.comment.createdAt];
+    } else {
+        self.timestampLabel.text = timeAgoDate.shortTimeAgoSinceNow;
+    }
     
     PFFileObject *postImage = self.comment.author[@"profilePicture"];
     [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];
