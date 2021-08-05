@@ -707,11 +707,18 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="POC-Qq-L8C">
-                        <barButtonItem key="rightBarButtonItem" image="gearshape" catalog="system" id="8gb-aU-RBu">
-                            <connections>
-                                <action selector="onSettingsButtonPressed:" destination="Quh-3o-mLf" id="ykl-Zi-iKb"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="gearshape" catalog="system" id="8gb-aU-RBu">
+                                <connections>
+                                    <action selector="onSettingsButtonPressed:" destination="Quh-3o-mLf" id="ykl-Zi-iKb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="square.and.arrow.down" catalog="system" id="uya-BJ-SRF">
+                                <connections>
+                                    <action selector="onDownloadButtonPressed:" destination="Quh-3o-mLf" id="NEX-ub-9jv"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tutorialView" destination="Dx4-34-8pT" id="ezR-Ol-jfr"/>
@@ -1856,6 +1863,7 @@
         <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="thumbnail_app_icon_blue" width="1024" height="1024"/>
         <image name="thumbnail_default" width="225" height="225"/>

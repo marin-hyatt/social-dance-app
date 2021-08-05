@@ -12,6 +12,7 @@
 #import <AVKit/AVKit.h>
 #import "TutorialView.h"
 #import "TutorialSettingViewController.h"
+#import "UIManager.h"
 
 
 @interface TutorialViewController () <TutorialSettingDelegate>
@@ -90,6 +91,37 @@
 
 - (IBAction)onSettingsButtonPressed:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"TutorialSettingViewController" sender:nil];
+}
+
+- (IBAction)onDownloadButtonPressed:(UIBarButtonItem *)sender {
+    [UIManager presentAlertWithMessage:@"Download this video to your device?" overViewController:self withHandler:^{
+        [self downloadVideo];
+    }];
+}
+
+- (void)downloadVideo {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *videoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.post.videoFile.url]];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filename = [[NSUUID UUID] UUIDString];
+        NSString *filePath = [[documentsDirectory stringByAppendingPathComponent:filename] stringByAppendingString:@".mp4"];
+        
+        if ([videoData writeToFile:filePath atomically:YES]) {
+            UISaveVideoAtPathToSavedPhotosAlbum(filePath, self, @selector(video: didFinishSavingWithError: contextInfo:), nil);
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIManager presentAlertWithMessage:@"There was an error downloading the video." overViewController:self withHandler:nil];
+            });
+        }
+    });
+}
+
+- (void) video: (NSString *) videoPath didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
+    if (error != nil) {
+        [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+    }
 }
 
 - (void)mirrorVideoChangedWithNewValue:(BOOL)isMirrored {

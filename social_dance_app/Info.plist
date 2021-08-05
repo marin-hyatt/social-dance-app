@@ -23,6 +23,11 @@
     <string>Need camera access to take pictures</string> <!-- added this for camera permission -->
     <key>NSMicrophoneUsageDescription</key> <!-- added this for video permission -->
     <string>Need microphone access to take video</string> <!-- added this for video permission -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
