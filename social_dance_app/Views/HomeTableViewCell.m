@@ -69,21 +69,26 @@ BOOL didSetupConstraints = NO;
 
 - (void)displayVideoThumbnail {
     UIImageView *thumbnailView = [[UIImageView alloc] initWithFrame:self.videoView.frame];
-    UIImageView *playButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play_button"]];
-    [playButton setFrame:CGRectMake(0, 0, 50, 50)];
 
     NSURL *thumbnailURL = [NSURL URLWithString:self.post.thumbnailImage.url];
     [thumbnailView setImageWithURL:thumbnailURL];
     [self.videoView addSubview:thumbnailView];
-    [self.videoView addSubview:playButton];
     [thumbnailView setBounds:self.videoView.bounds];
     [thumbnailView setClipsToBounds:YES];
-    
     thumbnailView.center = CGPointMake(self.videoView.bounds.size.width  / 2,
                                      self.videoView.bounds.size.height / 2);
+    
+    [self addPlayButton];
+    
+    [self.videoView layoutIfNeeded];
+}
+
+- (void)addPlayButton {
+    UIImageView *playButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play_button"]];
+    [playButton setFrame:CGRectMake(0, 0, 50, 50)];
+    [self.videoView addSubview:playButton];
     playButton.center = CGPointMake(self.videoView.bounds.size.width  / 2,
                                      self.videoView.bounds.size.height / 2);
-    [self.videoView layoutIfNeeded];
 }
 
 - (void)removeVideoThumbnail {
@@ -101,6 +106,7 @@ BOOL didSetupConstraints = NO;
 
 - (void)startPlayback {
     if (self.player.rate != 0) {
+        [self addPlayButton];
         [self.player pause];
     } else {
         [self removeVideoThumbnail];
