@@ -77,7 +77,7 @@
             PFUser *user = self.user;
             user[@"profilePicture"] = file;
             
-            [SVProgressHUD showWithStatus:@"Changing profile picture"];
+            [SVProgressHUD showWithStatus:@"Updating profile"];
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
                     [SVProgressHUD dismiss];
@@ -91,6 +91,7 @@
     
     PFUser *user = self.user;
     user.username = self.editProfileView.editUsernameField.text;
+    user[@"bio"] = self.editProfileView.editBioField.text;
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
             [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];

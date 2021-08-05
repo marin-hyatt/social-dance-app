@@ -21,6 +21,7 @@
 
 - (void)updateAppearance {
     self.usernameLabel.text = self.user.username;
+    self.bioLabel.text = self.user[@"bio"];
 
     PFFileObject *postImage = self.user[@"profilePicture"];
     [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:postImage];

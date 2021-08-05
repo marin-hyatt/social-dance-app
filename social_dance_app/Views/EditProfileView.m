@@ -24,6 +24,7 @@
     [UIManager updateProfilePicture:self.profilePictureView withPFFileObject:profileImage];
     
     self.editUsernameField.text = self.user.username;
+    self.editBioField.text = self.user[@"bio"];
 }
 
 @end
