@@ -159,6 +159,7 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
             self.feed = posts;
+            self.profileView.numPostsLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.feed.count];
             [self.profileCollectionView reloadData];
             [self.refreshControl endRefreshing];
         }

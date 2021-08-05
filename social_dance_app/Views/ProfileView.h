@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureView;
 @property (weak, nonatomic) IBOutlet UILabel *numFollowersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numFollowingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numPostsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followerButton;
 -(void)updateAppearance;
 @end
