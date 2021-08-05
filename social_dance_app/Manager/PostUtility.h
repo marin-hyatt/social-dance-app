@@ -13,6 +13,7 @@
 #import "Comment.h"
 #import "UIManager.h"
 #import "DateTools.h"
+#import "PlayerView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)updateLikeButton:(UIButton *)button withPost:(Post *)post;
 + (void)updateLikeLabel:(UILabel *)label withPost:(Post *)post;
 + (void)updateThumbnailView:(__weak UIImageView *)imageView withPost:(Post *)post;
++ (void)displayVideoThumbnailOverView:(PlayerView *)view withPost:(Post *)post withPlayButtonIncluded:(BOOL)isPlayButtonIncluded;
++ (void)addPlayButtonOverView:(PlayerView *)view;
 
 @end
 

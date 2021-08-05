@@ -13,9 +13,9 @@
 #import "TutorialView.h"
 #import "TutorialSettingViewController.h"
 #import "UIManager.h"
+#import "PostUtility.h"
 
-
-@interface TutorialViewController () <TutorialSettingDelegate>
+@interface TutorialViewController () <TutorialSettingDelegate, PlayerViewDelegate>
 @property (strong, nonatomic) IBOutlet TutorialView *tutorialView;
 @property BOOL isMirrored;
 @property float videoSpeedMultiplier;
@@ -37,9 +37,10 @@
     
     
     [self.tutorialView updateViewWithMirrorSetting:self.isMirrored];
+    self.tutorialView.playerView.delegate = self;
     self.tutorialView.playbackSpeed = 1;
-    [self updateVideo];
-    
+    [self loadVideo];
+    [self updateVideoPlayer];
     
     [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateSliderWithTimestamp:) userInfo:nil repeats:YES];
 }
@@ -62,7 +63,14 @@
     return readableTime;
 }
 
-- (void)updateVideo {
+- (void)updateVideoPlayer {
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlaybackWithRate:)];
+    [self.tutorialView.playerView addGestureRecognizer:tapGestureRecognizer];
+    [self.tutorialView.playerView setUserInteractionEnabled:YES];
+    [self.tutorialView.playerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
+}
+
+- (void)loadVideo {
     PFFileObject *videoFile = self.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
@@ -82,6 +90,25 @@
             [self setEndLabel];
         }
     }];
+}
+
+- (void)displayVideoThumbnail {
+    [PostUtility displayVideoThumbnailOverView:self.tutorialView.playerView withPost:self.post withPlayButtonIncluded:NO];
+}
+
+- (void)removeVideoThumbnail {
+    for (UIImageView *subview in self.tutorialView.playerView.subviews) {
+        [subview removeFromSuperview];
+    }
+}
+
+- (void)startPlaybackWithRate:(float)playbackSpeed {
+    if (self.tutorialView.player.rate != 0) {
+        [self.tutorialView.player pause];
+    } else {
+        [self removeVideoThumbnail];
+        [self.tutorialView.player playImmediatelyAtRate:self.tutorialView.playbackSpeed];
+    }
 }
 
 - (void)playerItemDidReachEnd:(NSNotification *)notification {

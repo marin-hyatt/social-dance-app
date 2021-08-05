@@ -12,19 +12,6 @@
 
 - (void)updateViewWithMirrorSetting:(BOOL)isMirrored {
     [self mirrorViewWithSetting:isMirrored];
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlaybackWithRate:)];
-    [self.playerView addGestureRecognizer:tapGestureRecognizer];
-    [self.playerView setUserInteractionEnabled:YES];
-    [self.playerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
-}
-
-- (void)startPlaybackWithRate:(float)playbackSpeed {
-    if (self.player.rate != 0) {
-        [self.player pause];
-    } else {
-        [self.player playImmediatelyAtRate:self.playbackSpeed];
-    }
 }
 
 - (void)mirrorViewWithSetting:(BOOL)isMirrored {

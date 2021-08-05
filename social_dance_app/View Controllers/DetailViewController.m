@@ -21,7 +21,7 @@
 #import "SVProgressHUD.h"
 #import "ProfileViewController.h"
 
-@interface DetailViewController () <RKTagsViewDelegate>
+@interface DetailViewController () <RKTagsViewDelegate, PlayerViewDelegate>
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
 @property int tagCount;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
@@ -34,7 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.detailView updateAppearanceWithPost:self.post];
-    [self updateVideo];
+    [self loadVideo];
+    [self updateVideoWithPost:self.post];
 
     [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
     [PostUtility updateCommentButton:self.detailView.commentButton withPost:self.post];
@@ -43,6 +44,7 @@
     [PostUtility updateTimestampForLabel:self.detailView.timestampLabel usingPost:self.post];
     
     self.detailView.tagView.delegate = self;
+    self.detailView.videoPlayerView.delegate = self;
     NSArray *tags = self.post.tags;
     self.tagCount = [self.post.tags count];
     for (NSString *tag in tags) {
@@ -83,6 +85,29 @@
             }
         });
     });
+}
+
+- (void)updateVideoWithPost:(Post *)post {
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
+    [self.detailView.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
+    [self.detailView.videoPlayerView setUserInteractionEnabled:YES];
+    [self.detailView.videoPlayerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
+    
+    // Update autolayout corresponding to video aspect ratio
+    CGFloat videoHeight = [post[@"videoHeight"] doubleValue];
+    CGFloat videoWidth = [post[@"videoWidth"] doubleValue];
+    
+    [self.detailView.videoPlayerView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
+}
+
+- (void)startPlayback {
+    if (self.detailView.player.rate != 0) {
+        [PostUtility addPlayButtonOverView:self.detailView.videoPlayerView];
+        [self.detailView.player pause];
+    } else {
+        [self removeVideoThumbnail];
+        [self.detailView.player play];
+    }
 }
 
 - (void)onProfileTapped:(UITapGestureRecognizer *)sender {
@@ -136,7 +161,7 @@
     }
 }
 
-- (void)updateVideo {
+- (void)loadVideo {
     PFFileObject *videoFile = self.post[@"videoFile"];
     NSURL *videoFileUrl = [NSURL URLWithString:videoFile.url];
     
@@ -157,6 +182,16 @@
 - (void)playerItemDidReachEnd:(NSNotification *)notification {
     AVPlayerItem *p = [notification object];
     [p seekToTime:kCMTimeZero completionHandler:nil];
+}
+
+- (void)displayVideoThumbnail {
+    [PostUtility displayVideoThumbnailOverView:self.detailView.videoPlayerView withPost:self.post withPlayButtonIncluded:YES];
+}
+
+- (void)removeVideoThumbnail {
+    for (UIImageView *subview in self.detailView.videoPlayerView.subviews) {
+        [subview removeFromSuperview];
+    }
 }
 
 

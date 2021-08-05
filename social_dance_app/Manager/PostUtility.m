@@ -119,4 +119,34 @@
                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {}];
 }
 
++ (void)displayVideoThumbnailOverView:(PlayerView *)view withPost:(Post *)post withPlayButtonIncluded:(BOOL)isPlayButtonIncluded {
+    UIImageView *thumbnailView = [[UIImageView alloc] initWithFrame:view.frame];
+
+    NSURL *thumbnailURL = [NSURL URLWithString:post.thumbnailImage.url];
+    
+    [self updateThumbnailView:thumbnailView withPost:post];
+//    [thumbnailView setImageWithURL:thumbnailURL];
+    
+    [thumbnailView setContentMode:UIViewContentModeScaleAspectFit];
+    [view addSubview:thumbnailView];
+    [thumbnailView setBounds:view.bounds];
+    [thumbnailView setClipsToBounds:YES];
+    thumbnailView.center = CGPointMake(view.bounds.size.width  / 2,
+                                     view.bounds.size.height / 2);
+    
+    if (isPlayButtonIncluded) {
+        [self addPlayButtonOverView:view];
+    }
+    
+    [view layoutIfNeeded];
+}
+
++ (void)addPlayButtonOverView:(UIView *)view {
+    UIImageView *playButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play_button"]];
+    [playButton setFrame:CGRectMake(0, 0, 50, 50)];
+    [view addSubview:playButton];
+    playButton.center = CGPointMake(view.bounds.size.width  / 2,
+                                     view.bounds.size.height / 2);
+}
+
 @end

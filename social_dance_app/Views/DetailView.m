@@ -21,7 +21,6 @@
     self.listenWithSpotifyButton.layer.masksToBounds = true;
     
     [self updateSongWithPost:post];
-    [self updateVideoWithPost:post];
     
 }
 
@@ -39,27 +38,4 @@
     }
 }
 
--(void)updateVideoWithPost:(Post *)post {
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startPlayback)];
-    [self.videoPlayerView addGestureRecognizer:tapGestureRecognizer];
-    [self.videoPlayerView setUserInteractionEnabled:YES];
-    [self.videoPlayerView setPlayer:[AVPlayer playerWithPlayerItem:nil]];
-    
-    // Update autolayout corresponding to video aspect ratio
-    CGFloat videoHeight = [post[@"videoHeight"] doubleValue];
-    CGFloat videoWidth = [post[@"videoWidth"] doubleValue];
-    
-    [self.videoPlayerView updateAutolayoutWithHeight:videoHeight withWidth:videoWidth];
-}
-
--(void)startPlayback {
-    if (self.player.rate != 0) {
-        [self.player pause];
-    } else {
-        [self.player play];
-    }
-}
-
-- (IBAction)deleteButton:(UIBarButtonItem *)sender {
-}
 @end

@@ -77,6 +77,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self deleteComment:self.comments[indexPath.row]];
+        [self.tableView reloadData];
     }
 }
 
@@ -90,6 +91,8 @@
             [comment saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (error != nil) {
                     [UIManager presentAlertWithMessage:error.localizedDescription overViewController:self withHandler:nil];
+                } else {
+                    [self loadComments];
                 }
             }];
         } else {
