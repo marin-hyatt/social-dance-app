@@ -234,6 +234,13 @@ commentsCount | Number | number of comments on post
 
 ## Progress Gifs
 
+**Final Product**
+![](sprint_4_gif_1.gif)
+![](sprint_4_gif_2.gif)
+![](sprint_4_gif_3.gif)
+![](sprint_4_gif_4.gif)
+![](sprint_4_gif_5.gif)
+
 **Sprint 1**
 
 ![](sprint_1_gif_1.gif)
@@ -254,3 +261,5 @@ commentsCount | Number | number of comments on post
 ![](sprint_3_gif_2.gif)
 ![](sprint_3_gif_3.gif)
 ![](sprint_3_gif_4.gif)
+
+
