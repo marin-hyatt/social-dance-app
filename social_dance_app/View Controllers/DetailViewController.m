@@ -23,6 +23,7 @@
 
 @interface DetailViewController () <RKTagsViewDelegate, PlayerViewDelegate>
 @property (strong, nonatomic) IBOutlet DetailView *detailView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property int tagCount;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
@@ -36,12 +37,7 @@
     [self.detailView updateAppearanceWithPost:self.post];
     [self loadVideo];
     [self updateVideoWithPost:self.post];
-
-    [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
-    [PostUtility updateCommentButton:self.detailView.commentButton withPost:self.post];
-    [PostUtility updateBookmarkButton:self.detailView.bookmarkButton usingPost:self.post];
-    [PostUtility updateUsernameLabel:self.detailView.usernameLabel andProfilePicture:self.detailView.profilePictureView WithUser:self.post.author];
-    [PostUtility updateTimestampForLabel:self.detailView.timestampLabel usingPost:self.post];
+    [self updatePostInfo];
     
     self.detailView.tagView.delegate = self;
     self.detailView.videoPlayerView.delegate = self;
@@ -51,8 +47,22 @@
         [self.detailView.tagView addTag:tag];
     }
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(updatePostInfo) forControlEvents:UIControlEventValueChanged];
+    [self.detailView.scrollView insertSubview:self.refreshControl atIndex:0];
+    [self.detailView.scrollView setAlwaysBounceVertical:YES];
+    
     [self addDeleteButtonIfNeeded];
     [self addGestureRecognizers];
+}
+
+- (void)updatePostInfo {
+    [PostUtility updateLikeButton:self.detailView.likeButton withPost:self.post];
+    [PostUtility updateCommentButton:self.detailView.commentButton withPost:self.post];
+    [PostUtility updateBookmarkButton:self.detailView.bookmarkButton usingPost:self.post];
+    [PostUtility updateUsernameLabel:self.detailView.usernameLabel andProfilePicture:self.detailView.profilePictureView WithUser:self.post.author];
+    [PostUtility updateTimestampForLabel:self.detailView.timestampLabel usingPost:self.post];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)addGestureRecognizers {

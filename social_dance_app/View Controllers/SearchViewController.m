@@ -168,9 +168,6 @@
             [self.refreshControl endRefreshing];
             
             [self searchPostsWithQuery:self.searchQuery isTag:self.isTag];
-//            if (self.searchQuery != nil) {
-//
-//            }
             
             [self.searchCollectionView reloadData];
         }
