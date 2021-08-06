@@ -121,11 +121,8 @@
 
 + (void)displayVideoThumbnailOverView:(PlayerView *)view withPost:(Post *)post withPlayButtonIncluded:(BOOL)isPlayButtonIncluded {
     UIImageView *thumbnailView = [[UIImageView alloc] initWithFrame:view.frame];
-
-    NSURL *thumbnailURL = [NSURL URLWithString:post.thumbnailImage.url];
     
     [self updateThumbnailView:thumbnailView withPost:post];
-//    [thumbnailView setImageWithURL:thumbnailURL];
     
     [thumbnailView setContentMode:UIViewContentModeScaleAspectFit];
     [view addSubview:thumbnailView];
@@ -142,7 +139,7 @@
 }
 
 + (void)addPlayButtonOverView:(UIView *)view {
-    UIImageView *playButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play_button"]];
+    UIImageView *playButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play_button_rounded"]];
     [playButton setFrame:CGRectMake(0, 0, 50, 50)];
     [view addSubview:playButton];
     playButton.center = CGPointMake(view.bounds.size.width  / 2,

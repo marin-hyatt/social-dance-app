@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *searchCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *feed;
 @property (strong, nonatomic) NSMutableArray *filteredFeed;
 
@@ -39,6 +40,11 @@
     [self loadPosts:50];
     
     [self.searchCollectionView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellWithReuseIdentifier:@"SearchCollectionViewCell"];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadPosts:) forControlEvents:UIControlEventValueChanged];
+    [self.searchCollectionView addSubview:self.refreshControl];
+    self.searchCollectionView.alwaysBounceVertical = YES;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -101,13 +107,14 @@
     if (userSegmentSelected) {
         [self performSegueWithIdentifier:@"UserSearchViewController" sender:nil];
     } else {
-        [self searchPostsWithQuery:searchText isTag:tagSegmentSelected];
+        self.searchQuery = searchText;
+        [self searchPostsWithQuery:self.searchQuery isTag:tagSegmentSelected];
     }
     
 }
 
 - (void)searchPostsWithQuery:(NSString *)query isTag:(BOOL)isTag {
-    if (query.length != 0) {
+    if (query != nil && query.length != 0) {
         self.searchBar.text = query;
         [self.segmentedControl setSelectedSegmentIndex: isTag ? 1 : 2];
         NSPredicate *predicate;
@@ -122,8 +129,7 @@
             }];
             self.filteredFeed = [self.feed filteredArrayUsingPredicate:predicate];
         }
-    }
-    else {
+    } else {
         self.filteredFeed = self.feed;
     }
     [self.searchCollectionView reloadData];
@@ -159,10 +165,12 @@
             self.feed = posts;
             self.filteredFeed = self.feed;
             [self.filteredFeed sortUsingSelector:@selector(comparewithPost:)];
+            [self.refreshControl endRefreshing];
             
-            if (self.searchQuery != nil) {
-                [self searchPostsWithQuery:self.searchQuery isTag:self.isTag];
-            }
+            [self searchPostsWithQuery:self.searchQuery isTag:self.isTag];
+//            if (self.searchQuery != nil) {
+//
+//            }
             
             [self.searchCollectionView reloadData];
         }
